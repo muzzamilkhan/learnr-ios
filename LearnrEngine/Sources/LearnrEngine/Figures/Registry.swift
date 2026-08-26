@@ -12,4 +12,6 @@ import Foundation
 let allFigureKindBuilders: [FigureKindBuilder] = [
     polygonBuilder,
     angleBuilder,
+    arrayBuilder,
+    spinnerBuilder,
 ]
