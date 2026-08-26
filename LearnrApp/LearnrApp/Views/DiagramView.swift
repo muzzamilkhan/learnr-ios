@@ -139,3 +139,31 @@ struct DiagramView: View {
         return path
     }
 }
+
+// MARK: - Previews
+
+/// Every shipped kind, drawn from the real builders. The fastest way to see
+/// that a renderer change did not quietly break one of eleven pictures.
+#Preview("Every figure kind") {
+    let kinds = figureKinds
+    return ScrollView {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 16)], spacing: 16) {
+            ForEach(kinds, id: \.self) { kind in
+                VStack(spacing: 6) {
+                    DiagramView(figure: {
+                        var rng = Rng(seed: "preview:\(kind)")
+                        return buildFigure(FigureSpec(kind: kind), [:], &rng)
+                    }())
+                    .frame(height: 150)
+                    Text(kind)
+                        .font(.caption)
+                        .foregroundStyle(Palette.inkSoft)
+                }
+                .padding(8)
+                .background(Palette.card, in: RoundedRectangle(cornerRadius: 12))
+            }
+        }
+        .padding()
+    }
+    .background(Palette.paper)
+}

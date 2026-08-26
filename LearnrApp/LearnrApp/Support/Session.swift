@@ -19,14 +19,41 @@ final class Session {
     private(set) var state: State = .loading
     private(set) var pendingAttempts = 0
 
+    /// The year level this child plays at.
+    ///
+    /// A managed child's level is their parent's to set, so this is read from
+    /// the server rather than chosen here. Three is the fallback for a child
+    /// whose level has never been set or cannot be read - a middle of the range
+    /// rather than an end of it, so a wrong guess is wrong by less.
+    private(set) var level: YearLevel = .three
+
+    /// Reads the stored level. Best-effort: a failure leaves the fallback.
+    func refreshLevel() async {
+        guard let play = try? await api.playState(level: level),
+              let stored = play.player.selectedLevel,
+              let parsed = YearLevel(rawValue: stored)
+        else { return }
+        level = parsed
+    }
+
     let api: ApiClient
     let queue: SyncQueue
+    let library: ContentLibrary
 
     init(baseURL: URL) {
         let tokens = KeychainTokenStore()
         let store = FileSittingStore(url: Self.queueURL)
         self.api = ApiClient(baseURL: baseURL, tokens: tokens)
         self.queue = SyncQueue(api: api, store: store)
+        self.library = ContentLibrary(api: api, store: FilePackStore(directory: Self.packsURL))
+    }
+
+    /// Cached content packs. Beside the queue in Application Support, which is
+    /// where data the app can rebuild but should not lose belongs.
+    private static var packsURL: URL {
+        let directory = FileManager.default.urls(for: .applicationSupportDirectory,
+                                                 in: .userDomainMask)[0]
+        return directory.appendingPathComponent("content-packs", isDirectory: true)
     }
 
     private static var queueURL: URL {
