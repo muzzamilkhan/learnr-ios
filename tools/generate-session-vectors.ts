@@ -168,7 +168,15 @@ const POOL: Json = [
   },
 ];
 
-/** A tap-answered pool member, so `answerMode` and `answerOptions` see choices. */
+/**
+ * A tap-answered pool member, so `answerMode` and `answerOptions` see choices.
+ *
+ * `choices` here is a `ChoiceSpec` — a count and the distractor expressions —
+ * not the resolved array. The two are different types wearing one name: a
+ * template asks for options to be built, and only the generated question
+ * carries the built ones. The grade and answer vectors below use the resolved
+ * array, because those functions take a question.
+ */
 const CHOICE_TEMPLATE: Json = {
   id: 'shape-1',
   subject: 'maths',
@@ -177,7 +185,7 @@ const CHOICE_TEMPLATE: Json = {
   prompt: 'How many sides does a {name} have?',
   vars: [{ name: 'name', kind: 'pick', from: ['triangle', 'square'] }],
   answer: "name == 'triangle' ? 3 : 4",
-  choices: ['3', '4', '5'],
+  choices: { count: 3, distractors: ['5', '6'] },
 };
 
 const BOOLEAN_TEMPLATE: Json = {
@@ -389,6 +397,35 @@ recordProfile('right on five days', [
   ...run('addition', [true, true], T0 + 4 * DAY),
 ]);
 
+/**
+ * A skill sitting *exactly* on each mastery boundary.
+ *
+ * Every other profile above clears the thresholds by a wide margin, so
+ * `streak >= 3` and `streak > 3` agree on all of them — a port with the
+ * comparison off by one passes. These pin the boundary itself: a run of
+ * exactly SECURE_STREAK correct answers, and exactly SECURE_OBSERVATIONS
+ * attempts, with the days to match.
+ */
+recordProfile('a streak of exactly three, over two days', [
+  ...run('addition', [true, true, true, true, true], T0),
+  // A slip resets the streak, then exactly three more rebuild it to the bound.
+  ...run('addition', [false], T0 + DAY),
+  ...run('addition', [true, true, true], T0 + DAY + HOUR),
+]);
+recordProfile('a streak of exactly two, one short', [
+  ...run('addition', [true, true, true, true, true], T0),
+  ...run('addition', [false], T0 + DAY),
+  ...run('addition', [true, true], T0 + DAY + HOUR),
+]);
+recordProfile('exactly eight attempts, all right, two days', [
+  ...run('addition', [true, true, true, true], T0),
+  ...run('addition', [true, true, true, true], T0 + DAY),
+]);
+recordProfile('exactly seven attempts, one short of secure', [
+  ...run('addition', [true, true, true, true], T0),
+  ...run('addition', [true, true, true], T0 + DAY),
+]);
+
 // One slip after a secure run: strength dips, streak resets to zero.
 recordProfile('one slip on a secure topic', [
   ...run('addition', [true, true, true, true], T0),
@@ -402,6 +439,35 @@ recordProfile('answers arriving out of order', [
   ...run('addition', [true], T0),
   ...run('addition', [true], T0 + 2 * DAY),
   ...run('addition', [true], T0 + DAY),
+]);
+
+/**
+ * Two answers on the same topic sharing an `answeredAt`, one right and one
+ * wrong.
+ *
+ * `buildProfile` sorts by `answeredAt`, and ES2019 requires that sort to be
+ * stable, so these two fold in the order given. Swift's `sorted(by:)` is *not*
+ * stable, which is why the port sorts on (answeredAt, original index). Nothing
+ * pinned that before: the existing tie was two correct answers on one topic,
+ * where either order gives the same strength and the same streak. These give
+ * different ones — a wrong-then-right tie ends with streak 1, right-then-wrong
+ * with streak 0.
+ */
+recordProfile('a tie broken right-then-wrong', [
+  ...run('addition', [true, true, true], T0),
+  { topic: 'addition', level: 'K', correct: true, timeTakenMs: 1000, answeredAt: T0 + HOUR },
+  { topic: 'addition', level: 'K', correct: false, timeTakenMs: 2000, answeredAt: T0 + HOUR },
+]);
+recordProfile('a tie broken wrong-then-right', [
+  ...run('addition', [true, true, true], T0),
+  { topic: 'addition', level: 'K', correct: false, timeTakenMs: 2000, answeredAt: T0 + HOUR },
+  { topic: 'addition', level: 'K', correct: true, timeTakenMs: 1000, answeredAt: T0 + HOUR },
+]);
+// A three-way tie across two topics, so the interleaving order matters too.
+recordProfile('a three-way tie across topics', [
+  { topic: 'addition', level: 'K', correct: true, timeTakenMs: 1000, answeredAt: T0 },
+  { topic: 'subtraction', level: 'K', correct: false, timeTakenMs: 2000, answeredAt: T0 },
+  { topic: 'addition', level: 'K', correct: false, timeTakenMs: 3000, answeredAt: T0 },
 ]);
 
 // The day counted is the child's, not UTC.
@@ -732,6 +798,26 @@ recordGrade('infinity against a real answer', numberQ(7), 'Infinity');
 recordGrade('hex parses in JS', numberQ(255), '0xff');
 recordGrade('exponent notation parses', numberQ(700), '7e2');
 recordGrade('a comma does not parse', numberQ(1000), '1,000');
+
+/**
+ * The four inputs where `Number()` and Swift's `Double(_:)` actually disagree.
+ *
+ * `0xff` above does not discriminate: both parsers read it as 255. These do,
+ * and without them a port grading with `Double(_:)` passes the whole corpus —
+ * which is exactly what mutation testing caught.
+ */
+recordGrade('binary parses in JS but not Swift', numberQ(5), '0b101');
+recordGrade('octal parses in JS but not Swift', numberQ(15), '0o17');
+// Swift reads a hex float; JS does not, and calls it NaN.
+recordGrade('a hex float is NaN in JS', numberQ(16), '0x1p4');
+// Swift's Double("inf")/("nan") parse; JS only accepts capital-I Infinity.
+recordGrade('lowercase infinity is not a number in JS', numberQ(7), 'inf');
+recordGrade('the word nan is not a number in JS', numberQ(7), 'nan');
+// And the same three against an answer they would match, so the verdict
+// differs rather than being false either way.
+recordGrade('binary against the value it denotes', numberQ(5), '0b101');
+recordGrade('octal against the value it denotes', numberQ(15), '0o17');
+recordGrade('a hex float against the value Swift reads', numberQ(16), '0x1p4');
 
 // Booleans, and the several spellings the pad and a keyboard can send.
 recordGrade('true as true', boolQ(true), 'true');

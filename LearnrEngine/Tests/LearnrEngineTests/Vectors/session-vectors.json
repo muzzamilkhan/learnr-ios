@@ -166,11 +166,13 @@
       }
     ],
     "answer": "name == 'triangle' ? 3 : 4",
-    "choices": [
-      "3",
-      "4",
-      "5"
-    ]
+    "choices": {
+      "count": 3,
+      "distractors": [
+        "5",
+        "6"
+      ]
+    }
   },
   "booleanTemplate": {
     "id": "even-1",
@@ -1636,6 +1638,626 @@
       ]
     },
     {
+      "name": "a streak of exactly three, over two days",
+      "observations": [
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3000,
+          "answeredAt": 1700000000000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3250,
+          "answeredAt": 1700000600000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3500,
+          "answeredAt": 1700001200000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3750,
+          "answeredAt": 1700001800000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 4000,
+          "answeredAt": 1700002400000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": false,
+          "timeTakenMs": 3000,
+          "answeredAt": 1700086400000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3000,
+          "answeredAt": 1700090000000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3250,
+          "answeredAt": 1700090600000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3500,
+          "answeredAt": 1700091200000
+        }
+      ],
+      "profile": {
+        "skills": [
+          {
+            "topic": "addition",
+            "level": "K",
+            "attempts": 9,
+            "correct": 8,
+            "strength": 0.9136,
+            "streak": 3,
+            "correctDays": 2,
+            "lastCorrectDay": 19676,
+            "totalTimeMs": 30250,
+            "lastAnsweredAt": 1700091200000
+          }
+        ]
+      },
+      "hasPattern": true,
+      "statuses": [
+        {
+          "now": 1700091200000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "secure"
+            }
+          ]
+        },
+        {
+          "now": 1700177600000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "secure"
+            }
+          ]
+        },
+        {
+          "now": 1700350400000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "review-due"
+            }
+          ]
+        },
+        {
+          "now": 1700609600000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "review-due"
+            }
+          ]
+        },
+        {
+          "now": 1701214400000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "review-due"
+            }
+          ]
+        },
+        {
+          "now": 1702596800000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "review-due"
+            }
+          ]
+        }
+      ],
+      "derived": [
+        {
+          "topic": "addition",
+          "level": "K",
+          "accuracy": 0.8888888888888888,
+          "averageTimeMs": 3361,
+          "reviewIntervalMs": 172800000,
+          "reviewDueAt": 1700264000000
+        }
+      ],
+      "recentTopics": [
+        "addition",
+        "addition",
+        "addition"
+      ]
+    },
+    {
+      "name": "a streak of exactly two, one short",
+      "observations": [
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3000,
+          "answeredAt": 1700000000000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3250,
+          "answeredAt": 1700000600000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3500,
+          "answeredAt": 1700001200000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3750,
+          "answeredAt": 1700001800000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 4000,
+          "answeredAt": 1700002400000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": false,
+          "timeTakenMs": 3000,
+          "answeredAt": 1700086400000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3000,
+          "answeredAt": 1700090000000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3250,
+          "answeredAt": 1700090600000
+        }
+      ],
+      "profile": {
+        "skills": [
+          {
+            "topic": "addition",
+            "level": "K",
+            "attempts": 8,
+            "correct": 7,
+            "strength": 0.856,
+            "streak": 2,
+            "correctDays": 2,
+            "lastCorrectDay": 19676,
+            "totalTimeMs": 26750,
+            "lastAnsweredAt": 1700090600000
+          }
+        ]
+      },
+      "hasPattern": true,
+      "statuses": [
+        {
+          "now": 1700090600000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1700177000000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1700349800000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1700609000000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1701213800000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1702596200000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        }
+      ],
+      "derived": [
+        {
+          "topic": "addition",
+          "level": "K",
+          "accuracy": 0.875,
+          "averageTimeMs": 3344,
+          "reviewIntervalMs": 172800000,
+          "reviewDueAt": 1700263400000
+        }
+      ],
+      "recentTopics": [
+        "addition",
+        "addition",
+        "addition"
+      ]
+    },
+    {
+      "name": "exactly eight attempts, all right, two days",
+      "observations": [
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3000,
+          "answeredAt": 1700000000000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3250,
+          "answeredAt": 1700000600000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3500,
+          "answeredAt": 1700001200000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3750,
+          "answeredAt": 1700001800000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3000,
+          "answeredAt": 1700086400000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3250,
+          "answeredAt": 1700087000000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3500,
+          "answeredAt": 1700087600000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3750,
+          "answeredAt": 1700088200000
+        }
+      ],
+      "profile": {
+        "skills": [
+          {
+            "topic": "addition",
+            "level": "K",
+            "attempts": 8,
+            "correct": 8,
+            "strength": 1,
+            "streak": 8,
+            "correctDays": 2,
+            "lastCorrectDay": 19676,
+            "totalTimeMs": 27000,
+            "lastAnsweredAt": 1700088200000
+          }
+        ]
+      },
+      "hasPattern": true,
+      "statuses": [
+        {
+          "now": 1700088200000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "secure"
+            }
+          ]
+        },
+        {
+          "now": 1700174600000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "secure"
+            }
+          ]
+        },
+        {
+          "now": 1700347400000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "review-due"
+            }
+          ]
+        },
+        {
+          "now": 1700606600000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "review-due"
+            }
+          ]
+        },
+        {
+          "now": 1701211400000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "review-due"
+            }
+          ]
+        },
+        {
+          "now": 1702593800000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "review-due"
+            }
+          ]
+        }
+      ],
+      "derived": [
+        {
+          "topic": "addition",
+          "level": "K",
+          "accuracy": 1,
+          "averageTimeMs": 3375,
+          "reviewIntervalMs": 172800000,
+          "reviewDueAt": 1700261000000
+        }
+      ],
+      "recentTopics": [
+        "addition",
+        "addition",
+        "addition"
+      ]
+    },
+    {
+      "name": "exactly seven attempts, one short of secure",
+      "observations": [
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3000,
+          "answeredAt": 1700000000000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3250,
+          "answeredAt": 1700000600000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3500,
+          "answeredAt": 1700001200000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3750,
+          "answeredAt": 1700001800000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3000,
+          "answeredAt": 1700086400000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3250,
+          "answeredAt": 1700087000000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3500,
+          "answeredAt": 1700087600000
+        }
+      ],
+      "profile": {
+        "skills": [
+          {
+            "topic": "addition",
+            "level": "K",
+            "attempts": 7,
+            "correct": 7,
+            "strength": 1,
+            "streak": 7,
+            "correctDays": 2,
+            "lastCorrectDay": 19676,
+            "totalTimeMs": 23250,
+            "lastAnsweredAt": 1700087600000
+          }
+        ]
+      },
+      "hasPattern": true,
+      "statuses": [
+        {
+          "now": 1700087600000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1700174000000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1700346800000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1700606000000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1701210800000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1702593200000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        }
+      ],
+      "derived": [
+        {
+          "topic": "addition",
+          "level": "K",
+          "accuracy": 1,
+          "averageTimeMs": 3321,
+          "reviewIntervalMs": 172800000,
+          "reviewDueAt": 1700260400000
+        }
+      ],
+      "recentTopics": [
+        "addition",
+        "addition",
+        "addition"
+      ]
+    },
+    {
       "name": "one slip on a secure topic",
       "observations": [
         {
@@ -1914,6 +2536,444 @@
       "recentTopics": [
         "addition",
         "addition",
+        "addition"
+      ]
+    },
+    {
+      "name": "a tie broken right-then-wrong",
+      "observations": [
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3000,
+          "answeredAt": 1700000000000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3250,
+          "answeredAt": 1700000600000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3500,
+          "answeredAt": 1700001200000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 1000,
+          "answeredAt": 1700003600000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": false,
+          "timeTakenMs": 2000,
+          "answeredAt": 1700003600000
+        }
+      ],
+      "profile": {
+        "skills": [
+          {
+            "topic": "addition",
+            "level": "K",
+            "attempts": 5,
+            "correct": 4,
+            "strength": 0.6,
+            "streak": 0,
+            "correctDays": 1,
+            "lastCorrectDay": 19675,
+            "totalTimeMs": 12750,
+            "lastAnsweredAt": 1700003600000
+          }
+        ]
+      },
+      "hasPattern": true,
+      "statuses": [
+        {
+          "now": 1700003600000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1700090000000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1700262800000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1700522000000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1701126800000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1702509200000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        }
+      ],
+      "derived": [
+        {
+          "topic": "addition",
+          "level": "K",
+          "accuracy": 0.8,
+          "averageTimeMs": 2550,
+          "reviewIntervalMs": 172800000,
+          "reviewDueAt": 1700176400000
+        }
+      ],
+      "recentTopics": [
+        "addition",
+        "addition",
+        "addition"
+      ]
+    },
+    {
+      "name": "a tie broken wrong-then-right",
+      "observations": [
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3000,
+          "answeredAt": 1700000000000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3250,
+          "answeredAt": 1700000600000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 3500,
+          "answeredAt": 1700001200000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": false,
+          "timeTakenMs": 2000,
+          "answeredAt": 1700003600000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 1000,
+          "answeredAt": 1700003600000
+        }
+      ],
+      "profile": {
+        "skills": [
+          {
+            "topic": "addition",
+            "level": "K",
+            "attempts": 5,
+            "correct": 4,
+            "strength": 0.76,
+            "streak": 1,
+            "correctDays": 1,
+            "lastCorrectDay": 19675,
+            "totalTimeMs": 12750,
+            "lastAnsweredAt": 1700003600000
+          }
+        ]
+      },
+      "hasPattern": true,
+      "statuses": [
+        {
+          "now": 1700003600000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1700090000000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1700262800000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1700522000000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1701126800000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        },
+        {
+          "now": 1702509200000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "developing"
+            }
+          ]
+        }
+      ],
+      "derived": [
+        {
+          "topic": "addition",
+          "level": "K",
+          "accuracy": 0.8,
+          "averageTimeMs": 2550,
+          "reviewIntervalMs": 172800000,
+          "reviewDueAt": 1700176400000
+        }
+      ],
+      "recentTopics": [
+        "addition",
+        "addition",
+        "addition"
+      ]
+    },
+    {
+      "name": "a three-way tie across topics",
+      "observations": [
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": true,
+          "timeTakenMs": 1000,
+          "answeredAt": 1700000000000
+        },
+        {
+          "topic": "subtraction",
+          "level": "K",
+          "correct": false,
+          "timeTakenMs": 2000,
+          "answeredAt": 1700000000000
+        },
+        {
+          "topic": "addition",
+          "level": "K",
+          "correct": false,
+          "timeTakenMs": 3000,
+          "answeredAt": 1700000000000
+        }
+      ],
+      "profile": {
+        "skills": [
+          {
+            "topic": "addition",
+            "level": "K",
+            "attempts": 2,
+            "correct": 1,
+            "strength": 0.6,
+            "streak": 0,
+            "correctDays": 1,
+            "lastCorrectDay": 19675,
+            "totalTimeMs": 4000,
+            "lastAnsweredAt": 1700000000000
+          },
+          {
+            "topic": "subtraction",
+            "level": "K",
+            "attempts": 1,
+            "correct": 0,
+            "strength": 0,
+            "streak": 0,
+            "correctDays": 0,
+            "lastCorrectDay": null,
+            "totalTimeMs": 2000,
+            "lastAnsweredAt": 1700000000000
+          }
+        ]
+      },
+      "hasPattern": false,
+      "statuses": [
+        {
+          "now": 1700000000000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "new"
+            },
+            {
+              "topic": "subtraction",
+              "level": "K",
+              "status": "new"
+            }
+          ]
+        },
+        {
+          "now": 1700086400000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "new"
+            },
+            {
+              "topic": "subtraction",
+              "level": "K",
+              "status": "new"
+            }
+          ]
+        },
+        {
+          "now": 1700259200000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "new"
+            },
+            {
+              "topic": "subtraction",
+              "level": "K",
+              "status": "new"
+            }
+          ]
+        },
+        {
+          "now": 1700518400000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "new"
+            },
+            {
+              "topic": "subtraction",
+              "level": "K",
+              "status": "new"
+            }
+          ]
+        },
+        {
+          "now": 1701123200000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "new"
+            },
+            {
+              "topic": "subtraction",
+              "level": "K",
+              "status": "new"
+            }
+          ]
+        },
+        {
+          "now": 1702505600000,
+          "skills": [
+            {
+              "topic": "addition",
+              "level": "K",
+              "status": "new"
+            },
+            {
+              "topic": "subtraction",
+              "level": "K",
+              "status": "new"
+            }
+          ]
+        }
+      ],
+      "derived": [
+        {
+          "topic": "addition",
+          "level": "K",
+          "accuracy": 0.5,
+          "averageTimeMs": 2000,
+          "reviewIntervalMs": 172800000,
+          "reviewDueAt": 1700172800000
+        },
+        {
+          "topic": "subtraction",
+          "level": "K",
+          "accuracy": 0,
+          "averageTimeMs": 2000,
+          "reviewIntervalMs": 172800000,
+          "reviewDueAt": 1700172800000
+        }
+      ],
+      "recentTopics": [
+        "addition",
+        "subtraction",
         "addition"
       ]
     },
@@ -5639,6 +6699,142 @@
       "grade": {
         "correct": false,
         "response": "1,000"
+      }
+    },
+    {
+      "name": "binary parses in JS but not Swift",
+      "question": {
+        "templateId": "q",
+        "subject": "maths",
+        "topic": "addition",
+        "level": "K",
+        "prompt": "p",
+        "answer": 5,
+        "answerType": "number"
+      },
+      "response": "0b101",
+      "grade": {
+        "correct": true,
+        "response": "0b101"
+      }
+    },
+    {
+      "name": "octal parses in JS but not Swift",
+      "question": {
+        "templateId": "q",
+        "subject": "maths",
+        "topic": "addition",
+        "level": "K",
+        "prompt": "p",
+        "answer": 15,
+        "answerType": "number"
+      },
+      "response": "0o17",
+      "grade": {
+        "correct": true,
+        "response": "0o17"
+      }
+    },
+    {
+      "name": "a hex float is NaN in JS",
+      "question": {
+        "templateId": "q",
+        "subject": "maths",
+        "topic": "addition",
+        "level": "K",
+        "prompt": "p",
+        "answer": 16,
+        "answerType": "number"
+      },
+      "response": "0x1p4",
+      "grade": {
+        "correct": false,
+        "response": "0x1p4"
+      }
+    },
+    {
+      "name": "lowercase infinity is not a number in JS",
+      "question": {
+        "templateId": "q",
+        "subject": "maths",
+        "topic": "addition",
+        "level": "K",
+        "prompt": "p",
+        "answer": 7,
+        "answerType": "number"
+      },
+      "response": "inf",
+      "grade": {
+        "correct": false,
+        "response": "inf"
+      }
+    },
+    {
+      "name": "the word nan is not a number in JS",
+      "question": {
+        "templateId": "q",
+        "subject": "maths",
+        "topic": "addition",
+        "level": "K",
+        "prompt": "p",
+        "answer": 7,
+        "answerType": "number"
+      },
+      "response": "nan",
+      "grade": {
+        "correct": false,
+        "response": "nan"
+      }
+    },
+    {
+      "name": "binary against the value it denotes",
+      "question": {
+        "templateId": "q",
+        "subject": "maths",
+        "topic": "addition",
+        "level": "K",
+        "prompt": "p",
+        "answer": 5,
+        "answerType": "number"
+      },
+      "response": "0b101",
+      "grade": {
+        "correct": true,
+        "response": "0b101"
+      }
+    },
+    {
+      "name": "octal against the value it denotes",
+      "question": {
+        "templateId": "q",
+        "subject": "maths",
+        "topic": "addition",
+        "level": "K",
+        "prompt": "p",
+        "answer": 15,
+        "answerType": "number"
+      },
+      "response": "0o17",
+      "grade": {
+        "correct": true,
+        "response": "0o17"
+      }
+    },
+    {
+      "name": "a hex float against the value Swift reads",
+      "question": {
+        "templateId": "q",
+        "subject": "maths",
+        "topic": "addition",
+        "level": "K",
+        "prompt": "p",
+        "answer": 16,
+        "answerType": "number"
+      },
+      "response": "0x1p4",
+      "grade": {
+        "correct": false,
+        "response": "0x1p4"
       }
     },
     {
@@ -15230,7 +16426,9 @@
               "answer": 3,
               "answerType": "number",
               "choices": [
-                3
+                3,
+                6,
+                5
               ],
               "vars": {
                 "name": "triangle"
@@ -15383,7 +16581,9 @@
               "answer": 4,
               "answerType": "number",
               "choices": [
-                4
+                5,
+                4,
+                6
               ],
               "vars": {
                 "name": "square"
@@ -16086,6 +17286,8 @@
               "answer": 4,
               "answerType": "number",
               "choices": [
+                5,
+                6,
                 4
               ],
               "vars": {
@@ -16861,7 +18063,9 @@
               "answer": 3,
               "answerType": "number",
               "choices": [
-                3
+                5,
+                3,
+                6
               ],
               "vars": {
                 "name": "triangle"
