@@ -19,4 +19,6 @@ let allFigureKindBuilders: [FigureKindBuilder] = [
     pictographBuilder,
     barBuilder,
     solidBuilder,
+    gridBuilder,
+    numberLineBuilder,
 ]

@@ -147,6 +147,24 @@ const cases: [string, string, Json, Json?][] = [
   ['bar.scale-pinned', 'barsc', { kind: 'bar', values: "'10,20,30'", scale: '10' }],
   ['bar.single-value', 'bar1v', { kind: 'bar', values: "'5'" }],
   ['bar.zero-value', 'bar0', { kind: 'bar', values: "'0,4,2'" }],
+  // Values that are multiples of some ladder scales and not others, so the
+  // preference for a scale every value lands on is a real choice rather than a
+  // filter that happens to keep everything. Without one of these, dropping the
+  // preference entirely changes no drawing.
+  ['bar.exact-scale-preferred', 'barex', { kind: 'bar', values: "'10,20,30,40'" }],
+  ['bar.inexact-values', 'barinex', { kind: 'bar', values: "'3,7,11,13'" }],
+  ['bar.multiples-of-five', 'bar5s', { kind: 'bar', values: "'5,15,25'" }],
+  // The discriminating pair for the exact-scale preference. Values every
+  // ladder step divides look the same either way; `2,4,6` is exact only at a
+  // scale of 2, and `6,12,18` at 2 and 5 but not 10 - so dropping the
+  // preference changes which axis is drawn. Several draws each, since the
+  // choice is a pick among whatever survives the filter.
+  ...([0, 1, 2, 3].map((n): [string, string, Json] => [
+    `bar.exact-forces-two#${n}`, `barex2-${n}`, { kind: 'bar', values: "'2,4,6'" },
+  ])),
+  ...([0, 1, 2, 3].map((n): [string, string, Json] => [
+    `bar.exact-narrows#${n}`, `barexn-${n}`, { kind: 'bar', values: "'6,12,18'" },
+  ])),
 
   // --- pictograph ---
   ['pictograph.basic', 'pic1', { kind: 'pictograph', counts: "'3,7,5'" }],
@@ -192,6 +210,25 @@ const cases: [string, string, Json, Json?][] = [
   // documented case where the range does not vary.
   ['numberline.decimal', 'nldec', { kind: 'number-line', at: '1.1' }],
   ['numberline.negative-range', 'nlneg', { kind: 'number-line', at: '-5', from: '-10', to: '0' }],
+  // Values the span grid can frame only one way, which is what `shiftedStart`
+  // exists for: measured, 36 of the integers 0-100 had exactly one line before
+  // it, and a child answering 11 saw the same picture every seed. Without
+  // these the half-span offset is unreachable - only two number-line vectors
+  // leave both ends open at all, and neither happens to shift.
+  ['numberline.shifted-11', 'nl11', { kind: 'number-line', at: '11' }],
+  ['numberline.shifted-13', 'nl13', { kind: 'number-line', at: '13' }],
+  ['numberline.shifted-17', 'nl17', { kind: 'number-line', at: '17' }],
+  ['numberline.shifted-23', 'nl23', { kind: 'number-line', at: '23' }],
+  ['numberline.unshifted-7', 'nl7', { kind: 'number-line', at: '7' }],
+  // The roundness guard itself: half of a span of 5 is 2.5, so a shift there
+  // would grow a decimal on an endpoint and is refused rather than drawn. An
+  // `at` under 10 is where the 5-wide span is in play, so these are the values
+  // that tell a working guard from one that always says yes.
+  ['numberline.roundness-3', 'nlr3', { kind: 'number-line', at: '3' }],
+  ['numberline.roundness-4', 'nlr4', { kind: 'number-line', at: '4' }],
+  ['numberline.roundness-6', 'nlr6', { kind: 'number-line', at: '6' }],
+  ['numberline.roundness-8', 'nlr8', { kind: 'number-line', at: '8' }],
+  ['numberline.roundness-9', 'nlr9', { kind: 'number-line', at: '9' }],
   // The arrow between two ticks: honoured when the range is pinned, because
   // estimating is a real question to ask.
   ['numberline.between-ticks', 'nlbet', { kind: 'number-line', at: '2.5', from: '0', to: '10', step: '5' }],
@@ -234,6 +271,11 @@ const cases: [string, string, Json, Json?][] = [
   ['grid.origin-on-lines', 'gr5', { kind: 'grid', at: "'0,0'", columns: '4', rows: '4', onLines: 'true', axisLabels: "'numbers'" }],
   ['grid.picked-extent', 'gr6', { kind: 'grid', at: "'2,3'" }],
   ['grid.rectangular', 'gr7', { kind: 'grid', at: "'3,1'", columns: '6', rows: '3', axisLabels: "'numbers'" }],
+  // Past Z, where a column name wraps to two letters. No shipped grid is wider
+  // than six columns, so the base-26 wrap is otherwise never drawn - and it is
+  // the one place a column could silently share a name with another.
+  ['grid.past-z', 'grz', { kind: 'grid', at: "'27,2'", columns: '30', rows: '2', axisLabels: "'letters'" }],
+  ['grid.at-z-boundary', 'grz2', { kind: 'grid', at: "'26,1'", columns: '27', rows: '2', axisLabels: "'letters'" }],
 
   // --- degradation: a figure must always come back drawable ---
   // These are the paths that run when content is wrong, and they are the ones
