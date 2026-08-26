@@ -16,4 +16,5 @@ let allFigureKindBuilders: [FigureKindBuilder] = [
     spinnerBuilder,
     clockBuilder,
     fractionShapeBuilder,
+    pictographBuilder,
 ]

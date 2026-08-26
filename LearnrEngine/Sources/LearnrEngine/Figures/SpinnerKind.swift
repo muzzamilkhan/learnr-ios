@@ -21,7 +21,10 @@ struct SpinnerBuilder: FigureKindBuilder {
 
     func build(_ spec: FigureSpec, _ scope: Scope, _ rng: inout Rng) -> [Mark] {
         let read = stringValue(readField(spec["sectors"], scope))
-        let parsed = read.flatMap(parseParts)
+        // Strict: a list with a hole in it is a typo, not a sector the arrow
+        // can never land on. `parseStrictNumbers` is shared with `pictograph`,
+        // which refuses a hole for the same reason.
+        let parsed = read.flatMap(parseStrictNumbers)
         // A negative part has no sector to be drawn in, so it is drawn as
         // nothing. It is reported by validation; here it only has to be
         // drawable.
@@ -87,17 +90,6 @@ func sectorAngles(_ parts: [Double]) -> [Double] {
     return parts.map { ($0 * 360) / total }
 }
 
-/// The comma-joined list, or nothing at all.
-///
-/// Strict: `Number('')` is 0 in JavaScript, so a list with a hole in it would
-/// read as a sector the arrow can never land on rather than as the typo it is.
-private func parseParts(_ text: String) -> [Double]? {
-    let pieces = commaList(text)
-    if pieces.contains(where: { $0.isEmpty }) { return nil }
-    let parts = pieces.map { Double($0) }
-    guard parts.allSatisfy({ $0?.isFinite == true }) else { return nil }
-    return parts.map { $0! }
-}
 
 /// Which sectors are shaded, **in the order the author wrote them**, which is
 /// the order the pairing is built in before anything is permuted.
