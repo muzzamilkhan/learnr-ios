@@ -120,6 +120,18 @@ const cases: [string, string, Json, Json?][] = [
   ['angle.clamped-high', 'angchi', { kind: 'angle', degrees: '360' }],
   ['angle.clamped-negative', 'angcneg', { kind: 'angle', degrees: '-30' }],
   ['angle.pinned-rotation', 'angrot', { kind: 'angle', degrees: '60', rotation: '20' }],
+  // A *negative* arc angle, which is the one coordinate in a figure that can be
+  // negative at all: `fit` clamps every point into [0, box] before rounding,
+  // but an arc's `from`/`to` are rounded as written. It takes a pinned negative
+  // rotation to produce one, so no shipped template does.
+  ['angle.negative-rotation', 'angnegrot', { kind: 'angle', degrees: '90', rotation: '-30' }],
+  // The same, landing on an exact rounding tie. This is the only place in the
+  // whole figure module where JavaScript's round-half-toward-+Infinity and
+  // Swift's round-half-away-from-zero can disagree, so without it the two are
+  // indistinguishable across all 509 vectors: the oracle gives 0 here, and
+  // Swift's native rounding would give -0.01.
+  ['angle.negative-rotation-tie', 'angnegtie', { kind: 'angle', degrees: '90', rotation: '-0.005' }],
+  ['angle.negative-rotation-tie-2', 'angnegtie2', { kind: 'angle', degrees: '45', rotation: '-2.125' }],
   // Pinned arm length makes both arms match; omitted, they are jittered
   // *separately*, which is deliberate and spends different draws.
   ['angle.pinned-arms', 'angarm', { kind: 'angle', degrees: '60', armLength: '40' }],

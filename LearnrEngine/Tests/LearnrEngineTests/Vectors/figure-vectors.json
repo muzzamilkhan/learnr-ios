@@ -1683,6 +1683,165 @@
     }
   },
   {
+    "name": "angle.negative-rotation",
+    "seed": "angnegrot",
+    "spec": {
+      "kind": "angle",
+      "degrees": "90",
+      "rotation": "-30"
+    },
+    "scope": {},
+    "figure": {
+      "width": 100,
+      "height": 100,
+      "marks": [
+        {
+          "kind": "path",
+          "points": [
+            [
+              88.44,
+              94
+            ],
+            [
+              30.44,
+              60.51
+            ],
+            [
+              61.91,
+              6
+            ]
+          ],
+          "closed": false,
+          "fill": false,
+          "dashed": false
+        },
+        {
+          "kind": "dot",
+          "at": [
+            30.44,
+            60.51
+          ]
+        },
+        {
+          "kind": "arc",
+          "at": [
+            30.44,
+            60.51
+          ],
+          "radius": 18.88,
+          "from": -30,
+          "to": 60
+        }
+      ]
+    }
+  },
+  {
+    "name": "angle.negative-rotation-tie",
+    "seed": "angnegtie",
+    "spec": {
+      "kind": "angle",
+      "degrees": "90",
+      "rotation": "-0.005"
+    },
+    "scope": {},
+    "figure": {
+      "width": 100,
+      "height": 100,
+      "marks": [
+        {
+          "kind": "path",
+          "points": [
+            [
+              94,
+              71.18
+            ],
+            [
+              24.15,
+              71.18
+            ],
+            [
+              24.16,
+              10.67
+            ]
+          ],
+          "closed": false,
+          "fill": false,
+          "dashed": false
+        },
+        {
+          "kind": "dot",
+          "at": [
+            24.15,
+            71.18
+          ]
+        },
+        {
+          "kind": "arc",
+          "at": [
+            24.15,
+            71.18
+          ],
+          "radius": 18.15,
+          "from": 0,
+          "to": 90
+        }
+      ]
+    }
+  },
+  {
+    "name": "angle.negative-rotation-tie-2",
+    "seed": "angnegtie2",
+    "spec": {
+      "kind": "angle",
+      "degrees": "45",
+      "rotation": "-2.125"
+    },
+    "scope": {},
+    "figure": {
+      "width": 100,
+      "height": 100,
+      "marks": [
+        {
+          "kind": "path",
+          "points": [
+            [
+              94,
+              70.44
+            ],
+            [
+              26.32,
+              67.93
+            ],
+            [
+              86.83,
+              11.75
+            ]
+          ],
+          "closed": false,
+          "fill": false,
+          "dashed": false
+        },
+        {
+          "kind": "dot",
+          "at": [
+            26.32,
+            67.93
+          ]
+        },
+        {
+          "kind": "arc",
+          "at": [
+            26.32,
+            67.93
+          ],
+          "radius": 20.32,
+          "from": -2.12,
+          "to": 42.88
+        }
+      ]
+    }
+  },
+  {
     "name": "angle.pinned-arms",
     "seed": "angarm",
     "spec": {
