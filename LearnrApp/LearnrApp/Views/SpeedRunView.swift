@@ -68,7 +68,12 @@ struct SpeedRunView: View {
                 .padding(.horizontal, 16)
                 .padding(.bottom, 12)
         }
-        .overlay {
+        .overlay(alignment: .bottom) {
+            // Bottom-aligned and over the pad only. An earlier version covered
+            // the whole screen, which dimmed the very question the run-up
+            // exists to let a child read — the countdown was hiding the thing
+            // it is there to buy time for. Rendering the PNGs is what showed
+            // it; nothing in the state machine was wrong.
             if run.phase == .countdown {
                 countdown(run)
             }
@@ -192,7 +197,7 @@ struct SpeedRunView: View {
         let seconds = Int((Double(run.countdownRemainingMs) / 1000).rounded(.up))
 
         return ZStack {
-            Palette.paper.opacity(0.86).ignoresSafeArea()
+            Palette.paper
 
             VStack(spacing: 12) {
                 Text(Modes.modeLabel(mode))
@@ -200,33 +205,56 @@ struct SpeedRunView: View {
                     .foregroundStyle(Palette.inkSoft)
 
                 Text("\(max(seconds, 1))")
-                    .font(.system(size: 140, weight: .bold, design: .rounded))
+                    .font(.system(size: 120, weight: .bold, design: .rounded))
                     .foregroundStyle(Palette.brand)
                     .monospacedDigit()
                     .contentTransition(.numericText(countsDown: true))
                     .animation(.easeOut(duration: 0.2), value: seconds)
             }
         }
+        // The pad's own height, so the run-up occupies the space the keys will
+        // and the question above stays fully legible.
+        .frame(height: 384)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("Starting in \(max(seconds, 1))")
     }
 }
 
 /// The result: the score, and one of three things to say about it.
+///
+/// Takes the three things it shows rather than the session that produced them.
+/// The view has no use for a clock or an entry, and taking only what it renders
+/// is what lets every tone be built and looked at directly.
 struct SpeedResultView: View {
-    let run: SpeedSession
+    let mode: Mode
+    let score: Int
+    let outcome: SpeedSession.Outcome
     let onDone: () -> Void
     let onAgain: () -> Void
+
+    init(mode: Mode, score: Int, outcome: SpeedSession.Outcome,
+         onDone: @escaping () -> Void, onAgain: @escaping () -> Void) {
+        self.mode = mode
+        self.score = score
+        self.outcome = outcome
+        self.onDone = onDone
+        self.onAgain = onAgain
+    }
+
+    init(run: SpeedSession, onDone: @escaping () -> Void, onAgain: @escaping () -> Void) {
+        self.init(mode: run.mode, score: run.score, outcome: run.outcome,
+                  onDone: onDone, onAgain: onAgain)
+    }
 
     var body: some View {
         VStack(spacing: 24) {
             Spacer()
 
-            Text(Modes.modeLabel(run.mode))
+            Text(Modes.modeLabel(mode))
                 .font(.system(size: 22, weight: .semibold, design: .rounded))
                 .foregroundStyle(Palette.inkSoft)
 
-            Text("\(run.score)")
+            Text("\(score)")
                 .font(.system(size: 120, weight: .bold, design: .rounded))
                 .foregroundStyle(Palette.ink)
                 .monospacedDigit()
@@ -264,7 +292,7 @@ struct SpeedResultView: View {
     /// beat, so it is told what it set rather than congratulated on it — a
     /// fanfare there would be invented.
     private var headline: String {
-        switch run.outcome {
+        switch outcome {
         case .pending:
             return " "
         case .unsent:
@@ -281,7 +309,7 @@ struct SpeedResultView: View {
     }
 
     private var tint: Color {
-        if case .settled(.record, _) = run.outcome { return Palette.right }
+        if case .settled(.record, _) = outcome { return Palette.right }
         return Palette.inkSoft
     }
 }
