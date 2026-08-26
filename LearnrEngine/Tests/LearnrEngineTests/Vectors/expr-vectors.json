@@ -1,0 +1,594 @@
+[
+  {
+    "src": "1 + 2",
+    "scope": {},
+    "value": 3,
+    "type": "number",
+    "str": "3"
+  },
+  {
+    "src": "7 - 2 * 3",
+    "scope": {},
+    "value": 1,
+    "type": "number",
+    "str": "1"
+  },
+  {
+    "src": "(7 - 2) * 3",
+    "scope": {},
+    "value": 15,
+    "type": "number",
+    "str": "15"
+  },
+  {
+    "src": "7 / 2",
+    "scope": {},
+    "value": 3.5,
+    "type": "number",
+    "str": "3.5"
+  },
+  {
+    "src": "5 / 2",
+    "scope": {},
+    "value": 2.5,
+    "type": "number",
+    "str": "2.5"
+  },
+  {
+    "src": "7 % 3",
+    "scope": {},
+    "value": 1,
+    "type": "number",
+    "str": "1"
+  },
+  {
+    "src": "2 ^ 3 ^ 2",
+    "scope": {},
+    "value": 512,
+    "type": "number",
+    "str": "512"
+  },
+  {
+    "src": "(2 ^ 3) ^ 2",
+    "scope": {},
+    "value": 64,
+    "type": "number",
+    "str": "64"
+  },
+  {
+    "src": "-4 + 1",
+    "scope": {},
+    "value": -3,
+    "type": "number",
+    "str": "-3"
+  },
+  {
+    "src": "1.5 * 2",
+    "scope": {},
+    "value": 3,
+    "type": "number",
+    "str": "3"
+  },
+  {
+    "src": "1 + 2 * 3",
+    "scope": {},
+    "value": 7,
+    "type": "number",
+    "str": "7"
+  },
+  {
+    "src": "-2 ^ 2",
+    "scope": {},
+    "value": -4,
+    "type": "number",
+    "str": "-4"
+  },
+  {
+    "src": "- - 3",
+    "scope": {},
+    "value": 3,
+    "type": "number",
+    "str": "3"
+  },
+  {
+    "src": "2 ^ -1",
+    "scope": {},
+    "value": 0.5,
+    "type": "number",
+    "str": "0.5"
+  },
+  {
+    "src": "-x",
+    "scope": {
+      "x": 5
+    },
+    "value": -5,
+    "type": "number",
+    "str": "-5"
+  },
+  {
+    "src": "!true == false",
+    "scope": {},
+    "value": true,
+    "type": "boolean",
+    "str": "true"
+  },
+  {
+    "src": "-7 % 3",
+    "scope": {},
+    "value": -1,
+    "type": "number",
+    "str": "-1"
+  },
+  {
+    "src": "7 % -3",
+    "scope": {},
+    "value": 1,
+    "type": "number",
+    "str": "1"
+  },
+  {
+    "src": "mod(-7, 3)",
+    "scope": {},
+    "value": 2,
+    "type": "number",
+    "str": "2"
+  },
+  {
+    "src": "mod(7, -3)",
+    "scope": {},
+    "value": -2,
+    "type": "number",
+    "str": "-2"
+  },
+  {
+    "src": "mod(-7.5, 3)",
+    "scope": {},
+    "value": 1.5,
+    "type": "number",
+    "str": "1.5"
+  },
+  {
+    "src": "round(2.5)",
+    "scope": {},
+    "value": 3,
+    "type": "number",
+    "str": "3"
+  },
+  {
+    "src": "round(-2.5)",
+    "scope": {},
+    "value": -2,
+    "type": "number",
+    "str": "-2"
+  },
+  {
+    "src": "round(3.5)",
+    "scope": {},
+    "value": 4,
+    "type": "number",
+    "str": "4"
+  },
+  {
+    "src": "round(-1.5)",
+    "scope": {},
+    "value": -1,
+    "type": "number",
+    "str": "-1"
+  },
+  {
+    "src": "round(-0.5)",
+    "scope": {},
+    "value": 0,
+    "type": "number",
+    "str": "0"
+  },
+  {
+    "src": "round(2.4)",
+    "scope": {},
+    "value": 2,
+    "type": "number",
+    "str": "2"
+  },
+  {
+    "src": "round(-2.4)",
+    "scope": {},
+    "value": -2,
+    "type": "number",
+    "str": "-2"
+  },
+  {
+    "src": "trunc(-2.7)",
+    "scope": {},
+    "value": -2,
+    "type": "number",
+    "str": "-2"
+  },
+  {
+    "src": "floor(-2.1)",
+    "scope": {},
+    "value": -3,
+    "type": "number",
+    "str": "-3"
+  },
+  {
+    "src": "ceil(-2.1)",
+    "scope": {},
+    "value": -2,
+    "type": "number",
+    "str": "-2"
+  },
+  {
+    "src": "sign(-3)",
+    "scope": {},
+    "value": -1,
+    "type": "number",
+    "str": "-1"
+  },
+  {
+    "src": "sign(0)",
+    "scope": {},
+    "value": 0,
+    "type": "number",
+    "str": "0"
+  },
+  {
+    "src": "sign(4)",
+    "scope": {},
+    "value": 1,
+    "type": "number",
+    "str": "1"
+  },
+  {
+    "src": "'2' == 2",
+    "scope": {},
+    "value": false,
+    "type": "boolean",
+    "str": "false"
+  },
+  {
+    "src": "1 == true",
+    "scope": {},
+    "value": false,
+    "type": "boolean",
+    "str": "false"
+  },
+  {
+    "src": "0 == false",
+    "scope": {},
+    "value": false,
+    "type": "boolean",
+    "str": "false"
+  },
+  {
+    "src": "2 == 2.0",
+    "scope": {},
+    "value": true,
+    "type": "boolean",
+    "str": "true"
+  },
+  {
+    "src": "\"a\" == \"b\"",
+    "scope": {},
+    "value": false,
+    "type": "boolean",
+    "str": "false"
+  },
+  {
+    "src": "1 && 2",
+    "scope": {},
+    "value": true,
+    "type": "boolean",
+    "str": "true"
+  },
+  {
+    "src": "x || y",
+    "scope": {
+      "x": 0,
+      "y": 5
+    },
+    "value": true,
+    "type": "boolean",
+    "str": "true"
+  },
+  {
+    "src": "x && y",
+    "scope": {
+      "x": "a",
+      "y": "b"
+    },
+    "value": true,
+    "type": "boolean",
+    "str": "true"
+  },
+  {
+    "src": "true && 0",
+    "scope": {},
+    "value": false,
+    "type": "boolean",
+    "str": "false"
+  },
+  {
+    "src": "x > 2 && x < 10",
+    "scope": {
+      "x": 5
+    },
+    "value": true,
+    "type": "boolean",
+    "str": "true"
+  },
+  {
+    "src": "!(x == 3)",
+    "scope": {
+      "x": 5
+    },
+    "value": true,
+    "type": "boolean",
+    "str": "true"
+  },
+  {
+    "src": "!x",
+    "scope": {
+      "x": "0"
+    },
+    "value": false,
+    "type": "boolean",
+    "str": "false"
+  },
+  {
+    "src": "!x",
+    "scope": {
+      "x": ""
+    },
+    "value": true,
+    "type": "boolean",
+    "str": "true"
+  },
+  {
+    "src": "!x",
+    "scope": {
+      "x": 0
+    },
+    "value": true,
+    "type": "boolean",
+    "str": "true"
+  },
+  {
+    "src": "x > y ? x : y",
+    "scope": {
+      "x": 3,
+      "y": 8
+    },
+    "value": 8,
+    "type": "number",
+    "str": "8"
+  },
+  {
+    "src": "1 ? 2 : 3 ? 4 : 5",
+    "scope": {},
+    "value": 2,
+    "type": "number",
+    "str": "2"
+  },
+  {
+    "src": "1 ? 2 ? 3 : 4 : 5",
+    "scope": {},
+    "value": 3,
+    "type": "number",
+    "str": "3"
+  },
+  {
+    "src": "abs(0 - 5)",
+    "scope": {},
+    "value": 5,
+    "type": "number",
+    "str": "5"
+  },
+  {
+    "src": "min(3, 9, 4)",
+    "scope": {},
+    "value": 3,
+    "type": "number",
+    "str": "3"
+  },
+  {
+    "src": "max(3, 9, 4)",
+    "scope": {},
+    "value": 9,
+    "type": "number",
+    "str": "9"
+  },
+  {
+    "src": "floor(7 / 2)",
+    "scope": {},
+    "value": 3,
+    "type": "number",
+    "str": "3"
+  },
+  {
+    "src": "ceil(7 / 2)",
+    "scope": {},
+    "value": 4,
+    "type": "number",
+    "str": "4"
+  },
+  {
+    "src": "gcd(12, 18)",
+    "scope": {},
+    "value": 6,
+    "type": "number",
+    "str": "6"
+  },
+  {
+    "src": "gcd(-12, 18)",
+    "scope": {},
+    "value": 6,
+    "type": "number",
+    "str": "6"
+  },
+  {
+    "src": "gcd(0, 5)",
+    "scope": {},
+    "value": 5,
+    "type": "number",
+    "str": "5"
+  },
+  {
+    "src": "lcm(4, 6)",
+    "scope": {},
+    "value": 12,
+    "type": "number",
+    "str": "12"
+  },
+  {
+    "src": "lcm(-4, 6)",
+    "scope": {},
+    "value": 12,
+    "type": "number",
+    "str": "12"
+  },
+  {
+    "src": "lcm(0, 5)",
+    "scope": {},
+    "value": 0,
+    "type": "number",
+    "str": "0"
+  },
+  {
+    "src": "sqrt(81)",
+    "scope": {},
+    "value": 9,
+    "type": "number",
+    "str": "9"
+  },
+  {
+    "src": "sqrt(-1)",
+    "scope": {},
+    "value": "NaN",
+    "type": "number",
+    "str": "NaN"
+  },
+  {
+    "src": "isInt(4.0)",
+    "scope": {},
+    "value": true,
+    "type": "boolean",
+    "str": "true"
+  },
+  {
+    "src": "isInt(4.5)",
+    "scope": {},
+    "value": false,
+    "type": "boolean",
+    "str": "false"
+  },
+  {
+    "src": "isEven(-4)",
+    "scope": {},
+    "value": true,
+    "type": "boolean",
+    "str": "true"
+  },
+  {
+    "src": "isEven(0)",
+    "scope": {},
+    "value": true,
+    "type": "boolean",
+    "str": "true"
+  },
+  {
+    "src": "isEven(3.5)",
+    "scope": {},
+    "value": false,
+    "type": "boolean",
+    "str": "false"
+  },
+  {
+    "src": "isOdd(-3)",
+    "scope": {},
+    "value": true,
+    "type": "boolean",
+    "str": "true"
+  },
+  {
+    "src": "isOdd(3.5)",
+    "scope": {},
+    "value": false,
+    "type": "boolean",
+    "str": "false"
+  },
+  {
+    "src": "pow(2, 10)",
+    "scope": {},
+    "value": 1024,
+    "type": "number",
+    "str": "1024"
+  },
+  {
+    "src": "pow(0, 0)",
+    "scope": {},
+    "value": 1,
+    "type": "number",
+    "str": "1"
+  },
+  {
+    "src": "pow(2, -1)",
+    "scope": {},
+    "value": 0.5,
+    "type": "number",
+    "str": "0.5"
+  },
+  {
+    "src": "3 / 0",
+    "scope": {},
+    "value": "Infinity",
+    "type": "number",
+    "str": "Infinity"
+  },
+  {
+    "src": "0 / 0",
+    "scope": {},
+    "value": "NaN",
+    "type": "number",
+    "str": "NaN"
+  },
+  {
+    "src": "5 % 0",
+    "scope": {},
+    "value": "NaN",
+    "type": "number",
+    "str": "NaN"
+  },
+  {
+    "src": "op == '+'",
+    "scope": {
+      "op": "+"
+    },
+    "value": true,
+    "type": "boolean",
+    "str": "true"
+  },
+  {
+    "src": "a + 'x'",
+    "scope": {
+      "a": "b"
+    },
+    "value": "bx",
+    "type": "string",
+    "str": "bx"
+  },
+  {
+    "src": "1 + \"a\"",
+    "scope": {},
+    "value": "1a",
+    "type": "string",
+    "str": "1a"
+  },
+  {
+    "src": "\"a\" + 2.0",
+    "scope": {},
+    "value": "a2",
+    "type": "string",
+    "str": "a2"
+  }
+]
