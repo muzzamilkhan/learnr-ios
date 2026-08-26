@@ -40,11 +40,50 @@ else and says why:
 cd ../learnr && npx tsx scripts/vectors.mts   # not yet written; see build order
 ```
 
+## Layout, as built
+
+```
+LearnrEngine/          Swift package, 36 tests
+  Sources/LearnrEngine/
+    Rng/               mulberry32 + FNV-1a
+    Expr/              tokenizer, Pratt parser, evaluator, JS number semantics
+    Api/               models, client, offline sync queue
+LearnrApp/             SwiftUI app - no Xcode project yet, see below
+```
+
 ## Status
 
-Early. The RNG and the JavaScript number semantics are ported and verified. The
-expression language, template generation, figures and the session state machine
-are not yet.
+**Done and verified:** the RNG, the JavaScript number semantics, the whole
+expression language, the API client, and the offline sync queue.
 
-Content extraction and full fixture generation - build-order steps 2 and 3 -
-have not happened, so nothing here can generate a real question yet.
+**Not started:** template generation, the eleven figure builders, the session
+and speed-run state machines. Those need the content pack, which is build-order
+step 2 and has not happened - so the app cannot generate a question yet, and
+`HomeView` says so rather than offering a button that cannot work.
+
+**No Xcode project yet.** `LearnrApp/` holds the sources and they compile
+against the package, but the `.xcodeproj` still needs creating - File > New >
+Project, then add `LearnrEngine` as a local package dependency.
+
+## The traps this port had to reproduce
+
+Four places where a reasonable Swift implementation silently diverges from the
+JavaScript the content was authored against:
+
+| | JavaScript | Swift's default |
+| --- | --- | --- |
+| `round(-2.5)` | `-2` | `-3` |
+| `String(2.0)` | `"2"` | `"2.0"` |
+| `-2 ^ 2` | `-4` | - |
+| `1 && 2` | `true` | - |
+
+The first two change what a child sees or scores, and **no test in the web app
+covers a negative half** - nothing there would have caught a wrong port. That is
+the argument for the oracle vectors, demonstrated rather than asserted.
+
+## Known gaps on the server side
+
+Nine of the API's 22 endpoints declare an untyped success response
+(`schema: {}`), including `/me`, so three of this app's models are transcribed
+by hand rather than generated. Tracked as learnr-api#1; when it is fixed those
+models should be regenerated.
