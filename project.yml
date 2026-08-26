@@ -37,6 +37,11 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.learnr.ios
+        # The plist substitution below expands this. It needs a value per
+        # configuration or it expands to nothing and the key is dropped from
+        # the built plist entirely - which is how this silently fell back to
+        # localhost the first time.
+        LEARNR_API_BASE_URL: https:/$()/learnr-api-syd.fly.dev
         MARKETING_VERSION: "0.1.0"
         CURRENT_PROJECT_VERSION: "1"
         SWIFT_VERSION: "6.0"
@@ -55,9 +60,12 @@ targets:
       properties:
         CFBundleDisplayName: LearnR
         UIRequiresFullScreen: true
-        # Overridable per build. Empty means fall back to localhost:3001, which
-        # is right for the simulator against a local server; a device build
-        # needs the deployed https URL, because ATS refuses plain HTTP.
+        # Set from LEARNR_API_BASE_URL above. Note the $() in that value: a
+        # bare // in an xcconfig-style setting starts a comment, so the scheme
+        # is written https:/$()/ to survive substitution intact.
+        #
+        # Point a build at a local server by overriding LEARNR_API_BASE_URL,
+        # e.g. xcodebuild LEARNR_API_BASE_URL='http:/$()/localhost:3001'.
         LearnrAPIBaseURL: $(LEARNR_API_BASE_URL)
 
   LearnrAppTests:
@@ -80,10 +88,6 @@ schemes:
         LearnrApp: all
     run:
       config: Debug
-      # Points at a local API server by default. Change it here, or set
-      # LEARNR_API_BASE_URL in the build settings, to run against Fly.
-      environmentVariables:
-        LEARNR_API_BASE_URL: http://localhost:3001
     test:
       config: Debug
       targets:

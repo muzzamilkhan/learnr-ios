@@ -84,6 +84,25 @@ Universal, iOS 17+, portrait only - a rotation mid-question moves every target
 under the child's hand. Verified building and running on both iPad and iPhone
 simulators.
 
+### Which API a build talks to
+
+`LEARNR_API_BASE_URL` in `project.yml` becomes `LearnrAPIBaseURL` in Info.plist,
+which is what `AppConfig` reads. It defaults to the deployed API. To point a
+build at a local server:
+
+```bash
+xcodebuild ... LEARNR_API_BASE_URL='http:/$()/localhost:3001'
+```
+
+The `$()` is not a typo: a bare `//` starts a comment in a build setting, so the
+scheme has to be written that way to survive substitution. Check what actually
+shipped rather than trusting the setting - an unset value expands to nothing and
+the key is dropped from the plist entirely:
+
+```bash
+plutil -p "$(xcrun simctl get_app_container booted com.learnr.ios)/Info.plist" | grep -i learnrapi
+```
+
 ## The traps this port had to reproduce
 
 Four places where a reasonable Swift implementation silently diverges from the
