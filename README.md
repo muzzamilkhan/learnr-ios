@@ -61,9 +61,28 @@ and speed-run state machines. Those need the content pack, which is build-order
 step 2 and has not happened - so the app cannot generate a question yet, and
 `HomeView` says so rather than offering a button that cannot work.
 
-**No Xcode project yet.** `LearnrApp/` holds the sources and they compile
-against the package, but the `.xcodeproj` still needs creating - File > New >
-Project, then add `LearnrEngine` as a local package dependency.
+## Building
+
+The Xcode project is **generated**, not committed - a `.pbxproj` is unreviewable
+in a diff and conflicts on every merge. `project.yml` is the reviewable half.
+
+```bash
+brew install xcodegen     # once
+xcodegen                  # writes LearnrApp.xcodeproj
+open LearnrApp.xcodeproj
+```
+
+Or from the command line:
+
+```bash
+xcodebuild -project LearnrApp.xcodeproj -scheme LearnrApp \
+  -destination 'platform=iOS Simulator,name=iPad Pro 11-inch (M5)' build
+cd LearnrEngine && swift test    # 41 engine tests
+```
+
+Universal, iOS 17+, portrait only - a rotation mid-question moves every target
+under the child's hand. Verified building and running on both iPad and iPhone
+simulators.
 
 ## The traps this port had to reproduce
 

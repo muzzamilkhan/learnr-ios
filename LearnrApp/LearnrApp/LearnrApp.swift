@@ -23,13 +23,32 @@ struct LearnrApp: App {
 }
 
 enum AppConfig {
-    /// Overridable so a device can point at a machine on the LAN without a
-    /// rebuild. Defaults to the simulator's view of a local server.
+    /// Where the API lives.
+    ///
+    /// Read from Info.plist so a build can be pointed at a local server or at
+    /// Fly without touching code. Defaults to the simulator's view of a local
+    /// server; a build running on a device needs the deployed https URL, since
+    /// App Transport Security refuses plain HTTP.
     static var apiBaseURL: URL {
-        if let raw = Bundle.main.object(forInfoDictionaryKey: "LearnrAPIBaseURL") as? String,
-           let url = URL(string: raw) {
-            return url
-        }
-        return URL(string: "http://localhost:3001")!
+        let raw = Bundle.main.object(forInfoDictionaryKey: "LearnrAPIBaseURL") as? String
+        return url(from: raw) ?? URL(string: "http://localhost:3001")!
+    }
+
+    /// Rejects the values a misconfigured build actually produces, rather than
+    /// trusting `URL(string:)` - which accepts an empty string and an
+    /// unsubstituted `$(VAR)` alike, yielding a URL that quietly resolves to
+    /// nothing and an app that cannot say why it will not sign in.
+    static func url(from raw: String?) -> URL? {
+        guard let raw else { return nil }
+
+        let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty, !trimmed.hasPrefix("$(") else { return nil }
+
+        guard let url = URL(string: trimmed),
+              let scheme = url.scheme, scheme == "http" || scheme == "https",
+              url.host != nil
+        else { return nil }
+
+        return url
     }
 }

@@ -19,8 +19,12 @@ struct CodeEntryView: View {
     private static let charset = Array("ABCDEFGHJKMNPQRSTUVWXYZ23456789")
     private static let length = 4
 
+    /// Eight across. The charset is 31 characters, which is prime, so no
+    /// column count divides evenly - eight leaves seven on the last row, which
+    /// is the least ragged of the options and keeps the letters and digits
+    /// reading as two blocks.
     private var columns: [GridItem] {
-        Array(repeating: GridItem(.flexible(), spacing: 10), count: 6)
+        Array(repeating: GridItem(.flexible(), spacing: 8), count: 8)
     }
 
     var body: some View {
@@ -78,14 +82,14 @@ struct CodeEntryView: View {
 
     private var pad: some View {
         VStack(spacing: 10) {
-            LazyVGrid(columns: columns, spacing: 10) {
+            LazyVGrid(columns: columns, spacing: 8) {
                 ForEach(Self.charset, id: \.self) { character in
                     Button {
                         append(character)
                     } label: {
                         Text(String(character))
-                            .font(.system(size: 24, weight: .semibold, design: .rounded))
-                            .frame(maxWidth: .infinity, minHeight: 54)
+                            .font(.system(size: 22, weight: .semibold, design: .rounded))
+                            .frame(maxWidth: .infinity, minHeight: 52)
                     }
                     .buttonStyle(.bordered)
                     .disabled(busy || entry.count >= Self.length)

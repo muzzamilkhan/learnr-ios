@@ -4,3 +4,7 @@
 DerivedData/
 *.xcuserstate
 xcuserdata/
+
+# Generated from project.yml by XcodeGen. The spec is the source of truth;
+# a .pbxproj is unreviewable in a diff and conflicts on every merge.
+*.xcodeproj/
