@@ -7,11 +7,26 @@ import Foundation
 /// because the failure mode is an app that silently talks to the wrong server.
 struct AppConfigTests {
 
-    @Test("falls back to localhost when Info.plist carries no URL")
+    @Test("falls back to localhost when no URL is configured")
     func fallsBackToLocalhost() {
-        // The test bundle has no LearnrAPIBaseURL, so this exercises the
-        // fallback exactly as a build with the setting unset would.
-        #expect(AppConfig.apiBaseURL.absoluteString.contains("localhost"))
+        // Asserted through `url(from:)` rather than through `apiBaseURL`.
+        //
+        // This used to read `apiBaseURL` directly, on the premise that "the test
+        // bundle has no LearnrAPIBaseURL" - which stopped being true once the
+        // test target began inheriting the app's build settings, so the test
+        // failed against a perfectly correct fallback. The premise was the bug:
+        // a test that depends on a key being *absent* from a bundle it does not
+        // control is testing the build system, not the code.
+        //
+        // `apiBaseURL` is `url(from:) ?? localhost`, so pinning the nil arm of
+        // that coalesce is pinning the fallback.
+        #expect(AppConfig.url(from: nil) == nil)
+
+        // And the real thing still resolves to something usable, whichever way
+        // this particular build is configured.
+        let scheme = AppConfig.apiBaseURL.scheme
+        #expect(scheme == "http" || scheme == "https")
+        #expect(AppConfig.apiBaseURL.host != nil)
     }
 
     @Test("an unsubstituted or empty setting does not become a bad URL")

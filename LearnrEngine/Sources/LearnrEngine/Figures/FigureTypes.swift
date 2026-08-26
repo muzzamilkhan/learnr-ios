@@ -132,6 +132,15 @@ public struct Figure: Equatable, Sendable, Codable {
     public var width: Double
     public var height: Double
     public var marks: [Mark]
+
+    /// Public because a renderer outside this module builds one: a SwiftUI
+    /// preview and the diagram tests both need a figure to draw, and a
+    /// memberwise init on a public struct is internal by default.
+    public init(width: Double, height: Double, marks: [Mark]) {
+        self.width = width
+        self.height = height
+        self.marks = marks
+    }
 }
 
 /// The resolved box is this square, in whatever units a renderer scales it to.
