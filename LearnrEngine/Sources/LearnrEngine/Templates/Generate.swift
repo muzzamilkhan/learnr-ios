@@ -12,8 +12,8 @@ import Foundation
 /// TypeScript, including all 378 figure-free shipped templates drawn three
 /// times each.
 ///
-/// **Figures are not ported yet.** A template carrying one is refused rather
-/// than generated without its picture; see `GenerateError.figureUnsupported`.
+/// A template carrying a figure draws it from the same scope and the same
+/// `Rng`, between the answer and the choices — see `generate`.
 
 /// How many times to redraw before giving up on a template's constraints.
 private let maxAttempts = 200
@@ -25,7 +25,6 @@ public enum GenerateError: Error, CustomStringConvertible, Equatable {
     case weightCountMismatch(name: String, weights: Int, values: Int)
     case constraintsUnsatisfied(label: String, constraints: [String])
     case notEnoughChoices(got: Int, want: Int)
-    case figureUnsupported(label: String)
 
     public var description: String {
         switch self {
@@ -43,8 +42,6 @@ public enum GenerateError: Error, CustomStringConvertible, Equatable {
         case .notEnoughChoices(let got, let want):
             return "Template could not produce \(want) distinct choices (got \(got)); "
                 + "add more distractors or a jitter range"
-        case .figureUnsupported(let label):
-            return "Template \(label) carries a figure, which this engine cannot build yet"
         }
     }
 }
@@ -270,14 +267,6 @@ public func generate(
     _ rng: inout Rng,
     label: String = "spec"
 ) throws -> GeneratedQuestion {
-    // Refused rather than generated without the picture: a figure question
-    // whose figure is missing is not a harder question, it is an unanswerable
-    // one. This is the one place the port is deliberately narrower than the
-    // TypeScript, and it fails loudly so it cannot be mistaken for support.
-    guard !spec.hasFigure else {
-        throw GenerateError.figureUnsupported(label: label)
-    }
-
     var scope: Scope?
     var attempt = 0
     while attempt < maxAttempts && scope == nil {
@@ -292,6 +281,17 @@ public func generate(
     }
 
     let answerValue = try evaluate(spec.answer, scope)
+
+    // Built here, between the answer and the choices, because that is where it
+    // sits in the RNG sequence: a figure drawn earlier or later would shift
+    // every draw after it and change the question's own options.
+    //
+    // `buildFigure` is total by construction — an unknown shape or an unbound
+    // parameter degrades to something drawable rather than throwing, exactly
+    // like the rest of this function — so there is nothing here to guard.
+    // Drawn from the same scope and the same `rng` the rest of the question
+    // uses, which is what makes a figure reproduce from its seed.
+    let figure = spec.figure.map { buildFigure($0, scope, &rng) }
 
     // A boolean answer is a true/false question whatever the spec declared:
     // its two options are implied, so any `choices` are meaningless and are
@@ -323,7 +323,8 @@ public func generate(
         answerType: answerType,
         choices: choices,
         hint: try spec.hint.map { try renderTemplateString($0, scope) },
-        vars: scope.mapValues(Answer.init)
+        vars: scope.mapValues(Answer.init),
+        figure: figure
     )
 }
 

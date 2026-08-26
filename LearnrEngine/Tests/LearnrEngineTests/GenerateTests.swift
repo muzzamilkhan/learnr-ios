@@ -7,9 +7,9 @@ import Foundation
 /// is what makes them an oracle rather than a second opinion. See
 /// `tools/generate-vectors.ts`.
 ///
-/// 378 figure-free shipped templates are covered, three draws each, plus 31
-/// hand-written cases for the mechanisms the shipped content does not exercise
-/// (`jitter` appears in no template at all today).
+/// All 505 shipped templates are covered, three draws each, plus hand-written
+/// cases for the mechanisms the shipped content does not exercise (`jitter`
+/// appears in no template at all today).
 struct GenerateTests {
     /// The recorded shape of one `generate()` call.
     ///
@@ -30,6 +30,11 @@ struct GenerateTests {
         let choices: [JSONValue]?
         let hint: String?
         let vars: [String: JSONValue]
+        /// Compared as a whole. `figure-vectors` is the oracle for the geometry
+        /// itself; what this checks is that a figure appears when the spec
+        /// carried one and that it was drawn at the right point in the draw
+        /// sequence — a figure built a step early or late is byte-different.
+        let figure: Figure?
     }
 
     /// A JSON scalar, compared against an `Answer` by rendered string.
@@ -99,15 +104,20 @@ struct GenerateTests {
             let actualVars = actual.vars.mapValues(\.stringValue)
             let expectedVars = expected.vars.mapValues { $0.asAnswer.stringValue }
             #expect(actualVars == expectedVars, "\(vector.name): vars")
+
+            #expect(actual.figure == expected.figure, "\(vector.name): figure")
         }
     }
 
-    @Test("every shipped figure-free template is covered, three draws each")
+    @Test("every shipped template is covered, three draws each")
     func shippedCoverage() {
         let shipped = Self.vectors.filter { $0.name.hasPrefix("shipped:") }
         let templates = Set(shipped.map { $0.name.split(separator: "#")[0] })
-        #expect(templates.count == 378)
+        #expect(templates.count == 505)
         #expect(shipped.count == templates.count * 3)
+        // The figure-carrying ones are the point of the widening: they are what
+        // hold the draw ordering, not just the values.
+        #expect(shipped.contains { $0.question.figure != nil })
     }
 
     @Test("the same seed always gives the same question")
@@ -118,23 +128,59 @@ struct GenerateTests {
         #expect(try generate(vector.spec, &a) == (try generate(vector.spec, &b)))
     }
 
-    @Test("a template carrying a figure is refused, not silently stripped")
-    func figureRefused() throws {
+    @Test("a template carrying a figure draws it, from the same seed")
+    func figureDrawn() throws {
         let json = """
         {
           "prompt": "How many sides?",
           "vars": [{ "name": "n", "kind": "int", "min": "3", "max": "8" }],
           "answer": "n",
-          "figure": { "kind": "polygon", "sides": "n" }
+          "figure": { "kind": "polygon", "shape": "'hexagon'" }
         }
         """
         let spec = try JSONDecoder().decode(QuestionSpec.self, from: Data(json.utf8))
         #expect(spec.hasFigure)
 
         var rng = Rng(seed: "fig")
-        #expect(throws: GenerateError.figureUnsupported(label: "poly")) {
-            try generate(spec, &rng, label: "poly")
+        let question = try generate(spec, &rng, label: "poly")
+        #expect(question.figure != nil)
+        #expect(!(question.figure?.marks.isEmpty ?? true))
+    }
+
+    @Test("the figure is drawn between the answer and the choices")
+    func figureSitsInTheDrawOrder() throws {
+        // A figure spends draws, so a question with one must get *different*
+        // choices from the same question without one. That ordering is the
+        // whole reason the figure is built where it is rather than last.
+        let base = """
+        {
+          "prompt": "What is {x}?",
+          "vars": [{ "name": "x", "kind": "int", "min": "1", "max": "20" }],
+          "answer": "x",
+          "answerType": "choice",
+          "choices": { "count": 4, "distractors": ["x + 1", "x + 2", "x + 3", "x + 4", "x + 5"] }
         }
+        """
+        let withFigure = base.replacingOccurrences(
+            of: "\"answer\": \"x\",",
+            with: "\"answer\": \"x\", \"figure\": { \"kind\": \"polygon\", \"shape\": \"'square'\" },"
+        )
+
+        var a = Rng(seed: "order")
+        var b = Rng(seed: "order")
+        let plain = try generate(
+            JSONDecoder().decode(QuestionSpec.self, from: Data(base.utf8)), &a
+        )
+        let drawn = try generate(
+            JSONDecoder().decode(QuestionSpec.self, from: Data(withFigure.utf8)), &b
+        )
+
+        #expect(plain.figure == nil)
+        #expect(drawn.figure != nil)
+        // Same answer — the binding happens before either — but the figure's
+        // draws land between, so the shuffled options differ.
+        #expect(plain.answer == drawn.answer)
+        #expect(plain.choices?.map(\.stringValue) != drawn.choices?.map(\.stringValue))
     }
 
     @Test("constraints that cannot be satisfied fail rather than loop")

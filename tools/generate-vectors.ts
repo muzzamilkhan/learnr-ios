@@ -19,10 +19,10 @@
  * vectors are the oracle, so a change to them is a change to what "correct"
  * means and has to be reviewable on its own.
  *
- * **Figures are deliberately out of scope.** `figure` is a separate module
- * (`src/lib/figures`, eleven shape kinds) and is its own port with its own
- * vectors. Every spec here is figure-free, so these vectors say nothing about
- * figures and cannot quietly appear to.
+ * Figures are included, now that they are ported. A figure spends draws off the
+ * same `Rng` between the answer and the choices, so a template carrying one
+ * exercises a sequencing that no figure-free template can - and `figure-vectors`
+ * remains the oracle for what a figure actually *draws*.
  */
 
 import { createRequire } from 'node:module';
@@ -441,12 +441,18 @@ const cases: [string, string, Json][] = [
 for (const [name, seed, spec] of cases) record(name, seed, spec);
 
 /**
- * Every figure-free shipped template, drawn three times.
+ * Every shipped template, drawn three times.
  *
  * The hand-written cases above cover the mechanisms; these cover the content a
  * child will actually be asked. Three seeds per template is enough to catch a
  * divergence that only shows on some bindings - a constraint that redraws, a
  * distractor that collides - without making the file enormous.
+ *
+ * **The figure-carrying templates are included**, now that figures are ported.
+ * They were excluded while `generate` refused a figure, and including them is
+ * what makes these vectors cover the sequencing rather than just the values: a
+ * figure spends draws off the same `Rng` between the answer and the choices, so
+ * a template with one exercises an ordering no figure-free template can.
  *
  * Sorted by id so the output is stable across runs: `PACKS` order is fixed
  * today, but a vector file that reshuffles on regeneration hides real changes
@@ -454,7 +460,6 @@ for (const [name, seed, spec] of cases) record(name, seed, spec);
  */
 const shipped = (PACKS as Json[])
   .flatMap((pack) => pack.templates as Json[])
-  .filter((template) => !template.figure)
   .sort((a, b) => String(a.id).localeCompare(String(b.id)));
 
 for (const template of shipped) {

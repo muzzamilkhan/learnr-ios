@@ -177,13 +177,16 @@ public struct QuestionSpec: Sendable, Decodable {
     /// Optional hint, also supports `{expression}` holes.
     public let hint: String?
 
-    /// Whether the template carries a figure.
+    /// The diagram the question is about, or shown alongside it.
     ///
-    /// The figure module is a separate port, so this decodes the *presence* of
-    /// a figure without decoding its contents. A template that has one cannot
-    /// be generated yet — `generate` refuses it rather than silently dropping
-    /// the picture the question is about. See `GenerateError.figureUnsupported`.
-    public let hasFigure: Bool
+    /// Optional and rare — most questions are a sentence with a hole in it, and
+    /// this is the escape hatch for the ones that are a picture instead. It
+    /// lives on the spec beside `choices` rather than on the template, because
+    /// it is a property of the question and not of where it sits in a course.
+    public let figure: FigureSpec?
+
+    /// Whether the template carries a figure.
+    public var hasFigure: Bool { figure != nil }
 
     private enum CodingKeys: String, CodingKey {
         case prompt, vars, constraints, answer, answerType, choices, hint, figure
@@ -198,7 +201,7 @@ public struct QuestionSpec: Sendable, Decodable {
         answerType = try c.decodeIfPresent(AnswerType.self, forKey: .answerType)
         choices = try c.decodeIfPresent(ChoiceSpec.self, forKey: .choices)
         hint = try c.decodeIfPresent(String.self, forKey: .hint)
-        hasFigure = c.contains(.figure)
+        figure = try c.decodeIfPresent(FigureSpec.self, forKey: .figure)
     }
 }
 
@@ -243,6 +246,9 @@ public struct GeneratedQuestion: Sendable, Equatable {
     public let hint: String?
     /// The bound variables, kept for debugging and analytics.
     public let vars: [String: Answer]
+    /// Present exactly when the spec carried a figure — resolved from the same
+    /// scope and `Rng` as everything else in the question.
+    public let figure: Figure?
 }
 
 /// A template expanded into something a child can actually be shown.
