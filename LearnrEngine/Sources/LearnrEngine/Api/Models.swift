@@ -3,12 +3,12 @@ import Foundation
 /// The wire types the child client needs, transcribed from
 /// `learnr-api/contract/openapi.yaml`.
 ///
-/// Where the contract declares a real schema, these mirror it exactly. Three of
+/// Where the contract declares a real schema, these mirror it exactly. Four of
 /// the endpoints this app calls declare `schema: {}` instead - `/me`,
-/// `/speed/runs` and `/speed/records` - so those models are transcribed from
-/// the server's TypeScript rather than generated, and are marked below. See
-/// learnr-api#1; when that is fixed these should be regenerated and the
-/// hand-written ones deleted.
+/// `/play/state`, `/speed/runs` and `/speed/records` - so those models are
+/// transcribed from the server's TypeScript rather than generated, and are
+/// marked below. See muzzamilkhan/learnr#4; when that is fixed these should be
+/// regenerated and the hand-written ones deleted.
 
 /// Australian school year. Note the contract orders `K` last in its enum, even
 /// though it sorts first everywhere in the product.
@@ -41,7 +41,7 @@ public struct RedeemResponse: Codable, Sendable {
 }
 
 /// `GET /me`. **Hand-transcribed** from `Account` in the server's
-/// `src/data/accounts.ts` - the contract says `schema: {}` (learnr-api#1).
+/// `apps/api/src/data/accounts.ts` - the contract says `schema: {}` (learnr#4).
 public struct Account: Codable, Sendable, Equatable {
     public let id: String
     public let role: String?
@@ -144,6 +144,83 @@ public struct AwardTargetResponse: Codable, Sendable {
     public let awarded: Bool
 }
 
+// MARK: - Play state
+
+/// Everything the play screen needs before its first question, in one call.
+///
+/// **Hand-transcribed** from the route's return in the server's
+/// `apps/api/src/routes/play.ts` - the contract says `schema: {}` (learnr#4).
+///
+/// This endpoint exists because assembling it from parts was five sequential
+/// reads. Over the wire that is five round trips before a child sees anything,
+/// which is the wrong trade on a school-run connection.
+public struct PlayState: Codable, Sendable, Equatable {
+    public let player: PlayerState
+    public let profile: LearnerProfile
+    public let recentTopics: [String]
+    /// A two-day window, and empty when the child has no target - the server
+    /// skips the read rather than paying for an answer it would throw away.
+    public let targetAnswers: [TargetAnswer]
+}
+
+public struct PlayerState: Codable, Sendable, Equatable {
+    /// As stored. Resolve it against the content before trusting it: a level
+    /// that is no longer a school year is not worth steering questions with.
+    public let selectedLevel: String?
+    public let streak: PlayStreak
+    public let stars: Int
+    public let target: DailyTarget?
+    /// The last local day the target's stars were banked.
+    public let targetDay: Int?
+}
+
+public struct PlayStreak: Codable, Sendable, Equatable {
+    /// Consecutive local days with at least one answer on them.
+    public let days: Int
+    public let lastDay: Int?
+}
+
+public struct DailyTarget: Codable, Sendable, Equatable {
+    /// "questions" or "minutes".
+    public let kind: String
+    public let value: Int
+}
+
+public struct TargetAnswer: Codable, Sendable, Equatable {
+    public let answeredAt: Int
+    public let timeTakenMs: Int
+}
+
+public struct LearnerProfile: Codable, Sendable, Equatable {
+    public let skills: [TopicSkill]
+
+    public static let empty = LearnerProfile(skills: [])
+}
+
+/// What a child can do on one topic at one year, folded from their attempts.
+public struct TopicSkill: Codable, Sendable, Equatable {
+    public let topic: String
+    public let level: YearLevel
+    public let attempts: Int
+    public let correct: Int
+    /// Recency-weighted accuracy in [0, 1] - what the child can do now, not on
+    /// average.
+    public let strength: Double
+    /// Correct answers in a row. A run, not one right answer, is the signal.
+    public let streak: Int
+    /// Distinct local days with at least one right answer: the count that says
+    /// a topic is known rather than merely warm.
+    public let correctDays: Int
+    public let lastCorrectDay: Int?
+    public let totalTimeMs: Int
+    public let lastAnsweredAt: Int
+}
+
+public struct SetLevelRequest: Codable, Sendable {
+    public let level: YearLevel
+    public init(level: YearLevel) { self.level = level }
+}
+
 // MARK: - Speed
 
 public struct SpeedRunRequest: Codable, Sendable {
@@ -159,7 +236,7 @@ public struct SpeedRunRequest: Codable, Sendable {
 }
 
 /// `POST /speed/runs`. **Hand-transcribed** from `SpeedOutcome` in the server's
-/// `src/data/speed-records.ts` - the contract says `schema: {}` (learnr-api#1).
+/// `apps/api/src/data/speed-records.ts` - the contract says `schema: {}` (learnr#4).
 public struct SpeedOutcome: Codable, Sendable {
     public let previousBest: Int?
     public let best: Int

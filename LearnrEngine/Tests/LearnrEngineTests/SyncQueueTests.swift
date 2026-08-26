@@ -94,6 +94,9 @@ private func anAttempt(_ index: Int, correct: Bool = true) -> AttemptPayload {
 }
 
 @Suite(.serialized)
+struct StubbedServerTests {
+
+@Suite(.serialized)
 struct SyncQueueTests {
 
     @Test("a finished sitting syncs, banks once, and leaves the queue")
@@ -259,4 +262,127 @@ struct SyncQueueTests {
         let ids = (0..<50).map { anAttempt($0).id }
         #expect(Set(ids).count == 50)
     }
+}
+
+@Suite(.serialized)
+struct PlayStateTests {
+
+    /// A body shaped exactly as `apps/api/src/routes/play.ts` returns it. The
+    /// contract says `schema: {}` for this endpoint (learnr#4), so this test is
+    /// the only thing standing between a server-side rename and a silent
+    /// decoding failure on a child's screen.
+    private static let body = Data("""
+    {
+      "player": {
+        "selectedLevel": "3",
+        "streak": { "days": 4, "lastDay": 20325 },
+        "stars": 27,
+        "target": { "kind": "questions", "value": 20 },
+        "targetDay": 20324
+      },
+      "profile": {
+        "skills": [
+          {
+            "topic": "addition", "level": "3", "attempts": 12, "correct": 9,
+            "strength": 0.78, "streak": 3, "correctDays": 2,
+            "lastCorrectDay": 20325, "totalTimeMs": 18400,
+            "lastAnsweredAt": 1756197600000
+          }
+        ]
+      },
+      "recentTopics": ["addition", "subtraction"],
+      "targetAnswers": [
+        { "answeredAt": 1756197600000, "timeTakenMs": 1500 }
+      ]
+    }
+    """.utf8)
+
+    @Test("a play-state body decodes into the hand-transcribed model")
+    func decodesPlayState() throws {
+        let state = try JSONDecoder().decode(PlayState.self, from: Self.body)
+
+        #expect(state.player.selectedLevel == "3")
+        #expect(state.player.streak.days == 4)
+        #expect(state.player.stars == 27)
+        #expect(state.player.target?.kind == "questions")
+        #expect(state.player.target?.value == 20)
+        #expect(state.profile.skills.count == 1)
+        #expect(state.profile.skills[0].topic == "addition")
+        #expect(state.profile.skills[0].level == .three)
+        #expect(state.profile.skills[0].strength == 0.78)
+        #expect(state.recentTopics == ["addition", "subtraction"])
+        #expect(state.targetAnswers.count == 1)
+    }
+
+    @Test("a child with no target decodes, with the nulls the server sends")
+    func decodesWithoutTarget() throws {
+        let body = Data("""
+        {
+          "player": {
+            "selectedLevel": null,
+            "streak": { "days": 0, "lastDay": null },
+            "stars": 0, "target": null, "targetDay": null
+          },
+          "profile": { "skills": [] },
+          "recentTopics": [],
+          "targetAnswers": []
+        }
+        """.utf8)
+
+        let state = try JSONDecoder().decode(PlayState.self, from: body)
+
+        #expect(state.player.selectedLevel == nil)
+        #expect(state.player.target == nil)
+        #expect(state.player.streak.lastDay == nil)
+        #expect(state.profile.skills.isEmpty)
+    }
+
+    @Test("playState asks for the level it was given")
+    func playStateSendsQuery() async throws {
+        StubProtocol.reset()
+        StubProtocol.handler = { _ in (200, Self.body) }
+
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [StubProtocol.self]
+        let api = ApiClient(baseURL: URL(string: "http://localhost:3001")!,
+                            tokens: MemoryTokenStore("tok"),
+                            session: URLSession(configuration: config))
+
+        _ = try await api.playState(subject: "maths", level: .three)
+
+        let call = StubProtocol.recorded.first
+        #expect(call?.method == "GET")
+        #expect(call?.path == "/play/state")
+    }
+
+    @Test("setLevel sends a PUT and tolerates the empty 204 body")
+    func setLevelSends() async throws {
+        StubProtocol.reset()
+        StubProtocol.handler = { _ in (204, Data()) }
+
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [StubProtocol.self]
+        let api = ApiClient(baseURL: URL(string: "http://localhost:3001")!,
+                            tokens: MemoryTokenStore("tok"),
+                            session: URLSession(configuration: config))
+
+        try await api.setLevel(.five)
+
+        let call = StubProtocol.recorded.first
+        #expect(call?.method == "PUT")
+        #expect(call?.path == "/me/level")
+
+        let json = try JSONSerialization.jsonObject(with: call!.body!) as? [String: Any]
+        #expect(json?["level"] as? String == "5")
+    }
+
+    @Test("K is a level the contract accepts, spelled its way")
+    func kIsAValidLevel() {
+        #expect(YearLevel.k.rawValue == "K")
+        #expect(YearLevel(rawValue: "K") == .k)
+        // The contract's enum lists K last; the product sorts it first.
+        #expect(YearLevel.schoolOrder.first == .k)
+    }
+}
+
 }

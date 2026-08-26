@@ -65,6 +65,31 @@ public actor ApiClient {
 
     // MARK: Play
 
+    /// Everything the play screen needs before its first question.
+    ///
+    /// One call rather than five, which matters more on a phone than it did in
+    /// the browser. Best-effort like the rest of the play path: a caller that
+    /// cannot reach this should start the child on an empty profile rather than
+    /// refuse to deal a question.
+    public func playState(
+        subject: String = "maths", level: YearLevel, recentTopics: Int = 5
+    ) async throws -> PlayState {
+        var components = URLComponents()
+        components.path = "/play/state"
+        components.queryItems = [
+            URLQueryItem(name: "subject", value: subject),
+            URLQueryItem(name: "level", value: level.rawValue),
+            URLQueryItem(name: "recentTopics", value: String(recentTopics)),
+        ]
+        return try await send("GET", components.string ?? "/play/state")
+    }
+
+    /// The level this child last chose. A managed child's is their parent's to
+    /// set, so this only ever confirms what the parent already decided.
+    public func setLevel(_ level: YearLevel) async throws {
+        try await sendNoContent("PUT", "/me/level", body: SetLevelRequest(level: level))
+    }
+
     @discardableResult
     public func createSession(_ request: CreateSessionRequest) async throws -> SessionResponse {
         try await send("POST", "/sessions", body: request)
@@ -164,6 +189,15 @@ public actor ApiClient {
 
     private func sendNoContent(_ method: String, _ path: String) async throws {
         let (data, http) = try await perform(try request(method, path, authorised: true))
+        try check(data, http)
+    }
+
+    private func sendNoContent<Body: Encodable>(
+        _ method: String, _ path: String, body: Body
+    ) async throws {
+        var request = try request(method, path, authorised: true)
+        request.httpBody = try JSONEncoder().encode(body)
+        let (data, http) = try await perform(request)
         try check(data, http)
     }
 

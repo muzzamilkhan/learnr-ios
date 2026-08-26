@@ -13,7 +13,7 @@ means the engine exists twice - once in TypeScript for the web, once here. The
 two are kept in step by fixtures generated from the TypeScript engine, which is
 the oracle: it defines what correct means, and this port is verified against it.
 
-See `learnr-api/docs/superpowers/specs/2026-08-26-ios-port-design.md`.
+See `learnr/docs/superpowers/specs/2026-08-26-ios-port-design.md`.
 
 ## Layout
 
@@ -83,7 +83,23 @@ the argument for the oracle vectors, demonstrated rather than asserted.
 
 ## Known gaps on the server side
 
-Nine of the API's 22 endpoints declare an untyped success response
-(`schema: {}`), including `/me`, so three of this app's models are transcribed
-by hand rather than generated. Tracked as learnr-api#1; when it is fixed those
-models should be regenerated.
+Thirteen of the API's 28 endpoints declare an untyped success response
+(`schema: {}`), including `/me`, `/speed/runs`, `/speed/records` and
+`/play/state`, so several of this app's models are transcribed by hand rather
+than generated. Tracked as [muzzamilkhan/learnr#4]; when it is fixed those
+models should be regenerated and the hand-written ones deleted.
+
+## The server
+
+The API lives in `muzzamilkhan/learnr` as the `apps/api` workspace - not in a
+repository of its own, because it depends on `@learnr/core` and a `file:` path
+dependency cannot resolve across two clones.
+
+- Contract: `learnr/apps/api/contract/openapi.yaml`, regenerated with
+  `npm run contract --workspace apps/api`
+- Deployed: `https://learnr-api-syd.fly.dev`
+
+`AppConfig.apiBaseURL` defaults to `http://localhost:3001` for the simulator
+against a local server. A build on a device needs the deployed URL set in
+Info.plist as `LearnrAPIBaseURL`, and it must be the `https` one - App Transport
+Security refuses plain HTTP, so the localhost default cannot work off-simulator.
