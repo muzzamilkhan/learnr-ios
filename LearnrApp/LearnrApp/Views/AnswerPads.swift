@@ -159,7 +159,7 @@ struct ChoicePad: View {
 // MARK: - Shared
 
 /// One key. Flat, bordered and large, like every control in this app.
-private struct PadKey: View {
+struct PadKey: View {
     let title: String?
     let systemImage: String?
     let label: String?
@@ -215,10 +215,54 @@ private struct PadKey: View {
 }
 
 /// `active:scale-95` — the press feedback every control in the web app has.
-private struct PadButtonStyle: ButtonStyle {
+struct PadButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
             .animation(.easeOut(duration: 0.08), value: configuration.isPressed)
+    }
+}
+
+// MARK: - Speed
+
+/// The pad a speed run uses: digits, delete, and a clear.
+///
+/// No Check key, and that is the whole difference. A right answer submits
+/// itself the instant it is typed — `judgeEntry` grades a partial entry
+/// keystroke by keystroke precisely so there is nothing to press. What replaces
+/// the tick is Clear, because an entry that can no longer become the answer is
+/// the one state a child has to get out of themselves.
+///
+/// No decimal point either: every one of the twenty-six modes is arithmetic
+/// over whole numbers, so a point could only ever make an entry dead.
+struct SpeedPad: View {
+    var disabled = false
+    let onDigit: (String) -> Void
+    let onBackspace: () -> Void
+    let onClear: () -> Void
+
+    private static let rows: [[String]] = [
+        ["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"],
+    ]
+
+    var body: some View {
+        HStack(spacing: 10) {
+            VStack(spacing: 10) {
+                ForEach(Self.rows, id: \.self) { row in
+                    HStack(spacing: 10) {
+                        ForEach(row, id: \.self) { digit in
+                            PadKey(digit, disabled: disabled) { onDigit(digit) }
+                        }
+                    }
+                }
+                HStack(spacing: 10) {
+                    PadKey(
+                        systemImage: "delete.left", label: "Delete", disabled: disabled,
+                        action: onBackspace)
+                    PadKey("0", disabled: disabled) { onDigit("0") }
+                    PadKey("C", label: "Clear", disabled: disabled, action: onClear)
+                }
+            }
+        }
     }
 }
