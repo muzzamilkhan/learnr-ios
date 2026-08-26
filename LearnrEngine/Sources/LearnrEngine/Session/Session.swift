@@ -38,8 +38,8 @@ public struct Attempt: Sendable, Equatable {
     public let offsetMinutes: Int
 
     /// The same attempt as something the profile can fold.
-    public var observation: Observation {
-        Observation(
+    public var observation: SkillObservation {
+        SkillObservation(
             topic: topic, level: level, correct: correct, templateId: templateId,
             timeTakenMs: timeTakenMs, answeredAt: answeredAt, offsetMinutes: offsetMinutes)
     }

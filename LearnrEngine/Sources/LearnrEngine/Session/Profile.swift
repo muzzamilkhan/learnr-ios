@@ -12,7 +12,7 @@ import Foundation
 /// Pure: the caller passes `now`, never the clock.
 
 /// The part of an attempt that says something about a skill.
-public struct Observation: Sendable, Equatable {
+public struct SkillObservation: Sendable, Equatable {
     public let topic: String
     public let level: String
     public let correct: Bool
@@ -167,7 +167,7 @@ public enum Profile {
     /// Exported on its own because the server keeps a running skill row per
     /// child and needs exactly this step — the stored profile and the in-memory
     /// one are then the same arithmetic, not two guesses that drift.
-    public static func nextSkill(_ previous: SkillRow?, _ observation: Observation) -> SkillRow {
+    public static func nextSkill(_ previous: SkillRow?, _ observation: SkillObservation) -> SkillRow {
         let outcome = observation.correct ? 1 : 0
         let day = Day.localDay(observation.answeredAt, observation.offsetMinutes)
 
@@ -209,7 +209,7 @@ public enum Profile {
 
     /// Immutable, like the session state it travels with.
     public static func applyObservation(
-        _ profile: LearnerProfileState, _ observation: Observation
+        _ profile: LearnerProfileState, _ observation: SkillObservation
     ) -> LearnerProfileState {
         let existingIndex = profile.skills.firstIndex {
             $0.topic == observation.topic && $0.level == observation.level
@@ -232,7 +232,7 @@ public enum Profile {
     /// the order they arrived, and JavaScript's `Array.prototype.sort` has been
     /// required to be stable since ES2019. Swift's `sorted(by:)` is not, so this
     /// sorts on (answeredAt, original index) to pin the same order.
-    public static func buildProfile(_ observations: [Observation]) -> LearnerProfileState {
+    public static func buildProfile(_ observations: [SkillObservation]) -> LearnerProfileState {
         observations
             .enumerated()
             .sorted { left, right in
@@ -253,7 +253,7 @@ public enum Profile {
     }
 
     /// The topics of the last few questions, newest first.
-    public static func recentTopics(_ observations: [Observation], _ count: Int) -> [String] {
+    public static func recentTopics(_ observations: [SkillObservation], _ count: Int) -> [String] {
         observations
             .enumerated()
             .sorted { left, right in

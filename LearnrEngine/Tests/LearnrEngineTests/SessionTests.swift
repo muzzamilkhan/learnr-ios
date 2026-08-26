@@ -51,8 +51,8 @@ struct SessionTests {
         let answeredAt: Int
         let offsetMinutes: Int?
 
-        var observation: Observation {
-            Observation(
+        var observation: SkillObservation {
+            SkillObservation(
                 topic: topic, level: level, correct: correct,
                 timeTakenMs: timeTakenMs, answeredAt: answeredAt,
                 offsetMinutes: offsetMinutes ?? 0)
@@ -679,6 +679,34 @@ struct SessionTests {
         let b = try Sessions.startSession(config)
         #expect(a.current.templateId == b.current.templateId)
         #expect(a.current.question == b.current.question)
+    }
+
+    // MARK: - Names
+
+    @Test("the engine's public names do not shadow the standard library's")
+    func noNameCollisions() {
+        // `SkillObservation` was `Observation` until it broke the app: an
+        // `@Observable` class in a file that also imports LearnrEngine resolves
+        // `Observation` to ours, and the macro then cannot find
+        // `Observation.ObservationRegistrar`. The engine compiled fine on its
+        // own - only the app target failed - so nothing here would have caught
+        // it. This names the rule instead.
+        //
+        // A type is referenced by its bare name in both files; if one is ever
+        // renamed back to a module the app imports, this stops compiling.
+        let observation = SkillObservation(
+            topic: "addition", level: "K", correct: true,
+            timeTakenMs: 1000, answeredAt: 0)
+        #expect(observation.topic == "addition")
+
+        // The same trap sits under any type named for a framework the app
+        // imports. These are the ones this engine defines that are close enough
+        // to matter.
+        let row = SkillRow(
+            topic: "addition", level: "K", attempts: 1, correct: 1, strength: 1,
+            streak: 1, correctDays: 1, lastCorrectDay: 0, totalTimeMs: 0,
+            lastAnsweredAt: 0)
+        #expect(row.topic == "addition")
     }
 
     // MARK: - Constants
