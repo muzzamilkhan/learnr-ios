@@ -1,0 +1,786 @@
+{
+  "add.easy": [
+    {
+      "prompt": "{x} + {y}",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "1",
+          "max": "10"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "10"
+        }
+      ],
+      "answer": "x + y"
+    }
+  ],
+  "add.moderate": [
+    {
+      "prompt": "{x} + {y}",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "10",
+          "max": "99"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "20"
+        }
+      ],
+      "answer": "x + y"
+    }
+  ],
+  "add.hard": [
+    {
+      "prompt": "{x} + {y}",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "10",
+          "max": "99"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "10",
+          "max": "99"
+        }
+      ],
+      "constraints": [
+        "mod(x, 10) + mod(y, 10) > 9"
+      ],
+      "answer": "x + y"
+    }
+  ],
+  "subtract.easy": [
+    {
+      "prompt": "{x} − {y}",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "2",
+          "max": "20"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "x"
+        }
+      ],
+      "answer": "x - y"
+    }
+  ],
+  "subtract.moderate": [
+    {
+      "prompt": "{x} − {y}",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "20",
+          "max": "99"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "min(20, x)"
+        }
+      ],
+      "answer": "x - y"
+    }
+  ],
+  "subtract.hard": [
+    {
+      "prompt": "{x} − {y}",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "30",
+          "max": "99"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "10",
+          "max": "x"
+        }
+      ],
+      "constraints": [
+        "mod(x, 10) < mod(y, 10)"
+      ],
+      "answer": "x - y"
+    }
+  ],
+  "multiply.2": [
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            2
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    }
+  ],
+  "multiply.3": [
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            3
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    }
+  ],
+  "multiply.4": [
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            4
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    }
+  ],
+  "multiply.5": [
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            5
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    }
+  ],
+  "multiply.6": [
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            6
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    }
+  ],
+  "multiply.7": [
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            7
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    }
+  ],
+  "multiply.8": [
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            8
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    }
+  ],
+  "multiply.9": [
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            9
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    }
+  ],
+  "multiply.11": [
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            11
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    }
+  ],
+  "multiply.12": [
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            12
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    }
+  ],
+  "multiply.2-5": [
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    }
+  ],
+  "multiply.6-9": [
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            6,
+            7,
+            8,
+            9
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    }
+  ],
+  "multiply.11-12": [
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            11,
+            12
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    }
+  ],
+  "multiply.all": [
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    }
+  ],
+  "divide.easy": [
+    {
+      "prompt": "{x} ÷ {d}",
+      "vars": [
+        {
+          "name": "d",
+          "kind": "pick",
+          "from": [
+            2,
+            5,
+            10
+          ]
+        },
+        {
+          "name": "q",
+          "kind": "int",
+          "min": "1",
+          "max": "10"
+        },
+        {
+          "name": "x",
+          "kind": "expr",
+          "expr": "d * q"
+        }
+      ],
+      "answer": "q"
+    }
+  ],
+  "divide.moderate": [
+    {
+      "prompt": "{x} ÷ {d}",
+      "vars": [
+        {
+          "name": "d",
+          "kind": "int",
+          "min": "2",
+          "max": "10"
+        },
+        {
+          "name": "q",
+          "kind": "int",
+          "min": "1",
+          "max": "10"
+        },
+        {
+          "name": "x",
+          "kind": "expr",
+          "expr": "d * q"
+        }
+      ],
+      "answer": "q"
+    }
+  ],
+  "divide.hard": [
+    {
+      "prompt": "{x} ÷ {d}",
+      "vars": [
+        {
+          "name": "d",
+          "kind": "int",
+          "min": "2",
+          "max": "12"
+        },
+        {
+          "name": "q",
+          "kind": "int",
+          "min": "2",
+          "max": "12"
+        },
+        {
+          "name": "x",
+          "kind": "expr",
+          "expr": "d * q"
+        }
+      ],
+      "answer": "q"
+    }
+  ],
+  "mixed.easy": [
+    {
+      "prompt": "{x} + {y}",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "1",
+          "max": "10"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "10"
+        }
+      ],
+      "answer": "x + y"
+    },
+    {
+      "prompt": "{x} − {y}",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "2",
+          "max": "20"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "x"
+        }
+      ],
+      "answer": "x - y"
+    },
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            2,
+            5,
+            10
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    },
+    {
+      "prompt": "{x} ÷ {d}",
+      "vars": [
+        {
+          "name": "d",
+          "kind": "pick",
+          "from": [
+            2,
+            5,
+            10
+          ]
+        },
+        {
+          "name": "q",
+          "kind": "int",
+          "min": "1",
+          "max": "10"
+        },
+        {
+          "name": "x",
+          "kind": "expr",
+          "expr": "d * q"
+        }
+      ],
+      "answer": "q"
+    }
+  ],
+  "mixed.moderate": [
+    {
+      "prompt": "{x} + {y}",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "10",
+          "max": "99"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "20"
+        }
+      ],
+      "answer": "x + y"
+    },
+    {
+      "prompt": "{x} − {y}",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "20",
+          "max": "99"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "min(20, x)"
+        }
+      ],
+      "answer": "x - y"
+    },
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    },
+    {
+      "prompt": "{x} ÷ {d}",
+      "vars": [
+        {
+          "name": "d",
+          "kind": "int",
+          "min": "2",
+          "max": "10"
+        },
+        {
+          "name": "q",
+          "kind": "int",
+          "min": "1",
+          "max": "10"
+        },
+        {
+          "name": "x",
+          "kind": "expr",
+          "expr": "d * q"
+        }
+      ],
+      "answer": "q"
+    }
+  ],
+  "mixed.hard": [
+    {
+      "prompt": "{x} + {y}",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "10",
+          "max": "99"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "10",
+          "max": "99"
+        }
+      ],
+      "constraints": [
+        "mod(x, 10) + mod(y, 10) > 9"
+      ],
+      "answer": "x + y"
+    },
+    {
+      "prompt": "{x} − {y}",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "30",
+          "max": "99"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "10",
+          "max": "x"
+        }
+      ],
+      "constraints": [
+        "mod(x, 10) < mod(y, 10)"
+      ],
+      "answer": "x - y"
+    },
+    {
+      "prompt": "{t} × {n}",
+      "vars": [
+        {
+          "name": "t",
+          "kind": "pick",
+          "from": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "answer": "t * n"
+    },
+    {
+      "prompt": "{x} ÷ {d}",
+      "vars": [
+        {
+          "name": "d",
+          "kind": "int",
+          "min": "2",
+          "max": "12"
+        },
+        {
+          "name": "q",
+          "kind": "int",
+          "min": "2",
+          "max": "12"
+        },
+        {
+          "name": "x",
+          "kind": "expr",
+          "expr": "d * q"
+        }
+      ],
+      "answer": "q"
+    }
+  ]
+}

@@ -20,6 +20,13 @@
  * Swift loads these specs rather than declaring its own. What the Swift ports
  * is the *logic*: which specs a mode maps to, and the run state machine.
  *
+ * This writes **two** files for that reason. The vectors go to stdout as usual;
+ * the specs the engine ships are written directly to
+ * `LearnrEngine/Sources/LearnrEngine/Resources/speed-modes.json`, from the same
+ * `specsFor` call in the same run. Deriving the shipped copy from the vectors
+ * file afterwards would make the engine's data a function of its test corpus,
+ * which is backwards — they are two consumers of one oracle, not a chain.
+ *
  * **Why a run vector records both slots.** `RunState` carries `current` and
  * `next`, and the screen shows the second dimmed above the first. A run that
  * advanced correctly but drew the wrong lookahead would still show the right
@@ -29,6 +36,7 @@
 
 import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
+import { writeFileSync } from 'node:fs';
 
 const learnrPath = resolve(process.argv[2] ?? '../learnr');
 const require_ = createRequire(resolve(learnrPath, 'package.json'));
@@ -94,6 +102,25 @@ const modeVectors = MODES.map((mode: Json) => ({
   operationNoun: operationNoun(mode.op),
   operationGlyph: operationGlyph(mode.op),
 }));
+
+/**
+ * The specs the engine ships, keyed by mode key.
+ *
+ * Written from the same `specsFor` calls the vectors above record, so the
+ * engine's data and the corpus that checks it are siblings rather than one
+ * derived from the other.
+ */
+writeFileSync(
+  resolve(
+    import.meta.dirname,
+    '../LearnrEngine/Sources/LearnrEngine/Resources/speed-modes.json',
+  ),
+  `${JSON.stringify(
+    Object.fromEntries(MODES.map((mode: Json) => [modeKey(mode), snap(specsFor(mode))])),
+    null,
+    2,
+  )}\n`,
+);
 
 /** `parseMode` on every real key and a spread of keys that are not. */
 const parseVectors = [

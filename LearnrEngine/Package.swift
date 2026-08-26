@@ -8,7 +8,11 @@ let package = Package(
         .library(name: "LearnrEngine", targets: ["LearnrEngine"]),
     ],
     targets: [
-        .target(name: "LearnrEngine"),
+        // `speed-modes.json` is the twenty-six modes' question specs, written by
+        // `tools/generate-speedrun-vectors.ts` from the real `specsFor`. It
+        // ships with the engine rather than being transcribed into Swift, so a
+        // bound cannot drift from the TypeScript's.
+        .target(name: "LearnrEngine", resources: [.process("Resources")]),
         .testTarget(
             name: "LearnrEngineTests",
             dependencies: ["LearnrEngine"],
