@@ -123,6 +123,31 @@ public actor ApiClient {
         try await send("POST", "/speed/runs", body: request)
     }
 
+    // MARK: Content
+
+    /// The catalogue of what can be played, and the ETag of each level's pack.
+    ///
+    /// Small enough to fetch on every launch, which is the point: it is how a
+    /// device finds out that a pack it has cached is stale without downloading
+    /// every pack to check.
+    public func contentManifest(ifNoneMatch etag: String? = nil) async throws -> Fetched<ContentManifest> {
+        try await conditionalGet("/content/manifest", ifNoneMatch: etag)
+    }
+
+    /// One subject at one year level: the templates a session draws from.
+    ///
+    /// Authorised like everything else, but a pack is not personal - two
+    /// children at the same level get the same bytes, which is what makes the
+    /// ETag worth honouring.
+    ///
+    /// Returns the raw bytes as well as the decoded pack, because the cache
+    /// stores what arrived rather than a re-encoding of it - see `CachedPack`.
+    public func contentPack(
+        subject: String, level: YearLevel, ifNoneMatch etag: String? = nil
+    ) async throws -> Fetched<ContentPack> {
+        try await conditionalGet("/content/\(subject)/\(level.rawValue)", ifNoneMatch: etag)
+    }
+
     // MARK: Transport
 
     private struct Empty: Codable {}
@@ -199,6 +224,29 @@ public actor ApiClient {
         request.httpBody = try JSONEncoder().encode(body)
         let (data, http) = try await perform(request)
         try check(data, http)
+    }
+
+    /// A GET that honours an ETag.
+    ///
+    /// Kept apart from `send` because 304 is not a failure here and `check`
+    /// would treat it as one: a Not Modified says the caller's cached copy is
+    /// current, which is the best possible answer and the whole reason the
+    /// header was sent. The ETag comes back alongside the body so the caller
+    /// can store it with what it cached.
+    private func conditionalGet<Response: Decodable>(
+        _ path: String, ifNoneMatch etag: String?
+    ) async throws -> Fetched<Response> {
+        var request = try request("GET", path, authorised: true)
+        if let etag { request.setValue(etag, forHTTPHeaderField: "If-None-Match") }
+
+        let (data, http) = try await perform(request)
+        if http.statusCode == 304 { return .notModified }
+
+        try check(data, http)
+        // Header lookup is case-insensitive on iOS 13+, so "ETag" and "etag"
+        // both land - the server sends the latter.
+        let tag = http.value(forHTTPHeaderField: "ETag")
+        return .fetched(try decode(data), etag: tag, data: data)
     }
 
     private func decode<T: Decodable>(_ data: Data) throws -> T {

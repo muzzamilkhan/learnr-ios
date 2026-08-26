@@ -8,6 +8,45 @@ final class StubProtocol: URLProtocol, @unchecked Sendable {
     struct Call: Sendable { let method: String; let path: String; let body: Data? }
 
     nonisolated(unsafe) static var handler: (@Sendable (URLRequest) -> (Int, Data))?
+
+    /// Per-session handlers, keyed by a header the session's configuration
+    /// carries.
+    ///
+    /// The static `handler` above is global state, which is fine while one
+    /// suite drives it and a trap the moment two do: `ContentTests` and
+    /// `SyncQueueTests` are separate suites, and Swift Testing runs suites in
+    /// parallel even when each is `.serialized` internally. That crossed the
+    /// wires - each answering the other's requests - until this existed.
+    ///
+    /// A caller registers a handler under a key and puts that key in
+    /// `httpAdditionalHeaders`, so every request from that session carries it
+    /// and lands on the right handler however many sessions are live.
+    nonisolated(unsafe) static var keyedHandlers:
+        [String: @Sendable (URLRequest) -> (Int, Data, [String: String])] = [:]
+
+    static let keyHeader = "X-Stub-Key"
+
+    /// Registers a handler and returns a session whose every request carries
+    /// its key.
+    static func session(
+        _ handler: @escaping @Sendable (URLRequest) -> (Int, Data, [String: String])
+    ) -> URLSession {
+        let key = UUID().uuidString
+        lock.lock()
+        keyedHandlers[key] = handler
+        lock.unlock()
+
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [StubProtocol.self]
+        config.httpAdditionalHeaders = [keyHeader: key]
+        return URLSession(configuration: config)
+    }
+
+    static func handlerFor(_ request: URLRequest) -> (@Sendable (URLRequest) -> (Int, Data, [String: String]))? {
+        guard let key = request.value(forHTTPHeaderField: keyHeader) else { return nil }
+        lock.lock(); defer { lock.unlock() }
+        return keyedHandlers[key]
+    }
     nonisolated(unsafe) static var calls: [Call] = []
     static let lock = NSLock()
 
@@ -15,6 +54,9 @@ final class StubProtocol: URLProtocol, @unchecked Sendable {
         lock.lock(); defer { lock.unlock() }
         calls = []
         handler = nil
+        // `keyedHandlers` is deliberately not cleared: its entries belong to
+        // whichever session registered them, and another suite's session may
+        // still be using one. They are keyed by UUID, so they cannot collide.
     }
 
     static func record(_ call: Call) {
@@ -48,13 +90,25 @@ final class StubProtocol: URLProtocol, @unchecked Sendable {
             body = data
         }
 
-        Self.record(.init(method: request.httpMethod ?? "?",
-                          path: request.url?.path ?? "?",
-                          body: body))
+        // Only the global handler's traffic is recorded. A keyed session has
+        // its own handler to observe from, and appending its requests here
+        // would put another suite's calls into `recorded` - which is what
+        // SyncQueueTests asserts against.
+        if Self.handlerFor(request) == nil {
+            Self.record(.init(method: request.httpMethod ?? "?",
+                              path: request.url?.path ?? "?",
+                              body: body))
+        }
 
-        let (status, data) = Self.handler?(request) ?? (200, Data("{}".utf8))
+        // A session-keyed handler wins; the global one is the older path that
+        // SyncQueueTests still uses.
+        let (status, data, headers) = Self.handlerFor(request)?(request)
+            ?? Self.handler.map { h in { (r: URLRequest) -> (Int, Data, [String: String]) in
+                let (s, d) = h(r); return (s, d, [:])
+            } }?(request)
+            ?? (200, Data("{}".utf8), [:])
         let response = HTTPURLResponse(url: request.url!, statusCode: status,
-                                       httpVersion: nil, headerFields: nil)!
+                                       httpVersion: nil, headerFields: headers)!
         client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
         client?.urlProtocol(self, didLoad: data)
         client?.urlProtocolDidFinishLoading(self)
