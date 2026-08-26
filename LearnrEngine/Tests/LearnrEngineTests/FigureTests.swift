@@ -57,7 +57,7 @@ struct FigureTests {
     /// absent kind falls back to the polygon builder, so running them would
     /// assert that a triangle is a clock face. The count is checked below so a
     /// kind cannot be quietly dropped from the sweep instead of being ported.
-    static let portedKinds: Set<String> = ["polygon", "angle", "array", "spinner", "clock", "fraction-shape", "pictograph"]
+    static let portedKinds: Set<String> = ["polygon", "angle", "array", "spinner", "clock", "fraction-shape", "pictograph", "bar"]
 
     static var ported: [Vector] {
         vectors.filter { portedKinds.contains($0.spec.kind) }
