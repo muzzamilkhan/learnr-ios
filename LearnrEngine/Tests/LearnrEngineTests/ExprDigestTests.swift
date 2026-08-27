@@ -17,26 +17,24 @@ import Foundation
 /// five draws supply five real bindings and each expression is seen against
 /// several rather than one lucky one.
 ///
-/// ## What is verified here, and what is not
+/// ## Why the figure params are sorted
 ///
-/// **The 127 figure-bearing templates are skipped, and cannot be verified until
-/// the oracle changes.** `expressionsOf` harvests a figure's parameters by
-/// walking `Object.entries(template.figure)`, so those groups' case order — and
-/// therefore their hashes — is pinned to the **JSON key order of the figure
-/// object**, which is the author's keystroke order in a year file. Swift cannot
-/// reproduce it: a `Codable` `FigureSpec` has declared property order and
-/// `JSONSerialization` is unordered, so `FigureSpec.fields` is a dictionary by
-/// the time any port sees it.
+/// `expressionsOf` used to harvest a figure's parameters by walking
+/// `Object.entries(template.figure)`, which pinned those 127 groups' case order
+/// — and so their hashes — to the **JSON key order of the figure literal**: the
+/// author's keystroke order in a year file, movable by an edit that changes
+/// nothing the engine does. No port can reproduce it, since `FigureSpec.fields`
+/// is a dictionary by the time any decoder is done.
 ///
-/// Raised as ledger **L8** and confirmed there as a defect rather than a
-/// decision — `canonicalScope` sorts each case's scope for exactly this reason
-/// and says so, and only the *case* order was left unsorted. The fix is
-/// web-side: sort the figure params inside the walk. This file harvests
-/// **sorted**, which is what the fix will make correct, so when it lands only
-/// the vendored digests change and no Swift does.
+/// Raised as ledger **L8**, confirmed a defect rather than a decision —
+/// `canonicalScope` already sorted each case's *scope* for exactly this reason,
+/// and only the *case* order had been left out. Fixed on the oracle's side by
+/// `learnr` `19e4a71` (sort the walk) and `6f5ba16` (regenerate), which moved
+/// 56 groups and took `expr.json` to `829f572f8fc7`. Fewer than 127 because a
+/// literal already written in alphabetical order harvests the same either way.
 ///
-/// Until then: 378 figure-free groups plus `traps` are verified, and the
-/// remaining 127 are counted and reported rather than silently passed.
+/// This side harvested sorted from the start, so that fix turned on all 127 by
+/// re-vendoring alone, with no change here.
 struct ExprDigestTests {
     /// How many real scopes each of a template's expressions is evaluated
     /// against.
@@ -84,6 +82,19 @@ struct ExprDigestTests {
         }
 
         for distractor in spec.choices?.distractors ?? [] { add(distractor) }
+
+        // A figure's parameters are expressions too, evaluated against this same
+        // bound scope by `buildFigure`.
+        //
+        // **Sorted by field name**, which is what `19e4a71` made the oracle do.
+        // It used to walk `Object.entries`, pinning these groups to the JSON key
+        // order of the figure literal — the author's keystroke order in a year
+        // file, which no port can reproduce and which a no-op edit could move.
+        // Ledger L8; `canonical.ts` exports `byName` so the two sites cannot
+        // sort differently.
+        if let figure = spec.figure {
+            for field in figure.fields.keys.sorted() { add(figure.fields[field]) }
+        }
 
         // The `jitter` bounds, used when authored distractors run short. No
         // shipped template carries one today, so this collects nothing yet; it
@@ -139,19 +150,14 @@ struct ExprDigestTests {
         }
     }
 
-    @Test("the figure-free expression groups reproduce the oracle's digest")
+    @Test("every expression group reproduces the oracle's digest")
     func exprDigestsMatch() throws {
         let oracle = Fixtures.digest(set: "expr")
         var checked = 0
-        var skipped = 0
+        var withFigure = 0
 
         for template in Fixtures.templates {
-            // See the type's note: the oracle's harvest order for these is
-            // unreproducible until L8 lands.
-            if template.spec.hasFigure {
-                skipped += 1
-                continue
-            }
+            if template.spec.hasFigure { withFigure += 1 }
 
             let expressions = Self.expressions(of: template)
             if expressions.isEmpty { continue }
@@ -176,8 +182,11 @@ struct ExprDigestTests {
             checked += 1
         }
 
-        #expect(checked == 378, "expected the 378 figure-free templates, hashed \(checked)")
-        #expect(skipped == 127, "expected 127 figure-bearing templates skipped, skipped \(skipped)")
+        #expect(checked == 505, "expected all 505 templates, hashed \(checked)")
+        // The figure-bearing ones were the 127 that L8 blocked. Counted rather
+        // than assumed, so that the day one is added or removed this says so
+        // instead of the coverage quietly changing.
+        #expect(withFigure == 127, "expected 127 figure-bearing templates, saw \(withFigure)")
     }
 
     /// **The half that asserts rather than records.** Everywhere else the
