@@ -74,6 +74,12 @@ final class SpeedSession {
     var secondsLeft: Int { Int((Double(remainingMs) / 1000).rounded(.up)) }
 
     private let api: ApiClient
+    /// Where a run goes when it cannot be sent now.
+    ///
+    /// Optional so a screen with nothing to sync into still runs; without one,
+    /// a failed submit is simply lost, which is the old behaviour and is what
+    /// the previews and the mode tests want.
+    private let queue: SyncQueue?
     private let now: () -> Int
     private let seed: String
 
@@ -90,11 +96,13 @@ final class SpeedSession {
     init(
         mode: Mode,
         api: ApiClient,
+        queue: SyncQueue? = nil,
         seed: String = UUID().uuidString.lowercased(),
         now: @escaping () -> Int = { Int(Date().timeIntervalSince1970 * 1000) }
     ) {
         self.mode = mode
         self.api = api
+        self.queue = queue
         self.seed = seed
         self.now = now
     }
@@ -233,7 +241,27 @@ final class SpeedSession {
         guard let state else { return }
         let result = SpeedRun.runResult(state)
 
-        Task { [weak self] in await self?.submit(result) }
+        // A score of nought is not a run. `SpeedRecords` reads a first run as
+        // "no record yet", so banking a nought makes it the baseline the first
+        // real run beats - which fires the child's record celebration and puts a
+        // personal-best banner in front of the parent for a run nobody played.
+        // Dropped here rather than at flush: a queued nought is a nought waiting
+        // to be sent.
+        // `.unsent` is the honest reading: the run was not sent, deliberately.
+        // The screen says "Nice work" and nothing about a record, which is
+        // exactly what a nought has earned.
+        guard result.correct > 0 else {
+            outcome = .unsent
+            return
+        }
+
+        // The id is minted once, here, and belongs to the run from now on.
+        // `POST /speed/runs` dedupes on it, so every flush of this run - now,
+        // and after any number of relaunches - has to carry this same id. One
+        // minted per request would dedupe nothing.
+        let pending = PendingRun(mode: result.mode.key, correct: result.correct)
+
+        Task { [weak self] in await self?.submit(pending, previousBest: result) }
     }
 
     /// Sends the run and turns the server's answer into what the screen says.
@@ -243,10 +271,15 @@ final class SpeedSession {
     /// The tone comes from `SpeedRecords` rather than the server's `isRecord`
     /// so the three-way distinction — first run, record, short — is made in one
     /// place, and a first run is never celebrated as a record.
-    private func submit(_ result: RunResult) async {
-        let request = SpeedRunRequest(mode: result.mode.key, correct: result.correct)
+    private func submit(_ pending: PendingRun, previousBest result: RunResult) async {
+        let request = SpeedRunRequest(
+            id: pending.id, mode: pending.mode, correct: pending.correct)
 
         guard let sent = try? await api.submitSpeedRun(request) else {
+            // Queued under the id it was just sent with, so the retry is the
+            // same run rather than a second one. The score stays on screen;
+            // only the celebration is missing.
+            await queue?.recordRun(pending)
             outcome = .unsent
             return
         }

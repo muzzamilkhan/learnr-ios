@@ -297,6 +297,98 @@ struct SpeedSessionTests {
         #expect(run.outcome == .pending, "an abandoned run is not a result")
     }
 
+    // MARK: Queueing (L11)
+
+    /// A store that keeps what it is given, so a queued run can be read back.
+    final class MemoryStore: SittingStore, @unchecked Sendable {
+        private let lock = NSLock()
+        private var sittings: [PendingSitting] = []
+        private var runs: [PendingRun] = []
+        func load() -> [PendingSitting] { lock.lock(); defer { lock.unlock() }; return sittings }
+        func save(_ s: [PendingSitting]) { lock.lock(); defer { lock.unlock() }; sittings = s }
+        func loadRuns() -> [PendingRun] { lock.lock(); defer { lock.unlock() }; return runs }
+        func saveRuns(_ r: [PendingRun]) { lock.lock(); defer { lock.unlock() }; runs = r }
+    }
+
+    /// A run wired to a queue, against the same unreachable server. The submit
+    /// always fails, which is the case the queue exists for.
+    static func queued(mode: Mode = .multiply(.single(7))) -> (SpeedSession, SyncQueue, MemoryStore) {
+        let api = ApiClient(
+            baseURL: URL(string: "http://127.0.0.1:1")!,
+            tokens: NoTokens(),
+            session: URLSession(configuration: .ephemeral))
+        let store = MemoryStore()
+        let queue = SyncQueue(api: api, store: store)
+        let run = SpeedSession(mode: mode, api: api, queue: queue, seed: "test-seed", now: { start })
+        return (run, queue, store)
+    }
+
+    @Test("a run that could not be sent is queued, not lost")
+    func unsentRunIsQueued() async throws {
+        let (run, queue, _) = Self.queued()
+        run.start()
+        run.tick(at: Self.runBegins)
+        for digit in Self.answer(run) {
+            run.type(String(digit), at: Self.runBegins + 1_000)
+        }
+        run.finish(at: Self.runBegins + SpeedRun.runMs + 1)
+
+        try await Task.sleep(for: .milliseconds(400))
+
+        #expect(await queue.pendingRunCount == 1,
+                "an unreachable server must cost the history, not the run")
+    }
+
+    @Test("a queued run carries the score and mode that were played")
+    func queuedRunCarriesTheResult() async throws {
+        let (run, _, store) = Self.queued(mode: .multiply(.single(7)))
+        run.start()
+        run.tick(at: Self.runBegins)
+        for digit in Self.answer(run) {
+            run.type(String(digit), at: Self.runBegins + 1_000)
+        }
+        run.finish(at: Self.runBegins + SpeedRun.runMs + 1)
+
+        try await Task.sleep(for: .milliseconds(400))
+
+        let queued = store.loadRuns()
+        #expect(queued.count == 1)
+        #expect(queued.first?.correct == 1)
+        #expect(queued.first?.mode == "multiply.7")
+    }
+
+    @Test("a score of nought is never queued")
+    func noughtIsNotQueued() async throws {
+        // A queued nought is a nought waiting to be sent. Banked, it becomes a
+        // baseline the first real run beats, which fires the record celebration
+        // for a run that never happened.
+        let (run, queue, _) = Self.queued()
+        run.start()
+        run.tick(at: Self.runBegins)
+        run.finish(at: Self.runBegins + SpeedRun.runMs + 1)
+
+        try await Task.sleep(for: .milliseconds(400))
+
+        #expect(run.score == 0)
+        #expect(await queue.pendingRunCount == 0)
+    }
+
+    @Test("an abandoned run is not queued")
+    func abandonedRunIsNotQueued() async throws {
+        let (run, queue, _) = Self.queued()
+        run.start()
+        run.tick(at: Self.runBegins)
+        for digit in Self.answer(run) {
+            run.type(String(digit), at: Self.runBegins + 1_000)
+        }
+        run.abandon()
+
+        try await Task.sleep(for: .milliseconds(400))
+
+        #expect(await queue.pendingRunCount == 0,
+                "a run the child walked away from is not a result to bank")
+    }
+
     // MARK: The modes
 
     @Test("every one of the twenty-six modes can be run")

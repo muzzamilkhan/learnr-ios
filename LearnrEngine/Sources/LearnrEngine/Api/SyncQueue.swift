@@ -33,18 +33,65 @@ public struct PendingSitting: Codable, Sendable, Equatable {
     }
 }
 
-/// Where pending sittings live between launches.
+/// One speed run a child finished, waiting to reach the server.
+///
+/// **The id belongs to the run, not to the request.** `POST /speed/runs`
+/// dedupes `SpeedAttempt` on it, so a flush retried after a dropped connection
+/// writes the run once. An id minted per request dedupes nothing - it is a new
+/// run every time, and the cabinet lists one afternoon twice. So it is minted
+/// where the run ends and persisted with it, and every flush of that run sends
+/// the same one.
+///
+/// Two runs that scored the same are still two runs; only a repeat of the same
+/// id collapses.
+public struct PendingRun: Codable, Sendable, Equatable {
+    public let id: String
+    /// The mode's key, as `Modes.parseMode` reads it. Parsed before queueing:
+    /// an unrecognised key is a 400 the queue can only drop.
+    public let mode: String
+    public let correct: Int
+
+    public init(id: String = UUID().uuidString.lowercased(), mode: String, correct: Int) {
+        self.id = id
+        self.mode = mode
+        self.correct = correct
+    }
+}
+
+/// Where pending work lives between launches.
+///
+/// Sittings and runs share one store so a crash cannot leave the two halves
+/// disagreeing about what has been sent.
 public protocol SittingStore: Sendable {
     func load() -> [PendingSitting]
     func save(_ sittings: [PendingSitting])
+    func loadRuns() -> [PendingRun]
+    func saveRuns(_ runs: [PendingRun])
+}
+
+extension SittingStore {
+    // Defaulted so a store written before speed runs were queued still
+    // compiles; it simply has nowhere to keep them.
+    public func loadRuns() -> [PendingRun] { [] }
+    public func saveRuns(_ runs: [PendingRun]) {}
 }
 
 /// A file-backed store. Writes atomically so a crash mid-write cannot leave a
 /// child's afternoon truncated.
+///
+/// Runs live beside the sittings in a second file rather than in the same one:
+/// the two are written on different occasions - an answer and the end of a run -
+/// and one atomic write per kind means neither can truncate the other.
 public struct FileSittingStore: SittingStore {
     let url: URL
+    let runsURL: URL
 
-    public init(url: URL) { self.url = url }
+    public init(url: URL) {
+        self.url = url
+        self.runsURL = url.deletingLastPathComponent()
+            .appendingPathComponent("\(url.deletingPathExtension().lastPathComponent)-runs")
+            .appendingPathExtension(url.pathExtension)
+    }
 
     public func load() -> [PendingSitting] {
         guard let data = try? Data(contentsOf: url) else { return [] }
@@ -54,6 +101,16 @@ public struct FileSittingStore: SittingStore {
     public func save(_ sittings: [PendingSitting]) {
         guard let data = try? JSONEncoder().encode(sittings) else { return }
         try? data.write(to: url, options: .atomic)
+    }
+
+    public func loadRuns() -> [PendingRun] {
+        guard let data = try? Data(contentsOf: runsURL) else { return [] }
+        return (try? JSONDecoder().decode([PendingRun].self, from: data)) ?? []
+    }
+
+    public func saveRuns(_ runs: [PendingRun]) {
+        guard let data = try? JSONEncoder().encode(runs) else { return }
+        try? data.write(to: runsURL, options: .atomic)
     }
 }
 
@@ -67,15 +124,19 @@ public actor SyncQueue {
     private let api: ApiClient
     private let store: any SittingStore
     private var sittings: [PendingSitting]
+    private var runs: [PendingRun]
     private var flushing = false
 
     public init(api: ApiClient, store: any SittingStore) {
         self.api = api
         self.store = store
         self.sittings = store.load()
+        self.runs = store.loadRuns()
     }
 
     public var pendingCount: Int { sittings.count }
+
+    public var pendingRunCount: Int { runs.count }
 
     public var pendingAttemptCount: Int {
         sittings.reduce(0) { $0 + $1.attempts.count }
@@ -96,6 +157,15 @@ public actor SyncQueue {
         guard let index = sittings.firstIndex(where: { $0.id == sittingId }) else { return }
         sittings[index].finished = true
         persist()
+    }
+
+    /// Queue a finished speed run under the id it was minted with.
+    ///
+    /// A score of nought never reaches here - `SpeedSession` drops it before
+    /// queueing, because a queued nought is a nought waiting to be sent.
+    public func recordRun(_ run: PendingRun) {
+        runs.append(run)
+        persistRuns()
     }
 
     /// Send everything that will go, keeping whatever will not.
@@ -127,7 +197,35 @@ public actor SyncQueue {
 
         sittings = kept
         persist()
+
+        await flushRuns()
         return sent
+    }
+
+    /// Send the finished runs, keeping whatever will not go.
+    ///
+    /// Each is one request, so unlike a sitting there is no partial send to
+    /// reason about: it either landed or it did not. A `503` is the database
+    /// rather than the run and is kept; a `400` is a mode that is not a mode -
+    /// `multiply.10` is retired - and retrying it forever is a queue that never
+    /// drains.
+    private func flushRuns() async {
+        var kept: [PendingRun] = []
+
+        for run in runs {
+            do {
+                try await api.submitSpeedRun(
+                    SpeedRunRequest(id: run.id, mode: run.mode, correct: run.correct))
+            } catch let error as ApiError where error.isRetryable {
+                kept.append(run)
+            } catch {
+                // Permanently refused. The score is already on the child's
+                // screen; what is lost is the history, which is the lesser harm.
+            }
+        }
+
+        runs = kept
+        persistRuns()
     }
 
     private func send(_ sitting: PendingSitting) async throws {
@@ -159,6 +257,8 @@ public actor SyncQueue {
     }
 
     private func persist() { store.save(sittings) }
+
+    private func persistRuns() { store.saveRuns(runs) }
 }
 
 extension Array {

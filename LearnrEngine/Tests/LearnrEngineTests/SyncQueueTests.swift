@@ -126,8 +126,11 @@ final class MemoryTokenStore: TokenStore, @unchecked Sendable {
 
 final class MemorySittingStore: SittingStore, @unchecked Sendable {
     private var sittings: [PendingSitting] = []
+    private var runs: [PendingRun] = []
     func load() -> [PendingSitting] { sittings }
     func save(_ sittings: [PendingSitting]) { self.sittings = sittings }
+    func loadRuns() -> [PendingRun] { runs }
+    func saveRuns(_ runs: [PendingRun]) { self.runs = runs }
 }
 
 private func makeClient(token: String? = "tok") -> ApiClient {
@@ -315,6 +318,185 @@ struct SyncQueueTests {
     func attemptsHaveDistinctIds() {
         let ids = (0..<50).map { anAttempt($0).id }
         #expect(Set(ids).count == 50)
+    }
+}
+/// The speed-run half of the queue.
+///
+/// `POST /speed/runs` dedupes on the client's id (`feae8f4` in `learnr`), so
+/// the id has to belong to the *run* and outlive every flush of it. An id
+/// minted per request dedupes nothing, which is the defect L11 names.
+/// A thread-safe call counter. The stub handler is `@Sendable` and is called
+/// off the test's own task, so a captured `var` is a data race rather than a
+/// convenience.
+final class Counter: @unchecked Sendable {
+    private let lock = NSLock()
+    private var count = 0
+    func next() -> Int {
+        lock.lock(); defer { lock.unlock() }
+        count += 1
+        return count
+    }
+}
+
+@Suite(.serialized)
+struct SpeedRunQueueTests {
+
+    /// The ids `POST /speed/runs` was called with, in order.
+    ///
+    /// Observed from this suite's own handler rather than `StubProtocol.recorded`:
+    /// a keyed session is deliberately not recorded globally, so that two
+    /// suites running in parallel cannot answer or observe each other's traffic.
+    final class SeenRuns: @unchecked Sendable {
+        private let lock = NSLock()
+        private var ids: [String] = []
+
+        func note(_ request: URLRequest) {
+            guard request.url?.path == "/speed/runs" else { return }
+            var body = request.httpBody
+            if body == nil, let stream = request.httpBodyStream {
+                stream.open()
+                var data = Data()
+                let size = 4096
+                let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: size)
+                while stream.hasBytesAvailable {
+                    let read = stream.read(buffer, maxLength: size)
+                    if read <= 0 { break }
+                    data.append(buffer, count: read)
+                }
+                buffer.deallocate()
+                stream.close()
+                body = data
+            }
+            guard let body,
+                  let json = try? JSONSerialization.jsonObject(with: body) as? [String: Any],
+                  let id = json["id"] as? String
+            else { return }
+            lock.lock(); defer { lock.unlock() }
+            ids.append(id)
+        }
+
+        var all: [String] {
+            lock.lock(); defer { lock.unlock() }
+            return ids
+        }
+    }
+
+    private func stubRuns(_ status: Int = 200, seen: SeenRuns) -> URLSession {
+        StubProtocol.session { request in
+            seen.note(request)
+            return (status, Data(#"{"previousBest":3,"best":5,"isRecord":true}"#.utf8), [:])
+        }
+    }
+
+    private func client(_ session: URLSession, token: String? = "tok") -> ApiClient {
+        ApiClient(baseURL: URL(string: "http://localhost:3001")!,
+                  tokens: MemoryTokenStore(token), session: session)
+    }
+
+    @Test("a run retried after a failed flush carries the id it was minted with")
+    func holdsOneIdAcrossFlushes() async throws {
+        let seen = SeenRuns()
+        // Fails first, then succeeds - the shape a school-run connection has.
+        let attempts = Counter()
+        let session = StubProtocol.session { request in
+            seen.note(request)
+            return attempts.next() == 1
+                ? (503, Data(#"{"error":"Could not record"}"#.utf8), [:])
+                : (200, Data(#"{"previousBest":3,"best":5,"isRecord":true}"#.utf8), [:])
+        }
+
+        let queue = SyncQueue(api: client(session), store: MemorySittingStore())
+        await queue.recordRun(PendingRun(mode: "add.easy", correct: 7))
+
+        _ = await queue.flush()
+        #expect(await queue.pendingRunCount == 1, "a 503 must not lose the run")
+        _ = await queue.flush()
+
+        let ids = seen.all
+        #expect(ids.count == 2, "the run was sent twice")
+        #expect(ids.first == ids.last,
+                "an id minted per request dedupes nothing - the server would store two runs")
+        #expect(await queue.pendingRunCount == 0)
+    }
+
+    @Test("two runs that scored the same are still two runs")
+    func distinctRunsGetDistinctIds() async throws {
+        let seen = SeenRuns()
+        let queue = SyncQueue(api: client(stubRuns(seen: seen)), store: MemorySittingStore())
+        await queue.recordRun(PendingRun(mode: "add.easy", correct: 7))
+        await queue.recordRun(PendingRun(mode: "add.easy", correct: 7))
+
+        _ = await queue.flush()
+
+        #expect(Set(seen.all).count == 2,
+                "the server dedupes on id - equal scores must not collapse")
+    }
+
+    @Test("a run the server could not record is kept for next time")
+    func keepsRetryableFailures() async throws {
+        let queue = SyncQueue(api: client(stubRuns(503, seen: SeenRuns())),
+                              store: MemorySittingStore())
+        await queue.recordRun(PendingRun(mode: "add.easy", correct: 7))
+
+        _ = await queue.flush()
+
+        #expect(await queue.pendingRunCount == 1)
+    }
+
+    @Test("a run whose mode the server rejects is dropped rather than retried forever")
+    func dropsPermanentFailures() async throws {
+        // `parseMode` is the endpoint's whole validation and an unrecognised
+        // key is a 400 - `multiply.10` is retired. Retrying it is a queue that
+        // never drains.
+        let queue = SyncQueue(api: client(stubRuns(400, seen: SeenRuns())),
+                              store: MemorySittingStore())
+        await queue.recordRun(PendingRun(mode: "multiply.10", correct: 7))
+
+        _ = await queue.flush()
+
+        #expect(await queue.pendingRunCount == 0)
+    }
+
+    @Test("a run survives a relaunch under the same id")
+    func persistsAcrossLaunches() async throws {
+        let seen = SeenRuns()
+        let store = MemorySittingStore()
+        let run = PendingRun(mode: "add.easy", correct: 7)
+
+        let first = SyncQueue(api: client(stubRuns(seen: SeenRuns())), store: store)
+        await first.recordRun(run)
+
+        let second = SyncQueue(api: client(stubRuns(seen: seen)), store: store)
+        #expect(await second.pendingRunCount == 1)
+
+        _ = await second.flush()
+
+        #expect(seen.all == [run.id],
+                "the id is the run's, so it has to survive the launch that minted it")
+    }
+
+    @Test("a run is sent even when the child has no sitting to sync")
+    func runsFlushWithoutASitting() async throws {
+        let seen = SeenRuns()
+        let queue = SyncQueue(api: client(stubRuns(seen: seen)), store: MemorySittingStore())
+        await queue.recordRun(PendingRun(mode: "add.easy", correct: 7))
+
+        _ = await queue.flush()
+
+        #expect(seen.all.count == 1)
+    }
+
+    @Test("nothing is sent while signed out")
+    func doesNotFlushSignedOut() async throws {
+        let seen = SeenRuns()
+        let queue = SyncQueue(api: client(stubRuns(seen: seen), token: nil),
+                              store: MemorySittingStore())
+        await queue.recordRun(PendingRun(mode: "add.easy", correct: 7))
+
+        _ = await queue.flush()
+
+        #expect(seen.all.isEmpty)
+        #expect(await queue.pendingRunCount == 1)
     }
 }
 
