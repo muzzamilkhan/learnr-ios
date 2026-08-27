@@ -16,7 +16,7 @@ let package = Package(
         .testTarget(
             name: "LearnrEngineTests",
             dependencies: ["LearnrEngine"],
-            resources: [.copy("Vectors")]
+            resources: [.copy("Vectors"), .copy("Digests"), .copy("Packs")]
         ),
     ]
 )
