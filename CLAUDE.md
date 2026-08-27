@@ -4,39 +4,70 @@ The native child client, and the Swift port of the question engine. Children
 only — a parent uses the web app, and the only way in is the four-character code
 a parent hands over.
 
-## Cross-repo changes: raise an issue, never a commit
+## Cross-repo changes: write to the ledger, never a commit
 
-**Anything that needs to change in `muzzamilkhan/learnr` gets a GitHub issue
-raised against that repo. Do not edit, commit to, or push to `learnr` from this
-repo's work.**
+**Do not edit, commit to, or push to `muzzamilkhan/learnr` from this repo's
+work.** That covers the API (`apps/api`), the shared engine (`packages/core`),
+the web app, the contract, and the specs and docs.
 
-That covers the API (`apps/api`), the shared engine (`packages/core`), the web
-app, the contract, and the docs under `apps/api/docs` — the handoff included.
+Why: `learnr` is live on Vercel and Fly, and it is worked on from another
+machine. A commit landing there from an iOS session is a change nobody on that
+side asked for, reviewed, or expected. The prohibition runs both ways — nothing
+here is edited from a session there — and it is the reason the ledger exists.
 
-Why: `learnr` is live on Vercel and Fly, and the API is being worked on from
-another machine. A commit landing there from an iOS session is a change nobody
-on that side asked for, reviewed, or expected. An issue reaches them; a push
-surprises them.
+**Anything the other side needs to know or do is a ledger entry, not a GitHub
+issue and not a commit.** The ledger is one shared file both agents read and
+write:
 
-```bash
-gh issue create --repo muzzamilkhan/learnr --title "..." --body-file ...
+```
+/home/muzza/code/learnr-ledger/LEDGER.md    on tesseract, outside both repos
 ```
 
-Say what this client needs and why, name the exact files or endpoints, and note
-what iOS is doing in the meantime. Link the issue number from any local comment
-or README line that depends on it.
+Reach it with the `ledger` wrapper on this Mac, which is an `ssh` to
+`muzza@172.16.0.20`. `ledger read` prints the whole thing, `ledger items` the
+outstanding ones; `status`, `entry` and `answer` take a body on stdin. Run
+`ledger --help` for the exact arguments, and see the `ledger` skill in
+`.claude/skills/ledger/` for the plumbing and its traps. Never edit `LEDGER.md`
+by hand — the script locks, stamps and commits each write.
 
-Existing examples: `learnr#4` (untyped API responses), `learnr-ios#1` (stale
-server references, raised the other way).
+**Read the ledger at the start of every session, and before answering anything
+about the server side.** A clone of `learnr` on this Mac is evidence of what has
+*shipped*, not of what exists — and there may be no clone here at all.
+
+The four rules:
+
+- **Ask, don't guess.** The TypeScript engine is the oracle, the API owns the
+  schema, and the specs live in `learnr`. Whenever you are unsure how something
+  is *meant* to work — a grading rule, a figure's geometry, what an endpoint
+  returns, whether a behaviour is deliberate — `ledger ask ios web "..."`. A
+  wrong guess in the port is invisible until a digest reddens, and sometimes not
+  even then. Say in the ask what you are doing in the meantime, so nothing
+  blocks that needn't.
+- **The `learnr` side answers**, from the engine, the contract and the specs.
+  Where a question is open-ended — a product call, a priority call, a trade
+  nobody has made yet — it escalates to Muzzamil rather than being invented, and
+  the item reads **for Muzzamil** until he rules.
+- **Log what the other side could contradict.** Not every commit:
+  `ledger entry ios <progress|direction|decision> "..."` for what changes what
+  the web side may assume.
+- **Never commit to `learnr`.** As above, and it runs the other way too.
+
+Name exact files, endpoints and ids: "the report endpoint" is a guess on the
+receiving side; `GET /reports/:childId` is not. Update this side's "Now" block
+with `ledger status ios` when it stops being true, and never touch the web's.
+
+The GitHub issues the two repos used to raise on each other are retired;
+`learnr-ios#1` and `#2` were migrated into the ledger as items `L1`–`L5`.
 
 ## Where things are
 
 | | |
 | --- | --- |
 | Server, contract, web app | `muzzamilkhan/learnr` — API is the `apps/api` workspace |
-| Contract | `learnr/apps/api/contract/openapi.yaml` |
+| Contract | `learnr/apps/api/contract/openapi.yaml`, served live at `https://learnr-api-syd.fly.dev/openapi.json` |
 | Deployed API | `https://learnr-api-syd.fly.dev` |
-| Spec | `learnr/apps/api/docs/superpowers/specs/2026-08-26-ios-port-design.md` |
+| Spec | `learnr/docs/superpowers/specs/2026-08-26-ios-port-design.md` |
+| Fixtures spec | `learnr/docs/superpowers/specs/2026-08-26-fixture-generation-design.md` — supersedes the conformance-suite section of the above |
 
 The API is not a repo of its own: it depends on `@learnr/core` and a `file:`
 path dependency cannot resolve across two clones.
@@ -67,6 +98,27 @@ cd LearnrEngine && swift test # engine tests
 
 `project.yml` is committed; the `.xcodeproj` is generated and gitignored. Change
 build settings there, not in Xcode's UI, or the change is lost on regeneration.
+
+## Committing
+
+**Commit to `main` and push as each piece of work finishes.** Not at the end of
+a session, and not batched into one commit spanning several pieces: a piece of
+work that is done, green and pushed is one the next session can build on, and
+one that survives this session ending badly.
+
+Atomic means the commit is *one* piece of work and all of it — the change, its
+tests, and the doc line it makes true or false. A commit that leaves the suite
+red is not finished work, and neither is one that needs the next commit to make
+sense.
+
+Two things stay separate on purpose, because both are contract rather than code:
+
+- **Vendored fixtures** (`Tests/LearnrEngineTests/Digests/`, `Packs/`) move in
+  their own commit that says why. They define what "correct" means, so a refresh
+  is a change to the contract and has to be reviewable on its own — never
+  alongside the engine change that made it red.
+- **Generated vectors** (`Tests/LearnrEngineTests/Vectors/`), for the same
+  reason. Regenerating is not the fix for a red build.
 
 ## Conventions
 

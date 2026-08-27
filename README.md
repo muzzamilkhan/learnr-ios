@@ -13,53 +13,54 @@ means the engine exists twice - once in TypeScript for the web, once here. The
 two are kept in step by fixtures generated from the TypeScript engine, which is
 the oracle: it defines what correct means, and this port is verified against it.
 
-See `learnr/docs/superpowers/specs/2026-08-26-ios-port-design.md`.
+See `learnr/docs/superpowers/specs/2026-08-26-ios-port-design.md`, whose
+conformance-suite section is superseded by
+`2026-08-26-fixture-generation-design.md` in the same directory.
 
 ## Layout
 
 ```
-LearnrEngine/          Swift package - the ported engine
+LearnrEngine/          Swift package - the ported engine, no dependencies
   Sources/LearnrEngine/
     Rng/               mulberry32 + FNV-1a, bit-exact with the web app
-    Expr/              the sandboxed expression language
-    Api/               generated from contract/openapi.yaml
-  Tests/
-    Vectors/           oracle data generated from the TypeScript engine
+    Expr/              tokenizer, Pratt parser, evaluator, JS number semantics
+    Templates/         binding, constraints, {expr} holes
+    Figures/           all eleven builders
+    Session/           the state machine, grading, the profile and the selector
+    SpeedRun/          the second state machine, and the modes
+    Api/               models, client, offline sync queue
+  Tests/LearnrEngineTests/
+    Digests/           the vendored golden corpus - the oracle
+    Vectors/           the older per-case oracle data
+    Packs/             the content packs the digests cover
+LearnrApp/             SwiftUI app - code entry, keychain, play, speed run
+  LearnrAppTests/
 ```
 
 ## Verification
 
-Every vector under `Tests/LearnrEngineTests/Vectors/` was produced by running
-the real TypeScript source under `tsx`, never by reimplementing it in the
-generator. That is what makes it an oracle rather than a second opinion.
+The oracle is the TypeScript engine in `learnr`. Every fixture here was produced
+by running that source, never by reimplementing it in the generator - that is
+what makes it an oracle rather than a second opinion.
 
-Regenerate after an intentional engine change, in a commit that does nothing
-else and says why:
+Verification is against the vendored digests under
+`Tests/LearnrEngineTests/Digests/`, which supersede the older per-case vectors:
+each set hashes a canonical form of the engine's output template by template, so
+a divergence names the template it diverged on.
 
 ```bash
-cd ../learnr && npx tsx scripts/vectors.mts   # not yet written; see build order
+cd LearnrEngine && swift test
 ```
 
-## Layout, as built
+**Status: one suite is red.** The corpus, grading, expression and figure sets all
+reproduce the oracle. `ProfileDigestTests` does not - 14 of its 15 scenarios
+disagree, `empty` being the one that matches. That suite is new and
+**uncommitted**, and the divergence is under a ledger ask (`L9`) rather than
+being guessed at, since chasing a digest by editing `Profile` until it matches
+would prove nothing.
 
-```
-LearnrEngine/          Swift package, 36 tests
-  Sources/LearnrEngine/
-    Rng/               mulberry32 + FNV-1a
-    Expr/              tokenizer, Pratt parser, evaluator, JS number semantics
-    Api/               models, client, offline sync queue
-LearnrApp/             SwiftUI app - no Xcode project yet, see below
-```
-
-## Status
-
-**Done and verified:** the RNG, the JavaScript number semantics, the whole
-expression language, the API client, and the offline sync queue.
-
-**Not started:** template generation, the eleven figure builders, the session
-and speed-run state machines. Those need the content pack, which is build-order
-step 2 and has not happened - so the app cannot generate a question yet, and
-`HomeView` says so rather than offering a button that cannot work.
+Regenerate fixtures only after an intentional engine change, in a commit that
+does nothing else and says why.
 
 ## Building
 
@@ -77,7 +78,7 @@ Or from the command line:
 ```bash
 xcodebuild -project LearnrApp.xcodeproj -scheme LearnrApp \
   -destination 'platform=iOS Simulator,name=iPad Pro 11-inch (M5)' build
-cd LearnrEngine && swift test    # 41 engine tests
+cd LearnrEngine && swift test
 ```
 
 Universal, iOS 17+, portrait only - a rotation mid-question moves every target
@@ -87,8 +88,8 @@ simulators.
 ### Which API a build talks to
 
 `LEARNR_API_BASE_URL` in `project.yml` becomes `LearnrAPIBaseURL` in Info.plist,
-which is what `AppConfig` reads. It defaults to the deployed API. To point a
-build at a local server:
+which is what `AppConfig` reads. `project.yml` sets it to the deployed API, so
+that is what a normal build talks to. To point a build at a local server:
 
 ```bash
 xcodebuild ... LEARNR_API_BASE_URL='http:/$()/localhost:3001'
@@ -119,13 +120,16 @@ The first two change what a child sees or scores, and **no test in the web app
 covers a negative half** - nothing there would have caught a wrong port. That is
 the argument for the oracle vectors, demonstrated rather than asserted.
 
-## Known gaps on the server side
+## The API models
 
-Thirteen of the API's 28 endpoints declare an untyped success response
-(`schema: {}`), including `/me`, `/speed/runs`, `/speed/records` and
-`/play/state`, so several of this app's models are transcribed by hand rather
-than generated. Tracked as [muzzamilkhan/learnr#4]; when it is fixed those
-models should be regenerated and the hand-written ones deleted.
+The contract is complete - 32 paths, and the four endpoints this app depends on
+that once declared `schema: {}` (`/me`, `/play/state`, `/speed/runs`,
+`/speed/records`) all carry real schemas now. `learnr#4` is closed.
+
+The models in `Api/Models.swift` are still **transcribed by hand**, and have been
+checked field for field against the live contract. Whether to replace them with
+generated ones - and take on the generator dependency this package currently
+does without - is an open call, tracked as ledger item `L1`.
 
 ## The server
 
@@ -134,10 +138,18 @@ repository of its own, because it depends on `@learnr/core` and a `file:` path
 dependency cannot resolve across two clones.
 
 - Contract: `learnr/apps/api/contract/openapi.yaml`, regenerated with
-  `npm run contract --workspace apps/api`
+  `npm run contract --workspace apps/api`, and served by the deployed API at
+  `/openapi.json` - which is how to read it from this Mac, there being no
+  `learnr` clone here
 - Deployed: `https://learnr-api-syd.fly.dev`
 
-`AppConfig.apiBaseURL` defaults to `http://localhost:3001` for the simulator
-against a local server. A build on a device needs the deployed URL set in
-Info.plist as `LearnrAPIBaseURL`, and it must be the `https` one - App Transport
-Security refuses plain HTTP, so the localhost default cannot work off-simulator.
+`AppConfig.apiBaseURL` is `url(from:) ?? http://localhost:3001`. The localhost
+half is a **fallback for when the plist key is missing or unsubstituted**, not
+what a configured build uses: `project.yml` ships
+`https://learnr-api-syd.fly.dev`, so a normal build talks to the deployed API.
+
+The fallback is the thing to watch on a device. An unset or empty
+`LEARNR_API_BASE_URL` expands to nothing, the key is dropped from the plist, and
+the app quietly falls back to localhost - where App Transport Security refuses
+plain HTTP and the failure arrives with nothing to read. Check what actually
+shipped rather than trusting the setting.

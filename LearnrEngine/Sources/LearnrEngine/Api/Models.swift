@@ -1,14 +1,22 @@
 import Foundation
 
-/// The wire types the child client needs, transcribed from
-/// `learnr-api/contract/openapi.yaml`.
+/// The wire types the child client needs, transcribed by hand from the
+/// contract at `learnr/apps/api/contract/openapi.yaml` - served live at
+/// `https://learnr-api-syd.fly.dev/openapi.json`, which is how to read it from
+/// a machine with no `learnr` clone.
 ///
-/// Where the contract declares a real schema, these mirror it exactly. Four of
-/// the endpoints this app calls declare `schema: {}` instead - `/me`,
-/// `/play/state`, `/speed/runs` and `/speed/records` - so those models are
-/// transcribed from the server's TypeScript rather than generated, and are
-/// marked below. See muzzamilkhan/learnr#4; when that is fixed these should be
-/// regenerated and the hand-written ones deleted.
+/// The contract is complete now: 32 paths, and the four endpoints that once
+/// declared `schema: {}` - `/me`, `/play/state`, `/speed/runs` and
+/// `/speed/records` - all carry real schemas. `learnr#4` is closed, and these
+/// models have been checked field for field against it.
+///
+/// They remain hand-written. Replacing them with generated ones means taking on
+/// `swift-openapi-generator` and reshaping every call site, which is a trade
+/// nobody has made - ledger item `L1`.
+///
+/// One trap if that ever happens: ten contract fields carry `format: date-time`,
+/// and `ApiClient` decodes with a bare `JSONDecoder()`. Generating `Date`-typed
+/// properties needs `dateDecodingStrategy = .iso8601` in the same change.
 
 /// Australian school year. Note the contract orders `K` last in its enum, even
 /// though it sorts first everywhere in the product.
@@ -40,8 +48,9 @@ public struct RedeemResponse: Codable, Sendable {
     public let expiresAt: String
 }
 
-/// `GET /me`. **Hand-transcribed** from `Account` in the server's
-/// `apps/api/src/data/accounts.ts` - the contract says `schema: {}` (learnr#4).
+/// `GET /me`. **Hand-written** (ledger `L1`), originally from `Account` in
+/// `apps/api/src/data/accounts.ts`, and since checked field for field against
+/// the contract's `GET /me`, which now declares all seven.
 public struct Account: Codable, Sendable, Equatable {
     public let id: String
     public let role: String?
@@ -148,8 +157,9 @@ public struct AwardTargetResponse: Codable, Sendable {
 
 /// Everything the play screen needs before its first question, in one call.
 ///
-/// **Hand-transcribed** from the route's return in the server's
-/// `apps/api/src/routes/play.ts` - the contract says `schema: {}` (learnr#4).
+/// **Hand-written** (ledger `L1`), originally from the route's return in
+/// `apps/api/src/routes/play.ts`, and since checked against the contract's
+/// `GET /play/state`, which now declares it.
 ///
 /// This endpoint exists because assembling it from parts was five sequential
 /// reads. Over the wire that is five round trips before a child sees anything,
@@ -236,7 +246,8 @@ public struct SpeedRunRequest: Codable, Sendable {
 }
 
 /// `POST /speed/runs`. **Hand-transcribed** from `SpeedOutcome` in the server's
-/// `apps/api/src/data/speed-records.ts` - the contract says `schema: {}` (learnr#4).
+/// `apps/api/src/data/speed-records.ts`, and since checked against the
+/// contract's `GET /speed/records`, which now declares it.
 public struct SpeedOutcome: Codable, Sendable {
     public let previousBest: Int?
     public let best: Int
