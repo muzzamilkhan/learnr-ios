@@ -1,0 +1,29 @@
+{
+  "version": "683a3754cce2",
+  "set": "english.6",
+  "draws": 100,
+  "groups": {
+    "english.6.figurative-language.eliminate-one": "dba727301ac9",
+    "english.6.figurative-language.identify": "9c204b14764a",
+    "english.6.figurative-language.match-the-example": "944438920627",
+    "english.6.figurative-language.same-device": "bec7153ce5b8",
+    "english.6.figurative-language.what-signals-it": "f455ae2a42f5",
+    "english.6.punctuation.clause-issue": "693f838cd6d4",
+    "english.6.punctuation.compound-issue": "8d5754f53c2f",
+    "english.6.punctuation.identify-issue": "73b386e27b0c",
+    "english.6.punctuation.list-issue": "a6ed6d433043",
+    "english.6.spelling-patterns.which-is-doubled-ing": "37d116091ddd",
+    "english.6.spelling-patterns.which-is-plural-y": "a7080eed7006",
+    "english.6.spelling-patterns.write-doubled-ing": "b52b75136684",
+    "english.6.spelling-patterns.write-plural-y": "1f80e0449f58",
+    "english.6.word-classes.has-adverb": "284b7ab3c98d",
+    "english.6.word-classes.identify-tense": "dd550bd51bab",
+    "english.6.word-classes.same-tense": "a057db3cd4c1",
+    "english.6.word-classes.which-is-adverb": "6e8adecc467f",
+    "english.6.word-roots.root-meaning": "825225e5146b",
+    "english.6.word-roots.same-root": "53a45fd1bc51",
+    "english.6.word-roots.which-root-is-in": "98c3190e5a71",
+    "english.6.word-roots.write-meaning": "576bca18205c",
+    "english.6.word-roots.write-root": "03c720c140fb"
+  }
+}

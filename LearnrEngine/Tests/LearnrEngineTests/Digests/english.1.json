@@ -1,0 +1,31 @@
+{
+  "version": "337d6baf2115",
+  "set": "english.1",
+  "draws": 100,
+  "groups": {
+    "english.1.letters-and-sounds.alphabet-before": "e1fce563c86c",
+    "english.1.letters-and-sounds.blend-word": "b7f0510098fb",
+    "english.1.letters-and-sounds.digraph-letters": "b6437daf622d",
+    "english.1.letters-and-sounds.digraph-word": "97cf81aaccd6",
+    "english.1.opposites.opposite-of-two": "a4969c060157",
+    "english.1.opposites.which-opposite": "dc01c924adac",
+    "english.1.opposites.worked-example": "5b329ef27eb9",
+    "english.1.opposites.write-opposite": "891ecd78b13e",
+    "english.1.opposites.write-opposite-worked-example": "a35e9901366a",
+    "english.1.plurals.add-es": "7c10910efbce",
+    "english.1.plurals.add-s": "1fd654302884",
+    "english.1.plurals.which-is-plural": "486c1e7fa579",
+    "english.1.plurals.which-is-singular": "a8a2f9f50186",
+    "english.1.rhyme.finish-the-rhyme": "5fd7a5648bec",
+    "english.1.rhyme.rhymes-with-both": "9818c9d52da3",
+    "english.1.rhyme.which-rhymes": "c2ee156e1e6b",
+    "english.1.rhyme.worked-example": "74e6ee272bec",
+    "english.1.sentences.a-or-an": "9069f27cac52",
+    "english.1.sentences.a-or-an-in-sentence": "62d245c62080",
+    "english.1.sentences.name-capital": "15e4872d723d",
+    "english.1.word-classes.is-doing-word": "a68b9a41c26a",
+    "english.1.word-classes.is-doing-word-in-sentence": "e3ed7601d014",
+    "english.1.word-classes.naming-or-doing": "031dd33ab7cd",
+    "english.1.word-classes.naming-word-in-context": "d68a59715ecb"
+  }
+}

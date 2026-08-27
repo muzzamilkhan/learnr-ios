@@ -1,0 +1,29 @@
+{
+  "version": "97e323476b95",
+  "set": "english.4",
+  "draws": 100,
+  "groups": {
+    "english.4.homophones.break-brake": "44f866133a90",
+    "english.4.homophones.flower-flour": "20fb59b274ef",
+    "english.4.homophones.weight-wait": "f7ea843bd5e5",
+    "english.4.homophones.which-witch": "e3992e0b164a",
+    "english.4.plurals.which-is-plural": "074fb6cb8d1e",
+    "english.4.plurals.which-is-singular": "7cee50b5f18b",
+    "english.4.plurals.write-plural": "32f60f519e31",
+    "english.4.plurals.write-singular": "3d4fa73de64e",
+    "english.4.prefixes-and-suffixes.find-base-word": "4f439161650d",
+    "english.4.prefixes-and-suffixes.which-means-opposite": "9dc003c5e2ca",
+    "english.4.prefixes-and-suffixes.which-means-that-way": "8ecdb03286ac",
+    "english.4.prefixes-and-suffixes.write-dis": "f0ae5f9addb3",
+    "english.4.prefixes-and-suffixes.write-with-ly": "64f7462306f5",
+    "english.4.synonyms.in-context": "f97319f331da",
+    "english.4.synonyms.which-antonym": "c0e6e02e129f",
+    "english.4.synonyms.which-synonym": "31e8ab4bd46a",
+    "english.4.synonyms.worked-example": "c46936cfeaf7",
+    "english.4.word-classes.identify-in-sentence": "66137916b8a4",
+    "english.4.word-classes.identify-verb-tense": "70d8aad11f71",
+    "english.4.word-classes.is-future-tense": "3c7be3116e49",
+    "english.4.word-classes.name-the-word-class": "a95fd6d7c984",
+    "english.4.word-classes.past-tense-form": "794d30f193af"
+  }
+}

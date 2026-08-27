@@ -1,0 +1,1404 @@
+{
+  "version": "d32b6a1aca72",
+  "subject": "english",
+  "level": "1",
+  "templates": [
+    {
+      "id": "english.1.letters-and-sounds.digraph-word",
+      "subject": "english",
+      "topic": "letters and sounds",
+      "level": "1",
+      "prompt": "Which word starts with the same two letters as {target}?",
+      "vars": [
+        {
+          "name": "f",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "t",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "e1",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "e2",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "f == 0 ? (t == 0 ? 'ship' : t == 1 ? 'shop' : t == 2 ? 'shell' : t == 3 ? 'shed' : t == 4 ? 'shark' : 'sheep') : f == 1 ? (t == 0 ? 'chip' : t == 1 ? 'chin' : t == 2 ? 'chest' : t == 3 ? 'check' : t == 4 ? 'chill' : 'chomp') : f == 2 ? (t == 0 ? 'thin' : t == 1 ? 'thump' : t == 2 ? 'think' : t == 3 ? 'thud' : t == 4 ? 'thick' : 'thorn') : (t == 0 ? 'whale' : t == 1 ? 'wheel' : t == 2 ? 'whisk' : t == 3 ? 'whip' : t == 4 ? 'wheat' : 'white')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? (a == 0 ? 'ship' : a == 1 ? 'shop' : a == 2 ? 'shell' : a == 3 ? 'shed' : a == 4 ? 'shark' : 'sheep') : f == 1 ? (a == 0 ? 'chip' : a == 1 ? 'chin' : a == 2 ? 'chest' : a == 3 ? 'check' : a == 4 ? 'chill' : 'chomp') : f == 2 ? (a == 0 ? 'thin' : a == 1 ? 'thump' : a == 2 ? 'think' : a == 3 ? 'thud' : a == 4 ? 'thick' : 'thorn') : (a == 0 ? 'whale' : a == 1 ? 'wheel' : a == 2 ? 'whisk' : a == 3 ? 'whip' : a == 4 ? 'wheat' : 'white')"
+        }
+      ],
+      "constraints": [
+        "t != a",
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(f + d1) % 4 == 0 ? (e1 == 0 ? 'ship' : e1 == 1 ? 'shop' : e1 == 2 ? 'shell' : e1 == 3 ? 'shed' : e1 == 4 ? 'shark' : 'sheep') : (f + d1) % 4 == 1 ? (e1 == 0 ? 'chip' : e1 == 1 ? 'chin' : e1 == 2 ? 'chest' : e1 == 3 ? 'check' : e1 == 4 ? 'chill' : 'chomp') : (f + d1) % 4 == 2 ? (e1 == 0 ? 'thin' : e1 == 1 ? 'thump' : e1 == 2 ? 'think' : e1 == 3 ? 'thud' : e1 == 4 ? 'thick' : 'thorn') : (e1 == 0 ? 'whale' : e1 == 1 ? 'wheel' : e1 == 2 ? 'whisk' : e1 == 3 ? 'whip' : e1 == 4 ? 'wheat' : 'white')",
+          "(f + d2) % 4 == 0 ? (e2 == 0 ? 'ship' : e2 == 1 ? 'shop' : e2 == 2 ? 'shell' : e2 == 3 ? 'shed' : e2 == 4 ? 'shark' : 'sheep') : (f + d2) % 4 == 1 ? (e2 == 0 ? 'chip' : e2 == 1 ? 'chin' : e2 == 2 ? 'chest' : e2 == 3 ? 'check' : e2 == 4 ? 'chill' : 'chomp') : (f + d2) % 4 == 2 ? (e2 == 0 ? 'thin' : e2 == 1 ? 'thump' : e2 == 2 ? 'think' : e2 == 3 ? 'thud' : e2 == 4 ? 'thick' : 'thorn') : (e2 == 0 ? 'whale' : e2 == 1 ? 'wheel' : e2 == 2 ? 'whisk' : e2 == 3 ? 'whip' : e2 == 4 ? 'wheat' : 'white')"
+        ]
+      },
+      "hint": "Say the start of each word. Two letters together can make one sound.",
+      "tags": [
+        "AC9E1LY11",
+        "EN1-PHOKW-01"
+      ]
+    },
+    {
+      "id": "english.1.letters-and-sounds.digraph-letters",
+      "subject": "english",
+      "topic": "letters and sounds",
+      "level": "1",
+      "prompt": "Which two letters does {word} start with?",
+      "vars": [
+        {
+          "name": "f",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "fd1",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "fd2",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "f == 0 ? (i == 0 ? 'ship' : i == 1 ? 'shop' : i == 2 ? 'shell' : i == 3 ? 'shed' : i == 4 ? 'shark' : 'sheep') : f == 1 ? (i == 0 ? 'chip' : i == 1 ? 'chin' : i == 2 ? 'chest' : i == 3 ? 'check' : i == 4 ? 'chill' : 'chomp') : f == 2 ? (i == 0 ? 'thin' : i == 1 ? 'thump' : i == 2 ? 'think' : i == 3 ? 'thud' : i == 4 ? 'thick' : 'thorn') : (i == 0 ? 'whale' : i == 1 ? 'wheel' : i == 2 ? 'whisk' : i == 3 ? 'whip' : i == 4 ? 'wheat' : 'white')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? 'sh' : f == 1 ? 'ch' : f == 2 ? 'th' : 'wh'"
+        }
+      ],
+      "constraints": [
+        "fd1 != fd2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(f + fd1) % 4 == 0 ? 'sh' : (f + fd1) % 4 == 1 ? 'ch' : (f + fd1) % 4 == 2 ? 'th' : 'wh'",
+          "(f + fd2) % 4 == 0 ? 'sh' : (f + fd2) % 4 == 1 ? 'ch' : (f + fd2) % 4 == 2 ? 'th' : 'wh'"
+        ]
+      },
+      "hint": "Say the word slowly. What two letters make the first sound?",
+      "tags": [
+        "AC9E1LY12",
+        "EN1-PHOKW-01"
+      ]
+    },
+    {
+      "id": "english.1.letters-and-sounds.blend-word",
+      "subject": "english",
+      "topic": "letters and sounds",
+      "level": "1",
+      "prompt": "Which word begins with the same blend as {target}?",
+      "vars": [
+        {
+          "name": "f",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "t",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "e1",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "e2",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "f == 0 ? (t == 0 ? 'black' : t == 1 ? 'blob' : t == 2 ? 'block' : t == 3 ? 'blank' : t == 4 ? 'bloom' : 'blink') : f == 1 ? (t == 0 ? 'crab' : t == 1 ? 'crib' : t == 2 ? 'crop' : t == 3 ? 'cross' : t == 4 ? 'crown' : 'creek') : f == 2 ? (t == 0 ? 'stop' : t == 1 ? 'stamp' : t == 2 ? 'sting' : t == 3 ? 'stack' : t == 4 ? 'stone' : 'stump') : (t == 0 ? 'swim' : t == 1 ? 'swing' : t == 2 ? 'swan' : t == 3 ? 'sweep' : t == 4 ? 'sweet' : 'swift')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? (a == 0 ? 'black' : a == 1 ? 'blob' : a == 2 ? 'block' : a == 3 ? 'blank' : a == 4 ? 'bloom' : 'blink') : f == 1 ? (a == 0 ? 'crab' : a == 1 ? 'crib' : a == 2 ? 'crop' : a == 3 ? 'cross' : a == 4 ? 'crown' : 'creek') : f == 2 ? (a == 0 ? 'stop' : a == 1 ? 'stamp' : a == 2 ? 'sting' : a == 3 ? 'stack' : a == 4 ? 'stone' : 'stump') : (a == 0 ? 'swim' : a == 1 ? 'swing' : a == 2 ? 'swan' : a == 3 ? 'sweep' : a == 4 ? 'sweet' : 'swift')"
+        }
+      ],
+      "constraints": [
+        "t != a",
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(f + d1) % 4 == 0 ? (e1 == 0 ? 'black' : e1 == 1 ? 'blob' : e1 == 2 ? 'block' : e1 == 3 ? 'blank' : e1 == 4 ? 'bloom' : 'blink') : (f + d1) % 4 == 1 ? (e1 == 0 ? 'crab' : e1 == 1 ? 'crib' : e1 == 2 ? 'crop' : e1 == 3 ? 'cross' : e1 == 4 ? 'crown' : 'creek') : (f + d1) % 4 == 2 ? (e1 == 0 ? 'stop' : e1 == 1 ? 'stamp' : e1 == 2 ? 'sting' : e1 == 3 ? 'stack' : e1 == 4 ? 'stone' : 'stump') : (e1 == 0 ? 'swim' : e1 == 1 ? 'swing' : e1 == 2 ? 'swan' : e1 == 3 ? 'sweep' : e1 == 4 ? 'sweet' : 'swift')",
+          "(f + d2) % 4 == 0 ? (e2 == 0 ? 'black' : e2 == 1 ? 'blob' : e2 == 2 ? 'block' : e2 == 3 ? 'blank' : e2 == 4 ? 'bloom' : 'blink') : (f + d2) % 4 == 1 ? (e2 == 0 ? 'crab' : e2 == 1 ? 'crib' : e2 == 2 ? 'crop' : e2 == 3 ? 'cross' : e2 == 4 ? 'crown' : 'creek') : (f + d2) % 4 == 2 ? (e2 == 0 ? 'stop' : e2 == 1 ? 'stamp' : e2 == 2 ? 'sting' : e2 == 3 ? 'stack' : e2 == 4 ? 'stone' : 'stump') : (e2 == 0 ? 'swim' : e2 == 1 ? 'swing' : e2 == 2 ? 'swan' : e2 == 3 ? 'sweep' : e2 == 4 ? 'sweet' : 'swift')"
+        ]
+      },
+      "hint": "Say the start of each word. Two letters together can start a blend.",
+      "tags": [
+        "AC9E1LY11",
+        "EN1-PHOKW-01"
+      ]
+    },
+    {
+      "id": "english.1.letters-and-sounds.alphabet-before",
+      "subject": "english",
+      "topic": "letters and sounds",
+      "level": "1",
+      "prompt": "Which letter comes right before {target} in the alphabet?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "1",
+          "max": "7"
+        },
+        {
+          "name": "j1",
+          "kind": "int",
+          "min": "0",
+          "max": "7"
+        },
+        {
+          "name": "j2",
+          "kind": "int",
+          "min": "0",
+          "max": "7"
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "i == 0 ? 'i' : i == 1 ? 'j' : i == 2 ? 'k' : i == 3 ? 'l' : i == 4 ? 'm' : i == 5 ? 'n' : i == 6 ? 'o' : 'p'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i - 1 == 0 ? 'i' : i - 1 == 1 ? 'j' : i - 1 == 2 ? 'k' : i - 1 == 3 ? 'l' : i - 1 == 4 ? 'm' : i - 1 == 5 ? 'n' : i - 1 == 6 ? 'o' : 'p'"
+        }
+      ],
+      "constraints": [
+        "j1 != i - 1",
+        "j2 != i - 1",
+        "j1 != j2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "j1 == 0 ? 'i' : j1 == 1 ? 'j' : j1 == 2 ? 'k' : j1 == 3 ? 'l' : j1 == 4 ? 'm' : j1 == 5 ? 'n' : j1 == 6 ? 'o' : 'p'",
+          "j2 == 0 ? 'i' : j2 == 1 ? 'j' : j2 == 2 ? 'k' : j2 == 3 ? 'l' : j2 == 4 ? 'm' : j2 == 5 ? 'n' : j2 == 6 ? 'o' : 'p'"
+        ]
+      },
+      "hint": "Say the alphabet from the start and stop just before {target}.",
+      "tags": [
+        "AC9E1LY12",
+        "EN1-PHOKW-01"
+      ]
+    },
+    {
+      "id": "english.1.rhyme.which-rhymes",
+      "subject": "english",
+      "topic": "rhyme",
+      "level": "1",
+      "prompt": "Which word rhymes with {target}?",
+      "vars": [
+        {
+          "name": "f",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "t",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "e1",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "e2",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "f == 0 ? (t == 0 ? 'star' : t == 1 ? 'car' : t == 2 ? 'far' : t == 3 ? 'jar' : t == 4 ? 'bar' : 'tar') : f == 1 ? (t == 0 ? 'nest' : t == 1 ? 'best' : t == 2 ? 'rest' : t == 3 ? 'test' : t == 4 ? 'pest' : 'vest') : f == 2 ? (t == 0 ? 'clock' : t == 1 ? 'sock' : t == 2 ? 'rock' : t == 3 ? 'lock' : t == 4 ? 'dock' : 'block') : (t == 0 ? 'bee' : t == 1 ? 'tree' : t == 2 ? 'free' : t == 3 ? 'key' : t == 4 ? 'three' : 'see')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? (a == 0 ? 'star' : a == 1 ? 'car' : a == 2 ? 'far' : a == 3 ? 'jar' : a == 4 ? 'bar' : 'tar') : f == 1 ? (a == 0 ? 'nest' : a == 1 ? 'best' : a == 2 ? 'rest' : a == 3 ? 'test' : a == 4 ? 'pest' : 'vest') : f == 2 ? (a == 0 ? 'clock' : a == 1 ? 'sock' : a == 2 ? 'rock' : a == 3 ? 'lock' : a == 4 ? 'dock' : 'block') : (a == 0 ? 'bee' : a == 1 ? 'tree' : a == 2 ? 'free' : a == 3 ? 'key' : a == 4 ? 'three' : 'see')"
+        }
+      ],
+      "constraints": [
+        "t != a",
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(f + d1) % 4 == 0 ? (e1 == 0 ? 'star' : e1 == 1 ? 'car' : e1 == 2 ? 'far' : e1 == 3 ? 'jar' : e1 == 4 ? 'bar' : 'tar') : (f + d1) % 4 == 1 ? (e1 == 0 ? 'nest' : e1 == 1 ? 'best' : e1 == 2 ? 'rest' : e1 == 3 ? 'test' : e1 == 4 ? 'pest' : 'vest') : (f + d1) % 4 == 2 ? (e1 == 0 ? 'clock' : e1 == 1 ? 'sock' : e1 == 2 ? 'rock' : e1 == 3 ? 'lock' : e1 == 4 ? 'dock' : 'block') : (e1 == 0 ? 'bee' : e1 == 1 ? 'tree' : e1 == 2 ? 'free' : e1 == 3 ? 'key' : e1 == 4 ? 'three' : 'see')",
+          "(f + d2) % 4 == 0 ? (e2 == 0 ? 'star' : e2 == 1 ? 'car' : e2 == 2 ? 'far' : e2 == 3 ? 'jar' : e2 == 4 ? 'bar' : 'tar') : (f + d2) % 4 == 1 ? (e2 == 0 ? 'nest' : e2 == 1 ? 'best' : e2 == 2 ? 'rest' : e2 == 3 ? 'test' : e2 == 4 ? 'pest' : 'vest') : (f + d2) % 4 == 2 ? (e2 == 0 ? 'clock' : e2 == 1 ? 'sock' : e2 == 2 ? 'rock' : e2 == 3 ? 'lock' : e2 == 4 ? 'dock' : 'block') : (e2 == 0 ? 'bee' : e2 == 1 ? 'tree' : e2 == 2 ? 'free' : e2 == 3 ? 'key' : e2 == 4 ? 'three' : 'see')"
+        ]
+      },
+      "hint": "Say the words out loud. Rhyming words end with the same sound.",
+      "tags": [
+        "AC9E1LE04",
+        "EN1-PHOKW-01"
+      ]
+    },
+    {
+      "id": "english.1.rhyme.finish-the-rhyme",
+      "subject": "english",
+      "topic": "rhyme",
+      "level": "1",
+      "prompt": "Finish the rhyme: {target} and ?",
+      "vars": [
+        {
+          "name": "f",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "t",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "e1",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "e2",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "f == 0 ? (t == 0 ? 'star' : t == 1 ? 'car' : t == 2 ? 'far' : t == 3 ? 'jar' : t == 4 ? 'bar' : 'tar') : f == 1 ? (t == 0 ? 'nest' : t == 1 ? 'best' : t == 2 ? 'rest' : t == 3 ? 'test' : t == 4 ? 'pest' : 'vest') : f == 2 ? (t == 0 ? 'clock' : t == 1 ? 'sock' : t == 2 ? 'rock' : t == 3 ? 'lock' : t == 4 ? 'dock' : 'block') : (t == 0 ? 'bee' : t == 1 ? 'tree' : t == 2 ? 'free' : t == 3 ? 'key' : t == 4 ? 'three' : 'see')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? (a == 0 ? 'star' : a == 1 ? 'car' : a == 2 ? 'far' : a == 3 ? 'jar' : a == 4 ? 'bar' : 'tar') : f == 1 ? (a == 0 ? 'nest' : a == 1 ? 'best' : a == 2 ? 'rest' : a == 3 ? 'test' : a == 4 ? 'pest' : 'vest') : f == 2 ? (a == 0 ? 'clock' : a == 1 ? 'sock' : a == 2 ? 'rock' : a == 3 ? 'lock' : a == 4 ? 'dock' : 'block') : (a == 0 ? 'bee' : a == 1 ? 'tree' : a == 2 ? 'free' : a == 3 ? 'key' : a == 4 ? 'three' : 'see')"
+        }
+      ],
+      "constraints": [
+        "t != a",
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(f + d1) % 4 == 0 ? (e1 == 0 ? 'star' : e1 == 1 ? 'car' : e1 == 2 ? 'far' : e1 == 3 ? 'jar' : e1 == 4 ? 'bar' : 'tar') : (f + d1) % 4 == 1 ? (e1 == 0 ? 'nest' : e1 == 1 ? 'best' : e1 == 2 ? 'rest' : e1 == 3 ? 'test' : e1 == 4 ? 'pest' : 'vest') : (f + d1) % 4 == 2 ? (e1 == 0 ? 'clock' : e1 == 1 ? 'sock' : e1 == 2 ? 'rock' : e1 == 3 ? 'lock' : e1 == 4 ? 'dock' : 'block') : (e1 == 0 ? 'bee' : e1 == 1 ? 'tree' : e1 == 2 ? 'free' : e1 == 3 ? 'key' : e1 == 4 ? 'three' : 'see')",
+          "(f + d2) % 4 == 0 ? (e2 == 0 ? 'star' : e2 == 1 ? 'car' : e2 == 2 ? 'far' : e2 == 3 ? 'jar' : e2 == 4 ? 'bar' : 'tar') : (f + d2) % 4 == 1 ? (e2 == 0 ? 'nest' : e2 == 1 ? 'best' : e2 == 2 ? 'rest' : e2 == 3 ? 'test' : e2 == 4 ? 'pest' : 'vest') : (f + d2) % 4 == 2 ? (e2 == 0 ? 'clock' : e2 == 1 ? 'sock' : e2 == 2 ? 'rock' : e2 == 3 ? 'lock' : e2 == 4 ? 'dock' : 'block') : (e2 == 0 ? 'bee' : e2 == 1 ? 'tree' : e2 == 2 ? 'free' : e2 == 3 ? 'key' : e2 == 4 ? 'three' : 'see')"
+        ]
+      },
+      "hint": "Think of a word that ends with the same sound as {target}.",
+      "tags": [
+        "AC9E1LE04",
+        "EN1-PHOKW-01"
+      ]
+    },
+    {
+      "id": "english.1.rhyme.rhymes-with-both",
+      "subject": "english",
+      "topic": "rhyme",
+      "level": "1",
+      "prompt": "Which word rhymes with both {target1} and {target2}?",
+      "vars": [
+        {
+          "name": "f",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "t1",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "t2",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "target1",
+          "kind": "expr",
+          "expr": "f == 0 ? (t1 == 0 ? 'star' : t1 == 1 ? 'car' : t1 == 2 ? 'far' : t1 == 3 ? 'jar' : t1 == 4 ? 'bar' : 'tar') : f == 1 ? (t1 == 0 ? 'nest' : t1 == 1 ? 'best' : t1 == 2 ? 'rest' : t1 == 3 ? 'test' : t1 == 4 ? 'pest' : 'vest') : f == 2 ? (t1 == 0 ? 'clock' : t1 == 1 ? 'sock' : t1 == 2 ? 'rock' : t1 == 3 ? 'lock' : t1 == 4 ? 'dock' : 'block') : (t1 == 0 ? 'bee' : t1 == 1 ? 'tree' : t1 == 2 ? 'free' : t1 == 3 ? 'key' : t1 == 4 ? 'three' : 'see')"
+        },
+        {
+          "name": "target2",
+          "kind": "expr",
+          "expr": "f == 0 ? (t2 == 0 ? 'star' : t2 == 1 ? 'car' : t2 == 2 ? 'far' : t2 == 3 ? 'jar' : t2 == 4 ? 'bar' : 'tar') : f == 1 ? (t2 == 0 ? 'nest' : t2 == 1 ? 'best' : t2 == 2 ? 'rest' : t2 == 3 ? 'test' : t2 == 4 ? 'pest' : 'vest') : f == 2 ? (t2 == 0 ? 'clock' : t2 == 1 ? 'sock' : t2 == 2 ? 'rock' : t2 == 3 ? 'lock' : t2 == 4 ? 'dock' : 'block') : (t2 == 0 ? 'bee' : t2 == 1 ? 'tree' : t2 == 2 ? 'free' : t2 == 3 ? 'key' : t2 == 4 ? 'three' : 'see')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? (a == 0 ? 'star' : a == 1 ? 'car' : a == 2 ? 'far' : a == 3 ? 'jar' : a == 4 ? 'bar' : 'tar') : f == 1 ? (a == 0 ? 'nest' : a == 1 ? 'best' : a == 2 ? 'rest' : a == 3 ? 'test' : a == 4 ? 'pest' : 'vest') : f == 2 ? (a == 0 ? 'clock' : a == 1 ? 'sock' : a == 2 ? 'rock' : a == 3 ? 'lock' : a == 4 ? 'dock' : 'block') : (a == 0 ? 'bee' : a == 1 ? 'tree' : a == 2 ? 'free' : a == 3 ? 'key' : a == 4 ? 'three' : 'see')"
+        }
+      ],
+      "constraints": [
+        "t1 != t2",
+        "a != t1",
+        "a != t2",
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(f + d1) % 4 == 0 ? (t1 == 0 ? 'star' : t1 == 1 ? 'car' : t1 == 2 ? 'far' : t1 == 3 ? 'jar' : t1 == 4 ? 'bar' : 'tar') : (f + d1) % 4 == 1 ? (t1 == 0 ? 'nest' : t1 == 1 ? 'best' : t1 == 2 ? 'rest' : t1 == 3 ? 'test' : t1 == 4 ? 'pest' : 'vest') : (f + d1) % 4 == 2 ? (t1 == 0 ? 'clock' : t1 == 1 ? 'sock' : t1 == 2 ? 'rock' : t1 == 3 ? 'lock' : t1 == 4 ? 'dock' : 'block') : (t1 == 0 ? 'bee' : t1 == 1 ? 'tree' : t1 == 2 ? 'free' : t1 == 3 ? 'key' : t1 == 4 ? 'three' : 'see')",
+          "(f + d2) % 4 == 0 ? (t2 == 0 ? 'star' : t2 == 1 ? 'car' : t2 == 2 ? 'far' : t2 == 3 ? 'jar' : t2 == 4 ? 'bar' : 'tar') : (f + d2) % 4 == 1 ? (t2 == 0 ? 'nest' : t2 == 1 ? 'best' : t2 == 2 ? 'rest' : t2 == 3 ? 'test' : t2 == 4 ? 'pest' : 'vest') : (f + d2) % 4 == 2 ? (t2 == 0 ? 'clock' : t2 == 1 ? 'sock' : t2 == 2 ? 'rock' : t2 == 3 ? 'lock' : t2 == 4 ? 'dock' : 'block') : (t2 == 0 ? 'bee' : t2 == 1 ? 'tree' : t2 == 2 ? 'free' : t2 == 3 ? 'key' : t2 == 4 ? 'three' : 'see')"
+        ]
+      },
+      "hint": "All the words in the family end with the same sound.",
+      "tags": [
+        "AC9E1LE04",
+        "EN1-PHOKW-01"
+      ]
+    },
+    {
+      "id": "english.1.rhyme.worked-example",
+      "subject": "english",
+      "topic": "rhyme",
+      "level": "1",
+      "prompt": "Here, {eTarget} and {eAnswer} rhyme. Which word rhymes with {target}?",
+      "vars": [
+        {
+          "name": "ef",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "et",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "ea",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "p",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "t",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "e1",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "e2",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "f",
+          "kind": "expr",
+          "expr": "(ef + p) % 4"
+        },
+        {
+          "name": "eTarget",
+          "kind": "expr",
+          "expr": "ef == 0 ? (et == 0 ? 'star' : et == 1 ? 'car' : et == 2 ? 'far' : et == 3 ? 'jar' : et == 4 ? 'bar' : 'tar') : ef == 1 ? (et == 0 ? 'nest' : et == 1 ? 'best' : et == 2 ? 'rest' : et == 3 ? 'test' : et == 4 ? 'pest' : 'vest') : ef == 2 ? (et == 0 ? 'clock' : et == 1 ? 'sock' : et == 2 ? 'rock' : et == 3 ? 'lock' : et == 4 ? 'dock' : 'block') : (et == 0 ? 'bee' : et == 1 ? 'tree' : et == 2 ? 'free' : et == 3 ? 'key' : et == 4 ? 'three' : 'see')"
+        },
+        {
+          "name": "eAnswer",
+          "kind": "expr",
+          "expr": "ef == 0 ? (ea == 0 ? 'star' : ea == 1 ? 'car' : ea == 2 ? 'far' : ea == 3 ? 'jar' : ea == 4 ? 'bar' : 'tar') : ef == 1 ? (ea == 0 ? 'nest' : ea == 1 ? 'best' : ea == 2 ? 'rest' : ea == 3 ? 'test' : ea == 4 ? 'pest' : 'vest') : ef == 2 ? (ea == 0 ? 'clock' : ea == 1 ? 'sock' : ea == 2 ? 'rock' : ea == 3 ? 'lock' : ea == 4 ? 'dock' : 'block') : (ea == 0 ? 'bee' : ea == 1 ? 'tree' : ea == 2 ? 'free' : ea == 3 ? 'key' : ea == 4 ? 'three' : 'see')"
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "f == 0 ? (t == 0 ? 'star' : t == 1 ? 'car' : t == 2 ? 'far' : t == 3 ? 'jar' : t == 4 ? 'bar' : 'tar') : f == 1 ? (t == 0 ? 'nest' : t == 1 ? 'best' : t == 2 ? 'rest' : t == 3 ? 'test' : t == 4 ? 'pest' : 'vest') : f == 2 ? (t == 0 ? 'clock' : t == 1 ? 'sock' : t == 2 ? 'rock' : t == 3 ? 'lock' : t == 4 ? 'dock' : 'block') : (t == 0 ? 'bee' : t == 1 ? 'tree' : t == 2 ? 'free' : t == 3 ? 'key' : t == 4 ? 'three' : 'see')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? (a == 0 ? 'star' : a == 1 ? 'car' : a == 2 ? 'far' : a == 3 ? 'jar' : a == 4 ? 'bar' : 'tar') : f == 1 ? (a == 0 ? 'nest' : a == 1 ? 'best' : a == 2 ? 'rest' : a == 3 ? 'test' : a == 4 ? 'pest' : 'vest') : f == 2 ? (a == 0 ? 'clock' : a == 1 ? 'sock' : a == 2 ? 'rock' : a == 3 ? 'lock' : a == 4 ? 'dock' : 'block') : (a == 0 ? 'bee' : a == 1 ? 'tree' : a == 2 ? 'free' : a == 3 ? 'key' : a == 4 ? 'three' : 'see')"
+        }
+      ],
+      "constraints": [
+        "et != ea",
+        "t != a",
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(f + d1) % 4 == 0 ? (e1 == 0 ? 'star' : e1 == 1 ? 'car' : e1 == 2 ? 'far' : e1 == 3 ? 'jar' : e1 == 4 ? 'bar' : 'tar') : (f + d1) % 4 == 1 ? (e1 == 0 ? 'nest' : e1 == 1 ? 'best' : e1 == 2 ? 'rest' : e1 == 3 ? 'test' : e1 == 4 ? 'pest' : 'vest') : (f + d1) % 4 == 2 ? (e1 == 0 ? 'clock' : e1 == 1 ? 'sock' : e1 == 2 ? 'rock' : e1 == 3 ? 'lock' : e1 == 4 ? 'dock' : 'block') : (e1 == 0 ? 'bee' : e1 == 1 ? 'tree' : e1 == 2 ? 'free' : e1 == 3 ? 'key' : e1 == 4 ? 'three' : 'see')",
+          "(f + d2) % 4 == 0 ? (e2 == 0 ? 'star' : e2 == 1 ? 'car' : e2 == 2 ? 'far' : e2 == 3 ? 'jar' : e2 == 4 ? 'bar' : 'tar') : (f + d2) % 4 == 1 ? (e2 == 0 ? 'nest' : e2 == 1 ? 'best' : e2 == 2 ? 'rest' : e2 == 3 ? 'test' : e2 == 4 ? 'pest' : 'vest') : (f + d2) % 4 == 2 ? (e2 == 0 ? 'clock' : e2 == 1 ? 'sock' : e2 == 2 ? 'rock' : e2 == 3 ? 'lock' : e2 == 4 ? 'dock' : 'block') : (e2 == 0 ? 'bee' : e2 == 1 ? 'tree' : e2 == 2 ? 'free' : e2 == 3 ? 'key' : e2 == 4 ? 'three' : 'see')"
+        ]
+      },
+      "hint": "Use the example to hear what sound you are listening for.",
+      "tags": [
+        "AC9E1LE04",
+        "EN1-PHOKW-01"
+      ]
+    },
+    {
+      "id": "english.1.plurals.add-s",
+      "subject": "english",
+      "topic": "plurals",
+      "level": "1",
+      "prompt": "Write the plural of {word}.",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'cat' : i == 1 ? 'dog' : i == 2 ? 'hat' : i == 3 ? 'cup' : i == 4 ? 'pen' : 'bird'"
+        }
+      ],
+      "answer": "word + 's'",
+      "answerType": "text",
+      "hint": "Most words just add -s to become plural.",
+      "tags": [
+        "AC9E1LY15",
+        "EN1-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.1.plurals.add-es",
+      "subject": "english",
+      "topic": "plurals",
+      "level": "1",
+      "prompt": "Write the plural of {word}.",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'box' : i == 1 ? 'bus' : i == 2 ? 'fox' : i == 3 ? 'dish' : i == 4 ? 'brush' : 'match'"
+        }
+      ],
+      "answer": "word + 'es'",
+      "answerType": "text",
+      "hint": "Words ending in s, x, ch or sh add -es to become plural.",
+      "tags": [
+        "AC9E1LY15",
+        "EN1-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.1.plurals.which-is-plural",
+      "subject": "english",
+      "topic": "plurals",
+      "level": "1",
+      "prompt": "Which word means more than one {word}?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'cat' : i == 1 ? 'box' : i == 2 ? 'dog' : i == 3 ? 'bus' : i == 4 ? 'hat' : 'fox'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'cats' : i == 1 ? 'boxes' : i == 2 ? 'dogs' : i == 3 ? 'buses' : i == 4 ? 'hats' : 'foxes'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 6 == 0 ? 'cats' : (i + d1) % 6 == 1 ? 'boxes' : (i + d1) % 6 == 2 ? 'dogs' : (i + d1) % 6 == 3 ? 'buses' : (i + d1) % 6 == 4 ? 'hats' : 'foxes'",
+          "(i + d2) % 6 == 0 ? 'cats' : (i + d2) % 6 == 1 ? 'boxes' : (i + d2) % 6 == 2 ? 'dogs' : (i + d2) % 6 == 3 ? 'buses' : (i + d2) % 6 == 4 ? 'hats' : 'foxes'"
+        ]
+      },
+      "hint": "A plural word means more than one.",
+      "tags": [
+        "AC9E1LY15",
+        "EN1-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.1.plurals.which-is-singular",
+      "subject": "english",
+      "topic": "plurals",
+      "level": "1",
+      "prompt": "Which word means just one, if {form} means more than one?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "form",
+          "kind": "expr",
+          "expr": "i == 0 ? 'cats' : i == 1 ? 'boxes' : i == 2 ? 'dogs' : i == 3 ? 'buses' : i == 4 ? 'hats' : 'foxes'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'cat' : i == 1 ? 'box' : i == 2 ? 'dog' : i == 3 ? 'bus' : i == 4 ? 'hat' : 'fox'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 6 == 0 ? 'cat' : (i + d1) % 6 == 1 ? 'box' : (i + d1) % 6 == 2 ? 'dog' : (i + d1) % 6 == 3 ? 'bus' : (i + d1) % 6 == 4 ? 'hat' : 'fox'",
+          "(i + d2) % 6 == 0 ? 'cat' : (i + d2) % 6 == 1 ? 'box' : (i + d2) % 6 == 2 ? 'dog' : (i + d2) % 6 == 3 ? 'bus' : (i + d2) % 6 == 4 ? 'hat' : 'fox'"
+        ]
+      },
+      "hint": "Take away the -s or -es to find just one.",
+      "tags": [
+        "AC9E1LY15",
+        "EN1-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.1.opposites.which-opposite",
+      "subject": "english",
+      "topic": "opposites",
+      "level": "1",
+      "prompt": "What is the opposite of {target}?",
+      "vars": [
+        {
+          "name": "p",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "s",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "s2",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "s3",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "s == 0 ? (p == 0 ? 'happy' : p == 1 ? 'open' : p == 2 ? 'full' : p == 3 ? 'loud' : p == 4 ? 'early' : 'clean') : (p == 0 ? 'sad' : p == 1 ? 'shut' : p == 2 ? 'empty' : p == 3 ? 'quiet' : p == 4 ? 'late' : 'dirty')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "1 - s == 0 ? (p == 0 ? 'happy' : p == 1 ? 'open' : p == 2 ? 'full' : p == 3 ? 'loud' : p == 4 ? 'early' : 'clean') : (p == 0 ? 'sad' : p == 1 ? 'shut' : p == 2 ? 'empty' : p == 3 ? 'quiet' : p == 4 ? 'late' : 'dirty')"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "s2 == 0 ? ((p + d1) % 6 == 0 ? 'happy' : (p + d1) % 6 == 1 ? 'open' : (p + d1) % 6 == 2 ? 'full' : (p + d1) % 6 == 3 ? 'loud' : (p + d1) % 6 == 4 ? 'early' : 'clean') : ((p + d1) % 6 == 0 ? 'sad' : (p + d1) % 6 == 1 ? 'shut' : (p + d1) % 6 == 2 ? 'empty' : (p + d1) % 6 == 3 ? 'quiet' : (p + d1) % 6 == 4 ? 'late' : 'dirty')",
+          "s3 == 0 ? ((p + d2) % 6 == 0 ? 'happy' : (p + d2) % 6 == 1 ? 'open' : (p + d2) % 6 == 2 ? 'full' : (p + d2) % 6 == 3 ? 'loud' : (p + d2) % 6 == 4 ? 'early' : 'clean') : ((p + d2) % 6 == 0 ? 'sad' : (p + d2) % 6 == 1 ? 'shut' : (p + d2) % 6 == 2 ? 'empty' : (p + d2) % 6 == 3 ? 'quiet' : (p + d2) % 6 == 4 ? 'late' : 'dirty')"
+        ]
+      },
+      "hint": "An opposite means the total reverse.",
+      "tags": [
+        "AC9E1LA09",
+        "EN1-VOCAB-01"
+      ]
+    },
+    {
+      "id": "english.1.opposites.opposite-of-two",
+      "subject": "english",
+      "topic": "opposites",
+      "level": "1",
+      "prompt": "Which word means the opposite of {target}?",
+      "vars": [
+        {
+          "name": "p",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "s",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "d",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "sw",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "s == 0 ? (p == 0 ? 'happy' : p == 1 ? 'open' : p == 2 ? 'full' : p == 3 ? 'loud' : p == 4 ? 'early' : 'clean') : (p == 0 ? 'sad' : p == 1 ? 'shut' : p == 2 ? 'empty' : p == 3 ? 'quiet' : p == 4 ? 'late' : 'dirty')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "1 - s == 0 ? (p == 0 ? 'happy' : p == 1 ? 'open' : p == 2 ? 'full' : p == 3 ? 'loud' : p == 4 ? 'early' : 'clean') : (p == 0 ? 'sad' : p == 1 ? 'shut' : p == 2 ? 'empty' : p == 3 ? 'quiet' : p == 4 ? 'late' : 'dirty')"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "sw == 0 ? ((p + d) % 6 == 0 ? 'happy' : (p + d) % 6 == 1 ? 'open' : (p + d) % 6 == 2 ? 'full' : (p + d) % 6 == 3 ? 'loud' : (p + d) % 6 == 4 ? 'early' : 'clean') : ((p + d) % 6 == 0 ? 'sad' : (p + d) % 6 == 1 ? 'shut' : (p + d) % 6 == 2 ? 'empty' : (p + d) % 6 == 3 ? 'quiet' : (p + d) % 6 == 4 ? 'late' : 'dirty')"
+        ]
+      },
+      "hint": "Think of the total opposite of {target}.",
+      "tags": [
+        "AC9E1LA09",
+        "EN1-VOCAB-01"
+      ]
+    },
+    {
+      "id": "english.1.opposites.worked-example",
+      "subject": "english",
+      "topic": "opposites",
+      "level": "1",
+      "prompt": "Here, {eTarget} and {eAnswer} are opposites. What is the opposite of {target}?",
+      "vars": [
+        {
+          "name": "ep",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "es",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "p",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "s",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "s2",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "s3",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "eTarget",
+          "kind": "expr",
+          "expr": "es == 0 ? (ep == 0 ? 'happy' : ep == 1 ? 'open' : ep == 2 ? 'full' : ep == 3 ? 'loud' : ep == 4 ? 'early' : 'clean') : (ep == 0 ? 'sad' : ep == 1 ? 'shut' : ep == 2 ? 'empty' : ep == 3 ? 'quiet' : ep == 4 ? 'late' : 'dirty')"
+        },
+        {
+          "name": "eAnswer",
+          "kind": "expr",
+          "expr": "1 - es == 0 ? (ep == 0 ? 'happy' : ep == 1 ? 'open' : ep == 2 ? 'full' : ep == 3 ? 'loud' : ep == 4 ? 'early' : 'clean') : (ep == 0 ? 'sad' : ep == 1 ? 'shut' : ep == 2 ? 'empty' : ep == 3 ? 'quiet' : ep == 4 ? 'late' : 'dirty')"
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "s == 0 ? ((ep + p) % 6 == 0 ? 'happy' : (ep + p) % 6 == 1 ? 'open' : (ep + p) % 6 == 2 ? 'full' : (ep + p) % 6 == 3 ? 'loud' : (ep + p) % 6 == 4 ? 'early' : 'clean') : ((ep + p) % 6 == 0 ? 'sad' : (ep + p) % 6 == 1 ? 'shut' : (ep + p) % 6 == 2 ? 'empty' : (ep + p) % 6 == 3 ? 'quiet' : (ep + p) % 6 == 4 ? 'late' : 'dirty')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "1 - s == 0 ? ((ep + p) % 6 == 0 ? 'happy' : (ep + p) % 6 == 1 ? 'open' : (ep + p) % 6 == 2 ? 'full' : (ep + p) % 6 == 3 ? 'loud' : (ep + p) % 6 == 4 ? 'early' : 'clean') : ((ep + p) % 6 == 0 ? 'sad' : (ep + p) % 6 == 1 ? 'shut' : (ep + p) % 6 == 2 ? 'empty' : (ep + p) % 6 == 3 ? 'quiet' : (ep + p) % 6 == 4 ? 'late' : 'dirty')"
+        }
+      ],
+      "constraints": [
+        "d1 != d2",
+        "d1 != p",
+        "d2 != p"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "s2 == 0 ? ((ep + d1) % 6 == 0 ? 'happy' : (ep + d1) % 6 == 1 ? 'open' : (ep + d1) % 6 == 2 ? 'full' : (ep + d1) % 6 == 3 ? 'loud' : (ep + d1) % 6 == 4 ? 'early' : 'clean') : ((ep + d1) % 6 == 0 ? 'sad' : (ep + d1) % 6 == 1 ? 'shut' : (ep + d1) % 6 == 2 ? 'empty' : (ep + d1) % 6 == 3 ? 'quiet' : (ep + d1) % 6 == 4 ? 'late' : 'dirty')",
+          "s3 == 0 ? ((ep + d2) % 6 == 0 ? 'happy' : (ep + d2) % 6 == 1 ? 'open' : (ep + d2) % 6 == 2 ? 'full' : (ep + d2) % 6 == 3 ? 'loud' : (ep + d2) % 6 == 4 ? 'early' : 'clean') : ((ep + d2) % 6 == 0 ? 'sad' : (ep + d2) % 6 == 1 ? 'shut' : (ep + d2) % 6 == 2 ? 'empty' : (ep + d2) % 6 == 3 ? 'quiet' : (ep + d2) % 6 == 4 ? 'late' : 'dirty')"
+        ]
+      },
+      "hint": "Use the example to see what \"opposite\" means.",
+      "tags": [
+        "AC9E1LA09",
+        "EN1-VOCAB-01"
+      ]
+    },
+    {
+      "id": "english.1.opposites.write-opposite",
+      "subject": "english",
+      "topic": "opposites",
+      "level": "1",
+      "prompt": "Write the opposite of {target}.",
+      "vars": [
+        {
+          "name": "p",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "s",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "s == 0 ? (p == 0 ? 'happy' : p == 1 ? 'open' : p == 2 ? 'full' : p == 3 ? 'loud' : p == 4 ? 'early' : 'clean') : (p == 0 ? 'sad' : p == 1 ? 'shut' : p == 2 ? 'empty' : p == 3 ? 'quiet' : p == 4 ? 'late' : 'dirty')"
+        }
+      ],
+      "answer": "1 - s == 0 ? (p == 0 ? 'happy' : p == 1 ? 'open' : p == 2 ? 'full' : p == 3 ? 'loud' : p == 4 ? 'early' : 'clean') : (p == 0 ? 'sad' : p == 1 ? 'shut' : p == 2 ? 'empty' : p == 3 ? 'quiet' : p == 4 ? 'late' : 'dirty')",
+      "answerType": "text",
+      "hint": "An opposite means the total reverse.",
+      "tags": [
+        "AC9E1LA09",
+        "EN1-VOCAB-01"
+      ]
+    },
+    {
+      "id": "english.1.opposites.write-opposite-worked-example",
+      "subject": "english",
+      "topic": "opposites",
+      "level": "1",
+      "prompt": "Here, {eTarget} and {eAnswer} are opposites. Write the opposite of {target}.",
+      "vars": [
+        {
+          "name": "ep",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "es",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "p",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "s",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "eTarget",
+          "kind": "expr",
+          "expr": "es == 0 ? (ep == 0 ? 'happy' : ep == 1 ? 'open' : ep == 2 ? 'full' : ep == 3 ? 'loud' : ep == 4 ? 'early' : 'clean') : (ep == 0 ? 'sad' : ep == 1 ? 'shut' : ep == 2 ? 'empty' : ep == 3 ? 'quiet' : ep == 4 ? 'late' : 'dirty')"
+        },
+        {
+          "name": "eAnswer",
+          "kind": "expr",
+          "expr": "1 - es == 0 ? (ep == 0 ? 'happy' : ep == 1 ? 'open' : ep == 2 ? 'full' : ep == 3 ? 'loud' : ep == 4 ? 'early' : 'clean') : (ep == 0 ? 'sad' : ep == 1 ? 'shut' : ep == 2 ? 'empty' : ep == 3 ? 'quiet' : ep == 4 ? 'late' : 'dirty')"
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "s == 0 ? ((ep + p) % 6 == 0 ? 'happy' : (ep + p) % 6 == 1 ? 'open' : (ep + p) % 6 == 2 ? 'full' : (ep + p) % 6 == 3 ? 'loud' : (ep + p) % 6 == 4 ? 'early' : 'clean') : ((ep + p) % 6 == 0 ? 'sad' : (ep + p) % 6 == 1 ? 'shut' : (ep + p) % 6 == 2 ? 'empty' : (ep + p) % 6 == 3 ? 'quiet' : (ep + p) % 6 == 4 ? 'late' : 'dirty')"
+        }
+      ],
+      "answer": "1 - s == 0 ? ((ep + p) % 6 == 0 ? 'happy' : (ep + p) % 6 == 1 ? 'open' : (ep + p) % 6 == 2 ? 'full' : (ep + p) % 6 == 3 ? 'loud' : (ep + p) % 6 == 4 ? 'early' : 'clean') : ((ep + p) % 6 == 0 ? 'sad' : (ep + p) % 6 == 1 ? 'shut' : (ep + p) % 6 == 2 ? 'empty' : (ep + p) % 6 == 3 ? 'quiet' : (ep + p) % 6 == 4 ? 'late' : 'dirty')",
+      "answerType": "text",
+      "hint": "Use the example to see what \"opposite\" means.",
+      "tags": [
+        "AC9E1LA09",
+        "EN1-VOCAB-01"
+      ]
+    },
+    {
+      "id": "english.1.word-classes.naming-or-doing",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "1",
+      "prompt": "Which word in this sentence is the {kind}? {sentence}",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "asksVerb",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "'The ' + (i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'bird' : i == 3 ? 'fish' : i == 4 ? 'frog' : 'rabbit') + ' can ' + (i == 0 ? 'run' : i == 1 ? 'swim' : i == 2 ? 'fly' : i == 3 ? 'dart' : i == 4 ? 'hop' : 'dig') + '.'"
+        },
+        {
+          "name": "kind",
+          "kind": "expr",
+          "expr": "asksVerb == 1 ? 'doing word' : 'naming word'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "asksVerb == 1 ? (i == 0 ? 'run' : i == 1 ? 'swim' : i == 2 ? 'fly' : i == 3 ? 'dart' : i == 4 ? 'hop' : 'dig') : (i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'bird' : i == 3 ? 'fish' : i == 4 ? 'frog' : 'rabbit')"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "1 - asksVerb == 1 ? (i == 0 ? 'run' : i == 1 ? 'swim' : i == 2 ? 'fly' : i == 3 ? 'dart' : i == 4 ? 'hop' : 'dig') : (i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'bird' : i == 3 ? 'fish' : i == 4 ? 'frog' : 'rabbit')"
+        ]
+      },
+      "hint": "The naming word names something. The doing word tells you what it does.",
+      "tags": [
+        "AC9E1LA07",
+        "EN1-CWT-01"
+      ]
+    },
+    {
+      "id": "english.1.word-classes.is-doing-word",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "1",
+      "prompt": "Is {word} a doing word?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "19"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'bird' : i == 3 ? 'ball' : i == 4 ? 'sock' : i == 5 ? 'chair' : i == 6 ? 'table' : i == 7 ? 'apple' : i == 8 ? 'house' : i == 9 ? 'tree' : i == 10 ? 'run' : i == 11 ? 'jump' : i == 12 ? 'swim' : i == 13 ? 'sing' : i == 14 ? 'read' : i == 15 ? 'write' : i == 16 ? 'sleep' : i == 17 ? 'hop' : i == 18 ? 'skip' : 'dance'"
+        }
+      ],
+      "answer": "i >= 10",
+      "hint": "A doing word tells you what someone or something does.",
+      "tags": [
+        "AC9E1LA07",
+        "EN1-CWT-01"
+      ]
+    },
+    {
+      "id": "english.1.word-classes.naming-word-in-context",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "1",
+      "prompt": "Is {candidate} a naming word in this sentence? {sentence}",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "askVerb",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "objPick",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "role",
+          "kind": "expr",
+          "expr": "askVerb == 1 ? 1 : (objPick == 1 ? 2 : 0)"
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "'The ' + (i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'bird' : i == 3 ? 'frog' : i == 4 ? 'rabbit' : 'mouse') + ' can ' + (i == 0 ? 'chase' : i == 1 ? 'catch' : i == 2 ? 'watch' : i == 3 ? 'follow' : i == 4 ? 'find' : 'see') + ' the ' + (i == 0 ? 'ball' : i == 1 ? 'bug' : i == 2 ? 'kite' : i == 3 ? 'worm' : i == 4 ? 'leaf' : 'stick') + '.'"
+        },
+        {
+          "name": "candidate",
+          "kind": "expr",
+          "expr": "role == 1 ? (i == 0 ? 'chase' : i == 1 ? 'catch' : i == 2 ? 'watch' : i == 3 ? 'follow' : i == 4 ? 'find' : 'see') : role == 2 ? (i == 0 ? 'ball' : i == 1 ? 'bug' : i == 2 ? 'kite' : i == 3 ? 'worm' : i == 4 ? 'leaf' : 'stick') : (i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'bird' : i == 3 ? 'frog' : i == 4 ? 'rabbit' : 'mouse')"
+        }
+      ],
+      "answer": "role != 1",
+      "hint": "A naming word names a person, animal or thing.",
+      "tags": [
+        "AC9E1LA07",
+        "EN1-CWT-01"
+      ]
+    },
+    {
+      "id": "english.1.word-classes.is-doing-word-in-sentence",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "1",
+      "prompt": "Is {candidate} the doing word in this sentence? {sentence}",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "ok",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "'The ' + (i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'bird' : i == 3 ? 'fish' : i == 4 ? 'frog' : 'rabbit') + ' can ' + (i == 0 ? 'run' : i == 1 ? 'swim' : i == 2 ? 'fly' : i == 3 ? 'dart' : i == 4 ? 'hop' : 'dig') + '.'"
+        },
+        {
+          "name": "candidate",
+          "kind": "expr",
+          "expr": "ok == 1 ? (i == 0 ? 'run' : i == 1 ? 'swim' : i == 2 ? 'fly' : i == 3 ? 'dart' : i == 4 ? 'hop' : 'dig') : (i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'bird' : i == 3 ? 'fish' : i == 4 ? 'frog' : 'rabbit')"
+        }
+      ],
+      "answer": "ok == 1",
+      "hint": "The doing word tells you what the naming word can do.",
+      "tags": [
+        "AC9E1LA07",
+        "EN1-CWT-01"
+      ]
+    },
+    {
+      "id": "english.1.sentences.name-capital",
+      "subject": "english",
+      "topic": "sentences",
+      "level": "1",
+      "prompt": "Does this sentence use a capital letter correctly for the name? {sentence}",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "ok",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "i == 0 ? (ok == 1 ? 'I played with Tom today.' : 'I played with tom today.') : i == 1 ? (ok == 1 ? 'We visited Ben at his house.' : 'We visited ben at his house.') : i == 2 ? (ok == 1 ? 'I saw Sam at the shop.' : 'I saw sam at the shop.') : i == 3 ? (ok == 1 ? 'My friend Amy can swim.' : 'My friend amy can swim.') : i == 4 ? (ok == 1 ? 'Our dog likes Zoe the best.' : 'Our dog likes zoe the best.') : (ok == 1 ? 'I gave Max a big hug.' : 'I gave max a big hug.')"
+        }
+      ],
+      "answer": "ok == 1",
+      "hint": "A person's name always starts with a capital letter.",
+      "tags": [
+        "AC9E1LA10",
+        "EN1-CWT-01"
+      ]
+    },
+    {
+      "id": "english.1.sentences.a-or-an-in-sentence",
+      "subject": "english",
+      "topic": "sentences",
+      "level": "1",
+      "prompt": "Does this sentence use 'a' or 'an' correctly? {sentence}",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "9"
+        },
+        {
+          "name": "ok",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "i == 0 ? (ok == 1 ? 'I saw an elephant.' : 'I saw a elephant.') : i == 1 ? (ok == 1 ? 'She ate an apple.' : 'She ate a apple.') : i == 2 ? (ok == 1 ? 'He picked an orange.' : 'He picked a orange.') : i == 3 ? (ok == 1 ? 'I have an umbrella.' : 'I have a umbrella.') : i == 4 ? (ok == 1 ? 'There is an ant.' : 'There is a ant.') : i == 5 ? (ok == 1 ? 'I saw a dog.' : 'I saw an dog.') : i == 6 ? (ok == 1 ? 'She has a cat.' : 'She has an cat.') : i == 7 ? (ok == 1 ? 'He kicked a ball.' : 'He kicked an ball.') : i == 8 ? (ok == 1 ? 'We live in a house.' : 'We live in an house.') : (ok == 1 ? 'I ate a banana.' : 'I ate an banana.')"
+        }
+      ],
+      "answer": "ok == 1",
+      "hint": "Use 'an' before a word that starts with a vowel sound.",
+      "tags": [
+        "AC9E1LA10",
+        "EN1-CWT-01"
+      ]
+    },
+    {
+      "id": "english.1.sentences.a-or-an",
+      "subject": "english",
+      "topic": "sentences",
+      "level": "1",
+      "prompt": "Which word finishes the sentence? {frame}",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "9"
+        },
+        {
+          "name": "frame",
+          "kind": "expr",
+          "expr": "i == 0 ? 'I saw ? elephant at the zoo.' : i == 1 ? 'She ate ? apple for lunch.' : i == 2 ? 'He picked ? orange from the tree.' : i == 3 ? 'I opened ? umbrella in the rain.' : i == 4 ? 'There is ? ant on the table.' : i == 5 ? 'I saw ? dog in the park.' : i == 6 ? 'She has ? cat at home.' : i == 7 ? 'He kicked ? ball across the yard.' : i == 8 ? 'We live in ? house on the hill.' : 'I ate ? banana for lunch.'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'an' : i == 1 ? 'an' : i == 2 ? 'an' : i == 3 ? 'an' : i == 4 ? 'an' : i == 5 ? 'a' : i == 6 ? 'a' : i == 7 ? 'a' : i == 8 ? 'a' : 'a'"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "(i == 0 ? 'an' : i == 1 ? 'an' : i == 2 ? 'an' : i == 3 ? 'an' : i == 4 ? 'an' : i == 5 ? 'a' : i == 6 ? 'a' : i == 7 ? 'a' : i == 8 ? 'a' : 'a') == 'a' ? 'an' : 'a'"
+        ]
+      },
+      "hint": "Use 'an' before a word that starts with a vowel sound.",
+      "tags": [
+        "AC9E1LA10",
+        "EN1-CWT-01"
+      ]
+    }
+  ]
+}

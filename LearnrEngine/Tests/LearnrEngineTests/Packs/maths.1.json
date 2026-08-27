@@ -1,0 +1,1835 @@
+{
+  "version": "35220d53ebf3",
+  "subject": "maths",
+  "level": "1",
+  "templates": [
+    {
+      "id": "maths.1.counting-numbers.skip",
+      "subject": "maths",
+      "topic": "counting numbers",
+      "level": "1",
+      "prompt": "Counting by {step}s: {x}, {x + step}, {x + 2 * step}, ?",
+      "vars": [
+        {
+          "name": "step",
+          "kind": "pick",
+          "from": [
+            2,
+            5,
+            10
+          ]
+        },
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "step",
+          "max": "step * 5"
+        }
+      ],
+      "constraints": [
+        "mod(x, step) == 0"
+      ],
+      "answer": "x + 3 * step",
+      "hint": "Add {step} each time.",
+      "tags": [
+        "AC9M1A01",
+        "MA1-FG-01"
+      ]
+    },
+    {
+      "id": "maths.1.counting-numbers.after-100",
+      "subject": "maths",
+      "topic": "counting numbers",
+      "level": "1",
+      "prompt": "What number comes after {x}?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "95",
+          "max": "119"
+        }
+      ],
+      "answer": "x + 1",
+      "tags": [
+        "AC9M1N01",
+        "MA1-RWN-02"
+      ]
+    },
+    {
+      "id": "maths.1.counting-numbers.largest",
+      "subject": "maths",
+      "topic": "counting numbers",
+      "level": "1",
+      "prompt": "Which of these is the largest: {a}, {b} or {c}?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "10",
+          "max": "120"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "10",
+          "max": "120"
+        },
+        {
+          "name": "c",
+          "kind": "int",
+          "min": "10",
+          "max": "120"
+        }
+      ],
+      "constraints": [
+        "a != b",
+        "b != c",
+        "a != c"
+      ],
+      "answer": "max(a, b, c)",
+      "tags": [
+        "AC9M1N01",
+        "MA1-RWN-02"
+      ]
+    },
+    {
+      "id": "maths.1.counting-numbers.ten-more",
+      "subject": "maths",
+      "topic": "counting numbers",
+      "level": "1",
+      "prompt": "What is 10 more than {x}?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "5",
+          "max": "109"
+        }
+      ],
+      "answer": "x + 10",
+      "hint": "Only the tens digit changes.",
+      "tags": [
+        "AC9M1N01",
+        "MA1-RWN-02"
+      ]
+    },
+    {
+      "id": "maths.1.counting-numbers.ten-less",
+      "subject": "maths",
+      "topic": "counting numbers",
+      "level": "1",
+      "prompt": "What is 10 less than {x}?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "15",
+          "max": "120"
+        }
+      ],
+      "answer": "x - 10",
+      "tags": [
+        "AC9M1N01",
+        "MA1-RWN-02"
+      ]
+    },
+    {
+      "id": "maths.1.counting-numbers.number-line",
+      "subject": "maths",
+      "topic": "counting numbers",
+      "level": "1",
+      "prompt": "What number is the arrow pointing to?",
+      "vars": [
+        {
+          "name": "base",
+          "kind": "int",
+          "min": "0",
+          "max": "9"
+        },
+        {
+          "name": "start",
+          "kind": "expr",
+          "expr": "base * 10"
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "start + 1",
+          "max": "start + 9"
+        }
+      ],
+      "constraints": [
+        "n != start + 5"
+      ],
+      "answer": "n",
+      "hint": "Start at the last number you can see, then count the small ticks.",
+      "figure": {
+        "kind": "number-line",
+        "at": "n",
+        "from": "start",
+        "to": "start + 10",
+        "step": "5"
+      },
+      "tags": [
+        "AC9M1N01",
+        "MA1-RWN-02"
+      ]
+    },
+    {
+      "id": "maths.1.place-value.count-tens",
+      "subject": "maths",
+      "topic": "place value",
+      "level": "1",
+      "prompt": "How many whole tens are there in {x}?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "20",
+          "max": "99"
+        }
+      ],
+      "answer": "floor(x / 10)",
+      "hint": "Look at the first digit of {x}.",
+      "tags": [
+        "AC9M1N02",
+        "MA1-RWN-01"
+      ]
+    },
+    {
+      "id": "maths.1.place-value.count-ones",
+      "subject": "maths",
+      "topic": "place value",
+      "level": "1",
+      "prompt": "{x} is {tens} tens and how many ones?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "21",
+          "max": "99"
+        },
+        {
+          "name": "tens",
+          "kind": "expr",
+          "expr": "floor(x / 10)"
+        }
+      ],
+      "constraints": [
+        "mod(x, 10) != 0"
+      ],
+      "answer": "mod(x, 10)",
+      "tags": [
+        "AC9M1N02",
+        "MA1-RWN-01"
+      ]
+    },
+    {
+      "id": "maths.1.place-value.build",
+      "subject": "maths",
+      "topic": "place value",
+      "level": "1",
+      "prompt": "What number is {tens} tens and {ones} ones?",
+      "vars": [
+        {
+          "name": "tens",
+          "kind": "int",
+          "min": "2",
+          "max": "9"
+        },
+        {
+          "name": "ones",
+          "kind": "int",
+          "min": "2",
+          "max": "9"
+        }
+      ],
+      "answer": "tens * 10 + ones",
+      "tags": [
+        "AC9M1N02",
+        "MA1-RWN-01"
+      ]
+    },
+    {
+      "id": "maths.1.addition.small",
+      "subject": "maths",
+      "topic": "addition",
+      "level": "1",
+      "prompt": "What is {x} + {y}?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "1",
+          "max": "9"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "9"
+        }
+      ],
+      "answer": "x + y",
+      "hint": "Start at {x} and count on {y} more.",
+      "tags": [
+        "AC9M1N04",
+        "MA1-CSQ-01"
+      ]
+    },
+    {
+      "id": "maths.1.addition.story",
+      "subject": "maths",
+      "topic": "addition",
+      "level": "1",
+      "prompt": "Mia has {x} stickers. She is given {y} more. How many does she have now?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "2",
+          "max": "12"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "8"
+        }
+      ],
+      "answer": "x + y",
+      "tags": [
+        "AC9M1N05",
+        "MA1-CSQ-01"
+      ]
+    },
+    {
+      "id": "maths.1.addition.within-twenty",
+      "subject": "maths",
+      "topic": "addition",
+      "level": "1",
+      "prompt": "What is {x} + {y}?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "6",
+          "max": "14"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "3",
+          "max": "20 - x"
+        }
+      ],
+      "answer": "x + y",
+      "hint": "Make ten first, then add what is left over.",
+      "tags": [
+        "AC9M1N04",
+        "MA1-CSQ-01"
+      ]
+    },
+    {
+      "id": "maths.1.addition.double",
+      "subject": "maths",
+      "topic": "addition",
+      "level": "1",
+      "prompt": "What is double {x}?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "2",
+          "max": "10"
+        }
+      ],
+      "answer": "x * 2",
+      "hint": "{x} + {x}",
+      "tags": [
+        "AC9M1N04",
+        "MA1-CSQ-01"
+      ]
+    },
+    {
+      "id": "maths.1.addition.missing-part",
+      "subject": "maths",
+      "topic": "addition",
+      "level": "1",
+      "prompt": "What goes in the box? {x} + ? = {total}",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "2",
+          "max": "10"
+        },
+        {
+          "name": "rest",
+          "kind": "int",
+          "min": "1",
+          "max": "10"
+        },
+        {
+          "name": "total",
+          "kind": "expr",
+          "expr": "x + rest"
+        }
+      ],
+      "answer": "rest",
+      "hint": "Count on from {x} until you reach {total}.",
+      "tags": [
+        "AC9M1N04",
+        "MA1-CSQ-01"
+      ]
+    },
+    {
+      "id": "maths.1.subtraction.difference",
+      "subject": "maths",
+      "topic": "subtraction",
+      "level": "1",
+      "prompt": "What is the difference between {x} and {y}?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "5",
+          "max": "20"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "19"
+        }
+      ],
+      "constraints": [
+        "x > y"
+      ],
+      "answer": "x - y",
+      "hint": "Count back from {x} until you reach {y}.",
+      "tags": [
+        "AC9M1N04",
+        "MA1-CSQ-01"
+      ]
+    },
+    {
+      "id": "maths.1.subtraction.story",
+      "subject": "maths",
+      "topic": "subtraction",
+      "level": "1",
+      "prompt": "There are {x} birds on a wall. {y} of them fly away. How many are left?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "5",
+          "max": "20"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "2",
+          "max": "x - 1"
+        }
+      ],
+      "answer": "x - y",
+      "tags": [
+        "AC9M1N05",
+        "MA1-CSQ-01"
+      ]
+    },
+    {
+      "id": "maths.1.subtraction.within-twenty",
+      "subject": "maths",
+      "topic": "subtraction",
+      "level": "1",
+      "prompt": "What is {x} − {y}?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "12",
+          "max": "20"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "3",
+          "max": "9"
+        }
+      ],
+      "answer": "x - y",
+      "hint": "Take away enough to get down to ten first.",
+      "tags": [
+        "AC9M1N04",
+        "MA1-CSQ-01"
+      ]
+    },
+    {
+      "id": "maths.1.sharing.equal-groups",
+      "subject": "maths",
+      "topic": "sharing",
+      "level": "1",
+      "prompt": "{total} pencils are shared equally between {n} friends. How many does each friend get?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "2",
+          "max": "5"
+        },
+        {
+          "name": "each",
+          "kind": "int",
+          "min": "2",
+          "max": "6"
+        },
+        {
+          "name": "total",
+          "kind": "expr",
+          "expr": "n * each"
+        }
+      ],
+      "answer": "each",
+      "tags": [
+        "AC9M1N06",
+        "MA1-FG-01"
+      ]
+    },
+    {
+      "id": "maths.1.sharing.how-many-groups",
+      "subject": "maths",
+      "topic": "sharing",
+      "level": "1",
+      "prompt": "How many groups of {n} can you make from {total} counters?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "2",
+          "max": "5"
+        },
+        {
+          "name": "groups",
+          "kind": "int",
+          "min": "2",
+          "max": "8"
+        },
+        {
+          "name": "total",
+          "kind": "expr",
+          "expr": "n * groups"
+        }
+      ],
+      "answer": "groups",
+      "hint": "Skip count by {n}s until you reach {total}.",
+      "tags": [
+        "AC9M1N06",
+        "MA1-FG-01"
+      ]
+    },
+    {
+      "id": "maths.1.sharing.array-count",
+      "subject": "maths",
+      "topic": "sharing",
+      "level": "1",
+      "prompt": "How many dots are there altogether?",
+      "vars": [
+        {
+          "name": "r",
+          "kind": "int",
+          "min": "2",
+          "max": "5"
+        },
+        {
+          "name": "c",
+          "kind": "int",
+          "min": "2",
+          "max": "5"
+        }
+      ],
+      "answer": "r * c",
+      "hint": "Count the dots in one row, then skip count.",
+      "figure": {
+        "kind": "array",
+        "rows": "r",
+        "columns": "c"
+      },
+      "tags": [
+        "AC9M1N06",
+        "MA1-FG-01"
+      ]
+    },
+    {
+      "id": "maths.1.fractions.half-shaded",
+      "subject": "maths",
+      "topic": "fractions",
+      "level": "1",
+      "prompt": "True or false: half of this shape is shaded.",
+      "vars": [
+        {
+          "name": "d",
+          "kind": "pick",
+          "from": [
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "name": "right",
+          "kind": "pick",
+          "from": [
+            1,
+            0
+          ]
+        },
+        {
+          "name": "off",
+          "kind": "int",
+          "min": "1",
+          "max": "d - 2"
+        },
+        {
+          "name": "n",
+          "kind": "expr",
+          "expr": "right == 1 ? d / 2 : mod(d / 2 - 1 + off, d - 1) + 1"
+        }
+      ],
+      "answer": "n * 2 == d",
+      "hint": "Half means the shaded parts and the plain parts are the same.",
+      "figure": {
+        "kind": "fraction-shape",
+        "numerator": "n",
+        "denominator": "d"
+      },
+      "tags": [
+        "MA1-GM-03"
+      ]
+    },
+    {
+      "id": "maths.1.fractions.how-much-shaded",
+      "subject": "maths",
+      "topic": "fractions",
+      "level": "1",
+      "prompt": "How much of this shape is shaded?",
+      "vars": [
+        {
+          "name": "which",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "d",
+          "kind": "expr",
+          "expr": "which == 0 ? 2 : 4"
+        },
+        {
+          "name": "n",
+          "kind": "expr",
+          "expr": "which == 2 ? 2 : which == 3 ? 3 : 1"
+        }
+      ],
+      "answer": "n * 2 == d ? 'a half' : n == 1 ? 'a quarter' : 'three quarters'",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "'a half'",
+          "'a quarter'",
+          "'three quarters'"
+        ]
+      },
+      "hint": "Count how many parts there are, then how many are shaded.",
+      "figure": {
+        "kind": "fraction-shape",
+        "numerator": "n",
+        "denominator": "d"
+      },
+      "tags": [
+        "MA1-GM-03"
+      ]
+    },
+    {
+      "id": "maths.1.money.count-coins",
+      "subject": "maths",
+      "topic": "money",
+      "level": "1",
+      "prompt": "How many {coin}c coins do you need to make {total}c?",
+      "vars": [
+        {
+          "name": "coin",
+          "kind": "pick",
+          "from": [
+            5,
+            10,
+            20
+          ]
+        },
+        {
+          "name": "many",
+          "kind": "int",
+          "min": "2",
+          "max": "8"
+        },
+        {
+          "name": "total",
+          "kind": "expr",
+          "expr": "coin * many"
+        }
+      ],
+      "answer": "many",
+      "hint": "Skip count by {coin}s.",
+      "tags": [
+        "AC9M1N05",
+        "MA1-FG-01"
+      ]
+    },
+    {
+      "id": "maths.1.number-patterns.count-back",
+      "subject": "maths",
+      "topic": "number patterns",
+      "level": "1",
+      "prompt": "What comes next? {x}, {x - step}, {x - 2 * step}, ?",
+      "vars": [
+        {
+          "name": "step",
+          "kind": "pick",
+          "from": [
+            2,
+            5,
+            10
+          ]
+        },
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "step * 4",
+          "max": "step * 12"
+        }
+      ],
+      "constraints": [
+        "mod(x, step) == 0"
+      ],
+      "answer": "x - 3 * step",
+      "hint": "The numbers go down by {step} each time.",
+      "tags": [
+        "AC9M1A01",
+        "MA1-FG-01"
+      ]
+    },
+    {
+      "id": "maths.1.number-patterns.repeating-unit",
+      "subject": "maths",
+      "topic": "number patterns",
+      "level": "1",
+      "prompt": "What comes next? {a}, {b}, {c}, {a}, {b}, {c}, {a}, {b}, ?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "4",
+          "max": "6"
+        },
+        {
+          "name": "c",
+          "kind": "int",
+          "min": "7",
+          "max": "9"
+        }
+      ],
+      "answer": "c",
+      "hint": "The part that repeats is {a}, {b}, {c}.",
+      "tags": [
+        "AC9M1A02"
+      ]
+    },
+    {
+      "id": "maths.1.measurement.how-much-longer",
+      "subject": "maths",
+      "topic": "measurement",
+      "level": "1",
+      "prompt": "A rope is {a} paperclips long. A pencil is {b} paperclips long. How many paperclips longer is the rope?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "8",
+          "max": "20"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "2",
+          "max": "7"
+        }
+      ],
+      "answer": "a - b",
+      "tags": [
+        "AC9M1M02",
+        "MA1-GM-02"
+      ]
+    },
+    {
+      "id": "maths.1.measurement.mass-heaviest",
+      "subject": "maths",
+      "topic": "measurement",
+      "level": "1",
+      "prompt": "A pear weighs the same as {a} marbles, an apple {b} marbles and a lime {c} marbles. Which is the heaviest?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "3",
+          "max": "15"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "3",
+          "max": "15"
+        },
+        {
+          "name": "c",
+          "kind": "int",
+          "min": "3",
+          "max": "15"
+        }
+      ],
+      "constraints": [
+        "a != b",
+        "b != c",
+        "a != c"
+      ],
+      "answer": "a > b && a > c ? 'the pear' : b > c ? 'the apple' : 'the lime'",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "'the pear'",
+          "'the apple'",
+          "'the lime'"
+        ]
+      },
+      "hint": "The heaviest one needs the most marbles to balance it.",
+      "tags": [
+        "AC9M1M02",
+        "MA1-NSM-01"
+      ]
+    },
+    {
+      "id": "maths.1.time.days-in-weeks",
+      "subject": "maths",
+      "topic": "time",
+      "level": "1",
+      "prompt": "How many days are there in {n} weeks?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "2",
+          "max": "6"
+        }
+      ],
+      "answer": "n * 7",
+      "hint": "There are 7 days in one week.",
+      "tags": [
+        "AC9M1M03",
+        "MA1-NSM-02"
+      ]
+    },
+    {
+      "id": "maths.1.time.hours-in-days",
+      "subject": "maths",
+      "topic": "time",
+      "level": "1",
+      "prompt": "How many hours are there in {n} days?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "2",
+          "max": "4"
+        }
+      ],
+      "answer": "n * 24",
+      "hint": "There are 24 hours in one day.",
+      "tags": [
+        "AC9M1M03",
+        "MA1-NSM-02"
+      ]
+    },
+    {
+      "id": "maths.1.time.half-past",
+      "subject": "maths",
+      "topic": "time",
+      "level": "1",
+      "prompt": "What time is this?",
+      "vars": [
+        {
+          "name": "h",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        },
+        {
+          "name": "half",
+          "kind": "pick",
+          "from": [
+            1,
+            0
+          ]
+        },
+        {
+          "name": "near",
+          "kind": "pick",
+          "from": [
+            -2,
+            -1,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "far",
+          "kind": "pick",
+          "from": [
+            -5,
+            -4,
+            -3,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "name": "hn",
+          "kind": "expr",
+          "expr": "mod(h + near - 1, 12) + 1"
+        },
+        {
+          "name": "hf",
+          "kind": "expr",
+          "expr": "mod(h + far - 1, 12) + 1"
+        },
+        {
+          "name": "flip",
+          "kind": "pick",
+          "from": [
+            1,
+            0
+          ]
+        },
+        {
+          "name": "hd",
+          "kind": "expr",
+          "expr": "flip == 1 ? h : hn"
+        }
+      ],
+      "answer": "half == 1 ? 'half past ' + h : h + ' o’clock'",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "half == 1 ? hd + ' o’clock' : 'half past ' + hd",
+          "half == 1 ? 'half past ' + hn : hn + ' o’clock'",
+          "half == 1 ? hf + ' o’clock' : 'half past ' + hf"
+        ]
+      },
+      "hint": "The long hand points straight down when it is half past.",
+      "figure": {
+        "kind": "clock",
+        "hour": "h",
+        "minute": "half == 1 ? 30 : 0",
+        "numerals": "true"
+      },
+      "tags": [
+        "MA1-NSM-02"
+      ]
+    },
+    {
+      "id": "maths.1.time.half-past-claim",
+      "subject": "maths",
+      "topic": "time",
+      "level": "1",
+      "prompt": "True or false: this clock shows half past {h}.",
+      "vars": [
+        {
+          "name": "h",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        },
+        {
+          "name": "right",
+          "kind": "pick",
+          "from": [
+            1,
+            0
+          ]
+        },
+        {
+          "name": "slip",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "off",
+          "kind": "int",
+          "min": "1",
+          "max": "11"
+        },
+        {
+          "name": "shownHour",
+          "kind": "expr",
+          "expr": "right == 1 || slip == 0 ? h : mod(h + off - 1, 12) + 1"
+        },
+        {
+          "name": "shownMinute",
+          "kind": "expr",
+          "expr": "right == 1 || slip == 1 ? 30 : 0"
+        }
+      ],
+      "answer": "shownHour == h && shownMinute == 30",
+      "figure": {
+        "kind": "clock",
+        "hour": "shownHour",
+        "minute": "shownMinute",
+        "numerals": "true"
+      },
+      "tags": [
+        "MA1-NSM-02"
+      ]
+    },
+    {
+      "id": "maths.1.shapes.corners",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "1",
+      "prompt": "How many corners does {article} {shape} have?",
+      "vars": [
+        {
+          "name": "shape",
+          "kind": "pick",
+          "from": [
+            "triangle",
+            "square",
+            "rectangle",
+            "pentagon",
+            "hexagon",
+            "octagon"
+          ]
+        },
+        {
+          "name": "article",
+          "kind": "expr",
+          "expr": "shape == 'octagon' ? 'an' : 'a'"
+        }
+      ],
+      "answer": "shape == 'triangle' ? 3 : shape == 'square' ? 4 : shape == 'rectangle' ? 4 : shape == 'pentagon' ? 5 : shape == 'hexagon' ? 6 : 8",
+      "tags": [
+        "AC9M1SP01",
+        "MA1-2DS-01"
+      ]
+    },
+    {
+      "id": "maths.1.shapes.name-picture",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "1",
+      "prompt": "What shape is this?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "pick",
+          "from": [
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "name": "tri",
+          "kind": "pick",
+          "from": [
+            "equilateral",
+            "isosceles",
+            "scalene"
+          ]
+        },
+        {
+          "name": "drawn",
+          "kind": "expr",
+          "expr": "n == 3 ? tri : n == 4 ? 'square' : n == 5 ? 'pentagon' : 'hexagon'"
+        }
+      ],
+      "answer": "n == 3 ? 'triangle' : n == 4 ? 'square' : n == 5 ? 'pentagon' : 'hexagon'",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "mod(n - 2, 4) + 3 == 3 ? 'triangle' : mod(n - 2, 4) + 3 == 4 ? 'square' : mod(n - 2, 4) + 3 == 5 ? 'pentagon' : 'hexagon'",
+          "mod(n - 1, 4) + 3 == 3 ? 'triangle' : mod(n - 1, 4) + 3 == 4 ? 'square' : mod(n - 1, 4) + 3 == 5 ? 'pentagon' : 'hexagon'",
+          "mod(n, 4) + 3 == 3 ? 'triangle' : mod(n, 4) + 3 == 4 ? 'square' : mod(n, 4) + 3 == 5 ? 'pentagon' : 'hexagon'"
+        ]
+      },
+      "figure": {
+        "kind": "polygon",
+        "shape": "drawn"
+      },
+      "tags": [
+        "AC9M1SP01",
+        "MA1-2DS-01"
+      ]
+    },
+    {
+      "id": "maths.1.shapes.corners-picture",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "1",
+      "prompt": "How many corners does this shape have?",
+      "vars": [
+        {
+          "name": "shape",
+          "kind": "pick",
+          "from": [
+            "equilateral",
+            "isosceles",
+            "right-triangle",
+            "square",
+            "rectangle",
+            "rhombus",
+            "kite",
+            "pentagon",
+            "hexagon",
+            "octagon"
+          ]
+        }
+      ],
+      "answer": "shape == 'equilateral' || shape == 'isosceles' || shape == 'scalene' || shape == 'right-triangle' ? 3 : shape == 'pentagon' ? 5 : shape == 'hexagon' ? 6 : shape == 'heptagon' ? 7 : shape == 'octagon' ? 8 : 4",
+      "hint": "A corner is where two sides meet.",
+      "figure": {
+        "kind": "polygon",
+        "shape": "shape"
+      },
+      "tags": [
+        "AC9M1SP01",
+        "MA1-2DS-01"
+      ]
+    },
+    {
+      "id": "maths.1.shapes.side-count-claim",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "1",
+      "prompt": "True or false: this shape has {claim} sides.",
+      "vars": [
+        {
+          "name": "shape",
+          "kind": "pick",
+          "from": [
+            "equilateral",
+            "scalene",
+            "square",
+            "rectangle",
+            "trapezium",
+            "kite",
+            "pentagon",
+            "hexagon"
+          ]
+        },
+        {
+          "name": "sides",
+          "kind": "expr",
+          "expr": "shape == 'equilateral' || shape == 'isosceles' || shape == 'scalene' || shape == 'right-triangle' ? 3 : shape == 'pentagon' ? 5 : shape == 'hexagon' ? 6 : shape == 'heptagon' ? 7 : shape == 'octagon' ? 8 : 4"
+        },
+        {
+          "name": "right",
+          "kind": "pick",
+          "from": [
+            1,
+            0
+          ]
+        },
+        {
+          "name": "claim",
+          "kind": "expr",
+          "expr": "right == 1 ? sides : sides != 4 ? 4 : shape == 'square' || shape == 'rectangle' ? 3 : shape == 'trapezium' ? 5 : 6"
+        }
+      ],
+      "answer": "sides == claim",
+      "figure": {
+        "kind": "polygon",
+        "shape": "shape"
+      },
+      "tags": [
+        "AC9M1SP01",
+        "MA1-2DS-01"
+      ]
+    },
+    {
+      "id": "maths.1.shapes.solid-name",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "1",
+      "prompt": "What is this called?",
+      "vars": [
+        {
+          "name": "shape",
+          "kind": "pick",
+          "from": [
+            "cube",
+            "sphere",
+            "cone",
+            "cylinder",
+            "square-pyramid"
+          ]
+        },
+        {
+          "name": "i",
+          "kind": "expr",
+          "expr": "shape == 'cube' ? 0 : shape == 'sphere' ? 1 : shape == 'cone' ? 2 : shape == 'cylinder' ? 3 : 4"
+        },
+        {
+          "name": "gap",
+          "kind": "pick",
+          "from": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "name": "a",
+          "kind": "expr",
+          "expr": "gap == 1 ? 2 : 1"
+        },
+        {
+          "name": "b",
+          "kind": "expr",
+          "expr": "gap <= 2 ? 3 : 2"
+        },
+        {
+          "name": "c",
+          "kind": "expr",
+          "expr": "gap == 4 ? 3 : 4"
+        }
+      ],
+      "answer": "i == 0 ? 'cube' : i == 1 ? 'sphere' : i == 2 ? 'cone' : i == 3 ? 'cylinder' : 'pyramid'",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "mod(i + a, 5) == 0 ? 'cube' : mod(i + a, 5) == 1 ? 'sphere' : mod(i + a, 5) == 2 ? 'cone' : mod(i + a, 5) == 3 ? 'cylinder' : 'pyramid'",
+          "mod(i + b, 5) == 0 ? 'cube' : mod(i + b, 5) == 1 ? 'sphere' : mod(i + b, 5) == 2 ? 'cone' : mod(i + b, 5) == 3 ? 'cylinder' : 'pyramid'",
+          "mod(i + c, 5) == 0 ? 'cube' : mod(i + c, 5) == 1 ? 'sphere' : mod(i + c, 5) == 2 ? 'cone' : mod(i + c, 5) == 3 ? 'cylinder' : 'pyramid'"
+        ]
+      },
+      "figure": {
+        "kind": "solid",
+        "solid": "shape",
+        "view": "'object'"
+      },
+      "tags": [
+        "AC9M1SP01",
+        "MA1-3DS-01"
+      ]
+    },
+    {
+      "id": "maths.1.shapes.solid-curved",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "1",
+      "prompt": "True or false: this shape has a curved surface.",
+      "vars": [
+        {
+          "name": "shape",
+          "kind": "pick",
+          "from": [
+            "cube",
+            "cuboid",
+            "sphere",
+            "cone",
+            "cylinder",
+            "square-pyramid",
+            "triangular-prism"
+          ],
+          "weights": [
+            3,
+            3,
+            4,
+            4,
+            4,
+            3,
+            3
+          ]
+        }
+      ],
+      "answer": "shape == 'sphere' || shape == 'cone' || shape == 'cylinder'",
+      "figure": {
+        "kind": "solid",
+        "solid": "shape",
+        "view": "'object'"
+      },
+      "tags": [
+        "AC9M1SP01",
+        "MA1-3DS-01"
+      ]
+    },
+    {
+      "id": "maths.1.shapes.solid-flat-faces",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "1",
+      "prompt": "How many flat faces does this shape have?",
+      "vars": [
+        {
+          "name": "shape",
+          "kind": "pick",
+          "from": [
+            "cube",
+            "cuboid",
+            "cone",
+            "cylinder",
+            "square-pyramid",
+            "triangular-prism"
+          ]
+        }
+      ],
+      "answer": "shape == 'cone' ? 1 : shape == 'cylinder' ? 2 : shape == 'square-pyramid' || shape == 'triangular-prism' ? 5 : 6",
+      "hint": "A flat face is a side you could stand the shape on.",
+      "figure": {
+        "kind": "solid",
+        "solid": "shape",
+        "view": "'object'"
+      },
+      "tags": [
+        "AC9M1SP01",
+        "MA1-3DS-01"
+      ]
+    },
+    {
+      "id": "maths.1.position.grid-squares-left",
+      "subject": "maths",
+      "topic": "position",
+      "level": "1",
+      "prompt": "How many squares are there to the left of the dot in the same row?",
+      "vars": [
+        {
+          "name": "c",
+          "kind": "int",
+          "min": "2",
+          "max": "5"
+        },
+        {
+          "name": "r",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        }
+      ],
+      "answer": "c - 1",
+      "hint": "Count along the row from the left edge up to the dot.",
+      "figure": {
+        "kind": "grid",
+        "at": "c + ',' + r",
+        "axisLabels": "'none'"
+      },
+      "tags": [
+        "AC9M1SP02",
+        "MA1-GM-01"
+      ]
+    },
+    {
+      "id": "maths.1.position.grid-bottom-row",
+      "subject": "maths",
+      "topic": "position",
+      "level": "1",
+      "prompt": "True or false: the dot is in the bottom row.",
+      "vars": [
+        {
+          "name": "bottom",
+          "kind": "pick",
+          "from": [
+            1,
+            0
+          ]
+        },
+        {
+          "name": "r",
+          "kind": "int",
+          "min": "bottom == 1 ? 1 : 2",
+          "max": "bottom == 1 ? 1 : 4"
+        },
+        {
+          "name": "c",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        }
+      ],
+      "answer": "r == 1",
+      "figure": {
+        "kind": "grid",
+        "at": "c + ',' + r",
+        "axisLabels": "'none'"
+      },
+      "tags": [
+        "AC9M1SP02",
+        "MA1-GM-01"
+      ]
+    },
+    {
+      "id": "maths.1.data.compare-tallies",
+      "subject": "maths",
+      "topic": "data",
+      "level": "1",
+      "prompt": "A class tally shows {a} children chose cats and {b} chose dogs. How many more chose cats?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "6",
+          "max": "18"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        }
+      ],
+      "answer": "a - b",
+      "tags": [
+        "AC9M1ST02",
+        "MA1-DATA-02"
+      ]
+    },
+    {
+      "id": "maths.1.data.graph-fewest",
+      "subject": "maths",
+      "topic": "data",
+      "level": "1",
+      "prompt": "This graph shows the fruit our class picked. Which fruit did the fewest children pick?",
+      "vars": [
+        {
+          "name": "pear",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "plum",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "kiwi",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        }
+      ],
+      "constraints": [
+        "pear != plum",
+        "plum != kiwi",
+        "pear != kiwi"
+      ],
+      "answer": "pear < plum && pear < kiwi ? 'Pear' : plum < kiwi ? 'Plum' : 'Kiwi'",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "'Pear'",
+          "'Plum'",
+          "'Kiwi'"
+        ]
+      },
+      "hint": "The shortest column is the fewest.",
+      "figure": {
+        "kind": "bar",
+        "values": "pear + ',' + plum + ',' + kiwi",
+        "labels": "'Pear,Plum,Kiwi'",
+        "scale": "1",
+        "style": "'column'"
+      },
+      "tags": [
+        "AC9M1ST02",
+        "MA1-DATA-02"
+      ]
+    },
+    {
+      "id": "maths.1.data.graph-difference",
+      "subject": "maths",
+      "topic": "data",
+      "level": "1",
+      "prompt": "This graph shows how we travel to school. How many more children come by {more} than by {less}?",
+      "vars": [
+        {
+          "name": "car",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "bus",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "bike",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "2"
+        },
+        {
+          "name": "k",
+          "kind": "int",
+          "min": "1",
+          "max": "2"
+        },
+        {
+          "name": "j",
+          "kind": "expr",
+          "expr": "mod(i + k, 3)"
+        },
+        {
+          "name": "big",
+          "kind": "expr",
+          "expr": "i == 0 ? car : i == 1 ? bus : bike"
+        },
+        {
+          "name": "small",
+          "kind": "expr",
+          "expr": "j == 0 ? car : j == 1 ? bus : bike"
+        },
+        {
+          "name": "more",
+          "kind": "expr",
+          "expr": "i == 0 ? 'car' : i == 1 ? 'bus' : 'bike'"
+        },
+        {
+          "name": "less",
+          "kind": "expr",
+          "expr": "j == 0 ? 'car' : j == 1 ? 'bus' : 'bike'"
+        }
+      ],
+      "constraints": [
+        "big > small"
+      ],
+      "answer": "big - small",
+      "hint": "Count both columns, then take the smaller away from the bigger.",
+      "figure": {
+        "kind": "bar",
+        "values": "car + ',' + bus + ',' + bike",
+        "labels": "'Car,Bus,Bike'",
+        "scale": "1",
+        "style": "'column'"
+      },
+      "tags": [
+        "AC9M1ST02",
+        "MA1-DATA-02"
+      ]
+    },
+    {
+      "id": "maths.1.data.picture-total",
+      "subject": "maths",
+      "topic": "data",
+      "level": "1",
+      "prompt": "Each picture stands for one book. How many books were read altogether?",
+      "vars": [
+        {
+          "name": "zoe",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "sam",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "eli",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        }
+      ],
+      "answer": "zoe + sam + eli",
+      "hint": "Count every picture in the graph.",
+      "figure": {
+        "kind": "pictograph",
+        "counts": "zoe + ',' + sam + ',' + eli",
+        "labels": "'Zoe,Sam,Eli'",
+        "key": "1"
+      },
+      "tags": [
+        "AC9M1ST02",
+        "MA1-DATA-02"
+      ]
+    },
+    {
+      "id": "maths.1.data.picture-claim",
+      "subject": "maths",
+      "topic": "data",
+      "level": "1",
+      "prompt": "Each picture stands for one shell. True or false: {a} found more shells than {b}.",
+      "vars": [
+        {
+          "name": "ivy",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "tom",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "ben",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "2"
+        },
+        {
+          "name": "k",
+          "kind": "int",
+          "min": "1",
+          "max": "2"
+        },
+        {
+          "name": "j",
+          "kind": "expr",
+          "expr": "mod(i + k, 3)"
+        },
+        {
+          "name": "va",
+          "kind": "expr",
+          "expr": "i == 0 ? ivy : i == 1 ? tom : ben"
+        },
+        {
+          "name": "vb",
+          "kind": "expr",
+          "expr": "j == 0 ? ivy : j == 1 ? tom : ben"
+        },
+        {
+          "name": "a",
+          "kind": "expr",
+          "expr": "i == 0 ? 'Ivy' : i == 1 ? 'Tom' : 'Ben'"
+        },
+        {
+          "name": "b",
+          "kind": "expr",
+          "expr": "j == 0 ? 'Ivy' : j == 1 ? 'Tom' : 'Ben'"
+        }
+      ],
+      "constraints": [
+        "va != vb"
+      ],
+      "answer": "va > vb",
+      "figure": {
+        "kind": "pictograph",
+        "counts": "ivy + ',' + tom + ',' + ben",
+        "labels": "'Ivy,Tom,Ben'",
+        "key": "1"
+      },
+      "tags": [
+        "AC9M1ST02",
+        "MA1-DATA-02"
+      ]
+    },
+    {
+      "id": "maths.1.chance.spinner-will-might",
+      "subject": "maths",
+      "topic": "chance",
+      "level": "1",
+      "prompt": "The arrow on this spinner is spun. Will it stop on {part}?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "pick",
+          "from": [
+            3,
+            4,
+            6
+          ]
+        },
+        {
+          "name": "whole",
+          "kind": "pick",
+          "from": [
+            1,
+            0
+          ]
+        },
+        {
+          "name": "s",
+          "kind": "int",
+          "min": "whole == 1 ? n : 1",
+          "max": "whole == 1 ? n : n - 1"
+        },
+        {
+          "name": "asked",
+          "kind": "pick",
+          "from": [
+            1,
+            0
+          ]
+        },
+        {
+          "name": "part",
+          "kind": "expr",
+          "expr": "asked == 1 ? 'a shaded part' : 'a part with no shading'"
+        }
+      ],
+      "answer": "asked == 1 ? (s == n ? 'It will' : 'It might') : (s == n ? 'It will not' : 'It might')",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "'It will'",
+          "'It might'",
+          "'It will not'"
+        ]
+      },
+      "figure": {
+        "kind": "spinner",
+        "sectors": "n == 3 ? '1,1,1' : n == 4 ? '1,1,1,1' : '1,1,1,1,1,1'",
+        "fills": "n == 3 ? (s == 1 ? 'a,b,b' : s == 2 ? 'a,a,b' : 'a,a,a') : n == 4 ? (s == 1 ? 'a,b,b,b' : s == 2 ? 'a,a,b,b' : s == 3 ? 'a,a,a,b' : 'a,a,a,a') : (s == 1 ? 'a,b,b,b,b,b' : s == 2 ? 'a,a,b,b,b,b' : s == 3 ? 'a,a,a,b,b,b' : s == 4 ? 'a,a,a,a,b,b' : s == 5 ? 'a,a,a,a,a,b' : 'a,a,a,a,a,a')"
+      },
+      "tags": [
+        "AC9M1P01",
+        "MA1-CHAN-01"
+      ]
+    },
+    {
+      "id": "maths.1.chance.spinner-more-likely",
+      "subject": "maths",
+      "topic": "chance",
+      "level": "1",
+      "prompt": "Is the arrow more likely to stop on a shaded part or on a part with no shading?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "pick",
+          "from": [
+            3,
+            4,
+            6
+          ]
+        },
+        {
+          "name": "s",
+          "kind": "int",
+          "min": "1",
+          "max": "n - 1"
+        }
+      ],
+      "constraints": [
+        "s * 2 != n"
+      ],
+      "answer": "s * 2 > n ? 'a shaded part' : 'a part with no shading'",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "'a shaded part'",
+          "'a part with no shading'"
+        ]
+      },
+      "hint": "More parts means more chance.",
+      "figure": {
+        "kind": "spinner",
+        "sectors": "n == 3 ? '1,1,1' : n == 4 ? '1,1,1,1' : '1,1,1,1,1,1'",
+        "fills": "n == 3 ? (s == 1 ? 'a,b,b' : s == 2 ? 'a,a,b' : 'a,a,a') : n == 4 ? (s == 1 ? 'a,b,b,b' : s == 2 ? 'a,a,b,b' : s == 3 ? 'a,a,a,b' : 'a,a,a,a') : (s == 1 ? 'a,b,b,b,b,b' : s == 2 ? 'a,a,b,b,b,b' : s == 3 ? 'a,a,a,b,b,b' : s == 4 ? 'a,a,a,a,b,b' : s == 5 ? 'a,a,a,a,a,b' : 'a,a,a,a,a,a')"
+      },
+      "tags": [
+        "AC9M1P01",
+        "MA1-CHAN-01"
+      ]
+    },
+    {
+      "id": "maths.1.chance.spinner-same-chance",
+      "subject": "maths",
+      "topic": "chance",
+      "level": "1",
+      "prompt": "True or false: the arrow is just as likely to stop on a shaded part as on a part with no shading.",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "pick",
+          "from": [
+            4,
+            6
+          ]
+        },
+        {
+          "name": "same",
+          "kind": "pick",
+          "from": [
+            1,
+            0
+          ]
+        },
+        {
+          "name": "off",
+          "kind": "int",
+          "min": "1",
+          "max": "n - 2"
+        },
+        {
+          "name": "s",
+          "kind": "expr",
+          "expr": "same == 1 ? n / 2 : mod(n / 2 - 1 + off, n - 1) + 1"
+        }
+      ],
+      "answer": "s * 2 == n",
+      "hint": "Count the shaded parts, then the parts with no shading.",
+      "figure": {
+        "kind": "spinner",
+        "sectors": "n == 4 ? '1,1,1,1' : '1,1,1,1,1,1'",
+        "fills": "n == 4 ? (s == 1 ? 'a,b,b,b' : s == 2 ? 'a,a,b,b' : s == 3 ? 'a,a,a,b' : 'a,a,a,a') : (s == 1 ? 'a,b,b,b,b,b' : s == 2 ? 'a,a,b,b,b,b' : s == 3 ? 'a,a,a,b,b,b' : s == 4 ? 'a,a,a,a,b,b' : s == 5 ? 'a,a,a,a,a,b' : 'a,a,a,a,a,a')"
+      },
+      "tags": [
+        "AC9M1P01",
+        "MA1-CHAN-01"
+      ]
+    }
+  ]
+}

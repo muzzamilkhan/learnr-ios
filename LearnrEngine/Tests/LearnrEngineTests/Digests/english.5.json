@@ -1,0 +1,29 @@
+{
+  "version": "d9af085669a9",
+  "set": "english.5",
+  "draws": 100,
+  "groups": {
+    "english.5.figurative-language.eliminate-one": "b16d58a329dc",
+    "english.5.figurative-language.identify": "2d2bf32a2806",
+    "english.5.figurative-language.match-the-example": "77a7a89fbf9e",
+    "english.5.figurative-language.same-device": "bac4432fef09",
+    "english.5.figurative-language.what-signals-it": "e9c2d513c286",
+    "english.5.homophones.affect-effect": "38d3b80c983c",
+    "english.5.homophones.council-counsel": "addc6fc3cb33",
+    "english.5.homophones.principal-principle": "fb16c96319e4",
+    "english.5.homophones.stationary-stationery": "03310b9b99fc",
+    "english.5.prefixes-and-suffixes.which-can-be-done": "a1227780b2ed",
+    "english.5.prefixes-and-suffixes.which-is-the-state": "8bf13209266e",
+    "english.5.prefixes-and-suffixes.write-able": "9b6f2b558f4f",
+    "english.5.prefixes-and-suffixes.write-ness": "119fae972c3c",
+    "english.5.spelling-patterns.same-silent-pattern": "c0c14e165604",
+    "english.5.spelling-patterns.which-is-plural": "5fc1e22a0d0b",
+    "english.5.spelling-patterns.write-plural": "55dfa4c87b76",
+    "english.5.spelling-patterns.write-singular": "d80f4e1ccdea",
+    "english.5.word-roots.root-meaning": "c4177e7e2c33",
+    "english.5.word-roots.same-root": "88442ac4e6f0",
+    "english.5.word-roots.which-comes-from-root": "e43db0ffd195",
+    "english.5.word-roots.write-by-clue": "f4640097ae8d",
+    "english.5.word-roots.write-root": "160c3a6b757b"
+  }
+}

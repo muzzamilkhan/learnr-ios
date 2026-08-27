@@ -1,0 +1,2139 @@
+{
+  "version": "cdfb1b49d5f4",
+  "subject": "maths",
+  "level": "6",
+  "templates": [
+    {
+      "id": "maths.6.integers.temperature",
+      "subject": "maths",
+      "topic": "integers",
+      "level": "6",
+      "prompt": "The temperature is {a}°C. Overnight it falls {d}°C. What is the new temperature, in °C?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "1",
+          "max": "8"
+        },
+        {
+          "name": "d",
+          "kind": "int",
+          "min": "a + 2",
+          "max": "a + 12"
+        },
+        {
+          "name": "s",
+          "kind": "pick",
+          "from": [
+            -1,
+            1
+          ]
+        }
+      ],
+      "answer": "a - d",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "d - a",
+          "-(a + d)",
+          "a - d + s"
+        ]
+      },
+      "hint": "Count down past zero.",
+      "tags": [
+        "AC9M6N01"
+      ]
+    },
+    {
+      "id": "maths.6.integers.subtract",
+      "subject": "maths",
+      "topic": "integers",
+      "level": "6",
+      "prompt": "What is {a} − {b}?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "1",
+          "max": "20"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "a + 2",
+          "max": "a + 20"
+        },
+        {
+          "name": "s",
+          "kind": "pick",
+          "from": [
+            -1,
+            1
+          ]
+        }
+      ],
+      "answer": "a - b",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "b - a",
+          "-(a + b)",
+          "a - b + s"
+        ]
+      },
+      "tags": [
+        "AC9M6N01"
+      ]
+    },
+    {
+      "id": "maths.6.integers.compare",
+      "subject": "maths",
+      "topic": "integers",
+      "level": "6",
+      "prompt": "True or false: −{a} is greater than −{b}.",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "1",
+          "max": "30"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "1",
+          "max": "30"
+        }
+      ],
+      "constraints": [
+        "a != b"
+      ],
+      "answer": "-a > -b",
+      "hint": "On a number line, further left is smaller.",
+      "tags": [
+        "AC9M6N01"
+      ]
+    },
+    {
+      "id": "maths.6.primes-and-squares.is-prime",
+      "subject": "maths",
+      "topic": "primes and squares",
+      "level": "6",
+      "prompt": "True or false: {n} is a prime number.",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "pick",
+          "from": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21
+          ]
+        }
+      ],
+      "answer": "n == 2 || n == 3 || n == 5 || n == 7 || n == 11 || n == 13 || n == 17 || n == 19",
+      "hint": "A prime has exactly two factors: 1 and itself.",
+      "tags": [
+        "AC9M6N02",
+        "MA3-RN-01"
+      ]
+    },
+    {
+      "id": "maths.6.primes-and-squares.square-number",
+      "subject": "maths",
+      "topic": "primes and squares",
+      "level": "6",
+      "prompt": "What is {n} squared?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "2",
+          "max": "15"
+        }
+      ],
+      "answer": "n * n",
+      "hint": "{n} × {n}",
+      "tags": [
+        "AC9M6N02",
+        "MA3-RN-01"
+      ]
+    },
+    {
+      "id": "maths.6.primes-and-squares.square-root",
+      "subject": "maths",
+      "topic": "primes and squares",
+      "level": "6",
+      "prompt": "What is the square root of {square}?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "2",
+          "max": "15"
+        },
+        {
+          "name": "square",
+          "kind": "expr",
+          "expr": "n * n"
+        }
+      ],
+      "answer": "n",
+      "hint": "Which number times itself gives {square}?",
+      "tags": [
+        "AC9M6N02",
+        "MA3-RN-01"
+      ]
+    },
+    {
+      "id": "maths.6.decimals.add",
+      "subject": "maths",
+      "topic": "decimals",
+      "level": "6",
+      "prompt": "What is {a} + {b}?",
+      "vars": [
+        {
+          "name": "na",
+          "kind": "int",
+          "min": "105",
+          "max": "4995"
+        },
+        {
+          "name": "nb",
+          "kind": "int",
+          "min": "105",
+          "max": "4995"
+        },
+        {
+          "name": "s",
+          "kind": "pick",
+          "from": [
+            -100,
+            100
+          ]
+        },
+        {
+          "name": "a",
+          "kind": "expr",
+          "expr": "na / 100"
+        },
+        {
+          "name": "b",
+          "kind": "expr",
+          "expr": "nb / 100"
+        }
+      ],
+      "answer": "(na + nb) / 100",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "(na + nb + 10) / 100",
+          "(na + nb - 1) / 100",
+          "(na + nb + s) / 100"
+        ]
+      },
+      "tags": [
+        "AC9M6N04",
+        "MA3-AR-01"
+      ]
+    },
+    {
+      "id": "maths.6.decimals.multiply-by-powers-of-ten",
+      "subject": "maths",
+      "topic": "decimals",
+      "level": "6",
+      "prompt": "What is {a} × {p}?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "105",
+          "max": "995"
+        },
+        {
+          "name": "a",
+          "kind": "expr",
+          "expr": "n / 100"
+        },
+        {
+          "name": "p",
+          "kind": "pick",
+          "from": [
+            10,
+            100
+          ]
+        },
+        {
+          "name": "q",
+          "kind": "pick",
+          "from": [
+            1,
+            10000
+          ]
+        }
+      ],
+      "constraints": [
+        "mod(n, 10) != 0"
+      ],
+      "answer": "n * p / 100",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "n * p / 1000",
+          "n * p / 10",
+          "n * p / q"
+        ]
+      },
+      "hint": "Every digit moves left one place for each zero.",
+      "tags": [
+        "AC9M6N06",
+        "MA3-MR-01"
+      ]
+    },
+    {
+      "id": "maths.6.decimals.divide-by-powers-of-ten",
+      "subject": "maths",
+      "topic": "decimals",
+      "level": "6",
+      "prompt": "What is {a} ÷ 10?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "11",
+          "max": "999"
+        },
+        {
+          "name": "a",
+          "kind": "expr",
+          "expr": "n / 10"
+        },
+        {
+          "name": "q",
+          "kind": "pick",
+          "from": [
+            1,
+            10000
+          ]
+        }
+      ],
+      "constraints": [
+        "mod(n, 10) != 0"
+      ],
+      "answer": "n / 100",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "n / 10",
+          "n / 1000",
+          "n / q"
+        ]
+      },
+      "hint": "Every digit moves one place to the right.",
+      "tags": [
+        "AC9M6N06",
+        "MA3-MR-01"
+      ]
+    },
+    {
+      "id": "maths.6.fractions.add-with-equivalence",
+      "subject": "maths",
+      "topic": "fractions",
+      "level": "6",
+      "prompt": "{a}/{d} + {b}/{d * 2} = ?/{d * 2}  What is the missing numerator?",
+      "vars": [
+        {
+          "name": "d",
+          "kind": "int",
+          "min": "3",
+          "max": "9"
+        },
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "1",
+          "max": "d - 2"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "1",
+          "max": "d - 1"
+        }
+      ],
+      "constraints": [
+        "a * 2 + b <= d * 2"
+      ],
+      "answer": "a * 2 + b",
+      "hint": "Rewrite {a}/{d} with {d * 2} on the bottom first.",
+      "tags": [
+        "AC9M6N05",
+        "MA3-RQF-01"
+      ]
+    },
+    {
+      "id": "maths.6.fractions.subtract-with-equivalence",
+      "subject": "maths",
+      "topic": "fractions",
+      "level": "6",
+      "prompt": "{a}/{d} − {b}/{d * 2} = ?/{d * 2}  What is the missing numerator?",
+      "vars": [
+        {
+          "name": "d",
+          "kind": "int",
+          "min": "3",
+          "max": "9"
+        },
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "2",
+          "max": "d - 1"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "1",
+          "max": "a * 2 - 1"
+        }
+      ],
+      "answer": "a * 2 - b",
+      "tags": [
+        "AC9M6N05",
+        "MA3-RQF-01"
+      ]
+    },
+    {
+      "id": "maths.6.fractions.compare",
+      "subject": "maths",
+      "topic": "fractions",
+      "level": "6",
+      "prompt": "True or false: {a}/{d} is greater than {b}/{e}.",
+      "vars": [
+        {
+          "name": "d",
+          "kind": "pick",
+          "from": [
+            2,
+            3,
+            4,
+            6
+          ]
+        },
+        {
+          "name": "e",
+          "kind": "pick",
+          "from": [
+            2,
+            3,
+            4,
+            6
+          ]
+        },
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "1",
+          "max": "d - 1"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "1",
+          "max": "e - 1"
+        }
+      ],
+      "constraints": [
+        "a / d != b / e"
+      ],
+      "answer": "a / d > b / e",
+      "hint": "Rewrite both with the same denominator.",
+      "tags": [
+        "AC9M6N03",
+        "MA3-RQF-01"
+      ]
+    },
+    {
+      "id": "maths.6.percentages.of-a-quantity",
+      "subject": "maths",
+      "topic": "percentages",
+      "level": "6",
+      "prompt": "What is {p}% of {total}?",
+      "vars": [
+        {
+          "name": "p",
+          "kind": "pick",
+          "from": [
+            5,
+            10,
+            20,
+            25,
+            50
+          ]
+        },
+        {
+          "name": "k",
+          "kind": "int",
+          "min": "2",
+          "max": "25"
+        },
+        {
+          "name": "total",
+          "kind": "expr",
+          "expr": "k * 20"
+        }
+      ],
+      "answer": "total * p / 100",
+      "tags": [
+        "AC9M6N07",
+        "MA3-RN-03"
+      ]
+    },
+    {
+      "id": "maths.6.percentages.discount-saved",
+      "subject": "maths",
+      "topic": "percentages",
+      "level": "6",
+      "prompt": "A jacket costs ${cost}. It is reduced by {p}%. How many dollars do you save?",
+      "vars": [
+        {
+          "name": "p",
+          "kind": "pick",
+          "from": [
+            10,
+            25,
+            50
+          ]
+        },
+        {
+          "name": "k",
+          "kind": "int",
+          "min": "1",
+          "max": "10"
+        },
+        {
+          "name": "cost",
+          "kind": "expr",
+          "expr": "k * 20"
+        }
+      ],
+      "answer": "cost * p / 100",
+      "tags": [
+        "AC9M6N07",
+        "MA3-RN-03"
+      ]
+    },
+    {
+      "id": "maths.6.percentages.sale-price",
+      "subject": "maths",
+      "topic": "percentages",
+      "level": "6",
+      "prompt": "A game costs ${cost} and is {p}% off. What do you pay, in dollars?",
+      "vars": [
+        {
+          "name": "p",
+          "kind": "pick",
+          "from": [
+            10,
+            25,
+            50
+          ]
+        },
+        {
+          "name": "k",
+          "kind": "int",
+          "min": "1",
+          "max": "10"
+        },
+        {
+          "name": "cost",
+          "kind": "expr",
+          "expr": "k * 20"
+        }
+      ],
+      "answer": "cost - cost * p / 100",
+      "hint": "Work out the saving, then subtract it from {cost} dollars.",
+      "tags": [
+        "AC9M6N07",
+        "MA3-RN-03"
+      ]
+    },
+    {
+      "id": "maths.6.order-of-operations.multiply-first",
+      "subject": "maths",
+      "topic": "order of operations",
+      "level": "6",
+      "prompt": "What is {a} + {b} × {c}?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "2",
+          "max": "30"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "2",
+          "max": "12"
+        },
+        {
+          "name": "c",
+          "kind": "int",
+          "min": "2",
+          "max": "9"
+        }
+      ],
+      "answer": "a + b * c",
+      "hint": "Multiplication happens before addition.",
+      "tags": [
+        "AC9M6A02",
+        "MA3-MR-02"
+      ]
+    },
+    {
+      "id": "maths.6.order-of-operations.brackets-first",
+      "subject": "maths",
+      "topic": "order of operations",
+      "level": "6",
+      "prompt": "What is ({a} + {b}) × {c}?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "2",
+          "max": "30"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "2",
+          "max": "20"
+        },
+        {
+          "name": "c",
+          "kind": "int",
+          "min": "2",
+          "max": "9"
+        }
+      ],
+      "answer": "(a + b) * c",
+      "hint": "Do what is inside the brackets first.",
+      "tags": [
+        "AC9M6A02",
+        "MA3-MR-02"
+      ]
+    },
+    {
+      "id": "maths.6.algebra.unknown-with-brackets",
+      "subject": "maths",
+      "topic": "algebra",
+      "level": "6",
+      "prompt": "What goes in the box? ({a} + ?) × {c} = {total}",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "2",
+          "max": "20"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "2",
+          "max": "20"
+        },
+        {
+          "name": "c",
+          "kind": "int",
+          "min": "2",
+          "max": "9"
+        },
+        {
+          "name": "total",
+          "kind": "expr",
+          "expr": "(a + b) * c"
+        }
+      ],
+      "answer": "b",
+      "hint": "Divide {total} by {c} first.",
+      "tags": [
+        "AC9M6A02",
+        "MA3-MR-02"
+      ]
+    },
+    {
+      "id": "maths.6.number-patterns.two-step-rule",
+      "subject": "maths",
+      "topic": "number patterns",
+      "level": "6",
+      "prompt": "The rule is: multiply by {k}, then add {b}. What comes after {a}?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "2",
+          "max": "20"
+        },
+        {
+          "name": "k",
+          "kind": "pick",
+          "from": [
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "1",
+          "max": "9"
+        }
+      ],
+      "answer": "a * k + b",
+      "tags": [
+        "AC9M6A01",
+        "MA3-MR-01"
+      ]
+    },
+    {
+      "id": "maths.6.number-patterns.growing-pattern",
+      "subject": "maths",
+      "topic": "number patterns",
+      "level": "6",
+      "prompt": "A growing pattern starts at {a} and the gaps grow: it adds {d}, then {2 * d}, then {3 * d}. What is the 4th number?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "1",
+          "max": "20"
+        },
+        {
+          "name": "d",
+          "kind": "int",
+          "min": "2",
+          "max": "9"
+        }
+      ],
+      "answer": "a + d + 2 * d + 3 * d",
+      "tags": [
+        "AC9M6A01",
+        "MA3-AR-01"
+      ]
+    },
+    {
+      "id": "maths.6.measurement.centimetres-to-metres",
+      "subject": "maths",
+      "topic": "measurement",
+      "level": "6",
+      "prompt": "How many metres is {cm} centimetres?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "3",
+          "max": "199"
+        },
+        {
+          "name": "cm",
+          "kind": "expr",
+          "expr": "n * 5"
+        },
+        {
+          "name": "q",
+          "kind": "pick",
+          "from": [
+            1,
+            10000
+          ]
+        }
+      ],
+      "constraints": [
+        "mod(n * 5, 100) != 0"
+      ],
+      "answer": "n * 5 / 100",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "n * 5 / 10",
+          "n * 5 / 1000",
+          "n * 5 / q"
+        ]
+      },
+      "hint": "There are 100 centimetres in a metre.",
+      "tags": [
+        "AC9M6M01",
+        "MA3-GM-02"
+      ]
+    },
+    {
+      "id": "maths.6.measurement.grams-to-kilograms",
+      "subject": "maths",
+      "topic": "measurement",
+      "level": "6",
+      "prompt": "How many kilograms is {g} grams?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "3",
+          "max": "199"
+        },
+        {
+          "name": "g",
+          "kind": "expr",
+          "expr": "n * 50"
+        },
+        {
+          "name": "q",
+          "kind": "pick",
+          "from": [
+            1,
+            100000
+          ]
+        }
+      ],
+      "constraints": [
+        "mod(n * 5, 100) != 0"
+      ],
+      "answer": "n * 50 / 1000",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "n * 50 / 100",
+          "n * 50 / 10000",
+          "n * 50 / q"
+        ]
+      },
+      "hint": "There are 1000 grams in a kilogram.",
+      "tags": [
+        "AC9M6M01",
+        "MA3-NSM-01"
+      ]
+    },
+    {
+      "id": "maths.6.measurement.number-line-centimetres",
+      "subject": "maths",
+      "topic": "measurement",
+      "level": "6",
+      "prompt": "The arrow shows a length in metres. How many centimetres is that?",
+      "vars": [
+        {
+          "name": "w",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "t",
+          "kind": "int",
+          "min": "0",
+          "max": "9"
+        },
+        {
+          "name": "k",
+          "kind": "pick",
+          "from": [
+            1,
+            3,
+            7,
+            9
+          ]
+        },
+        {
+          "name": "cm",
+          "kind": "expr",
+          "expr": "w * 100 + t * 10 + k"
+        },
+        {
+          "name": "lo",
+          "kind": "expr",
+          "expr": "(w * 100 + t * 10) / 100"
+        },
+        {
+          "name": "hi",
+          "kind": "expr",
+          "expr": "(w * 100 + t * 10 + 10) / 100"
+        },
+        {
+          "name": "m",
+          "kind": "expr",
+          "expr": "cm / 100"
+        }
+      ],
+      "answer": "cm",
+      "hint": "Each small tick is a hundredth of a metre, which is one centimetre.",
+      "figure": {
+        "kind": "number-line",
+        "at": "m",
+        "from": "lo",
+        "to": "hi",
+        "step": "0.1"
+      },
+      "tags": [
+        "AC9M6M01",
+        "MA3-GM-02"
+      ]
+    },
+    {
+      "id": "maths.6.measurement.total-mass",
+      "subject": "maths",
+      "topic": "measurement",
+      "level": "6",
+      "prompt": "{n} tins each weigh {g} grams. What is the total mass, in kilograms?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "2",
+          "max": "9"
+        },
+        {
+          "name": "j",
+          "kind": "int",
+          "min": "1",
+          "max": "8"
+        },
+        {
+          "name": "g",
+          "kind": "expr",
+          "expr": "j * 50"
+        }
+      ],
+      "answer": "n * g / 1000",
+      "hint": "Work out the total in grams first. There are 1000 grams in a kilogram.",
+      "tags": [
+        "AC9M6M01",
+        "MA3-NSM-01"
+      ]
+    },
+    {
+      "id": "maths.6.measurement.litres-to-millilitres",
+      "subject": "maths",
+      "topic": "measurement",
+      "level": "6",
+      "prompt": "A jug holds {l} litres. How many millilitres is that?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "105",
+          "max": "995"
+        },
+        {
+          "name": "l",
+          "kind": "expr",
+          "expr": "n / 100"
+        }
+      ],
+      "constraints": [
+        "mod(n, 10) != 0"
+      ],
+      "answer": "n * 10",
+      "hint": "There are 1000 millilitres in a litre.",
+      "tags": [
+        "AC9M6M01",
+        "MA3-3DS-02"
+      ]
+    },
+    {
+      "id": "maths.6.measurement.full-glasses",
+      "subject": "maths",
+      "topic": "measurement",
+      "level": "6",
+      "prompt": "A {l} litre bottle is poured into glasses holding {ml} millilitres each. How many glasses does it fill?",
+      "vars": [
+        {
+          "name": "l",
+          "kind": "int",
+          "min": "2",
+          "max": "6"
+        },
+        {
+          "name": "ml",
+          "kind": "pick",
+          "from": [
+            100,
+            125,
+            200,
+            250,
+            500
+          ]
+        }
+      ],
+      "answer": "l * 1000 / ml",
+      "hint": "The bottle holds {l * 1000} millilitres.",
+      "tags": [
+        "AC9M6M01",
+        "MA3-3DS-02"
+      ]
+    },
+    {
+      "id": "maths.6.perimeter-and-area.rectangle-formula",
+      "subject": "maths",
+      "topic": "perimeter and area",
+      "level": "6",
+      "prompt": "A rectangle is {l} m long and {w} m wide. What is its area, in square metres?",
+      "vars": [
+        {
+          "name": "l",
+          "kind": "int",
+          "min": "5",
+          "max": "40"
+        },
+        {
+          "name": "w",
+          "kind": "int",
+          "min": "3",
+          "max": "25"
+        }
+      ],
+      "answer": "l * w",
+      "hint": "Area of a rectangle is length times width.",
+      "tags": [
+        "AC9M6M02",
+        "MA3-2DS-02"
+      ]
+    },
+    {
+      "id": "maths.6.perimeter-and-area.square-area",
+      "subject": "maths",
+      "topic": "perimeter and area",
+      "level": "6",
+      "prompt": "A square has sides of {s} m. What is its area, in square metres?",
+      "vars": [
+        {
+          "name": "s",
+          "kind": "int",
+          "min": "3",
+          "max": "20"
+        }
+      ],
+      "answer": "s * s",
+      "tags": [
+        "AC9M6M02",
+        "MA3-2DS-02"
+      ]
+    },
+    {
+      "id": "maths.6.angles.on-a-straight-line",
+      "subject": "maths",
+      "topic": "angles",
+      "level": "6",
+      "prompt": "Two angles sit on a straight line. One is {a} degrees. What is the other, in degrees?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "10",
+          "max": "170",
+          "step": 5
+        }
+      ],
+      "answer": "180 - a",
+      "hint": "Angles on a straight line add to 180 degrees.",
+      "tags": [
+        "AC9M6M04",
+        "MA3-GM-03"
+      ]
+    },
+    {
+      "id": "maths.6.angles.at-a-point",
+      "subject": "maths",
+      "topic": "angles",
+      "level": "6",
+      "prompt": "Three angles meet at a point. Two of them are {a} degrees and {b} degrees. What is the third, in degrees?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "20",
+          "max": "170",
+          "step": 5
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "20",
+          "max": "170",
+          "step": 5
+        }
+      ],
+      "constraints": [
+        "a + b < 350"
+      ],
+      "answer": "360 - a - b",
+      "hint": "Angles at a point add to 360 degrees.",
+      "tags": [
+        "AC9M6M04",
+        "MA3-GM-03"
+      ]
+    },
+    {
+      "id": "maths.6.angles.vertically-opposite",
+      "subject": "maths",
+      "topic": "angles",
+      "level": "6",
+      "prompt": "Two straight lines cross. One of the angles is {a} degrees. What is the angle opposite it, in degrees?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "15",
+          "max": "165",
+          "step": 5
+        }
+      ],
+      "answer": "a",
+      "hint": "Vertically opposite angles are equal.",
+      "tags": [
+        "AC9M6M04",
+        "MA3-GM-03"
+      ]
+    },
+    {
+      "id": "maths.6.angles.rest-of-a-turn",
+      "subject": "maths",
+      "topic": "angles",
+      "level": "6",
+      "prompt": "The marked angle is {d} degrees. How many degrees is the angle on the other side of it?",
+      "vars": [
+        {
+          "name": "d",
+          "kind": "int",
+          "min": "20",
+          "max": "340",
+          "step": 5
+        }
+      ],
+      "constraints": [
+        "d != 180"
+      ],
+      "answer": "360 - d",
+      "hint": "Angles at a point add to 360 degrees.",
+      "figure": {
+        "kind": "angle",
+        "degrees": "d"
+      },
+      "tags": [
+        "AC9M6M04",
+        "MA3-GM-03"
+      ]
+    },
+    {
+      "id": "maths.6.angles.rest-of-a-line",
+      "subject": "maths",
+      "topic": "angles",
+      "level": "6",
+      "prompt": "One more angle beside the marked one would make a straight line. Would that other angle be bigger or smaller than this one?",
+      "vars": [
+        {
+          "name": "d",
+          "kind": "int",
+          "min": "20",
+          "max": "160",
+          "step": 5
+        }
+      ],
+      "constraints": [
+        "abs(d - 90) >= 25"
+      ],
+      "answer": "d < 90 ? 'bigger' : 'smaller'",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "'bigger'",
+          "'smaller'"
+        ]
+      },
+      "hint": "The two add to 180 degrees, so compare this one with 90.",
+      "figure": {
+        "kind": "angle",
+        "degrees": "d"
+      },
+      "tags": [
+        "AC9M6M04",
+        "MA3-GM-03"
+      ]
+    },
+    {
+      "id": "maths.6.time.journey-length",
+      "subject": "maths",
+      "topic": "time",
+      "level": "6",
+      "prompt": "A bus leaves at 9:{a} and arrives at 10:{b}. How many minutes does the journey take?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "5",
+          "max": "55",
+          "step": 5
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "5",
+          "max": "55",
+          "step": 5
+        }
+      ],
+      "answer": "60 - a + b",
+      "hint": "Count up to 10 o’clock first.",
+      "tags": [
+        "AC9M6M03",
+        "MA3-NSM-02"
+      ]
+    },
+    {
+      "id": "maths.6.time.clock-arrival",
+      "subject": "maths",
+      "topic": "time",
+      "level": "6",
+      "prompt": "This clock shows when the bus leaves. The trip takes {n} minutes. What time does it arrive?",
+      "vars": [
+        {
+          "name": "h",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        },
+        {
+          "name": "mi",
+          "kind": "int",
+          "min": "0",
+          "max": "11"
+        },
+        {
+          "name": "m",
+          "kind": "expr",
+          "expr": "mi * 5"
+        },
+        {
+          "name": "g",
+          "kind": "int",
+          "min": "1",
+          "max": "11"
+        },
+        {
+          "name": "n",
+          "kind": "expr",
+          "expr": "g * 5"
+        },
+        {
+          "name": "tot",
+          "kind": "expr",
+          "expr": "mi + g"
+        },
+        {
+          "name": "ah",
+          "kind": "expr",
+          "expr": "tot >= 12 ? mod(h, 12) + 1 : h"
+        },
+        {
+          "name": "am",
+          "kind": "expr",
+          "expr": "mod(tot, 12) * 5"
+        },
+        {
+          "name": "hs",
+          "kind": "pick",
+          "from": [
+            1,
+            -1
+          ]
+        },
+        {
+          "name": "oh",
+          "kind": "expr",
+          "expr": "mod(ah - 1 + hs + 12, 12) + 1"
+        },
+        {
+          "name": "dm",
+          "kind": "int",
+          "min": "1",
+          "max": "11"
+        },
+        {
+          "name": "om",
+          "kind": "expr",
+          "expr": "mod(mod(tot, 12) + dm, 12) * 5"
+        },
+        {
+          "name": "ams",
+          "kind": "expr",
+          "expr": "am == 0 ? '00' : am == 5 ? '05' : '' + am"
+        },
+        {
+          "name": "oms",
+          "kind": "expr",
+          "expr": "om == 0 ? '00' : om == 5 ? '05' : '' + om"
+        }
+      ],
+      "answer": "ah + ':' + ams",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "oh + ':' + ams",
+          "ah + ':' + oms",
+          "oh + ':' + oms"
+        ]
+      },
+      "hint": "Read the clock first, then count on round the face in 5s.",
+      "figure": {
+        "kind": "clock",
+        "hour": "h",
+        "minute": "m",
+        "numerals": "true",
+        "minuteTicks": "true"
+      },
+      "tags": [
+        "AC9M6M03",
+        "MA3-NSM-02"
+      ]
+    },
+    {
+      "id": "maths.6.time.clock-leave-by",
+      "subject": "maths",
+      "topic": "time",
+      "level": "6",
+      "prompt": "This clock shows when the train leaves. The walk takes {n} minutes. What time should you set off?",
+      "vars": [
+        {
+          "name": "h",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        },
+        {
+          "name": "mi",
+          "kind": "int",
+          "min": "0",
+          "max": "11"
+        },
+        {
+          "name": "m",
+          "kind": "expr",
+          "expr": "mi * 5"
+        },
+        {
+          "name": "g",
+          "kind": "int",
+          "min": "1",
+          "max": "11"
+        },
+        {
+          "name": "n",
+          "kind": "expr",
+          "expr": "g * 5"
+        },
+        {
+          "name": "back",
+          "kind": "expr",
+          "expr": "mi - g < 0 ? 1 : 0"
+        },
+        {
+          "name": "ah",
+          "kind": "expr",
+          "expr": "back == 1 ? (h == 1 ? 12 : h - 1) : h"
+        },
+        {
+          "name": "am",
+          "kind": "expr",
+          "expr": "mod(mi - g + 12, 12) * 5"
+        },
+        {
+          "name": "hs",
+          "kind": "pick",
+          "from": [
+            1,
+            -1
+          ]
+        },
+        {
+          "name": "oh",
+          "kind": "expr",
+          "expr": "mod(ah - 1 + hs + 12, 12) + 1"
+        },
+        {
+          "name": "dm",
+          "kind": "int",
+          "min": "1",
+          "max": "11"
+        },
+        {
+          "name": "om",
+          "kind": "expr",
+          "expr": "mod(mod(mi - g + 12, 12) + dm, 12) * 5"
+        },
+        {
+          "name": "ams",
+          "kind": "expr",
+          "expr": "am == 0 ? '00' : am == 5 ? '05' : '' + am"
+        },
+        {
+          "name": "oms",
+          "kind": "expr",
+          "expr": "om == 0 ? '00' : om == 5 ? '05' : '' + om"
+        }
+      ],
+      "answer": "ah + ':' + ams",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "oh + ':' + ams",
+          "ah + ':' + oms",
+          "oh + ':' + oms"
+        ]
+      },
+      "hint": "Read the clock first, then count back round the face in 5s.",
+      "figure": {
+        "kind": "clock",
+        "hour": "h",
+        "minute": "m",
+        "numerals": "true",
+        "minuteTicks": "true"
+      },
+      "tags": [
+        "AC9M6M03",
+        "MA3-NSM-02"
+      ]
+    },
+    {
+      "id": "maths.6.position.move-a-point",
+      "subject": "maths",
+      "topic": "position",
+      "level": "6",
+      "prompt": "A point sits at ({x}, {y}) on a grid. It moves {d} units to the right. What is its new x-coordinate?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "1",
+          "max": "8"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "8"
+        },
+        {
+          "name": "d",
+          "kind": "int",
+          "min": "2",
+          "max": "9"
+        }
+      ],
+      "answer": "x + d",
+      "tags": [
+        "AC9M6SP02",
+        "MA3-GM-01"
+      ]
+    },
+    {
+      "id": "maths.6.position.move-right",
+      "subject": "maths",
+      "topic": "position",
+      "level": "6",
+      "prompt": "The dot moves {d} {sq} right. What is its new x-coordinate?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "d",
+          "kind": "int",
+          "min": "1",
+          "max": "2"
+        },
+        {
+          "name": "sq",
+          "kind": "expr",
+          "expr": "d == 1 ? 'square' : 'squares'"
+        },
+        {
+          "name": "cols",
+          "kind": "int",
+          "min": "max(3, x + d)",
+          "max": "5"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "rws",
+          "kind": "int",
+          "min": "3",
+          "max": "4"
+        }
+      ],
+      "answer": "x + d",
+      "hint": "Read the number along the bottom the dot is standing on, then count on {d}.",
+      "figure": {
+        "kind": "grid",
+        "at": "x + ',' + y",
+        "columns": "cols",
+        "rows": "rws",
+        "onLines": "true"
+      },
+      "tags": [
+        "AC9M6SP02",
+        "MA3-GM-01"
+      ]
+    },
+    {
+      "id": "maths.6.position.move-back",
+      "subject": "maths",
+      "topic": "position",
+      "level": "6",
+      "prompt": "The dot has just moved {d} {sq} up. What was its y-coordinate before?",
+      "vars": [
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "2",
+          "max": "4"
+        },
+        {
+          "name": "d",
+          "kind": "int",
+          "min": "1",
+          "max": "2"
+        },
+        {
+          "name": "sq",
+          "kind": "expr",
+          "expr": "d == 1 ? 'square' : 'squares'"
+        },
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "cols",
+          "kind": "int",
+          "min": "max(3, x)",
+          "max": "5"
+        },
+        {
+          "name": "rws",
+          "kind": "int",
+          "min": "max(3, y)",
+          "max": "4"
+        }
+      ],
+      "answer": "y - d",
+      "hint": "Read the number up the side the dot is standing on, then count back {d}.",
+      "figure": {
+        "kind": "grid",
+        "at": "x + ',' + y",
+        "columns": "cols",
+        "rows": "rws",
+        "onLines": "true"
+      },
+      "tags": [
+        "AC9M6SP02",
+        "MA3-GM-01"
+      ]
+    },
+    {
+      "id": "maths.6.shapes.is-a-prism",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "6",
+      "prompt": "True or false: this shape is a prism.",
+      "vars": [
+        {
+          "name": "prism",
+          "kind": "pick",
+          "from": [
+            1,
+            0
+          ]
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "2"
+        },
+        {
+          "name": "shape",
+          "kind": "expr",
+          "expr": "prism == 1 ? (i == 0 ? 'cube' : i == 1 ? 'cuboid' : 'triangular-prism') : (i == 0 ? 'square-pyramid' : i == 1 ? 'cone' : 'sphere')"
+        }
+      ],
+      "answer": "prism == 1",
+      "hint": "A prism has two matching ends joined by flat faces.",
+      "figure": {
+        "kind": "solid",
+        "solid": "shape",
+        "view": "'object'"
+      },
+      "tags": [
+        "AC9M6SP01",
+        "MA3-3DS-01"
+      ]
+    },
+    {
+      "id": "maths.6.shapes.cross-section",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "6",
+      "prompt": "This shape is cut straight across, parallel to its ends. What shape is the cut face?",
+      "vars": [
+        {
+          "name": "shape",
+          "kind": "pick",
+          "from": [
+            "cube",
+            "triangular-prism",
+            "cylinder"
+          ]
+        }
+      ],
+      "answer": "shape == 'cube' ? 'square' : shape == 'triangular-prism' ? 'triangle' : 'circle'",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "'square'",
+          "'triangle'",
+          "'circle'"
+        ]
+      },
+      "hint": "The cut face is the same shape as the end you would look straight at.",
+      "figure": {
+        "kind": "solid",
+        "solid": "shape",
+        "view": "'object'"
+      },
+      "tags": [
+        "AC9M6SP01",
+        "MA3-3DS-01"
+      ]
+    },
+    {
+      "id": "maths.6.shapes.net-is-a-prism",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "6",
+      "prompt": "True or false: this net folds up into a prism.",
+      "vars": [
+        {
+          "name": "prism",
+          "kind": "pick",
+          "from": [
+            1,
+            0
+          ]
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "2"
+        },
+        {
+          "name": "j",
+          "kind": "int",
+          "min": "0",
+          "max": "1"
+        },
+        {
+          "name": "shape",
+          "kind": "expr",
+          "expr": "prism == 1 ? (i == 0 ? 'cube' : i == 1 ? 'cuboid' : 'triangular-prism') : (j == 0 ? 'square-pyramid' : 'cone')"
+        }
+      ],
+      "answer": "prism == 1",
+      "hint": "A prism folds up with two matching ends joined by flat faces.",
+      "figure": {
+        "kind": "solid",
+        "solid": "shape",
+        "view": "'net'"
+      },
+      "tags": [
+        "AC9M6SP01",
+        "MA3-3DS-01"
+      ]
+    },
+    {
+      "id": "maths.6.data.column-range",
+      "subject": "maths",
+      "topic": "data",
+      "level": "6",
+      "prompt": "What is the range of these scores?",
+      "vars": [
+        {
+          "name": "rr",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "lo",
+          "kind": "int",
+          "min": "1",
+          "max": "5 - rr"
+        },
+        {
+          "name": "hi",
+          "kind": "expr",
+          "expr": "lo + rr"
+        },
+        {
+          "name": "p",
+          "kind": "int",
+          "min": "lo",
+          "max": "hi"
+        },
+        {
+          "name": "q",
+          "kind": "int",
+          "min": "lo",
+          "max": "hi"
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "k",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "j",
+          "kind": "expr",
+          "expr": "mod(i + k, 4)"
+        },
+        {
+          "name": "v0",
+          "kind": "expr",
+          "expr": "i == 0 ? hi : j == 0 ? lo : p"
+        },
+        {
+          "name": "v1",
+          "kind": "expr",
+          "expr": "i == 1 ? hi : j == 1 ? lo : p"
+        },
+        {
+          "name": "v2",
+          "kind": "expr",
+          "expr": "i == 2 ? hi : j == 2 ? lo : q"
+        },
+        {
+          "name": "v3",
+          "kind": "expr",
+          "expr": "i == 3 ? hi : j == 3 ? lo : q"
+        }
+      ],
+      "answer": "rr * 10",
+      "hint": "The range is the highest score take away the lowest.",
+      "figure": {
+        "kind": "bar",
+        "values": "(v0 * 10) + ',' + (v1 * 10) + ',' + (v2 * 10) + ',' + (v3 * 10)",
+        "labels": "'Ada,Kai,Leo,Mia'",
+        "scale": "10",
+        "style": "'column'"
+      },
+      "tags": [
+        "AC9M6ST01",
+        "MA3-DATA-02"
+      ]
+    },
+    {
+      "id": "maths.6.data.column-mode",
+      "subject": "maths",
+      "topic": "data",
+      "level": "6",
+      "prompt": "Which pet is the mode?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "top",
+          "kind": "int",
+          "min": "3",
+          "max": "5"
+        },
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "1",
+          "max": "top - 1"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "1",
+          "max": "top - 1"
+        },
+        {
+          "name": "c",
+          "kind": "int",
+          "min": "1",
+          "max": "top - 1"
+        },
+        {
+          "name": "d",
+          "kind": "int",
+          "min": "1",
+          "max": "top - 1"
+        },
+        {
+          "name": "v0",
+          "kind": "expr",
+          "expr": "i == 0 ? top : a"
+        },
+        {
+          "name": "v1",
+          "kind": "expr",
+          "expr": "i == 1 ? top : b"
+        },
+        {
+          "name": "v2",
+          "kind": "expr",
+          "expr": "i == 2 ? top : c"
+        },
+        {
+          "name": "v3",
+          "kind": "expr",
+          "expr": "i == 3 ? top : d"
+        }
+      ],
+      "answer": "i == 0 ? 'Cat' : i == 1 ? 'Dog' : i == 2 ? 'Rat' : 'Pig'",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "'Cat'",
+          "'Dog'",
+          "'Rat'",
+          "'Pig'"
+        ]
+      },
+      "hint": "The mode is the one that comes up most often - the tallest column.",
+      "figure": {
+        "kind": "bar",
+        "values": "(v0 * 10) + ',' + (v1 * 10) + ',' + (v2 * 10) + ',' + (v3 * 10)",
+        "labels": "'Cat,Dog,Rat,Pig'",
+        "scale": "10",
+        "style": "'column'"
+      },
+      "tags": [
+        "AC9M6ST01",
+        "MA3-DATA-02"
+      ]
+    },
+    {
+      "id": "maths.6.data.line-graph-steepest",
+      "subject": "maths",
+      "topic": "data",
+      "level": "6",
+      "prompt": "Between which two days did the visitors rise the most?",
+      "vars": [
+        {
+          "name": "g0",
+          "kind": "int",
+          "min": "-1",
+          "max": "2"
+        },
+        {
+          "name": "g1",
+          "kind": "int",
+          "min": "-1",
+          "max": "2"
+        },
+        {
+          "name": "g2",
+          "kind": "int",
+          "min": "-1",
+          "max": "2"
+        },
+        {
+          "name": "p1",
+          "kind": "expr",
+          "expr": "g0"
+        },
+        {
+          "name": "p2",
+          "kind": "expr",
+          "expr": "g0 + g1"
+        },
+        {
+          "name": "p3",
+          "kind": "expr",
+          "expr": "g0 + g1 + g2"
+        },
+        {
+          "name": "lo",
+          "kind": "expr",
+          "expr": "min(0, p1, p2, p3)"
+        },
+        {
+          "name": "hi",
+          "kind": "expr",
+          "expr": "max(0, p1, p2, p3)"
+        },
+        {
+          "name": "off",
+          "kind": "int",
+          "min": "0",
+          "max": "max(0, 4 - hi + lo)"
+        },
+        {
+          "name": "v0",
+          "kind": "expr",
+          "expr": "1 - lo + off"
+        },
+        {
+          "name": "v1",
+          "kind": "expr",
+          "expr": "v0 + g0"
+        },
+        {
+          "name": "v2",
+          "kind": "expr",
+          "expr": "v1 + g1"
+        },
+        {
+          "name": "v3",
+          "kind": "expr",
+          "expr": "v2 + g2"
+        }
+      ],
+      "constraints": [
+        "max(g0, g1, g2) > 0",
+        "(g0 > g1 && g0 > g2) || (g1 > g0 && g1 > g2) || (g2 > g0 && g2 > g1)"
+      ],
+      "answer": "g0 > g1 && g0 > g2 ? 'Mon to Tue' : g1 > g2 ? 'Tue to Wed' : 'Wed to Thu'",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "'Mon to Tue'",
+          "'Tue to Wed'",
+          "'Wed to Thu'"
+        ]
+      },
+      "hint": "The steepest climb on the line is the biggest rise.",
+      "figure": {
+        "kind": "bar",
+        "values": "(v0 * 10) + ',' + (v1 * 10) + ',' + (v2 * 10) + ',' + (v3 * 10)",
+        "labels": "'Mon,Tue,Wed,Thu'",
+        "scale": "10",
+        "style": "'line'"
+      },
+      "tags": [
+        "AC9M6ST01",
+        "MA3-DATA-02"
+      ]
+    },
+    {
+      "id": "maths.6.data.picture-key-total",
+      "subject": "maths",
+      "topic": "data",
+      "level": "6",
+      "prompt": "Each picture stands for 20 books. How many books did the three read altogether?",
+      "vars": [
+        {
+          "name": "ha",
+          "kind": "int",
+          "min": "1",
+          "max": "8"
+        },
+        {
+          "name": "hb",
+          "kind": "int",
+          "min": "1",
+          "max": "8"
+        },
+        {
+          "name": "hc",
+          "kind": "int",
+          "min": "1",
+          "max": "8"
+        }
+      ],
+      "answer": "(ha + hb + hc) * 10",
+      "hint": "A whole picture is 20 books and half a picture is 10. Add the three rows.",
+      "figure": {
+        "kind": "pictograph",
+        "counts": "(ha * 10) + ',' + (hb * 10) + ',' + (hc * 10)",
+        "labels": "'Ada,Kai,Leo'",
+        "key": "20",
+        "halves": "true"
+      },
+      "tags": [
+        "AC9M6ST01",
+        "MA3-DATA-01"
+      ]
+    },
+    {
+      "id": "maths.6.chance.spinner-decimal",
+      "subject": "maths",
+      "topic": "chance",
+      "level": "6",
+      "prompt": "What is the chance of stopping on a shaded part, as a decimal?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "pick",
+          "from": [
+            5,
+            10
+          ]
+        },
+        {
+          "name": "s",
+          "kind": "int",
+          "min": "1",
+          "max": "n - 1"
+        },
+        {
+          "name": "parts",
+          "kind": "expr",
+          "expr": "n == 5 ? '1,1,1,1,1' : '1,1,1,1,1,1,1,1,1,1'"
+        },
+        {
+          "name": "shading",
+          "kind": "expr",
+          "expr": "n == 5 ? (s == 1 ? 'a,b,b,b,b' : s == 2 ? 'a,a,b,b,b' : s == 3 ? 'a,a,a,b,b' : s == 4 ? 'a,a,a,a,b' : 'a,a,a,a,a') : (s == 1 ? 'a,b,b,b,b,b,b,b,b,b' : s == 2 ? 'a,a,b,b,b,b,b,b,b,b' : s == 3 ? 'a,a,a,b,b,b,b,b,b,b' : s == 4 ? 'a,a,a,a,b,b,b,b,b,b' : s == 5 ? 'a,a,a,a,a,b,b,b,b,b' : s == 6 ? 'a,a,a,a,a,a,b,b,b,b' : s == 7 ? 'a,a,a,a,a,a,a,b,b,b' : s == 8 ? 'a,a,a,a,a,a,a,a,b,b' : s == 9 ? 'a,a,a,a,a,a,a,a,a,b' : 'a,a,a,a,a,a,a,a,a,a')"
+        }
+      ],
+      "answer": "s / n",
+      "hint": "Count the shaded parts, then all the parts, and divide.",
+      "figure": {
+        "kind": "spinner",
+        "sectors": "parts",
+        "fills": "shading"
+      },
+      "tags": [
+        "AC9M6P01",
+        "MA3-CHAN-01"
+      ]
+    },
+    {
+      "id": "maths.6.chance.spinner-not-shaded",
+      "subject": "maths",
+      "topic": "chance",
+      "level": "6",
+      "prompt": "What is the chance of not stopping on a shaded part, as a percentage?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "pick",
+          "from": [
+            4,
+            5
+          ]
+        },
+        {
+          "name": "s",
+          "kind": "int",
+          "min": "1",
+          "max": "n - 1"
+        },
+        {
+          "name": "parts",
+          "kind": "expr",
+          "expr": "n == 4 ? '1,1,1,1' : '1,1,1,1,1'"
+        },
+        {
+          "name": "shading",
+          "kind": "expr",
+          "expr": "n == 4 ? (s == 1 ? 'a,b,b,b' : s == 2 ? 'a,a,b,b' : s == 3 ? 'a,a,a,b' : 'a,a,a,a') : (s == 1 ? 'a,b,b,b,b' : s == 2 ? 'a,a,b,b,b' : s == 3 ? 'a,a,a,b,b' : s == 4 ? 'a,a,a,a,b' : 'a,a,a,a,a')"
+        }
+      ],
+      "answer": "(n - s) * 100 / n",
+      "hint": "The whole spinner is 100%. How much of it is left unshaded?",
+      "figure": {
+        "kind": "spinner",
+        "sectors": "parts",
+        "fills": "shading"
+      },
+      "tags": [
+        "AC9M6P01",
+        "MA3-CHAN-01"
+      ]
+    },
+    {
+      "id": "maths.6.chance.spinner-and-coin",
+      "subject": "maths",
+      "topic": "chance",
+      "level": "6",
+      "prompt": "You spin this spinner once and toss a coin. How many different results are there?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "3",
+          "max": "6"
+        },
+        {
+          "name": "parts",
+          "kind": "expr",
+          "expr": "n == 3 ? '1,1,1' : n == 4 ? '1,1,1,1' : n == 5 ? '1,1,1,1,1' : '1,1,1,1,1,1'"
+        }
+      ],
+      "answer": "n * 2",
+      "hint": "Every part of the spinner can come up with heads, or with tails.",
+      "figure": {
+        "kind": "spinner",
+        "sectors": "parts"
+      },
+      "tags": [
+        "AC9M6P01",
+        "MA3-CHAN-01"
+      ]
+    }
+  ]
+}

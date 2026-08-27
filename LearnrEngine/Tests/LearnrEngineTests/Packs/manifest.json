@@ -1,0 +1,259 @@
+{
+  "version": "ffabd538927a",
+  "subjects": [
+    {
+      "subject": "english",
+      "levels": [
+        {
+          "level": "K",
+          "topics": [
+            "letters and sounds",
+            "opposites",
+            "rhyme",
+            "sentences",
+            "syllables"
+          ],
+          "templateCount": 21,
+          "etag": "104cbb947163"
+        },
+        {
+          "level": "1",
+          "topics": [
+            "letters and sounds",
+            "opposites",
+            "plurals",
+            "rhyme",
+            "sentences",
+            "word classes"
+          ],
+          "templateCount": 24,
+          "etag": "d32b6a1aca72"
+        },
+        {
+          "level": "2",
+          "topics": [
+            "compound words",
+            "past tense",
+            "plurals",
+            "punctuation",
+            "synonyms",
+            "word classes"
+          ],
+          "templateCount": 22,
+          "etag": "8d7f7d44373c"
+        },
+        {
+          "level": "3",
+          "topics": [
+            "homophones",
+            "prefixes and suffixes",
+            "punctuation",
+            "spelling patterns",
+            "word classes"
+          ],
+          "templateCount": 22,
+          "etag": "59f80399e134"
+        },
+        {
+          "level": "4",
+          "topics": [
+            "homophones",
+            "plurals",
+            "prefixes and suffixes",
+            "synonyms",
+            "word classes"
+          ],
+          "templateCount": 22,
+          "etag": "92b2162f60ad"
+        },
+        {
+          "level": "5",
+          "topics": [
+            "figurative language",
+            "homophones",
+            "prefixes and suffixes",
+            "spelling patterns",
+            "word roots"
+          ],
+          "templateCount": 22,
+          "etag": "8fa92c1bf680"
+        },
+        {
+          "level": "6",
+          "topics": [
+            "figurative language",
+            "punctuation",
+            "spelling patterns",
+            "word classes",
+            "word roots"
+          ],
+          "templateCount": 22,
+          "etag": "859d5cc54f2d"
+        }
+      ]
+    },
+    {
+      "subject": "maths",
+      "levels": [
+        {
+          "level": "K",
+          "topics": [
+            "addition",
+            "comparing numbers",
+            "counting numbers",
+            "data",
+            "even and odd",
+            "measurement",
+            "patterns",
+            "shapes",
+            "sharing",
+            "subtraction",
+            "time"
+          ],
+          "templateCount": 41,
+          "etag": "490f82ec1387"
+        },
+        {
+          "level": "1",
+          "topics": [
+            "addition",
+            "chance",
+            "counting numbers",
+            "data",
+            "fractions",
+            "measurement",
+            "money",
+            "number patterns",
+            "place value",
+            "position",
+            "shapes",
+            "sharing",
+            "subtraction",
+            "time"
+          ],
+          "templateCount": 48,
+          "etag": "35220d53ebf3"
+        },
+        {
+          "level": "2",
+          "topics": [
+            "addition",
+            "addition and subtraction",
+            "chance",
+            "counting numbers",
+            "data",
+            "division",
+            "even and odd",
+            "fractions",
+            "measurement",
+            "money",
+            "multiplication",
+            "number patterns",
+            "place value",
+            "position",
+            "shapes",
+            "subtraction",
+            "time",
+            "turns"
+          ],
+          "templateCount": 52,
+          "etag": "28a7a43c6193"
+        },
+        {
+          "level": "3",
+          "topics": [
+            "addition",
+            "algebra",
+            "angles",
+            "chance",
+            "counting numbers",
+            "data",
+            "division",
+            "fractions",
+            "measurement",
+            "money",
+            "multiplication",
+            "place value",
+            "position",
+            "shapes",
+            "subtraction",
+            "time"
+          ],
+          "templateCount": 52,
+          "etag": "2e22d6589f84"
+        },
+        {
+          "level": "4",
+          "topics": [
+            "algebra",
+            "angles",
+            "chance",
+            "data",
+            "decimals",
+            "division",
+            "estimation",
+            "even and odd",
+            "fractions",
+            "measurement",
+            "multiplication",
+            "number patterns",
+            "perimeter and area",
+            "position",
+            "shapes",
+            "symmetry",
+            "time"
+          ],
+          "templateCount": 55,
+          "etag": "26c832dc804d"
+        },
+        {
+          "level": "5",
+          "topics": [
+            "algebra",
+            "angles",
+            "chance",
+            "data",
+            "decimals",
+            "division",
+            "factors and multiples",
+            "fractions",
+            "measurement",
+            "multiplication",
+            "number patterns",
+            "percentages",
+            "perimeter and area",
+            "position",
+            "shapes",
+            "symmetry",
+            "time"
+          ],
+          "templateCount": 53,
+          "etag": "b5f2fb49fb42"
+        },
+        {
+          "level": "6",
+          "topics": [
+            "algebra",
+            "angles",
+            "chance",
+            "data",
+            "decimals",
+            "fractions",
+            "integers",
+            "measurement",
+            "number patterns",
+            "order of operations",
+            "percentages",
+            "perimeter and area",
+            "position",
+            "primes and squares",
+            "shapes",
+            "time"
+          ],
+          "templateCount": 49,
+          "etag": "cdfb1b49d5f4"
+        }
+      ]
+    }
+  ]
+}

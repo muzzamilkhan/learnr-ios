@@ -1,0 +1,90 @@
+{
+  "version": "04b1e32eeee9",
+  "sets": [
+    {
+      "set": "english.K",
+      "groups": 21,
+      "version": "e3160c38ad92"
+    },
+    {
+      "set": "english.1",
+      "groups": 24,
+      "version": "337d6baf2115"
+    },
+    {
+      "set": "english.2",
+      "groups": 22,
+      "version": "92d2253a19f5"
+    },
+    {
+      "set": "english.3",
+      "groups": 22,
+      "version": "fb4f7cf03d76"
+    },
+    {
+      "set": "english.4",
+      "groups": 22,
+      "version": "97e323476b95"
+    },
+    {
+      "set": "english.5",
+      "groups": 22,
+      "version": "d9af085669a9"
+    },
+    {
+      "set": "english.6",
+      "groups": 22,
+      "version": "683a3754cce2"
+    },
+    {
+      "set": "maths.K",
+      "groups": 41,
+      "version": "b8eb6d8ac08c"
+    },
+    {
+      "set": "maths.1",
+      "groups": 48,
+      "version": "e5bddcdf4284"
+    },
+    {
+      "set": "maths.2",
+      "groups": 52,
+      "version": "7dbf81d6283f"
+    },
+    {
+      "set": "maths.3",
+      "groups": 52,
+      "version": "d51c90436a28"
+    },
+    {
+      "set": "maths.4",
+      "groups": 55,
+      "version": "b9b52929eaf4"
+    },
+    {
+      "set": "maths.5",
+      "groups": 53,
+      "version": "5afc3fa38fdc"
+    },
+    {
+      "set": "maths.6",
+      "groups": 49,
+      "version": "7eb94726b43e"
+    },
+    {
+      "set": "expr",
+      "groups": 506,
+      "version": "1dedbdd8cd30"
+    },
+    {
+      "set": "grading",
+      "groups": 505,
+      "version": "4718acb84e49"
+    },
+    {
+      "set": "profile",
+      "groups": 15,
+      "version": "11570323392b"
+    }
+  ]
+}

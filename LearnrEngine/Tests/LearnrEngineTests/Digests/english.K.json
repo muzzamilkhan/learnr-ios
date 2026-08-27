@@ -1,0 +1,28 @@
+{
+  "version": "e3160c38ad92",
+  "set": "english.K",
+  "draws": 100,
+  "groups": {
+    "english.K.letters-and-sounds.alphabet-next": "f98ebc89693c",
+    "english.K.letters-and-sounds.ends-with": "4585e917be86",
+    "english.K.letters-and-sounds.letter-count": "32950288ced6",
+    "english.K.letters-and-sounds.middle-sound": "e0df82ba1f43",
+    "english.K.letters-and-sounds.starts-with": "eb5b2e73f0e0",
+    "english.K.letters-and-sounds.word-for-sound": "e593df96e17a",
+    "english.K.opposites.opposite-of-two": "dac2683db67e",
+    "english.K.opposites.which-opposite": "10220c3bd564",
+    "english.K.opposites.worked-example": "257f6140c5fe",
+    "english.K.rhyme.finish-the-rhyme": "f40425e23511",
+    "english.K.rhyme.which-rhymes": "0762f8a6e84c",
+    "english.K.sentences.complete-with-adjective": "16123b7c191e",
+    "english.K.sentences.complete-with-noun": "a85ff085ffc3",
+    "english.K.sentences.complete-with-verb": "c7d3ecfc4ea7",
+    "english.K.sentences.ends-with-full-stop": "61f18b2517e3",
+    "english.K.sentences.is-a-question": "a12a995452cc",
+    "english.K.sentences.is-a-sentence": "0a42d2ccc9b0",
+    "english.K.sentences.starts-with-capital": "917edae3b51f",
+    "english.K.syllables.count-claps": "500b393aa8be",
+    "english.K.syllables.count-parts": "98f9e3a20b6f",
+    "english.K.syllables.which-has-n": "52be45ac8abc"
+  }
+}

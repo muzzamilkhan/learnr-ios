@@ -1,0 +1,29 @@
+{
+  "version": "92d2253a19f5",
+  "set": "english.2",
+  "draws": 100,
+  "groups": {
+    "english.2.compound-words.combine": "b14b55c32f69",
+    "english.2.compound-words.find-missing-part": "beb812de20f9",
+    "english.2.compound-words.which-is-compound": "64fa4ce55306",
+    "english.2.compound-words.which-word-completes": "5dfd90495271",
+    "english.2.past-tense.which-is-past-tense": "a7b75e8d7cdf",
+    "english.2.past-tense.which-is-present": "55981f098378",
+    "english.2.past-tense.worked-example": "f9c1f5e6de6d",
+    "english.2.past-tense.write-past-tense": "5457b801188a",
+    "english.2.plurals.add-ies": "8900d3f180db",
+    "english.2.plurals.add-ves": "763f2d901cf1",
+    "english.2.plurals.which-is-plural": "4f58142b141d",
+    "english.2.plurals.which-is-singular": "2a9a90971624",
+    "english.2.punctuation.is-question": "79096c679a19",
+    "english.2.punctuation.name-the-mark": "10bb2885fe02",
+    "english.2.punctuation.which-mark": "81717c7792af",
+    "english.2.synonyms.two-choices": "ea64aba314c6",
+    "english.2.synonyms.which-synonym": "d192cbdae74a",
+    "english.2.synonyms.worked-example": "d65a393072ff",
+    "english.2.word-classes.identify-in-sentence": "aad4f911c21a",
+    "english.2.word-classes.is-adjective": "94fe39827a50",
+    "english.2.word-classes.is-doing-word": "dbb4b7ae7a77",
+    "english.2.word-classes.name-the-word-type": "f39e5092e763"
+  }
+}

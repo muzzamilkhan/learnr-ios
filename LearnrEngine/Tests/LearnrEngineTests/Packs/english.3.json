@@ -1,0 +1,1032 @@
+{
+  "version": "59f80399e134",
+  "subject": "english",
+  "level": "3",
+  "templates": [
+    {
+      "id": "english.3.prefixes-and-suffixes.add-un",
+      "subject": "english",
+      "topic": "prefixes and suffixes",
+      "level": "3",
+      "prompt": "Write the word that means not {word}.",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'happy' : i == 1 ? 'kind' : i == 2 ? 'fair' : i == 3 ? 'safe' : i == 4 ? 'lucky' : 'wise'"
+        }
+      ],
+      "answer": "'un' + word",
+      "answerType": "text",
+      "hint": "Add un- to the front of the word.",
+      "tags": [
+        "AC9E3LY10",
+        "EN2-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.3.prefixes-and-suffixes.double-add-ing",
+      "subject": "english",
+      "topic": "prefixes and suffixes",
+      "level": "3",
+      "prompt": "Write {word} with -ing added.",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'hop' : i == 1 ? 'run' : i == 2 ? 'stop' : i == 3 ? 'swim' : i == 4 ? 'plan' : 'grab'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'hopping' : i == 1 ? 'running' : i == 2 ? 'stopping' : i == 3 ? 'swimming' : i == 4 ? 'planning' : 'grabbing'"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "text",
+      "hint": "Double the last letter before adding -ing.",
+      "tags": [
+        "AC9E3LY10",
+        "EN2-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.3.prefixes-and-suffixes.which-means-not",
+      "subject": "english",
+      "topic": "prefixes and suffixes",
+      "level": "3",
+      "prompt": "Which word means not {word}?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'happy' : i == 1 ? 'kind' : i == 2 ? 'fair' : i == 3 ? 'safe' : i == 4 ? 'lucky' : 'wise'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'unhappy' : i == 1 ? 'unkind' : i == 2 ? 'unfair' : i == 3 ? 'unsafe' : i == 4 ? 'unlucky' : 'unwise'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 6 == 0 ? 'unhappy' : (i + d1) % 6 == 1 ? 'unkind' : (i + d1) % 6 == 2 ? 'unfair' : (i + d1) % 6 == 3 ? 'unsafe' : (i + d1) % 6 == 4 ? 'unlucky' : 'unwise'",
+          "(i + d2) % 6 == 0 ? 'unhappy' : (i + d2) % 6 == 1 ? 'unkind' : (i + d2) % 6 == 2 ? 'unfair' : (i + d2) % 6 == 3 ? 'unsafe' : (i + d2) % 6 == 4 ? 'unlucky' : 'unwise'"
+        ]
+      },
+      "hint": "Un- at the start of a word means not.",
+      "tags": [
+        "AC9E3LY10",
+        "EN2-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.3.prefixes-and-suffixes.which-is-happening-now",
+      "subject": "english",
+      "topic": "prefixes and suffixes",
+      "level": "3",
+      "prompt": "Which word means {word} is happening right now?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'hop' : i == 1 ? 'run' : i == 2 ? 'stop' : i == 3 ? 'swim' : i == 4 ? 'plan' : 'grab'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'hopping' : i == 1 ? 'running' : i == 2 ? 'stopping' : i == 3 ? 'swimming' : i == 4 ? 'planning' : 'grabbing'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 6 == 0 ? 'hopping' : (i + d1) % 6 == 1 ? 'running' : (i + d1) % 6 == 2 ? 'stopping' : (i + d1) % 6 == 3 ? 'swimming' : (i + d1) % 6 == 4 ? 'planning' : 'grabbing'",
+          "(i + d2) % 6 == 0 ? 'hopping' : (i + d2) % 6 == 1 ? 'running' : (i + d2) % 6 == 2 ? 'stopping' : (i + d2) % 6 == 3 ? 'swimming' : (i + d2) % 6 == 4 ? 'planning' : 'grabbing'"
+        ]
+      },
+      "hint": "Double the last letter, then add -ing.",
+      "tags": [
+        "AC9E3LY10",
+        "EN2-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.3.prefixes-and-suffixes.which-means-again",
+      "subject": "english",
+      "topic": "prefixes and suffixes",
+      "level": "3",
+      "prompt": "Which word means to {word} again?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'do' : i == 1 ? 'make' : i == 2 ? 'build' : i == 3 ? 'fill' : i == 4 ? 'play' : 'tell'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'redo' : i == 1 ? 'remake' : i == 2 ? 'rebuild' : i == 3 ? 'refill' : i == 4 ? 'replay' : 'retell'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 6 == 0 ? 'redo' : (i + d1) % 6 == 1 ? 'remake' : (i + d1) % 6 == 2 ? 'rebuild' : (i + d1) % 6 == 3 ? 'refill' : (i + d1) % 6 == 4 ? 'replay' : 'retell'",
+          "(i + d2) % 6 == 0 ? 'redo' : (i + d2) % 6 == 1 ? 'remake' : (i + d2) % 6 == 2 ? 'rebuild' : (i + d2) % 6 == 3 ? 'refill' : (i + d2) % 6 == 4 ? 'replay' : 'retell'"
+        ]
+      },
+      "hint": "Re- at the start of a word means again.",
+      "tags": [
+        "AC9E3LY10",
+        "EN2-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.3.homophones.to-too-two",
+      "subject": "english",
+      "topic": "homophones",
+      "level": "3",
+      "prompt": "Which word completes the sentence? {sentence}",
+      "vars": [
+        {
+          "name": "j",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "j == 0 ? \"We are going ? the beach.\" : j == 1 ? \"This soup is ? hot to eat.\" : \"I have ? brothers.\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "j == 0 ? 'to' : j == 1 ? 'too' : 'two'"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(j + 1) % 3 == 0 ? 'to' : (j + 1) % 3 == 1 ? 'too' : 'two'",
+          "(j + 2) % 3 == 0 ? 'to' : (j + 2) % 3 == 1 ? 'too' : 'two'"
+        ]
+      },
+      "hint": "Read the whole sentence to hear which one fits.",
+      "tags": [
+        "AC9E3LY12",
+        "EN2-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.3.homophones.there-their",
+      "subject": "english",
+      "topic": "homophones",
+      "level": "3",
+      "prompt": "Which word completes the sentence? {sentence}",
+      "vars": [
+        {
+          "name": "j",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "j == 0 ? \"Put the ball over ?.\" : \"The children lost ? bags.\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "j == 0 ? 'there' : 'their'"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "1 - j == 0 ? 'there' : 'their'"
+        ]
+      },
+      "hint": "One of these two words points to a place, and the other shows something belongs to someone.",
+      "tags": [
+        "AC9E3LY12",
+        "EN2-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.3.homophones.here-hear",
+      "subject": "english",
+      "topic": "homophones",
+      "level": "3",
+      "prompt": "Which word completes the sentence? {sentence}",
+      "vars": [
+        {
+          "name": "j",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "j == 0 ? \"Come and sit over ?.\" : \"Can you ? the birds?\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "j == 0 ? 'here' : 'hear'"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "1 - j == 0 ? 'here' : 'hear'"
+        ]
+      },
+      "hint": "One of these two words points to a place, and the other is about listening.",
+      "tags": [
+        "AC9E3LY12",
+        "EN2-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.3.homophones.one-won",
+      "subject": "english",
+      "topic": "homophones",
+      "level": "3",
+      "prompt": "Which word completes the sentence? {sentence}",
+      "vars": [
+        {
+          "name": "j",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "j == 0 ? \"I only have ? apple.\" : \"Our team ? the game.\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "j == 0 ? 'one' : 'won'"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "1 - j == 0 ? 'one' : 'won'"
+        ]
+      },
+      "hint": "One of these two words is a number, and the other means came first in a game.",
+      "tags": [
+        "AC9E3LY12",
+        "EN2-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.3.word-classes.identify-in-sentence",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "3",
+      "prompt": "Which word in this sentence is the {kind}? {sentence}",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "role",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "'The ' + (i == 0 ? 'tall' : i == 1 ? 'clever' : i == 2 ? 'brave' : i == 3 ? 'loud' : i == 4 ? 'curious' : 'strong') + ' ' + (i == 0 ? 'giant' : i == 1 ? 'fox' : i == 2 ? 'knight' : i == 3 ? 'lion' : i == 4 ? 'student' : 'farmer') + ' can ' + (i == 0 ? 'climb' : i == 1 ? 'hunt' : i == 2 ? 'fight' : i == 3 ? 'roar' : i == 4 ? 'study' : 'plant') + '.'"
+        },
+        {
+          "name": "kind",
+          "kind": "expr",
+          "expr": "role == 1 ? 'doing word' : (role == 2 ? 'describing word' : 'naming word')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "role == 1 ? (i == 0 ? 'climb' : i == 1 ? 'hunt' : i == 2 ? 'fight' : i == 3 ? 'roar' : i == 4 ? 'study' : 'plant') : role == 2 ? (i == 0 ? 'tall' : i == 1 ? 'clever' : i == 2 ? 'brave' : i == 3 ? 'loud' : i == 4 ? 'curious' : 'strong') : (i == 0 ? 'giant' : i == 1 ? 'fox' : i == 2 ? 'knight' : i == 3 ? 'lion' : i == 4 ? 'student' : 'farmer')"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(role + 1) % 3 == 1 ? (i == 0 ? 'climb' : i == 1 ? 'hunt' : i == 2 ? 'fight' : i == 3 ? 'roar' : i == 4 ? 'study' : 'plant') : (role + 1) % 3 == 2 ? (i == 0 ? 'tall' : i == 1 ? 'clever' : i == 2 ? 'brave' : i == 3 ? 'loud' : i == 4 ? 'curious' : 'strong') : (i == 0 ? 'giant' : i == 1 ? 'fox' : i == 2 ? 'knight' : i == 3 ? 'lion' : i == 4 ? 'student' : 'farmer')",
+          "(role + 2) % 3 == 1 ? (i == 0 ? 'climb' : i == 1 ? 'hunt' : i == 2 ? 'fight' : i == 3 ? 'roar' : i == 4 ? 'study' : 'plant') : (role + 2) % 3 == 2 ? (i == 0 ? 'tall' : i == 1 ? 'clever' : i == 2 ? 'brave' : i == 3 ? 'loud' : i == 4 ? 'curious' : 'strong') : (i == 0 ? 'giant' : i == 1 ? 'fox' : i == 2 ? 'knight' : i == 3 ? 'lion' : i == 4 ? 'student' : 'farmer')"
+        ]
+      },
+      "hint": "A naming word names something, a doing word tells you what it does, and a describing word tells you what it is like.",
+      "tags": [
+        "AC9E3LA07",
+        "EN2-CWT-01"
+      ]
+    },
+    {
+      "id": "english.3.word-classes.name-the-word-type",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "3",
+      "prompt": "In this sentence, what kind of word is {candidate}? {sentence}",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "role",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "'The ' + (i == 0 ? 'tall' : i == 1 ? 'clever' : i == 2 ? 'brave' : i == 3 ? 'loud' : i == 4 ? 'curious' : 'strong') + ' ' + (i == 0 ? 'giant' : i == 1 ? 'fox' : i == 2 ? 'knight' : i == 3 ? 'lion' : i == 4 ? 'student' : 'farmer') + ' can ' + (i == 0 ? 'climb' : i == 1 ? 'hunt' : i == 2 ? 'fight' : i == 3 ? 'roar' : i == 4 ? 'study' : 'plant') + '.'"
+        },
+        {
+          "name": "candidate",
+          "kind": "expr",
+          "expr": "role == 1 ? (i == 0 ? 'climb' : i == 1 ? 'hunt' : i == 2 ? 'fight' : i == 3 ? 'roar' : i == 4 ? 'study' : 'plant') : role == 2 ? (i == 0 ? 'tall' : i == 1 ? 'clever' : i == 2 ? 'brave' : i == 3 ? 'loud' : i == 4 ? 'curious' : 'strong') : (i == 0 ? 'giant' : i == 1 ? 'fox' : i == 2 ? 'knight' : i == 3 ? 'lion' : i == 4 ? 'student' : 'farmer')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "role == 1 ? 'doing word' : (role == 2 ? 'describing word' : 'naming word')"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(role + 1) % 3 == 1 ? 'doing word' : ((role + 1) % 3 == 2 ? 'describing word' : 'naming word')",
+          "(role + 2) % 3 == 1 ? 'doing word' : ((role + 2) % 3 == 2 ? 'describing word' : 'naming word')"
+        ]
+      },
+      "hint": "A naming word names something, a doing word tells you what it does, and a describing word tells you what it is like.",
+      "tags": [
+        "AC9E3LA07",
+        "EN2-CWT-01"
+      ]
+    },
+    {
+      "id": "english.3.word-classes.identify-verb-tense",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "3",
+      "prompt": "Is this happening in the past, now, or in the future? {sentence}",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "tense",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "'I ' + (tense == 0 ? (i == 0 ? 'walk' : i == 1 ? 'clean' : i == 2 ? 'cook' : i == 3 ? 'paint' : i == 4 ? 'watch' : 'wash') : tense == 1 ? ((i == 0 ? 'walk' : i == 1 ? 'clean' : i == 2 ? 'cook' : i == 3 ? 'paint' : i == 4 ? 'watch' : 'wash') + 'ed') : ('will ' + (i == 0 ? 'walk' : i == 1 ? 'clean' : i == 2 ? 'cook' : i == 3 ? 'paint' : i == 4 ? 'watch' : 'wash'))) + ' ' + (i == 0 ? \"the dog\" : i == 1 ? \"my room\" : i == 2 ? \"dinner\" : i == 3 ? \"a picture\" : i == 4 ? \"a movie\" : \"the car\") + '.'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "tense == 1 ? 'past' : (tense == 2 ? 'future' : 'now')"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(tense + 1) % 3 == 1 ? 'past' : ((tense + 1) % 3 == 2 ? 'future' : 'now')",
+          "(tense + 2) % 3 == 1 ? 'past' : ((tense + 2) % 3 == 2 ? 'future' : 'now')"
+        ]
+      },
+      "hint": "Look at the verb: does it end in -ed, or does it start with will?",
+      "tags": [
+        "AC9E3LA08",
+        "EN2-CWT-01"
+      ]
+    },
+    {
+      "id": "english.3.word-classes.future-tense-form",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "3",
+      "prompt": "Which word means {word} will happen, if {word} means it is happening now?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'walk' : i == 1 ? 'clean' : i == 2 ? 'cook' : i == 3 ? 'paint' : i == 4 ? 'watch' : 'wash'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "'will ' + word"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "'will ' + ((i + d1) % 6 == 0 ? 'walk' : (i + d1) % 6 == 1 ? 'clean' : (i + d1) % 6 == 2 ? 'cook' : (i + d1) % 6 == 3 ? 'paint' : (i + d1) % 6 == 4 ? 'watch' : 'wash')",
+          "'will ' + ((i + d2) % 6 == 0 ? 'walk' : (i + d2) % 6 == 1 ? 'clean' : (i + d2) % 6 == 2 ? 'cook' : (i + d2) % 6 == 3 ? 'paint' : (i + d2) % 6 == 4 ? 'watch' : 'wash')"
+        ]
+      },
+      "hint": "Add will before the word to show it will happen in the future.",
+      "tags": [
+        "AC9E3LA08",
+        "EN2-CWT-01"
+      ]
+    },
+    {
+      "id": "english.3.word-classes.is-a-verb",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "3",
+      "prompt": "Is {word} a doing word?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "15"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'skip' : i == 1 ? 'shout' : i == 2 ? 'laugh' : i == 3 ? 'crawl' : i == 4 ? 'whisper' : i == 5 ? 'giggle' : i == 6 ? 'stretch' : i == 7 ? 'wander' : i == 8 ? 'pumpkin' : i == 9 ? 'ladder' : i == 10 ? 'shiny' : i == 11 ? 'narrow' : i == 12 ? 'bucket' : i == 13 ? 'glossy' : i == 14 ? 'island' : 'wooden'"
+        }
+      ],
+      "answer": "i < 8",
+      "hint": "A doing word tells you what someone or something does.",
+      "tags": [
+        "AC9E3LA07",
+        "EN2-CWT-01"
+      ]
+    },
+    {
+      "id": "english.3.punctuation.which-is-contraction",
+      "subject": "english",
+      "topic": "punctuation",
+      "level": "3",
+      "prompt": "Which word means the same as {long}?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "long",
+          "kind": "expr",
+          "expr": "i == 0 ? \"do not\" : i == 1 ? \"is not\" : i == 2 ? \"are not\" : i == 3 ? \"have not\" : i == 4 ? \"was not\" : \"will not\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? \"don't\" : i == 1 ? \"isn't\" : i == 2 ? \"aren't\" : i == 3 ? \"haven't\" : i == 4 ? \"wasn't\" : \"won't\""
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 6 == 0 ? \"don't\" : (i + d1) % 6 == 1 ? \"isn't\" : (i + d1) % 6 == 2 ? \"aren't\" : (i + d1) % 6 == 3 ? \"haven't\" : (i + d1) % 6 == 4 ? \"wasn't\" : \"won't\"",
+          "(i + d2) % 6 == 0 ? \"don't\" : (i + d2) % 6 == 1 ? \"isn't\" : (i + d2) % 6 == 2 ? \"aren't\" : (i + d2) % 6 == 3 ? \"haven't\" : (i + d2) % 6 == 4 ? \"wasn't\" : \"won't\""
+        ]
+      },
+      "hint": "A contraction joins two words and uses an apostrophe for the missing letters.",
+      "tags": [
+        "AC9E3LA11",
+        "EN2-CWT-01"
+      ]
+    },
+    {
+      "id": "english.3.punctuation.which-is-long-form",
+      "subject": "english",
+      "topic": "punctuation",
+      "level": "3",
+      "prompt": "Which words mean the same as {short}?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "short",
+          "kind": "expr",
+          "expr": "i == 0 ? \"don't\" : i == 1 ? \"isn't\" : i == 2 ? \"aren't\" : i == 3 ? \"haven't\" : i == 4 ? \"wasn't\" : \"won't\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? \"do not\" : i == 1 ? \"is not\" : i == 2 ? \"are not\" : i == 3 ? \"have not\" : i == 4 ? \"was not\" : \"will not\""
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 6 == 0 ? \"do not\" : (i + d1) % 6 == 1 ? \"is not\" : (i + d1) % 6 == 2 ? \"are not\" : (i + d1) % 6 == 3 ? \"have not\" : (i + d1) % 6 == 4 ? \"was not\" : \"will not\"",
+          "(i + d2) % 6 == 0 ? \"do not\" : (i + d2) % 6 == 1 ? \"is not\" : (i + d2) % 6 == 2 ? \"are not\" : (i + d2) % 6 == 3 ? \"have not\" : (i + d2) % 6 == 4 ? \"was not\" : \"will not\""
+        ]
+      },
+      "hint": "Say the contraction slowly to hear the two words inside it.",
+      "tags": [
+        "AC9E3LA11",
+        "EN2-CWT-01"
+      ]
+    },
+    {
+      "id": "english.3.punctuation.which-is-possessive",
+      "subject": "english",
+      "topic": "punctuation",
+      "level": "3",
+      "prompt": "Which word means belonging to the {noun}?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "noun",
+          "kind": "expr",
+          "expr": "i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'teacher' : i == 3 ? 'sister' : i == 4 ? 'boy' : 'girl'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "(i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'teacher' : i == 3 ? 'sister' : i == 4 ? 'boy' : 'girl') + \"'s\""
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "((i + d1) % 6 == 0 ? 'dog' : (i + d1) % 6 == 1 ? 'cat' : (i + d1) % 6 == 2 ? 'teacher' : (i + d1) % 6 == 3 ? 'sister' : (i + d1) % 6 == 4 ? 'boy' : 'girl') + \"'s\"",
+          "((i + d2) % 6 == 0 ? 'dog' : (i + d2) % 6 == 1 ? 'cat' : (i + d2) % 6 == 2 ? 'teacher' : (i + d2) % 6 == 3 ? 'sister' : (i + d2) % 6 == 4 ? 'boy' : 'girl') + \"'s\""
+        ]
+      },
+      "hint": "Add an apostrophe and an s to show something belongs to someone.",
+      "tags": [
+        "AC9E3LA11",
+        "EN2-CWT-01"
+      ]
+    },
+    {
+      "id": "english.3.punctuation.which-is-the-owner",
+      "subject": "english",
+      "topic": "punctuation",
+      "level": "3",
+      "prompt": "Which word means just the owner, if {poss} means it belongs to them?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "poss",
+          "kind": "expr",
+          "expr": "(i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'teacher' : i == 3 ? 'sister' : i == 4 ? 'boy' : 'girl') + \"'s\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'teacher' : i == 3 ? 'sister' : i == 4 ? 'boy' : 'girl'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 6 == 0 ? 'dog' : (i + d1) % 6 == 1 ? 'cat' : (i + d1) % 6 == 2 ? 'teacher' : (i + d1) % 6 == 3 ? 'sister' : (i + d1) % 6 == 4 ? 'boy' : 'girl'",
+          "(i + d2) % 6 == 0 ? 'dog' : (i + d2) % 6 == 1 ? 'cat' : (i + d2) % 6 == 2 ? 'teacher' : (i + d2) % 6 == 3 ? 'sister' : (i + d2) % 6 == 4 ? 'boy' : 'girl'"
+        ]
+      },
+      "hint": "Take away the apostrophe and s to find the owner.",
+      "tags": [
+        "AC9E3LA11",
+        "EN2-CWT-01"
+      ]
+    },
+    {
+      "id": "english.3.spelling-patterns.add-ion",
+      "subject": "english",
+      "topic": "spelling patterns",
+      "level": "3",
+      "prompt": "Write the noun made by adding -ion to {word}.",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'act' : i == 1 ? 'invent' : i == 2 ? 'collect' : i == 3 ? 'connect' : i == 4 ? 'direct' : 'correct'"
+        }
+      ],
+      "answer": "word + 'ion'",
+      "answerType": "text",
+      "hint": "Add -ion to the end of the word.",
+      "tags": [
+        "AC9E3LY11",
+        "EN2-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.3.spelling-patterns.which-is-ion-noun",
+      "subject": "english",
+      "topic": "spelling patterns",
+      "level": "3",
+      "prompt": "Which word is made by adding -ion to {word}?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'act' : i == 1 ? 'invent' : i == 2 ? 'collect' : i == 3 ? 'connect' : i == 4 ? 'direct' : 'correct'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "word + 'ion'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "((i + d1) % 6 == 0 ? 'act' : (i + d1) % 6 == 1 ? 'invent' : (i + d1) % 6 == 2 ? 'collect' : (i + d1) % 6 == 3 ? 'connect' : (i + d1) % 6 == 4 ? 'direct' : 'correct') + 'ion'",
+          "((i + d2) % 6 == 0 ? 'act' : (i + d2) % 6 == 1 ? 'invent' : (i + d2) % 6 == 2 ? 'collect' : (i + d2) % 6 == 3 ? 'connect' : (i + d2) % 6 == 4 ? 'direct' : 'correct') + 'ion'"
+        ]
+      },
+      "hint": "Add -ion to the end of the word.",
+      "tags": [
+        "AC9E3LY11",
+        "EN2-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.3.spelling-patterns.find-base-word",
+      "subject": "english",
+      "topic": "spelling patterns",
+      "level": "3",
+      "prompt": "Write the base word that {noun} comes from.",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'act' : i == 1 ? 'invent' : i == 2 ? 'collect' : i == 3 ? 'connect' : i == 4 ? 'direct' : 'correct'"
+        },
+        {
+          "name": "noun",
+          "kind": "expr",
+          "expr": "word + 'ion'"
+        }
+      ],
+      "answer": "word",
+      "answerType": "text",
+      "hint": "Take away -ion to find the base word.",
+      "tags": [
+        "AC9E3LY11",
+        "EN2-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.3.spelling-patterns.which-same-pattern",
+      "subject": "english",
+      "topic": "spelling patterns",
+      "level": "3",
+      "prompt": "Which word has the same letter pattern as {target}?",
+      "vars": [
+        {
+          "name": "f",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "t",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "e1",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "e2",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "f == 0 ? (t == 0 ? 'rain' : t == 1 ? 'pain' : t == 2 ? 'main' : 'chain') : f == 1 ? (t == 0 ? 'tree' : t == 1 ? 'free' : t == 2 ? 'green' : 'sheep') : f == 2 ? (t == 0 ? 'boat' : t == 1 ? 'coat' : t == 2 ? 'road' : 'soap') : (t == 0 ? 'light' : t == 1 ? 'night' : t == 2 ? 'right' : 'sight')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? (a == 0 ? 'rain' : a == 1 ? 'pain' : a == 2 ? 'main' : 'chain') : f == 1 ? (a == 0 ? 'tree' : a == 1 ? 'free' : a == 2 ? 'green' : 'sheep') : f == 2 ? (a == 0 ? 'boat' : a == 1 ? 'coat' : a == 2 ? 'road' : 'soap') : (a == 0 ? 'light' : a == 1 ? 'night' : a == 2 ? 'right' : 'sight')"
+        }
+      ],
+      "constraints": [
+        "t != a",
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(f + d1) % 4 == 0 ? (e1 == 0 ? 'rain' : e1 == 1 ? 'pain' : e1 == 2 ? 'main' : 'chain') : (f + d1) % 4 == 1 ? (e1 == 0 ? 'tree' : e1 == 1 ? 'free' : e1 == 2 ? 'green' : 'sheep') : (f + d1) % 4 == 2 ? (e1 == 0 ? 'boat' : e1 == 1 ? 'coat' : e1 == 2 ? 'road' : 'soap') : (e1 == 0 ? 'light' : e1 == 1 ? 'night' : e1 == 2 ? 'right' : 'sight')",
+          "(f + d2) % 4 == 0 ? (e2 == 0 ? 'rain' : e2 == 1 ? 'pain' : e2 == 2 ? 'main' : 'chain') : (f + d2) % 4 == 1 ? (e2 == 0 ? 'tree' : e2 == 1 ? 'free' : e2 == 2 ? 'green' : 'sheep') : (f + d2) % 4 == 2 ? (e2 == 0 ? 'boat' : e2 == 1 ? 'coat' : e2 == 2 ? 'road' : 'soap') : (e2 == 0 ? 'light' : e2 == 1 ? 'night' : e2 == 2 ? 'right' : 'sight')"
+        ]
+      },
+      "hint": "Look for the same group of letters making the same sound.",
+      "tags": [
+        "AC9E3LY11",
+        "EN2-SPELL-01"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "version": "fb4f7cf03d76",
+  "set": "english.3",
+  "draws": 100,
+  "groups": {
+    "english.3.homophones.here-hear": "5be66084d02a",
+    "english.3.homophones.one-won": "1028eefd560f",
+    "english.3.homophones.there-their": "eaf0ff0f3fbe",
+    "english.3.homophones.to-too-two": "6b69f817990a",
+    "english.3.prefixes-and-suffixes.add-un": "b91028967b93",
+    "english.3.prefixes-and-suffixes.double-add-ing": "5cd23a39a003",
+    "english.3.prefixes-and-suffixes.which-is-happening-now": "5fce4b8b7f3c",
+    "english.3.prefixes-and-suffixes.which-means-again": "42937025cf5d",
+    "english.3.prefixes-and-suffixes.which-means-not": "49fac32254ee",
+    "english.3.punctuation.which-is-contraction": "3a657e087046",
+    "english.3.punctuation.which-is-long-form": "f56da2dc4d27",
+    "english.3.punctuation.which-is-possessive": "94d34e589f4a",
+    "english.3.punctuation.which-is-the-owner": "0e168be96e16",
+    "english.3.spelling-patterns.add-ion": "df8d337a8b55",
+    "english.3.spelling-patterns.find-base-word": "9236c450b3cd",
+    "english.3.spelling-patterns.which-is-ion-noun": "07b9e25502ca",
+    "english.3.spelling-patterns.which-same-pattern": "4814b3edd96b",
+    "english.3.word-classes.future-tense-form": "bdc079684ee2",
+    "english.3.word-classes.identify-in-sentence": "f63c01d4bcb0",
+    "english.3.word-classes.identify-verb-tense": "6d0e3c874eb4",
+    "english.3.word-classes.is-a-verb": "84e521446a80",
+    "english.3.word-classes.name-the-word-type": "785813dba938"
+  }
+}

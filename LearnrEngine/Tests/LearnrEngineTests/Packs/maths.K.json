@@ -1,0 +1,1522 @@
+{
+  "version": "490f82ec1387",
+  "subject": "maths",
+  "level": "K",
+  "templates": [
+    {
+      "id": "maths.K.counting-numbers.next",
+      "subject": "maths",
+      "topic": "counting numbers",
+      "level": "K",
+      "prompt": "What number comes after {x}?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "1",
+          "max": "19"
+        }
+      ],
+      "answer": "x + 1",
+      "hint": "Count up one from {x}.",
+      "tags": [
+        "AC9MFN01",
+        "MAE-RWN-02"
+      ]
+    },
+    {
+      "id": "maths.K.counting-numbers.before",
+      "subject": "maths",
+      "topic": "counting numbers",
+      "level": "K",
+      "prompt": "What number comes before {x}?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "2",
+          "max": "20"
+        }
+      ],
+      "answer": "x - 1",
+      "hint": "Count back one from {x}.",
+      "tags": [
+        "AC9MFN01",
+        "MAE-RWN-02"
+      ]
+    },
+    {
+      "id": "maths.K.counting-numbers.missing",
+      "subject": "maths",
+      "topic": "counting numbers",
+      "level": "K",
+      "prompt": "Fill in the gap: {x}, {x + 1}, ?, {x + 3}",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "1",
+          "max": "16"
+        }
+      ],
+      "answer": "x + 2",
+      "tags": [
+        "AC9MFN01",
+        "MAE-RWN-02"
+      ]
+    },
+    {
+      "id": "maths.K.counting-numbers.count-back",
+      "subject": "maths",
+      "topic": "counting numbers",
+      "level": "K",
+      "prompt": "Counting backwards: {x}, {x - 1}, ?, {x - 3}",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "4",
+          "max": "20"
+        }
+      ],
+      "answer": "x - 2",
+      "hint": "Take away one each time.",
+      "tags": [
+        "AC9MFN01",
+        "MAE-RWN-02"
+      ]
+    },
+    {
+      "id": "maths.K.counting-numbers.skip-twos",
+      "subject": "maths",
+      "topic": "counting numbers",
+      "level": "K",
+      "prompt": "Counting by twos: {x}, {x + 2}, {x + 4}, ?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "2",
+          "max": "12",
+          "step": 2
+        }
+      ],
+      "answer": "x + 6",
+      "hint": "Add two more each time.",
+      "tags": [
+        "AC9MFA01",
+        "MAE-FG-02"
+      ]
+    },
+    {
+      "id": "maths.K.counting-numbers.number-line",
+      "subject": "maths",
+      "topic": "counting numbers",
+      "level": "K",
+      "prompt": "What number is the arrow pointing to?",
+      "vars": [
+        {
+          "name": "base",
+          "kind": "pick",
+          "from": [
+            0,
+            5,
+            10
+          ]
+        },
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "base + 1",
+          "max": "base + 9"
+        }
+      ],
+      "constraints": [
+        "n != base + 5"
+      ],
+      "answer": "n",
+      "hint": "Start at the last number you can see, then count the small ticks.",
+      "figure": {
+        "kind": "number-line",
+        "at": "n",
+        "from": "base",
+        "to": "base + 10",
+        "step": "5"
+      },
+      "tags": [
+        "AC9MFN01",
+        "MAE-RWN-02"
+      ]
+    },
+    {
+      "id": "maths.K.comparing-numbers.larger",
+      "subject": "maths",
+      "topic": "comparing numbers",
+      "level": "K",
+      "prompt": "Which number is larger, {x} or {y}?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "1",
+          "max": "20"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "20"
+        }
+      ],
+      "constraints": [
+        "x != y"
+      ],
+      "answer": "max(x, y)",
+      "tags": [
+        "AC9MFN03",
+        "MAE-RWN-01"
+      ]
+    },
+    {
+      "id": "maths.K.comparing-numbers.smaller",
+      "subject": "maths",
+      "topic": "comparing numbers",
+      "level": "K",
+      "prompt": "Which number is smaller, {x} or {y}?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "1",
+          "max": "20"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "20"
+        }
+      ],
+      "constraints": [
+        "x != y"
+      ],
+      "answer": "min(x, y)",
+      "tags": [
+        "AC9MFN03",
+        "MAE-RWN-01"
+      ]
+    },
+    {
+      "id": "maths.K.comparing-numbers.more-than",
+      "subject": "maths",
+      "topic": "comparing numbers",
+      "level": "K",
+      "prompt": "True or false: {x} is more than {y}.",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "1",
+          "max": "20"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "20"
+        }
+      ],
+      "constraints": [
+        "x != y"
+      ],
+      "answer": "x > y",
+      "tags": [
+        "AC9MFN03",
+        "MAE-RWN-01"
+      ]
+    },
+    {
+      "id": "maths.K.comparing-numbers.between",
+      "subject": "maths",
+      "topic": "comparing numbers",
+      "level": "K",
+      "prompt": "Which number goes between {x} and {x + 2}?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "1",
+          "max": "18"
+        }
+      ],
+      "answer": "x + 1",
+      "tags": [
+        "AC9MFN01",
+        "MAE-RWN-02"
+      ]
+    },
+    {
+      "id": "maths.K.addition.to-ten",
+      "subject": "maths",
+      "topic": "addition",
+      "level": "K",
+      "prompt": "What is {x} + {y}?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "1",
+          "max": "9"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "10 - x"
+        }
+      ],
+      "answer": "x + y",
+      "hint": "Start at {x} and count on {y} more.",
+      "tags": [
+        "AC9MFN05",
+        "MAE-CSQ-01"
+      ]
+    },
+    {
+      "id": "maths.K.addition.story",
+      "subject": "maths",
+      "topic": "addition",
+      "level": "K",
+      "prompt": "Ali has {x} shells. He finds {y} more. How many shells does he have now?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "2",
+          "max": "8"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "6"
+        }
+      ],
+      "answer": "x + y",
+      "tags": [
+        "AC9MFN05",
+        "MAE-CSQ-01"
+      ]
+    },
+    {
+      "id": "maths.K.addition.part-part-whole",
+      "subject": "maths",
+      "topic": "addition",
+      "level": "K",
+      "prompt": "You need 10 counters. You already have {x}. How many more do you need?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "1",
+          "max": "9"
+        }
+      ],
+      "answer": "10 - x",
+      "hint": "Count on from {x} up to 10.",
+      "tags": [
+        "AC9MFN04",
+        "MAE-CSQ-02"
+      ]
+    },
+    {
+      "id": "maths.K.subtraction.to-ten",
+      "subject": "maths",
+      "topic": "subtraction",
+      "level": "K",
+      "prompt": "What is {x} − {y}?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "2",
+          "max": "10"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "1",
+          "max": "x - 1"
+        }
+      ],
+      "answer": "x - y",
+      "hint": "Count back {y} from {x}.",
+      "tags": [
+        "AC9MFN05",
+        "MAE-CSQ-01"
+      ]
+    },
+    {
+      "id": "maths.K.subtraction.story",
+      "subject": "maths",
+      "topic": "subtraction",
+      "level": "K",
+      "prompt": "There are {x} ducks on a pond. {y} of them swim away. How many are left?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "4",
+          "max": "10"
+        },
+        {
+          "name": "y",
+          "kind": "int",
+          "min": "2",
+          "max": "x - 1"
+        }
+      ],
+      "answer": "x - y",
+      "tags": [
+        "AC9MFN05",
+        "MAE-CSQ-01"
+      ]
+    },
+    {
+      "id": "maths.K.sharing.equal-groups",
+      "subject": "maths",
+      "topic": "sharing",
+      "level": "K",
+      "prompt": "{total} apples are shared equally between {n} children. How many does each child get?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "pick",
+          "from": [
+            2,
+            5
+          ]
+        },
+        {
+          "name": "each",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "total",
+          "kind": "expr",
+          "expr": "n * each"
+        }
+      ],
+      "answer": "each",
+      "hint": "Share them out one at a time until they are all gone.",
+      "tags": [
+        "AC9MFN06",
+        "MAE-FG-02"
+      ]
+    },
+    {
+      "id": "maths.K.sharing.how-many-groups",
+      "subject": "maths",
+      "topic": "sharing",
+      "level": "K",
+      "prompt": "You have {total} stickers. How many children get {n} stickers each?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "pick",
+          "from": [
+            2,
+            5
+          ]
+        },
+        {
+          "name": "groups",
+          "kind": "int",
+          "min": "2",
+          "max": "4"
+        },
+        {
+          "name": "total",
+          "kind": "expr",
+          "expr": "n * groups"
+        }
+      ],
+      "answer": "groups",
+      "tags": [
+        "AC9MFN06",
+        "MAE-FG-02"
+      ]
+    },
+    {
+      "id": "maths.K.even-and-odd.next-even",
+      "subject": "maths",
+      "topic": "even and odd",
+      "level": "K",
+      "prompt": "{x} is an even number. What is the next even number?",
+      "vars": [
+        {
+          "name": "x",
+          "kind": "int",
+          "min": "2",
+          "max": "18",
+          "step": 2
+        }
+      ],
+      "constraints": [
+        "isEven(x)"
+      ],
+      "answer": "x + 2",
+      "hint": "Count on two from {x}.",
+      "tags": [
+        "AC9MFA01",
+        "MAE-FG-02"
+      ]
+    },
+    {
+      "id": "maths.K.patterns.repeating-two",
+      "subject": "maths",
+      "topic": "patterns",
+      "level": "K",
+      "prompt": "What comes next? {a}, {b}, {a}, {b}, {a}, ?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "pick",
+          "from": [
+            "red",
+            "blue",
+            "green"
+          ]
+        },
+        {
+          "name": "b",
+          "kind": "pick",
+          "from": [
+            "yellow",
+            "orange",
+            "purple"
+          ]
+        }
+      ],
+      "answer": "b",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "a",
+          "'yellow'",
+          "'orange'",
+          "'purple'"
+        ]
+      },
+      "hint": "The pattern goes {a}, {b}, over and over.",
+      "tags": [
+        "AC9MFA01",
+        "MAE-FG-01"
+      ]
+    },
+    {
+      "id": "maths.K.patterns.repeating-three",
+      "subject": "maths",
+      "topic": "patterns",
+      "level": "K",
+      "prompt": "What comes next? {a}, {b}, {c}, {a}, {b}, {c}, {a}, ?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "pick",
+          "from": [
+            "red",
+            "blue",
+            "green",
+            "yellow",
+            "orange",
+            "purple"
+          ]
+        },
+        {
+          "name": "b",
+          "kind": "pick",
+          "from": [
+            "red",
+            "blue",
+            "green",
+            "yellow",
+            "orange",
+            "purple"
+          ]
+        },
+        {
+          "name": "c",
+          "kind": "pick",
+          "from": [
+            "red",
+            "blue",
+            "green",
+            "yellow",
+            "orange",
+            "purple"
+          ]
+        }
+      ],
+      "constraints": [
+        "a != b",
+        "b != c",
+        "a != c"
+      ],
+      "answer": "b",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "a",
+          "c"
+        ]
+      },
+      "hint": "The part that repeats is {a}, {b}, {c}.",
+      "tags": [
+        "AC9MFA01",
+        "MAE-FG-01"
+      ]
+    },
+    {
+      "id": "maths.K.measurement.longer",
+      "subject": "maths",
+      "topic": "measurement",
+      "level": "K",
+      "prompt": "A red ribbon is {a} blocks long. A blue ribbon is {b} blocks long. Which ribbon is longer, red or blue?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "2",
+          "max": "12"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "2",
+          "max": "12"
+        }
+      ],
+      "constraints": [
+        "a != b"
+      ],
+      "answer": "a > b ? 'red' : 'blue'",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "'red'",
+          "'blue'"
+        ]
+      },
+      "tags": [
+        "AC9MFM01",
+        "MAE-GM-02"
+      ]
+    },
+    {
+      "id": "maths.K.measurement.holds-more",
+      "subject": "maths",
+      "topic": "measurement",
+      "level": "K",
+      "prompt": "A box holds {a} cups of sand. A jar holds {b} cups of sand. Which holds more, the box or the jar?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "2",
+          "max": "12"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "2",
+          "max": "12"
+        }
+      ],
+      "constraints": [
+        "a != b"
+      ],
+      "answer": "a > b ? 'box' : 'jar'",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "'box'",
+          "'jar'"
+        ]
+      },
+      "tags": [
+        "AC9MFM01",
+        "MAE-3DS-02"
+      ]
+    },
+    {
+      "id": "maths.K.measurement.heavier",
+      "subject": "maths",
+      "topic": "measurement",
+      "level": "K",
+      "prompt": "A book balances {a} blocks. A shoe balances {b} blocks. Which is heavier, the book or the shoe?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "2",
+          "max": "12"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "2",
+          "max": "12"
+        }
+      ],
+      "constraints": [
+        "a != b"
+      ],
+      "answer": "a > b ? 'book' : 'shoe'",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "'book'",
+          "'shoe'"
+        ]
+      },
+      "tags": [
+        "AC9MFM01",
+        "MAE-NSM-01"
+      ]
+    },
+    {
+      "id": "maths.K.measurement.lightest",
+      "subject": "maths",
+      "topic": "measurement",
+      "level": "K",
+      "prompt": "The red bag balances {a} blocks, the blue bag {b} blocks and the green bag {c} blocks. Which bag is the lightest?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "2",
+          "max": "12"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "2",
+          "max": "12"
+        },
+        {
+          "name": "c",
+          "kind": "int",
+          "min": "2",
+          "max": "12"
+        }
+      ],
+      "constraints": [
+        "a != b",
+        "b != c",
+        "a != c"
+      ],
+      "answer": "a < b && a < c ? 'red' : b < c ? 'blue' : 'green'",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "'red'",
+          "'blue'",
+          "'green'"
+        ]
+      },
+      "tags": [
+        "AC9MFM01",
+        "MAE-NSM-01"
+      ]
+    },
+    {
+      "id": "maths.K.time.day-after",
+      "subject": "maths",
+      "topic": "time",
+      "level": "K",
+      "prompt": "Which day comes after {day}?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "0",
+          "max": "6"
+        },
+        {
+          "name": "o",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "day",
+          "kind": "expr",
+          "expr": "n == 0 ? 'Monday' : n == 1 ? 'Tuesday' : n == 2 ? 'Wednesday' : n == 3 ? 'Thursday' : n == 4 ? 'Friday' : n == 5 ? 'Saturday' : 'Sunday'"
+        },
+        {
+          "name": "after",
+          "kind": "expr",
+          "expr": "mod(n + 1, 7) == 0 ? 'Monday' : mod(n + 1, 7) == 1 ? 'Tuesday' : mod(n + 1, 7) == 2 ? 'Wednesday' : mod(n + 1, 7) == 3 ? 'Thursday' : mod(n + 1, 7) == 4 ? 'Friday' : mod(n + 1, 7) == 5 ? 'Saturday' : 'Sunday'"
+        },
+        {
+          "name": "d1",
+          "kind": "expr",
+          "expr": "mod(n - o + 7, 7) == 0 ? 'Monday' : mod(n - o + 7, 7) == 1 ? 'Tuesday' : mod(n - o + 7, 7) == 2 ? 'Wednesday' : mod(n - o + 7, 7) == 3 ? 'Thursday' : mod(n - o + 7, 7) == 4 ? 'Friday' : mod(n - o + 7, 7) == 5 ? 'Saturday' : 'Sunday'"
+        },
+        {
+          "name": "d2",
+          "kind": "expr",
+          "expr": "mod(n - o + (o == 0 ? 2 : 1) + 7, 7) == 0 ? 'Monday' : mod(n - o + (o == 0 ? 2 : 1) + 7, 7) == 1 ? 'Tuesday' : mod(n - o + (o == 0 ? 2 : 1) + 7, 7) == 2 ? 'Wednesday' : mod(n - o + (o == 0 ? 2 : 1) + 7, 7) == 3 ? 'Thursday' : mod(n - o + (o == 0 ? 2 : 1) + 7, 7) == 4 ? 'Friday' : mod(n - o + (o == 0 ? 2 : 1) + 7, 7) == 5 ? 'Saturday' : 'Sunday'"
+        },
+        {
+          "name": "d3",
+          "kind": "expr",
+          "expr": "mod(n - o + (o == 2 ? 2 : 3) + 7, 7) == 0 ? 'Monday' : mod(n - o + (o == 2 ? 2 : 3) + 7, 7) == 1 ? 'Tuesday' : mod(n - o + (o == 2 ? 2 : 3) + 7, 7) == 2 ? 'Wednesday' : mod(n - o + (o == 2 ? 2 : 3) + 7, 7) == 3 ? 'Thursday' : mod(n - o + (o == 2 ? 2 : 3) + 7, 7) == 4 ? 'Friday' : mod(n - o + (o == 2 ? 2 : 3) + 7, 7) == 5 ? 'Saturday' : 'Sunday'"
+        }
+      ],
+      "answer": "after",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "d1",
+          "d2",
+          "d3"
+        ]
+      },
+      "tags": [
+        "AC9MFM02",
+        "MAE-NSM-02"
+      ]
+    },
+    {
+      "id": "maths.K.time.day-before",
+      "subject": "maths",
+      "topic": "time",
+      "level": "K",
+      "prompt": "Which day comes before {day}?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "int",
+          "min": "0",
+          "max": "6"
+        },
+        {
+          "name": "o",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "day",
+          "kind": "expr",
+          "expr": "n == 0 ? 'Monday' : n == 1 ? 'Tuesday' : n == 2 ? 'Wednesday' : n == 3 ? 'Thursday' : n == 4 ? 'Friday' : n == 5 ? 'Saturday' : 'Sunday'"
+        },
+        {
+          "name": "before",
+          "kind": "expr",
+          "expr": "mod(n + 6, 7) == 0 ? 'Monday' : mod(n + 6, 7) == 1 ? 'Tuesday' : mod(n + 6, 7) == 2 ? 'Wednesday' : mod(n + 6, 7) == 3 ? 'Thursday' : mod(n + 6, 7) == 4 ? 'Friday' : mod(n + 6, 7) == 5 ? 'Saturday' : 'Sunday'"
+        },
+        {
+          "name": "d1",
+          "kind": "expr",
+          "expr": "mod(n - 1 - o + (o == 0 ? 1 : 0) + 7, 7) == 0 ? 'Monday' : mod(n - 1 - o + (o == 0 ? 1 : 0) + 7, 7) == 1 ? 'Tuesday' : mod(n - 1 - o + (o == 0 ? 1 : 0) + 7, 7) == 2 ? 'Wednesday' : mod(n - 1 - o + (o == 0 ? 1 : 0) + 7, 7) == 3 ? 'Thursday' : mod(n - 1 - o + (o == 0 ? 1 : 0) + 7, 7) == 4 ? 'Friday' : mod(n - 1 - o + (o == 0 ? 1 : 0) + 7, 7) == 5 ? 'Saturday' : 'Sunday'"
+        },
+        {
+          "name": "d2",
+          "kind": "expr",
+          "expr": "mod(n - 1 - o + (o <= 1 ? 2 : 1) + 7, 7) == 0 ? 'Monday' : mod(n - 1 - o + (o <= 1 ? 2 : 1) + 7, 7) == 1 ? 'Tuesday' : mod(n - 1 - o + (o <= 1 ? 2 : 1) + 7, 7) == 2 ? 'Wednesday' : mod(n - 1 - o + (o <= 1 ? 2 : 1) + 7, 7) == 3 ? 'Thursday' : mod(n - 1 - o + (o <= 1 ? 2 : 1) + 7, 7) == 4 ? 'Friday' : mod(n - 1 - o + (o <= 1 ? 2 : 1) + 7, 7) == 5 ? 'Saturday' : 'Sunday'"
+        },
+        {
+          "name": "d3",
+          "kind": "expr",
+          "expr": "mod(n - 1 - o + 3 + 7, 7) == 0 ? 'Monday' : mod(n - 1 - o + 3 + 7, 7) == 1 ? 'Tuesday' : mod(n - 1 - o + 3 + 7, 7) == 2 ? 'Wednesday' : mod(n - 1 - o + 3 + 7, 7) == 3 ? 'Thursday' : mod(n - 1 - o + 3 + 7, 7) == 4 ? 'Friday' : mod(n - 1 - o + 3 + 7, 7) == 5 ? 'Saturday' : 'Sunday'"
+        }
+      ],
+      "answer": "before",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "d1",
+          "d2",
+          "d3"
+        ]
+      },
+      "tags": [
+        "AC9MFM02",
+        "MAE-NSM-02"
+      ]
+    },
+    {
+      "id": "maths.K.time.oclock",
+      "subject": "maths",
+      "topic": "time",
+      "level": "K",
+      "prompt": "What time is this?",
+      "vars": [
+        {
+          "name": "h",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        },
+        {
+          "name": "near",
+          "kind": "pick",
+          "from": [
+            -2,
+            -1,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "alsoNear",
+          "kind": "pick",
+          "from": [
+            -2,
+            -1,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "far",
+          "kind": "pick",
+          "from": [
+            -5,
+            -4,
+            -3,
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "constraints": [
+        "near != alsoNear"
+      ],
+      "answer": "h + ' o’clock'",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "(mod(h + near - 1, 12) + 1) + ' o’clock'",
+          "(mod(h + alsoNear - 1, 12) + 1) + ' o’clock'",
+          "(mod(h + far - 1, 12) + 1) + ' o’clock'"
+        ]
+      },
+      "hint": "The short hand tells you the hour.",
+      "figure": {
+        "kind": "clock",
+        "hour": "h",
+        "minute": "0",
+        "numerals": "true"
+      },
+      "tags": [
+        "MAE-NSM-02"
+      ]
+    },
+    {
+      "id": "maths.K.time.clock-says",
+      "subject": "maths",
+      "topic": "time",
+      "level": "K",
+      "prompt": "True or false: this clock shows {h} o’clock.",
+      "vars": [
+        {
+          "name": "h",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        },
+        {
+          "name": "right",
+          "kind": "int",
+          "min": "0",
+          "max": "1"
+        },
+        {
+          "name": "off",
+          "kind": "int",
+          "min": "1",
+          "max": "11"
+        },
+        {
+          "name": "shown",
+          "kind": "expr",
+          "expr": "right == 1 ? h : mod(h + off - 1, 12) + 1"
+        }
+      ],
+      "answer": "shown == h",
+      "figure": {
+        "kind": "clock",
+        "hour": "shown",
+        "minute": "0",
+        "numerals": "true"
+      },
+      "tags": [
+        "MAE-NSM-02"
+      ]
+    },
+    {
+      "id": "maths.K.shapes.sides",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "K",
+      "prompt": "How many sides does a {shape} have?",
+      "vars": [
+        {
+          "name": "shape",
+          "kind": "pick",
+          "from": [
+            "triangle",
+            "square",
+            "rectangle",
+            "pentagon",
+            "hexagon"
+          ]
+        }
+      ],
+      "answer": "shape == 'triangle' ? 3 : shape == 'square' ? 4 : shape == 'rectangle' ? 4 : shape == 'pentagon' ? 5 : 6",
+      "tags": [
+        "AC9MFSP01",
+        "MAE-2DS-01"
+      ]
+    },
+    {
+      "id": "maths.K.shapes.name",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "K",
+      "prompt": "A shape has {n} equal sides and {n} corners. What is it called?",
+      "vars": [
+        {
+          "name": "n",
+          "kind": "pick",
+          "from": [
+            3,
+            4,
+            5,
+            6
+          ]
+        }
+      ],
+      "answer": "n == 3 ? 'triangle' : n == 4 ? 'square' : n == 5 ? 'pentagon' : 'hexagon'",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "mod(n - 2, 4) + 3 == 3 ? 'triangle' : mod(n - 2, 4) + 3 == 4 ? 'square' : mod(n - 2, 4) + 3 == 5 ? 'pentagon' : 'hexagon'",
+          "mod(n - 1, 4) + 3 == 3 ? 'triangle' : mod(n - 1, 4) + 3 == 4 ? 'square' : mod(n - 1, 4) + 3 == 5 ? 'pentagon' : 'hexagon'",
+          "mod(n, 4) + 3 == 3 ? 'triangle' : mod(n, 4) + 3 == 4 ? 'square' : mod(n, 4) + 3 == 5 ? 'pentagon' : 'hexagon'"
+        ]
+      },
+      "tags": [
+        "AC9MFSP01",
+        "MAE-2DS-01"
+      ]
+    },
+    {
+      "id": "maths.K.shapes.name-picture",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "K",
+      "prompt": "What shape is this?",
+      "vars": [
+        {
+          "name": "shape",
+          "kind": "pick",
+          "from": [
+            "triangle",
+            "square",
+            "hexagon"
+          ]
+        },
+        {
+          "name": "tri",
+          "kind": "pick",
+          "from": [
+            "equilateral",
+            "isosceles",
+            "scalene"
+          ]
+        },
+        {
+          "name": "drawn",
+          "kind": "expr",
+          "expr": "shape == 'triangle' ? tri : shape"
+        }
+      ],
+      "answer": "shape",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "'triangle'",
+          "'square'",
+          "'hexagon'"
+        ]
+      },
+      "figure": {
+        "kind": "polygon",
+        "shape": "drawn"
+      },
+      "tags": [
+        "AC9MFSP01",
+        "MAE-2DS-01"
+      ]
+    },
+    {
+      "id": "maths.K.shapes.sides-picture",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "K",
+      "prompt": "How many sides does this shape have?",
+      "vars": [
+        {
+          "name": "shape",
+          "kind": "pick",
+          "from": [
+            "equilateral",
+            "isosceles",
+            "scalene",
+            "square",
+            "rectangle",
+            "trapezium",
+            "pentagon",
+            "hexagon"
+          ]
+        }
+      ],
+      "answer": "shape == 'equilateral' || shape == 'isosceles' || shape == 'scalene' || shape == 'right-triangle' ? 3 : shape == 'pentagon' ? 5 : shape == 'hexagon' ? 6 : shape == 'heptagon' ? 7 : shape == 'octagon' ? 8 : 4",
+      "hint": "Touch each side as you count it.",
+      "figure": {
+        "kind": "polygon",
+        "shape": "shape"
+      },
+      "tags": [
+        "AC9MFSP01",
+        "MAE-2DS-01"
+      ]
+    },
+    {
+      "id": "maths.K.shapes.is-a-triangle",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "K",
+      "prompt": "True or false: this shape is a triangle.",
+      "vars": [
+        {
+          "name": "shape",
+          "kind": "pick",
+          "from": [
+            "equilateral",
+            "isosceles",
+            "scalene",
+            "right-triangle",
+            "square",
+            "rectangle",
+            "trapezium",
+            "pentagon",
+            "hexagon"
+          ]
+        },
+        {
+          "name": "sides",
+          "kind": "expr",
+          "expr": "shape == 'equilateral' || shape == 'isosceles' || shape == 'scalene' || shape == 'right-triangle' ? 3 : shape == 'pentagon' ? 5 : shape == 'hexagon' ? 6 : shape == 'heptagon' ? 7 : shape == 'octagon' ? 8 : 4"
+        }
+      ],
+      "answer": "sides == 3",
+      "figure": {
+        "kind": "polygon",
+        "shape": "shape"
+      },
+      "tags": [
+        "AC9MFSP01",
+        "MAE-2DS-01"
+      ]
+    },
+    {
+      "id": "maths.K.shapes.solid-name",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "K",
+      "prompt": "What is this called?",
+      "vars": [
+        {
+          "name": "shape",
+          "kind": "pick",
+          "from": [
+            "cube",
+            "sphere",
+            "cone",
+            "cylinder"
+          ]
+        }
+      ],
+      "answer": "shape",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "'cube'",
+          "'sphere'",
+          "'cone'",
+          "'cylinder'"
+        ]
+      },
+      "figure": {
+        "kind": "solid",
+        "solid": "shape",
+        "view": "'object'"
+      },
+      "tags": [
+        "AC9MFSP01",
+        "MAE-3DS-01"
+      ]
+    },
+    {
+      "id": "maths.K.shapes.solid-rolls",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "K",
+      "prompt": "True or false: this shape can roll.",
+      "vars": [
+        {
+          "name": "shape",
+          "kind": "pick",
+          "from": [
+            "cube",
+            "cuboid",
+            "sphere",
+            "cylinder",
+            "square-pyramid"
+          ]
+        }
+      ],
+      "answer": "shape == 'sphere' || shape == 'cylinder'",
+      "figure": {
+        "kind": "solid",
+        "solid": "shape",
+        "view": "'object'"
+      },
+      "tags": [
+        "AC9MFSP01",
+        "MAE-3DS-01"
+      ]
+    },
+    {
+      "id": "maths.K.shapes.solid-everyday",
+      "subject": "maths",
+      "topic": "shapes",
+      "level": "K",
+      "prompt": "Which of these is shaped like this?",
+      "vars": [
+        {
+          "name": "shape",
+          "kind": "pick",
+          "from": [
+            "cube",
+            "cuboid",
+            "sphere",
+            "cone",
+            "cylinder"
+          ]
+        }
+      ],
+      "answer": "shape == 'sphere' ? 'a ball' : shape == 'cube' || shape == 'cuboid' ? 'a box' : shape == 'cylinder' ? 'a can' : 'a party hat'",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "'a ball'",
+          "'a box'",
+          "'a can'",
+          "'a party hat'"
+        ]
+      },
+      "figure": {
+        "kind": "solid",
+        "solid": "shape",
+        "view": "'object'"
+      },
+      "tags": [
+        "AC9MFSP01",
+        "MAE-3DS-01"
+      ]
+    },
+    {
+      "id": "maths.K.data.most-counted",
+      "subject": "maths",
+      "topic": "data",
+      "level": "K",
+      "prompt": "Sam counted cars: {a} red, {b} blue and {c} green. Which colour did he see most of?",
+      "vars": [
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        },
+        {
+          "name": "b",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        },
+        {
+          "name": "c",
+          "kind": "int",
+          "min": "1",
+          "max": "12"
+        }
+      ],
+      "constraints": [
+        "a != b",
+        "b != c",
+        "a != c"
+      ],
+      "answer": "a > b && a > c ? 'red' : b > c ? 'blue' : 'green'",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "'red'",
+          "'blue'",
+          "'green'"
+        ]
+      },
+      "tags": [
+        "AC9MFST01",
+        "MAE-DATA-01"
+      ]
+    },
+    {
+      "id": "maths.K.data.graph-count",
+      "subject": "maths",
+      "topic": "data",
+      "level": "K",
+      "prompt": "This graph shows the pets in our class. How many children have a {pet}?",
+      "vars": [
+        {
+          "name": "dog",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "cat",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "fish",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "2"
+        },
+        {
+          "name": "pet",
+          "kind": "expr",
+          "expr": "i == 0 ? 'dog' : i == 1 ? 'cat' : 'fish'"
+        }
+      ],
+      "constraints": [
+        "max(dog, cat, fish) > 1"
+      ],
+      "answer": "i == 0 ? dog : i == 1 ? cat : fish",
+      "hint": "Find the name along the bottom, then count up.",
+      "figure": {
+        "kind": "bar",
+        "values": "dog + ',' + cat + ',' + fish",
+        "labels": "'Dog,Cat,Fish'",
+        "scale": "1"
+      },
+      "tags": [
+        "AC9MFST01",
+        "MAE-DATA-01"
+      ]
+    },
+    {
+      "id": "maths.K.data.graph-most",
+      "subject": "maths",
+      "topic": "data",
+      "level": "K",
+      "prompt": "This graph shows our favourite toys. Which toy did the most children pick?",
+      "vars": [
+        {
+          "name": "ball",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "bike",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "doll",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        }
+      ],
+      "constraints": [
+        "ball != bike",
+        "bike != doll",
+        "ball != doll"
+      ],
+      "answer": "ball > bike && ball > doll ? 'Ball' : bike > doll ? 'Bike' : 'Doll'",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "'Ball'",
+          "'Bike'",
+          "'Doll'"
+        ]
+      },
+      "figure": {
+        "kind": "bar",
+        "values": "ball + ',' + bike + ',' + doll",
+        "labels": "'Ball,Bike,Doll'",
+        "scale": "1"
+      },
+      "tags": [
+        "AC9MFST01",
+        "MAE-DATA-01"
+      ]
+    },
+    {
+      "id": "maths.K.data.picture-count",
+      "subject": "maths",
+      "topic": "data",
+      "level": "K",
+      "prompt": "Each picture stands for one book. How many books did {who} read?",
+      "vars": [
+        {
+          "name": "ana",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "ben",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "kim",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "2"
+        },
+        {
+          "name": "who",
+          "kind": "expr",
+          "expr": "i == 0 ? 'Ana' : i == 1 ? 'Ben' : 'Kim'"
+        }
+      ],
+      "answer": "i == 0 ? ana : i == 1 ? ben : kim",
+      "hint": "Count the pictures in that row.",
+      "figure": {
+        "kind": "pictograph",
+        "counts": "ana + ',' + ben + ',' + kim",
+        "labels": "'Ana,Ben,Kim'",
+        "key": "1"
+      },
+      "tags": [
+        "AC9MFST01",
+        "MAE-DATA-01"
+      ]
+    },
+    {
+      "id": "maths.K.data.picture-fewest",
+      "subject": "maths",
+      "topic": "data",
+      "level": "K",
+      "prompt": "Each picture stands for one shell. Who found the fewest shells?",
+      "vars": [
+        {
+          "name": "ana",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "ben",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "kim",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        }
+      ],
+      "constraints": [
+        "ana != ben",
+        "ben != kim",
+        "ana != kim"
+      ],
+      "answer": "ana < ben && ana < kim ? 'Ana' : ben < kim ? 'Ben' : 'Kim'",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "'Ana'",
+          "'Ben'",
+          "'Kim'"
+        ]
+      },
+      "hint": "The shortest row is the fewest.",
+      "figure": {
+        "kind": "pictograph",
+        "counts": "ana + ',' + ben + ',' + kim",
+        "labels": "'Ana,Ben,Kim'",
+        "key": "1"
+      },
+      "tags": [
+        "AC9MFST01",
+        "MAE-DATA-01"
+      ]
+    }
+  ]
+}

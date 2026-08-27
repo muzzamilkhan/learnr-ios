@@ -1,0 +1,1098 @@
+{
+  "version": "8fa92c1bf680",
+  "subject": "english",
+  "level": "5",
+  "templates": [
+    {
+      "id": "english.5.word-roots.same-root",
+      "subject": "english",
+      "topic": "word roots",
+      "level": "5",
+      "prompt": "Which word has the same root as {target}?",
+      "vars": [
+        {
+          "name": "f",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "t",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "e1",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "e2",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "f == 0 ? (t == 0 ? 'transport' : t == 1 ? 'export' : t == 2 ? 'import' : 'report') : f == 1 ? (t == 0 ? 'predict' : t == 1 ? 'verdict' : t == 2 ? 'dictate' : 'contradict') : f == 2 ? (t == 0 ? 'inspect' : t == 1 ? 'respect' : t == 2 ? 'suspect' : 'spectator') : f == 3 ? (t == 0 ? 'construct' : t == 1 ? 'instruct' : t == 2 ? 'destruct' : 'structure') : f == 4 ? (t == 0 ? 'reject' : t == 1 ? 'inject' : t == 2 ? 'project' : 'eject') : (t == 0 ? 'describe' : t == 1 ? 'subscribe' : t == 2 ? 'inscribe' : 'prescribe')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? (a == 0 ? 'transport' : a == 1 ? 'export' : a == 2 ? 'import' : 'report') : f == 1 ? (a == 0 ? 'predict' : a == 1 ? 'verdict' : a == 2 ? 'dictate' : 'contradict') : f == 2 ? (a == 0 ? 'inspect' : a == 1 ? 'respect' : a == 2 ? 'suspect' : 'spectator') : f == 3 ? (a == 0 ? 'construct' : a == 1 ? 'instruct' : a == 2 ? 'destruct' : 'structure') : f == 4 ? (a == 0 ? 'reject' : a == 1 ? 'inject' : a == 2 ? 'project' : 'eject') : (a == 0 ? 'describe' : a == 1 ? 'subscribe' : a == 2 ? 'inscribe' : 'prescribe')"
+        }
+      ],
+      "constraints": [
+        "t != a",
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(f + d1) % 6 == 0 ? (e1 == 0 ? 'transport' : e1 == 1 ? 'export' : e1 == 2 ? 'import' : 'report') : (f + d1) % 6 == 1 ? (e1 == 0 ? 'predict' : e1 == 1 ? 'verdict' : e1 == 2 ? 'dictate' : 'contradict') : (f + d1) % 6 == 2 ? (e1 == 0 ? 'inspect' : e1 == 1 ? 'respect' : e1 == 2 ? 'suspect' : 'spectator') : (f + d1) % 6 == 3 ? (e1 == 0 ? 'construct' : e1 == 1 ? 'instruct' : e1 == 2 ? 'destruct' : 'structure') : (f + d1) % 6 == 4 ? (e1 == 0 ? 'reject' : e1 == 1 ? 'inject' : e1 == 2 ? 'project' : 'eject') : (e1 == 0 ? 'describe' : e1 == 1 ? 'subscribe' : e1 == 2 ? 'inscribe' : 'prescribe')",
+          "(f + d2) % 6 == 0 ? (e2 == 0 ? 'transport' : e2 == 1 ? 'export' : e2 == 2 ? 'import' : 'report') : (f + d2) % 6 == 1 ? (e2 == 0 ? 'predict' : e2 == 1 ? 'verdict' : e2 == 2 ? 'dictate' : 'contradict') : (f + d2) % 6 == 2 ? (e2 == 0 ? 'inspect' : e2 == 1 ? 'respect' : e2 == 2 ? 'suspect' : 'spectator') : (f + d2) % 6 == 3 ? (e2 == 0 ? 'construct' : e2 == 1 ? 'instruct' : e2 == 2 ? 'destruct' : 'structure') : (f + d2) % 6 == 4 ? (e2 == 0 ? 'reject' : e2 == 1 ? 'inject' : e2 == 2 ? 'project' : 'eject') : (e2 == 0 ? 'describe' : e2 == 1 ? 'subscribe' : e2 == 2 ? 'inscribe' : 'prescribe')"
+        ]
+      },
+      "hint": "Look for the part of the word that stays the same and means the same thing.",
+      "tags": [
+        "AC9E5LY09",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.5.word-roots.which-comes-from-root",
+      "subject": "english",
+      "topic": "word roots",
+      "level": "5",
+      "prompt": "Which word comes from a root meaning to {meaning}?",
+      "vars": [
+        {
+          "name": "f",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "e1",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "e2",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "meaning",
+          "kind": "expr",
+          "expr": "f == 0 ? \"carry\" : f == 1 ? \"say\" : f == 2 ? \"look\" : f == 3 ? \"build\" : f == 4 ? \"throw\" : \"write\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? (i == 0 ? 'transport' : i == 1 ? 'export' : i == 2 ? 'import' : 'report') : f == 1 ? (i == 0 ? 'predict' : i == 1 ? 'verdict' : i == 2 ? 'dictate' : 'contradict') : f == 2 ? (i == 0 ? 'inspect' : i == 1 ? 'respect' : i == 2 ? 'suspect' : 'spectator') : f == 3 ? (i == 0 ? 'construct' : i == 1 ? 'instruct' : i == 2 ? 'destruct' : 'structure') : f == 4 ? (i == 0 ? 'reject' : i == 1 ? 'inject' : i == 2 ? 'project' : 'eject') : (i == 0 ? 'describe' : i == 1 ? 'subscribe' : i == 2 ? 'inscribe' : 'prescribe')"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(f + d1) % 6 == 0 ? (e1 == 0 ? 'transport' : e1 == 1 ? 'export' : e1 == 2 ? 'import' : 'report') : (f + d1) % 6 == 1 ? (e1 == 0 ? 'predict' : e1 == 1 ? 'verdict' : e1 == 2 ? 'dictate' : 'contradict') : (f + d1) % 6 == 2 ? (e1 == 0 ? 'inspect' : e1 == 1 ? 'respect' : e1 == 2 ? 'suspect' : 'spectator') : (f + d1) % 6 == 3 ? (e1 == 0 ? 'construct' : e1 == 1 ? 'instruct' : e1 == 2 ? 'destruct' : 'structure') : (f + d1) % 6 == 4 ? (e1 == 0 ? 'reject' : e1 == 1 ? 'inject' : e1 == 2 ? 'project' : 'eject') : (e1 == 0 ? 'describe' : e1 == 1 ? 'subscribe' : e1 == 2 ? 'inscribe' : 'prescribe')",
+          "(f + d2) % 6 == 0 ? (e2 == 0 ? 'transport' : e2 == 1 ? 'export' : e2 == 2 ? 'import' : 'report') : (f + d2) % 6 == 1 ? (e2 == 0 ? 'predict' : e2 == 1 ? 'verdict' : e2 == 2 ? 'dictate' : 'contradict') : (f + d2) % 6 == 2 ? (e2 == 0 ? 'inspect' : e2 == 1 ? 'respect' : e2 == 2 ? 'suspect' : 'spectator') : (f + d2) % 6 == 3 ? (e2 == 0 ? 'construct' : e2 == 1 ? 'instruct' : e2 == 2 ? 'destruct' : 'structure') : (f + d2) % 6 == 4 ? (e2 == 0 ? 'reject' : e2 == 1 ? 'inject' : e2 == 2 ? 'project' : 'eject') : (e2 == 0 ? 'describe' : e2 == 1 ? 'subscribe' : e2 == 2 ? 'inscribe' : 'prescribe')"
+        ]
+      },
+      "hint": "The root inside each word shows which family it belongs to.",
+      "tags": [
+        "AC9E5LY09",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.5.word-roots.root-meaning",
+      "subject": "english",
+      "topic": "word roots",
+      "level": "5",
+      "prompt": "What does the root in {word} mean?",
+      "vars": [
+        {
+          "name": "f",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "f == 0 ? (i == 0 ? 'transport' : i == 1 ? 'export' : i == 2 ? 'import' : 'report') : f == 1 ? (i == 0 ? 'predict' : i == 1 ? 'verdict' : i == 2 ? 'dictate' : 'contradict') : f == 2 ? (i == 0 ? 'inspect' : i == 1 ? 'respect' : i == 2 ? 'suspect' : 'spectator') : f == 3 ? (i == 0 ? 'construct' : i == 1 ? 'instruct' : i == 2 ? 'destruct' : 'structure') : f == 4 ? (i == 0 ? 'reject' : i == 1 ? 'inject' : i == 2 ? 'project' : 'eject') : (i == 0 ? 'describe' : i == 1 ? 'subscribe' : i == 2 ? 'inscribe' : 'prescribe')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? \"carry\" : f == 1 ? \"say\" : f == 2 ? \"look\" : f == 3 ? \"build\" : f == 4 ? \"throw\" : \"write\""
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(f + d1) % 6 == 0 ? \"carry\" : (f + d1) % 6 == 1 ? \"say\" : (f + d1) % 6 == 2 ? \"look\" : (f + d1) % 6 == 3 ? \"build\" : (f + d1) % 6 == 4 ? \"throw\" : \"write\"",
+          "(f + d2) % 6 == 0 ? \"carry\" : (f + d2) % 6 == 1 ? \"say\" : (f + d2) % 6 == 2 ? \"look\" : (f + d2) % 6 == 3 ? \"build\" : (f + d2) % 6 == 4 ? \"throw\" : \"write\""
+        ]
+      },
+      "hint": "Think about what all the words in that family have in common.",
+      "tags": [
+        "AC9E5LY09",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.5.word-roots.write-root",
+      "subject": "english",
+      "topic": "word roots",
+      "level": "5",
+      "prompt": "Write the root inside {word}.",
+      "vars": [
+        {
+          "name": "f",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "f == 0 ? (i == 0 ? 'transport' : i == 1 ? 'export' : i == 2 ? 'import' : 'report') : f == 1 ? (i == 0 ? 'predict' : i == 1 ? 'verdict' : i == 2 ? 'dictate' : 'contradict') : f == 2 ? (i == 0 ? 'inspect' : i == 1 ? 'respect' : i == 2 ? 'suspect' : 'spectator') : f == 3 ? (i == 0 ? 'construct' : i == 1 ? 'instruct' : i == 2 ? 'destruct' : 'structure') : f == 4 ? (i == 0 ? 'reject' : i == 1 ? 'inject' : i == 2 ? 'project' : 'eject') : (i == 0 ? 'describe' : i == 1 ? 'subscribe' : i == 2 ? 'inscribe' : 'prescribe')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? \"port\" : f == 1 ? \"dict\" : f == 2 ? \"spect\" : f == 3 ? \"struct\" : f == 4 ? \"ject\" : \"scrib\""
+        }
+      ],
+      "constraints": [
+        "f != 5"
+      ],
+      "answer": "answer",
+      "answerType": "text",
+      "hint": "Look for the meaningful chunk of letters shared by that word family.",
+      "tags": [
+        "AC9E5LY09",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.5.word-roots.write-by-clue",
+      "subject": "english",
+      "topic": "word roots",
+      "level": "5",
+      "prompt": "Write the word that {clue}.",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "clue",
+          "kind": "expr",
+          "expr": "i == 0 ? \"carries something from one place to another\" : i == 1 ? \"says what will happen in the future\" : i == 2 ? \"looks closely to check something\" : i == 3 ? \"builds something out of parts\" : i == 4 ? \"says words for someone else to write down\" : \"shows admiration for someone or something\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'transport' : i == 1 ? 'predict' : i == 2 ? 'inspect' : i == 3 ? 'construct' : i == 4 ? 'dictate' : 'respect'"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "text",
+      "hint": "Break the clue down into the single action it describes.",
+      "tags": [
+        "AC9E5LY09",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.5.prefixes-and-suffixes.write-able",
+      "subject": "english",
+      "topic": "prefixes and suffixes",
+      "level": "5",
+      "prompt": "Write the adjective made by adding -able to {word}.",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'afford' : i == 1 ? 'accept' : i == 2 ? 'adjust' : i == 3 ? 'avoid' : i == 4 ? 'prevent' : 'defend'"
+        }
+      ],
+      "answer": "word + 'able'",
+      "answerType": "text",
+      "hint": "Add -able to the end of the word.",
+      "tags": [
+        "AC9E5LY10",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.5.prefixes-and-suffixes.write-ness",
+      "subject": "english",
+      "topic": "prefixes and suffixes",
+      "level": "5",
+      "prompt": "Write the noun made by adding -ness to {word}.",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'kind' : i == 1 ? 'sad' : i == 2 ? 'dark' : i == 3 ? 'weak' : i == 4 ? 'calm' : 'quiet'"
+        }
+      ],
+      "answer": "word + 'ness'",
+      "answerType": "text",
+      "hint": "Add -ness to the end of the word.",
+      "tags": [
+        "AC9E5LY10",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.5.prefixes-and-suffixes.which-can-be-done",
+      "subject": "english",
+      "topic": "prefixes and suffixes",
+      "level": "5",
+      "prompt": "Which word describes something that can be {word}ed?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'afford' : i == 1 ? 'accept' : i == 2 ? 'adjust' : i == 3 ? 'avoid' : i == 4 ? 'prevent' : 'defend'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "word + 'able'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "((i + d1) % 6 == 0 ? 'afford' : (i + d1) % 6 == 1 ? 'accept' : (i + d1) % 6 == 2 ? 'adjust' : (i + d1) % 6 == 3 ? 'avoid' : (i + d1) % 6 == 4 ? 'prevent' : 'defend') + 'able'",
+          "((i + d2) % 6 == 0 ? 'afford' : (i + d2) % 6 == 1 ? 'accept' : (i + d2) % 6 == 2 ? 'adjust' : (i + d2) % 6 == 3 ? 'avoid' : (i + d2) % 6 == 4 ? 'prevent' : 'defend') + 'able'"
+        ]
+      },
+      "hint": "Add -able to the end of the word.",
+      "tags": [
+        "AC9E5LY10",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.5.prefixes-and-suffixes.which-is-the-state",
+      "subject": "english",
+      "topic": "prefixes and suffixes",
+      "level": "5",
+      "prompt": "Which word means the state of being {word}?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'kind' : i == 1 ? 'sad' : i == 2 ? 'dark' : i == 3 ? 'weak' : i == 4 ? 'calm' : 'quiet'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "word + 'ness'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "((i + d1) % 6 == 0 ? 'kind' : (i + d1) % 6 == 1 ? 'sad' : (i + d1) % 6 == 2 ? 'dark' : (i + d1) % 6 == 3 ? 'weak' : (i + d1) % 6 == 4 ? 'calm' : 'quiet') + 'ness'",
+          "((i + d2) % 6 == 0 ? 'kind' : (i + d2) % 6 == 1 ? 'sad' : (i + d2) % 6 == 2 ? 'dark' : (i + d2) % 6 == 3 ? 'weak' : (i + d2) % 6 == 4 ? 'calm' : 'quiet') + 'ness'"
+        ]
+      },
+      "hint": "Add -ness to the end of the word.",
+      "tags": [
+        "AC9E5LY10",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.5.homophones.stationary-stationery",
+      "subject": "english",
+      "topic": "homophones",
+      "level": "5",
+      "prompt": "Which word completes the sentence? {sentence}",
+      "vars": [
+        {
+          "name": "j",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "j == 0 ? \"The car remained ? at the red light.\" : \"She bought new pens and paper at the ? shop.\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "j == 0 ? 'stationary' : 'stationery'"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "1 - j == 0 ? 'stationary' : 'stationery'"
+        ]
+      },
+      "hint": "One of these words means not moving, and the other is paper and pens for writing.",
+      "tags": [
+        "AC9E5LY08",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.5.homophones.principal-principle",
+      "subject": "english",
+      "topic": "homophones",
+      "level": "5",
+      "prompt": "Which word completes the sentence? {sentence}",
+      "vars": [
+        {
+          "name": "j",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "j == 0 ? \"The ? of the school greeted the new students.\" : \"Honesty is an important ? to live by.\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "j == 0 ? 'principal' : 'principle'"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "1 - j == 0 ? 'principal' : 'principle'"
+        ]
+      },
+      "hint": "One of these words is the head of a school, and the other is a rule you believe in.",
+      "tags": [
+        "AC9E5LY08",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.5.homophones.council-counsel",
+      "subject": "english",
+      "topic": "homophones",
+      "level": "5",
+      "prompt": "Which word completes the sentence? {sentence}",
+      "vars": [
+        {
+          "name": "j",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "j == 0 ? \"The local ? decided to build a new park.\" : \"The teacher gave her some helpful ? about her studies.\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "j == 0 ? 'council' : 'counsel'"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "1 - j == 0 ? 'council' : 'counsel'"
+        ]
+      },
+      "hint": "One of these words is a group that governs, and the other is advice.",
+      "tags": [
+        "AC9E5LY08",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.5.homophones.affect-effect",
+      "subject": "english",
+      "topic": "homophones",
+      "level": "5",
+      "prompt": "Which word completes the sentence? {sentence}",
+      "vars": [
+        {
+          "name": "j",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "j == 0 ? \"The rain did not ? our plans.\" : \"The medicine had a strong ? on her.\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "j == 0 ? 'affect' : 'effect'"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "1 - j == 0 ? 'affect' : 'effect'"
+        ]
+      },
+      "hint": "One of these words is usually a verb meaning to change something, and the other is usually a noun for a result.",
+      "tags": [
+        "AC9E5LY08",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.5.figurative-language.identify",
+      "subject": "english",
+      "topic": "figurative language",
+      "level": "5",
+      "prompt": "Which one is this? {sentence}",
+      "vars": [
+        {
+          "name": "type",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "type == 0 ? (i == 0 ? \"The wind roared like a lion through the valley.\" : i == 1 ? \"Her smile was as bright as the morning sun.\" : i == 2 ? \"He ran as fast as a cheetah chasing its prey.\" : i == 3 ? \"The old car rattled like a bag of tin cans.\" : \"Her voice was as smooth as silk.\") : type == 1 ? (i == 0 ? \"The classroom was a zoo during the fire drill.\" : i == 1 ? \"Time is a thief that steals our best moments.\" : i == 2 ? \"The stars were diamonds scattered across the sky.\" : i == 3 ? \"Her eyes were pools of sparkling water.\" : \"The kitchen was a disaster zone after the party.\") : (i == 0 ? \"The wind whispered secrets through the trees.\" : i == 1 ? \"The old house groaned when the storm rolled in.\" : i == 2 ? \"The sun smiled down on the sleepy village.\" : i == 3 ? \"The angry clouds glared at the picnic below.\" : \"The leaves danced across the playground.\")"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "type == 0 ? \"simile\" : type == 1 ? \"metaphor\" : \"personification\""
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(type + 1) % 3 == 0 ? \"simile\" : (type + 1) % 3 == 1 ? \"metaphor\" : \"personification\"",
+          "(type + 2) % 3 == 0 ? \"simile\" : (type + 2) % 3 == 1 ? \"metaphor\" : \"personification\""
+        ]
+      },
+      "hint": "A simile uses like or as, a metaphor says one thing is another, and personification gives human actions to something that is not human.",
+      "tags": [
+        "AC9E5LE04",
+        "EN3-UARL-01"
+      ]
+    },
+    {
+      "id": "english.5.figurative-language.what-signals-it",
+      "subject": "english",
+      "topic": "figurative language",
+      "level": "5",
+      "prompt": "What tells you this sentence uses figurative language? {sentence}",
+      "vars": [
+        {
+          "name": "type",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "type == 0 ? (i == 0 ? \"The wind roared like a lion through the valley.\" : i == 1 ? \"Her smile was as bright as the morning sun.\" : i == 2 ? \"He ran as fast as a cheetah chasing its prey.\" : i == 3 ? \"The old car rattled like a bag of tin cans.\" : \"Her voice was as smooth as silk.\") : type == 1 ? (i == 0 ? \"The classroom was a zoo during the fire drill.\" : i == 1 ? \"Time is a thief that steals our best moments.\" : i == 2 ? \"The stars were diamonds scattered across the sky.\" : i == 3 ? \"Her eyes were pools of sparkling water.\" : \"The kitchen was a disaster zone after the party.\") : (i == 0 ? \"The wind whispered secrets through the trees.\" : i == 1 ? \"The old house groaned when the storm rolled in.\" : i == 2 ? \"The sun smiled down on the sleepy village.\" : i == 3 ? \"The angry clouds glared at the picnic below.\" : \"The leaves danced across the playground.\")"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "type == 0 ? \"the word like or as\" : type == 1 ? \"saying one thing is another\" : \"giving human actions to something that is not human\""
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(type + 1) % 3 == 0 ? \"the word like or as\" : (type + 1) % 3 == 1 ? \"saying one thing is another\" : \"giving human actions to something that is not human\"",
+          "(type + 2) % 3 == 0 ? \"the word like or as\" : (type + 2) % 3 == 1 ? \"saying one thing is another\" : \"giving human actions to something that is not human\""
+        ]
+      },
+      "hint": "A simile uses like or as, a metaphor says one thing is another, and personification gives human actions to something that is not human.",
+      "tags": [
+        "AC9E5LE04",
+        "EN3-UARL-01"
+      ]
+    },
+    {
+      "id": "english.5.figurative-language.match-the-example",
+      "subject": "english",
+      "topic": "figurative language",
+      "level": "5",
+      "prompt": "Which sentence is an example of {label}?",
+      "vars": [
+        {
+          "name": "type",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "i0",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i1",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i2",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "label",
+          "kind": "expr",
+          "expr": "type == 0 ? \"simile\" : type == 1 ? \"metaphor\" : \"personification\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "type == 0 ? (i0 == 0 ? \"The wind roared like a lion through the valley.\" : i0 == 1 ? \"Her smile was as bright as the morning sun.\" : i0 == 2 ? \"He ran as fast as a cheetah chasing its prey.\" : i0 == 3 ? \"The old car rattled like a bag of tin cans.\" : \"Her voice was as smooth as silk.\") : type == 1 ? (i0 == 0 ? \"The classroom was a zoo during the fire drill.\" : i0 == 1 ? \"Time is a thief that steals our best moments.\" : i0 == 2 ? \"The stars were diamonds scattered across the sky.\" : i0 == 3 ? \"Her eyes were pools of sparkling water.\" : \"The kitchen was a disaster zone after the party.\") : (i0 == 0 ? \"The wind whispered secrets through the trees.\" : i0 == 1 ? \"The old house groaned when the storm rolled in.\" : i0 == 2 ? \"The sun smiled down on the sleepy village.\" : i0 == 3 ? \"The angry clouds glared at the picnic below.\" : \"The leaves danced across the playground.\")"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(type + 1) % 3 == 0 ? (i1 == 0 ? \"The wind roared like a lion through the valley.\" : i1 == 1 ? \"Her smile was as bright as the morning sun.\" : i1 == 2 ? \"He ran as fast as a cheetah chasing its prey.\" : i1 == 3 ? \"The old car rattled like a bag of tin cans.\" : \"Her voice was as smooth as silk.\") : (type + 1) % 3 == 1 ? (i1 == 0 ? \"The classroom was a zoo during the fire drill.\" : i1 == 1 ? \"Time is a thief that steals our best moments.\" : i1 == 2 ? \"The stars were diamonds scattered across the sky.\" : i1 == 3 ? \"Her eyes were pools of sparkling water.\" : \"The kitchen was a disaster zone after the party.\") : (i1 == 0 ? \"The wind whispered secrets through the trees.\" : i1 == 1 ? \"The old house groaned when the storm rolled in.\" : i1 == 2 ? \"The sun smiled down on the sleepy village.\" : i1 == 3 ? \"The angry clouds glared at the picnic below.\" : \"The leaves danced across the playground.\")",
+          "(type + 2) % 3 == 0 ? (i2 == 0 ? \"The wind roared like a lion through the valley.\" : i2 == 1 ? \"Her smile was as bright as the morning sun.\" : i2 == 2 ? \"He ran as fast as a cheetah chasing its prey.\" : i2 == 3 ? \"The old car rattled like a bag of tin cans.\" : \"Her voice was as smooth as silk.\") : (type + 2) % 3 == 1 ? (i2 == 0 ? \"The classroom was a zoo during the fire drill.\" : i2 == 1 ? \"Time is a thief that steals our best moments.\" : i2 == 2 ? \"The stars were diamonds scattered across the sky.\" : i2 == 3 ? \"Her eyes were pools of sparkling water.\" : \"The kitchen was a disaster zone after the party.\") : (i2 == 0 ? \"The wind whispered secrets through the trees.\" : i2 == 1 ? \"The old house groaned when the storm rolled in.\" : i2 == 2 ? \"The sun smiled down on the sleepy village.\" : i2 == 3 ? \"The angry clouds glared at the picnic below.\" : \"The leaves danced across the playground.\")"
+        ]
+      },
+      "hint": "A simile uses like or as, a metaphor says one thing is another, and personification gives human actions to something that is not human.",
+      "tags": [
+        "AC9E5LE04",
+        "EN3-UARL-01"
+      ]
+    },
+    {
+      "id": "english.5.figurative-language.same-device",
+      "subject": "english",
+      "topic": "figurative language",
+      "level": "5",
+      "prompt": "Which sentence uses the same kind of figurative language as this one? {sentence}",
+      "vars": [
+        {
+          "name": "type",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "i0",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "iSame",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "i1",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i2",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "type == 0 ? (i0 == 0 ? \"The wind roared like a lion through the valley.\" : i0 == 1 ? \"Her smile was as bright as the morning sun.\" : i0 == 2 ? \"He ran as fast as a cheetah chasing its prey.\" : i0 == 3 ? \"The old car rattled like a bag of tin cans.\" : \"Her voice was as smooth as silk.\") : type == 1 ? (i0 == 0 ? \"The classroom was a zoo during the fire drill.\" : i0 == 1 ? \"Time is a thief that steals our best moments.\" : i0 == 2 ? \"The stars were diamonds scattered across the sky.\" : i0 == 3 ? \"Her eyes were pools of sparkling water.\" : \"The kitchen was a disaster zone after the party.\") : (i0 == 0 ? \"The wind whispered secrets through the trees.\" : i0 == 1 ? \"The old house groaned when the storm rolled in.\" : i0 == 2 ? \"The sun smiled down on the sleepy village.\" : i0 == 3 ? \"The angry clouds glared at the picnic below.\" : \"The leaves danced across the playground.\")"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "type == 0 ? ((i0 + iSame) % 5 == 0 ? \"The wind roared like a lion through the valley.\" : (i0 + iSame) % 5 == 1 ? \"Her smile was as bright as the morning sun.\" : (i0 + iSame) % 5 == 2 ? \"He ran as fast as a cheetah chasing its prey.\" : (i0 + iSame) % 5 == 3 ? \"The old car rattled like a bag of tin cans.\" : \"Her voice was as smooth as silk.\") : type == 1 ? ((i0 + iSame) % 5 == 0 ? \"The classroom was a zoo during the fire drill.\" : (i0 + iSame) % 5 == 1 ? \"Time is a thief that steals our best moments.\" : (i0 + iSame) % 5 == 2 ? \"The stars were diamonds scattered across the sky.\" : (i0 + iSame) % 5 == 3 ? \"Her eyes were pools of sparkling water.\" : \"The kitchen was a disaster zone after the party.\") : ((i0 + iSame) % 5 == 0 ? \"The wind whispered secrets through the trees.\" : (i0 + iSame) % 5 == 1 ? \"The old house groaned when the storm rolled in.\" : (i0 + iSame) % 5 == 2 ? \"The sun smiled down on the sleepy village.\" : (i0 + iSame) % 5 == 3 ? \"The angry clouds glared at the picnic below.\" : \"The leaves danced across the playground.\")"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(type + 1) % 3 == 0 ? (i1 == 0 ? \"The wind roared like a lion through the valley.\" : i1 == 1 ? \"Her smile was as bright as the morning sun.\" : i1 == 2 ? \"He ran as fast as a cheetah chasing its prey.\" : i1 == 3 ? \"The old car rattled like a bag of tin cans.\" : \"Her voice was as smooth as silk.\") : (type + 1) % 3 == 1 ? (i1 == 0 ? \"The classroom was a zoo during the fire drill.\" : i1 == 1 ? \"Time is a thief that steals our best moments.\" : i1 == 2 ? \"The stars were diamonds scattered across the sky.\" : i1 == 3 ? \"Her eyes were pools of sparkling water.\" : \"The kitchen was a disaster zone after the party.\") : (i1 == 0 ? \"The wind whispered secrets through the trees.\" : i1 == 1 ? \"The old house groaned when the storm rolled in.\" : i1 == 2 ? \"The sun smiled down on the sleepy village.\" : i1 == 3 ? \"The angry clouds glared at the picnic below.\" : \"The leaves danced across the playground.\")",
+          "(type + 2) % 3 == 0 ? (i2 == 0 ? \"The wind roared like a lion through the valley.\" : i2 == 1 ? \"Her smile was as bright as the morning sun.\" : i2 == 2 ? \"He ran as fast as a cheetah chasing its prey.\" : i2 == 3 ? \"The old car rattled like a bag of tin cans.\" : \"Her voice was as smooth as silk.\") : (type + 2) % 3 == 1 ? (i2 == 0 ? \"The classroom was a zoo during the fire drill.\" : i2 == 1 ? \"Time is a thief that steals our best moments.\" : i2 == 2 ? \"The stars were diamonds scattered across the sky.\" : i2 == 3 ? \"Her eyes were pools of sparkling water.\" : \"The kitchen was a disaster zone after the party.\") : (i2 == 0 ? \"The wind whispered secrets through the trees.\" : i2 == 1 ? \"The old house groaned when the storm rolled in.\" : i2 == 2 ? \"The sun smiled down on the sleepy village.\" : i2 == 3 ? \"The angry clouds glared at the picnic below.\" : \"The leaves danced across the playground.\")"
+        ]
+      },
+      "hint": "Look for what the sentences do, not just what they are about.",
+      "tags": [
+        "AC9E5LE04",
+        "EN3-UARL-01"
+      ]
+    },
+    {
+      "id": "english.5.figurative-language.eliminate-one",
+      "subject": "english",
+      "topic": "figurative language",
+      "level": "5",
+      "prompt": "This is not a {wrongLabel}. What is it? {sentence}",
+      "vars": [
+        {
+          "name": "type",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "off",
+          "kind": "pick",
+          "from": [
+            1,
+            2
+          ]
+        },
+        {
+          "name": "wrongType",
+          "kind": "expr",
+          "expr": "(type + off) % 3"
+        },
+        {
+          "name": "wrongLabel",
+          "kind": "expr",
+          "expr": "wrongType == 0 ? \"simile\" : wrongType == 1 ? \"metaphor\" : \"personification\""
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "type == 0 ? (i == 0 ? \"The wind roared like a lion through the valley.\" : i == 1 ? \"Her smile was as bright as the morning sun.\" : i == 2 ? \"He ran as fast as a cheetah chasing its prey.\" : i == 3 ? \"The old car rattled like a bag of tin cans.\" : \"Her voice was as smooth as silk.\") : type == 1 ? (i == 0 ? \"The classroom was a zoo during the fire drill.\" : i == 1 ? \"Time is a thief that steals our best moments.\" : i == 2 ? \"The stars were diamonds scattered across the sky.\" : i == 3 ? \"Her eyes were pools of sparkling water.\" : \"The kitchen was a disaster zone after the party.\") : (i == 0 ? \"The wind whispered secrets through the trees.\" : i == 1 ? \"The old house groaned when the storm rolled in.\" : i == 2 ? \"The sun smiled down on the sleepy village.\" : i == 3 ? \"The angry clouds glared at the picnic below.\" : \"The leaves danced across the playground.\")"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "type == 0 ? \"simile\" : type == 1 ? \"metaphor\" : \"personification\""
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(type + 1) % 3 == 0 ? \"simile\" : (type + 1) % 3 == 1 ? \"metaphor\" : \"personification\"",
+          "(type + 2) % 3 == 0 ? \"simile\" : (type + 2) % 3 == 1 ? \"metaphor\" : \"personification\""
+        ]
+      },
+      "hint": "A simile uses like or as, a metaphor says one thing is another, and personification gives human actions to something that is not human.",
+      "tags": [
+        "AC9E5LE04",
+        "EN3-UARL-01"
+      ]
+    },
+    {
+      "id": "english.5.spelling-patterns.write-plural",
+      "subject": "english",
+      "topic": "spelling patterns",
+      "level": "5",
+      "prompt": "Write the plural of {word}.",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'leaf' : i == 1 ? 'wolf' : i == 2 ? 'thief' : i == 3 ? 'life' : i == 4 ? 'shelf' : 'wife'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'leaves' : i == 1 ? 'wolves' : i == 2 ? 'thieves' : i == 3 ? 'lives' : i == 4 ? 'shelves' : 'wives'"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "text",
+      "hint": "Change the f or fe to v, then add -es.",
+      "tags": [
+        "AC9E5LY08",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.5.spelling-patterns.write-singular",
+      "subject": "english",
+      "topic": "spelling patterns",
+      "level": "5",
+      "prompt": "Write the singular of {word}.",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'leaves' : i == 1 ? 'wolves' : i == 2 ? 'thieves' : i == 3 ? 'lives' : i == 4 ? 'shelves' : 'wives'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'leaf' : i == 1 ? 'wolf' : i == 2 ? 'thief' : i == 3 ? 'life' : i == 4 ? 'shelf' : 'wife'"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "text",
+      "hint": "Change the v back to f or fe.",
+      "tags": [
+        "AC9E5LY08",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.5.spelling-patterns.which-is-plural",
+      "subject": "english",
+      "topic": "spelling patterns",
+      "level": "5",
+      "prompt": "Which word is the plural of {word}?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'leaf' : i == 1 ? 'wolf' : i == 2 ? 'thief' : i == 3 ? 'life' : i == 4 ? 'shelf' : 'wife'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'leaves' : i == 1 ? 'wolves' : i == 2 ? 'thieves' : i == 3 ? 'lives' : i == 4 ? 'shelves' : 'wives'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 6 == 0 ? 'leaves' : (i + d1) % 6 == 1 ? 'wolves' : (i + d1) % 6 == 2 ? 'thieves' : (i + d1) % 6 == 3 ? 'lives' : (i + d1) % 6 == 4 ? 'shelves' : 'wives'",
+          "(i + d2) % 6 == 0 ? 'leaves' : (i + d2) % 6 == 1 ? 'wolves' : (i + d2) % 6 == 2 ? 'thieves' : (i + d2) % 6 == 3 ? 'lives' : (i + d2) % 6 == 4 ? 'shelves' : 'wives'"
+        ]
+      },
+      "hint": "Change the f or fe to v, then add -es.",
+      "tags": [
+        "AC9E5LY08",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.5.spelling-patterns.same-silent-pattern",
+      "subject": "english",
+      "topic": "spelling patterns",
+      "level": "5",
+      "prompt": "Which word has the same silent letter pattern as {target}?",
+      "vars": [
+        {
+          "name": "f",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "t",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "e1",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "e2",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "f == 0 ? (t == 0 ? 'knee' : t == 1 ? 'knife' : t == 2 ? 'knot' : t == 3 ? 'knock' : t == 4 ? 'know' : 'knight') : f == 1 ? (t == 0 ? 'wrist' : t == 1 ? 'wrong' : t == 2 ? 'write' : t == 3 ? 'wreck' : t == 4 ? 'wrap' : 'wrinkle') : f == 2 ? (t == 0 ? 'thumb' : t == 1 ? 'climb' : t == 2 ? 'comb' : t == 3 ? 'lamb' : t == 4 ? 'limb' : 'crumb') : f == 3 ? (t == 0 ? 'gnome' : t == 1 ? 'gnat' : t == 2 ? 'sign' : t == 3 ? 'design' : t == 4 ? 'gnaw' : 'foreign') : f == 4 ? (t == 0 ? 'listen' : t == 1 ? 'castle' : t == 2 ? 'often' : t == 3 ? 'fasten' : t == 4 ? 'soften' : 'hasten') : (t == 0 ? 'walk' : t == 1 ? 'talk' : t == 2 ? 'half' : t == 3 ? 'yolk' : t == 4 ? 'chalk' : 'folk')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? (a == 0 ? 'knee' : a == 1 ? 'knife' : a == 2 ? 'knot' : a == 3 ? 'knock' : a == 4 ? 'know' : 'knight') : f == 1 ? (a == 0 ? 'wrist' : a == 1 ? 'wrong' : a == 2 ? 'write' : a == 3 ? 'wreck' : a == 4 ? 'wrap' : 'wrinkle') : f == 2 ? (a == 0 ? 'thumb' : a == 1 ? 'climb' : a == 2 ? 'comb' : a == 3 ? 'lamb' : a == 4 ? 'limb' : 'crumb') : f == 3 ? (a == 0 ? 'gnome' : a == 1 ? 'gnat' : a == 2 ? 'sign' : a == 3 ? 'design' : a == 4 ? 'gnaw' : 'foreign') : f == 4 ? (a == 0 ? 'listen' : a == 1 ? 'castle' : a == 2 ? 'often' : a == 3 ? 'fasten' : a == 4 ? 'soften' : 'hasten') : (a == 0 ? 'walk' : a == 1 ? 'talk' : a == 2 ? 'half' : a == 3 ? 'yolk' : a == 4 ? 'chalk' : 'folk')"
+        }
+      ],
+      "constraints": [
+        "t != a",
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(f + d1) % 6 == 0 ? (e1 == 0 ? 'knee' : e1 == 1 ? 'knife' : e1 == 2 ? 'knot' : e1 == 3 ? 'knock' : e1 == 4 ? 'know' : 'knight') : (f + d1) % 6 == 1 ? (e1 == 0 ? 'wrist' : e1 == 1 ? 'wrong' : e1 == 2 ? 'write' : e1 == 3 ? 'wreck' : e1 == 4 ? 'wrap' : 'wrinkle') : (f + d1) % 6 == 2 ? (e1 == 0 ? 'thumb' : e1 == 1 ? 'climb' : e1 == 2 ? 'comb' : e1 == 3 ? 'lamb' : e1 == 4 ? 'limb' : 'crumb') : (f + d1) % 6 == 3 ? (e1 == 0 ? 'gnome' : e1 == 1 ? 'gnat' : e1 == 2 ? 'sign' : e1 == 3 ? 'design' : e1 == 4 ? 'gnaw' : 'foreign') : (f + d1) % 6 == 4 ? (e1 == 0 ? 'listen' : e1 == 1 ? 'castle' : e1 == 2 ? 'often' : e1 == 3 ? 'fasten' : e1 == 4 ? 'soften' : 'hasten') : (e1 == 0 ? 'walk' : e1 == 1 ? 'talk' : e1 == 2 ? 'half' : e1 == 3 ? 'yolk' : e1 == 4 ? 'chalk' : 'folk')",
+          "(f + d2) % 6 == 0 ? (e2 == 0 ? 'knee' : e2 == 1 ? 'knife' : e2 == 2 ? 'knot' : e2 == 3 ? 'knock' : e2 == 4 ? 'know' : 'knight') : (f + d2) % 6 == 1 ? (e2 == 0 ? 'wrist' : e2 == 1 ? 'wrong' : e2 == 2 ? 'write' : e2 == 3 ? 'wreck' : e2 == 4 ? 'wrap' : 'wrinkle') : (f + d2) % 6 == 2 ? (e2 == 0 ? 'thumb' : e2 == 1 ? 'climb' : e2 == 2 ? 'comb' : e2 == 3 ? 'lamb' : e2 == 4 ? 'limb' : 'crumb') : (f + d2) % 6 == 3 ? (e2 == 0 ? 'gnome' : e2 == 1 ? 'gnat' : e2 == 2 ? 'sign' : e2 == 3 ? 'design' : e2 == 4 ? 'gnaw' : 'foreign') : (f + d2) % 6 == 4 ? (e2 == 0 ? 'listen' : e2 == 1 ? 'castle' : e2 == 2 ? 'often' : e2 == 3 ? 'fasten' : e2 == 4 ? 'soften' : 'hasten') : (e2 == 0 ? 'walk' : e2 == 1 ? 'talk' : e2 == 2 ? 'half' : e2 == 3 ? 'yolk' : e2 == 4 ? 'chalk' : 'folk')"
+        ]
+      },
+      "hint": "Look for the same silent letter combination.",
+      "tags": [
+        "AC9E5LY08",
+        "EN3-SPELL-01"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1280 @@
+{
+  "version": "859d5cc54f2d",
+  "subject": "english",
+  "level": "6",
+  "templates": [
+    {
+      "id": "english.6.word-roots.same-root",
+      "subject": "english",
+      "topic": "word roots",
+      "level": "6",
+      "prompt": "Which word has the same root as {target}?",
+      "vars": [
+        {
+          "name": "f",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "t",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "a",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "i1",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "i2",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "f == 0 ? (t == 0 ? 'transport' : t == 1 ? 'import' : t == 2 ? 'export' : 'portable') : f == 1 ? (t == 0 ? 'photograph' : t == 1 ? 'autograph' : t == 2 ? 'paragraph' : 'graphic') : f == 2 ? (t == 0 ? 'aquarium' : t == 1 ? 'aquatic' : t == 2 ? 'aqueduct' : 'aquamarine') : f == 3 ? (t == 0 ? 'telephone' : t == 1 ? 'television' : t == 2 ? 'telescope' : 'telepathy') : f == 4 ? (t == 0 ? 'scribble' : t == 1 ? 'ascribe' : t == 2 ? 'inscribe' : 'describe') : (t == 0 ? 'dictionary' : t == 1 ? 'dictator' : t == 2 ? 'predict' : 'verdict')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? (a == 0 ? 'transport' : a == 1 ? 'import' : a == 2 ? 'export' : 'portable') : f == 1 ? (a == 0 ? 'photograph' : a == 1 ? 'autograph' : a == 2 ? 'paragraph' : 'graphic') : f == 2 ? (a == 0 ? 'aquarium' : a == 1 ? 'aquatic' : a == 2 ? 'aqueduct' : 'aquamarine') : f == 3 ? (a == 0 ? 'telephone' : a == 1 ? 'television' : a == 2 ? 'telescope' : 'telepathy') : f == 4 ? (a == 0 ? 'scribble' : a == 1 ? 'ascribe' : a == 2 ? 'inscribe' : 'describe') : (a == 0 ? 'dictionary' : a == 1 ? 'dictator' : a == 2 ? 'predict' : 'verdict')"
+        }
+      ],
+      "constraints": [
+        "t != a",
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(f + d1) % 6 == 0 ? (i1 == 0 ? 'transport' : i1 == 1 ? 'import' : i1 == 2 ? 'export' : 'portable') : (f + d1) % 6 == 1 ? (i1 == 0 ? 'photograph' : i1 == 1 ? 'autograph' : i1 == 2 ? 'paragraph' : 'graphic') : (f + d1) % 6 == 2 ? (i1 == 0 ? 'aquarium' : i1 == 1 ? 'aquatic' : i1 == 2 ? 'aqueduct' : 'aquamarine') : (f + d1) % 6 == 3 ? (i1 == 0 ? 'telephone' : i1 == 1 ? 'television' : i1 == 2 ? 'telescope' : 'telepathy') : (f + d1) % 6 == 4 ? (i1 == 0 ? 'scribble' : i1 == 1 ? 'ascribe' : i1 == 2 ? 'inscribe' : 'describe') : (i1 == 0 ? 'dictionary' : i1 == 1 ? 'dictator' : i1 == 2 ? 'predict' : 'verdict')",
+          "(f + d2) % 6 == 0 ? (i2 == 0 ? 'transport' : i2 == 1 ? 'import' : i2 == 2 ? 'export' : 'portable') : (f + d2) % 6 == 1 ? (i2 == 0 ? 'photograph' : i2 == 1 ? 'autograph' : i2 == 2 ? 'paragraph' : 'graphic') : (f + d2) % 6 == 2 ? (i2 == 0 ? 'aquarium' : i2 == 1 ? 'aquatic' : i2 == 2 ? 'aqueduct' : 'aquamarine') : (f + d2) % 6 == 3 ? (i2 == 0 ? 'telephone' : i2 == 1 ? 'television' : i2 == 2 ? 'telescope' : 'telepathy') : (f + d2) % 6 == 4 ? (i2 == 0 ? 'scribble' : i2 == 1 ? 'ascribe' : i2 == 2 ? 'inscribe' : 'describe') : (i2 == 0 ? 'dictionary' : i2 == 1 ? 'dictator' : i2 == 2 ? 'predict' : 'verdict')"
+        ]
+      },
+      "hint": "Look for the part of the word that stays the same and means the same thing.",
+      "tags": [
+        "AC9E6LY09",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.6.word-roots.which-root-is-in",
+      "subject": "english",
+      "topic": "word roots",
+      "level": "6",
+      "prompt": "Which root is inside the word {word}?",
+      "vars": [
+        {
+          "name": "f",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "f == 0 ? (i == 0 ? 'transport' : i == 1 ? 'import' : i == 2 ? 'export' : 'portable') : f == 1 ? (i == 0 ? 'photograph' : i == 1 ? 'autograph' : i == 2 ? 'paragraph' : 'graphic') : f == 2 ? (i == 0 ? 'aquarium' : i == 1 ? 'aquatic' : i == 2 ? 'aqueduct' : 'aquamarine') : f == 3 ? (i == 0 ? 'telephone' : i == 1 ? 'television' : i == 2 ? 'telescope' : 'telepathy') : f == 4 ? (i == 0 ? 'scribble' : i == 1 ? 'ascribe' : i == 2 ? 'inscribe' : 'describe') : (i == 0 ? 'dictionary' : i == 1 ? 'dictator' : i == 2 ? 'predict' : 'verdict')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? \"port\" : f == 1 ? \"graph\" : f == 2 ? \"aqua\" : f == 3 ? \"tele\" : f == 4 ? \"scrib\" : \"dict\""
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(f + d1) % 6 == 0 ? \"port\" : (f + d1) % 6 == 1 ? \"graph\" : (f + d1) % 6 == 2 ? \"aqua\" : (f + d1) % 6 == 3 ? \"tele\" : (f + d1) % 6 == 4 ? \"scrib\" : \"dict\"",
+          "(f + d2) % 6 == 0 ? \"port\" : (f + d2) % 6 == 1 ? \"graph\" : (f + d2) % 6 == 2 ? \"aqua\" : (f + d2) % 6 == 3 ? \"tele\" : (f + d2) % 6 == 4 ? \"scrib\" : \"dict\""
+        ]
+      },
+      "hint": "Look for the meaningful chunk of letters shared by that word family.",
+      "tags": [
+        "AC9E6LY09",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.6.word-roots.root-meaning",
+      "subject": "english",
+      "topic": "word roots",
+      "level": "6",
+      "prompt": "What does the root {root} mean?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "root",
+          "kind": "expr",
+          "expr": "i == 0 ? \"port\" : i == 1 ? \"aqua\" : i == 2 ? \"tele\" : \"dict\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? \"carry\" : i == 1 ? \"water\" : i == 2 ? \"far\" : \"say\""
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 4 == 0 ? \"carry\" : (i + d1) % 4 == 1 ? \"water\" : (i + d1) % 4 == 2 ? \"far\" : \"say\"",
+          "(i + d2) % 4 == 0 ? \"carry\" : (i + d2) % 4 == 1 ? \"water\" : (i + d2) % 4 == 2 ? \"far\" : \"say\""
+        ]
+      },
+      "hint": "Think about what all the words built from that root have in common.",
+      "tags": [
+        "AC9E6LY09",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.6.word-roots.write-root",
+      "subject": "english",
+      "topic": "word roots",
+      "level": "6",
+      "prompt": "Write the root inside {word}.",
+      "vars": [
+        {
+          "name": "f",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "f == 0 ? (i == 0 ? 'transport' : i == 1 ? 'import' : i == 2 ? 'export' : 'portable') : f == 1 ? (i == 0 ? 'photograph' : i == 1 ? 'autograph' : i == 2 ? 'paragraph' : 'graphic') : f == 2 ? (i == 0 ? 'aquarium' : i == 1 ? 'aquatic' : i == 2 ? 'aqueduct' : 'aquamarine') : f == 3 ? (i == 0 ? 'telephone' : i == 1 ? 'television' : i == 2 ? 'telescope' : 'telepathy') : f == 4 ? (i == 0 ? 'scribble' : i == 1 ? 'ascribe' : i == 2 ? 'inscribe' : 'describe') : (i == 0 ? 'dictionary' : i == 1 ? 'dictator' : i == 2 ? 'predict' : 'verdict')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? \"port\" : f == 1 ? \"graph\" : f == 2 ? \"aqua\" : f == 3 ? \"tele\" : f == 4 ? \"scrib\" : \"dict\""
+        }
+      ],
+      "constraints": [
+        "f != 4",
+        "!(f == 2 && i == 2)"
+      ],
+      "answer": "answer",
+      "answerType": "text",
+      "hint": "Look for the meaningful chunk of letters shared by that word family.",
+      "tags": [
+        "AC9E6LY09",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.6.word-roots.write-meaning",
+      "subject": "english",
+      "topic": "word roots",
+      "level": "6",
+      "prompt": "Write what the root in {word} means.",
+      "vars": [
+        {
+          "name": "f",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "f == 0 ? (i == 0 ? 'transport' : i == 1 ? 'import' : i == 2 ? 'export' : 'portable') : f == 1 ? (i == 0 ? 'photograph' : i == 1 ? 'autograph' : i == 2 ? 'paragraph' : 'graphic') : f == 2 ? (i == 0 ? 'aquarium' : i == 1 ? 'aquatic' : i == 2 ? 'aqueduct' : 'aquamarine') : f == 3 ? (i == 0 ? 'telephone' : i == 1 ? 'television' : i == 2 ? 'telescope' : 'telepathy') : f == 4 ? (i == 0 ? 'scribble' : i == 1 ? 'ascribe' : i == 2 ? 'inscribe' : 'describe') : (i == 0 ? 'dictionary' : i == 1 ? 'dictator' : i == 2 ? 'predict' : 'verdict')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "f == 0 ? \"carry\" : f == 1 ? \"write\" : f == 2 ? \"water\" : f == 3 ? \"far\" : f == 4 ? \"write\" : \"say\""
+        }
+      ],
+      "answer": "answer",
+      "answerType": "text",
+      "hint": "Think about what all the words built from that root have in common.",
+      "tags": [
+        "AC9E6LY09",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.6.word-classes.identify-tense",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "6",
+      "prompt": "Which one is this? {sentence}",
+      "vars": [
+        {
+          "name": "type",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "type == 0 ? (i == 0 ? \"The chef cooked dinner for the whole family.\" : i == 1 ? \"She had finished her homework before dinner.\" : i == 2 ? \"The dog was barking loudly all morning.\" : \"They walked to the park after school.\") : type == 1 ? (i == 0 ? \"The chef cooks dinner for the whole family.\" : i == 1 ? \"She is finishing her homework before dinner.\" : i == 2 ? \"The dog barks loudly every morning.\" : \"They walk to the park after school.\") : (i == 0 ? \"The chef will cook dinner for the whole family.\" : i == 1 ? \"She will finish her homework before dinner.\" : i == 2 ? \"The dog will bark loudly tomorrow morning.\" : \"They will walk to the park after school.\")"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "type == 0 ? \"past\" : type == 1 ? \"present\" : \"future\""
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(type + 1) % 3 == 0 ? \"past\" : (type + 1) % 3 == 1 ? \"present\" : \"future\"",
+          "(type + 2) % 3 == 0 ? \"past\" : (type + 2) % 3 == 1 ? \"present\" : \"future\""
+        ]
+      },
+      "hint": "Look at the verb group to see when the action happens.",
+      "tags": [
+        "AC9E6LA06",
+        "EN3-CWT-01"
+      ]
+    },
+    {
+      "id": "english.6.word-classes.same-tense",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "6",
+      "prompt": "Which sentence is in the same tense as this one? {sentence}",
+      "vars": [
+        {
+          "name": "type",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "i0",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "iSame",
+          "kind": "int",
+          "min": "1",
+          "max": "3"
+        },
+        {
+          "name": "i1",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "i2",
+          "kind": "int",
+          "min": "0",
+          "max": "3"
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "type == 0 ? (i0 == 0 ? \"The chef cooked dinner for the whole family.\" : i0 == 1 ? \"She had finished her homework before dinner.\" : i0 == 2 ? \"The dog was barking loudly all morning.\" : \"They walked to the park after school.\") : type == 1 ? (i0 == 0 ? \"The chef cooks dinner for the whole family.\" : i0 == 1 ? \"She is finishing her homework before dinner.\" : i0 == 2 ? \"The dog barks loudly every morning.\" : \"They walk to the park after school.\") : (i0 == 0 ? \"The chef will cook dinner for the whole family.\" : i0 == 1 ? \"She will finish her homework before dinner.\" : i0 == 2 ? \"The dog will bark loudly tomorrow morning.\" : \"They will walk to the park after school.\")"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "type == 0 ? ((i0 + iSame) % 4 == 0 ? \"The chef cooked dinner for the whole family.\" : (i0 + iSame) % 4 == 1 ? \"She had finished her homework before dinner.\" : (i0 + iSame) % 4 == 2 ? \"The dog was barking loudly all morning.\" : \"They walked to the park after school.\") : type == 1 ? ((i0 + iSame) % 4 == 0 ? \"The chef cooks dinner for the whole family.\" : (i0 + iSame) % 4 == 1 ? \"She is finishing her homework before dinner.\" : (i0 + iSame) % 4 == 2 ? \"The dog barks loudly every morning.\" : \"They walk to the park after school.\") : ((i0 + iSame) % 4 == 0 ? \"The chef will cook dinner for the whole family.\" : (i0 + iSame) % 4 == 1 ? \"She will finish her homework before dinner.\" : (i0 + iSame) % 4 == 2 ? \"The dog will bark loudly tomorrow morning.\" : \"They will walk to the park after school.\")"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(type + 1) % 3 == 0 ? (i1 == 0 ? \"The chef cooked dinner for the whole family.\" : i1 == 1 ? \"She had finished her homework before dinner.\" : i1 == 2 ? \"The dog was barking loudly all morning.\" : \"They walked to the park after school.\") : (type + 1) % 3 == 1 ? (i1 == 0 ? \"The chef cooks dinner for the whole family.\" : i1 == 1 ? \"She is finishing her homework before dinner.\" : i1 == 2 ? \"The dog barks loudly every morning.\" : \"They walk to the park after school.\") : (i1 == 0 ? \"The chef will cook dinner for the whole family.\" : i1 == 1 ? \"She will finish her homework before dinner.\" : i1 == 2 ? \"The dog will bark loudly tomorrow morning.\" : \"They will walk to the park after school.\")",
+          "(type + 2) % 3 == 0 ? (i2 == 0 ? \"The chef cooked dinner for the whole family.\" : i2 == 1 ? \"She had finished her homework before dinner.\" : i2 == 2 ? \"The dog was barking loudly all morning.\" : \"They walked to the park after school.\") : (type + 2) % 3 == 1 ? (i2 == 0 ? \"The chef cooks dinner for the whole family.\" : i2 == 1 ? \"She is finishing her homework before dinner.\" : i2 == 2 ? \"The dog barks loudly every morning.\" : \"They walk to the park after school.\") : (i2 == 0 ? \"The chef will cook dinner for the whole family.\" : i2 == 1 ? \"She will finish her homework before dinner.\" : i2 == 2 ? \"The dog will bark loudly tomorrow morning.\" : \"They will walk to the park after school.\")"
+        ]
+      },
+      "hint": "Look at what each verb group is doing, not just what the sentence is about.",
+      "tags": [
+        "AC9E6LA06",
+        "EN3-CWT-01"
+      ]
+    },
+    {
+      "id": "english.6.word-classes.which-is-adverb",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "6",
+      "prompt": "Which of these adverbs is used in this sentence? {sentence}",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "i == 0 ? \"She sang beautifully during the concert.\" : i == 1 ? \"The children played quietly in the library.\" : i == 2 ? \"He quickly finished his lunch before class.\" : i == 3 ? \"The old bridge creaked loudly in the storm.\" : \"They arrived early for the school assembly.\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? \"beautifully\" : i == 1 ? \"quietly\" : i == 2 ? \"quickly\" : i == 3 ? \"loudly\" : \"early\""
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 5 == 0 ? \"beautifully\" : (i + d1) % 5 == 1 ? \"quietly\" : (i + d1) % 5 == 2 ? \"quickly\" : (i + d1) % 5 == 3 ? \"loudly\" : \"early\"",
+          "(i + d2) % 5 == 0 ? \"beautifully\" : (i + d2) % 5 == 1 ? \"quietly\" : (i + d2) % 5 == 2 ? \"quickly\" : (i + d2) % 5 == 3 ? \"loudly\" : \"early\""
+        ]
+      },
+      "hint": "Find the word that describes how the action happens, and check it is the one used here.",
+      "tags": [
+        "AC9E6LA06",
+        "EN3-CWT-01"
+      ]
+    },
+    {
+      "id": "english.6.word-classes.has-adverb",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "6",
+      "prompt": "Does this sentence contain an adverb group? {sentence}",
+      "vars": [
+        {
+          "name": "ok",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "ok == 1 ? (i == 0 ? \"She sang beautifully during the concert.\" : i == 1 ? \"The children played quietly in the library.\" : i == 2 ? \"He quickly finished his lunch before class.\" : i == 3 ? \"The old bridge creaked loudly in the storm.\" : \"They arrived early for the school assembly.\") : (i == 0 ? \"The teacher read a book to the class.\" : i == 1 ? \"The farmer grew vegetables in the field.\" : i == 2 ? \"The builder fixed the broken window.\" : i == 3 ? \"The artist painted a picture of the harbour.\" : \"The baker made bread for the shop.\")"
+        }
+      ],
+      "answer": "ok == 1",
+      "hint": "An adverb usually describes how, when or where something happens.",
+      "tags": [
+        "AC9E6LA06",
+        "EN3-CWT-01"
+      ]
+    },
+    {
+      "id": "english.6.figurative-language.identify",
+      "subject": "english",
+      "topic": "figurative language",
+      "level": "6",
+      "prompt": "Which one is this? {sentence}",
+      "vars": [
+        {
+          "name": "type",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "d3",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "type == 0 ? (i == 0 ? \"Her skin was as soft as a rose petal.\" : i == 1 ? \"He fought like a lion to win the match.\" : i == 2 ? \"The lake was as still as glass in the morning.\" : i == 3 ? \"She moved through the crowd like a shadow.\" : \"The ice was as cold as a winter night.\") : type == 1 ? (i == 0 ? \"The library was a treasure chest of stories.\" : i == 1 ? \"His words were daggers aimed at her pride.\" : i == 2 ? \"The playground was a battlefield at lunchtime.\" : i == 3 ? \"Her laughter was music drifting through the house.\" : \"The city streets were rivers of moving cars.\") : type == 2 ? (i == 0 ? \"The camera caught the moment the fireworks kissed the sky.\" : i == 1 ? \"The old clock coughed out its final chime.\" : i == 2 ? \"The waves raced each other onto the shore.\" : i == 3 ? \"The garden gate creaked a complaint when it opened.\" : \"The storm clouds argued loudly overhead.\") : type == 3 ? (i == 0 ? \"Grandpa always says it is raining cats and dogs outside.\" : i == 1 ? \"Once the news broke, the cat was out of the bag.\" : i == 2 ? \"She told him to break a leg before the concert.\" : i == 3 ? \"After the long flight, he felt under the weather.\" : \"The whole class had to hit the books before the exam.\") : (i == 0 ? \"I have told you a million times to tidy your room.\" : i == 1 ? \"This backpack weighs a tonne after a day at school.\" : i == 2 ? \"I am so hungry I could eat an entire elephant.\" : i == 3 ? \"Grandma is older than the mountains behind our house.\" : \"The queue for the roller coaster went on forever and ever.\")"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "type == 0 ? \"simile\" : type == 1 ? \"metaphor\" : type == 2 ? \"personification\" : type == 3 ? \"idiom\" : \"hyperbole\""
+        }
+      ],
+      "constraints": [
+        "d1 != d2",
+        "d1 != d3",
+        "d2 != d3"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "(type + d1) % 5 == 0 ? \"simile\" : (type + d1) % 5 == 1 ? \"metaphor\" : (type + d1) % 5 == 2 ? \"personification\" : (type + d1) % 5 == 3 ? \"idiom\" : \"hyperbole\"",
+          "(type + d2) % 5 == 0 ? \"simile\" : (type + d2) % 5 == 1 ? \"metaphor\" : (type + d2) % 5 == 2 ? \"personification\" : (type + d2) % 5 == 3 ? \"idiom\" : \"hyperbole\"",
+          "(type + d3) % 5 == 0 ? \"simile\" : (type + d3) % 5 == 1 ? \"metaphor\" : (type + d3) % 5 == 2 ? \"personification\" : (type + d3) % 5 == 3 ? \"idiom\" : \"hyperbole\""
+        ]
+      },
+      "hint": "A simile uses like or as, a metaphor says one thing is another, personification gives human actions to something not human, an idiom does not mean its literal words, and hyperbole is a wild exaggeration.",
+      "tags": [
+        "AC9E6LA08",
+        "EN3-UARL-01"
+      ]
+    },
+    {
+      "id": "english.6.figurative-language.what-signals-it",
+      "subject": "english",
+      "topic": "figurative language",
+      "level": "6",
+      "prompt": "What tells you this sentence uses figurative language? {sentence}",
+      "vars": [
+        {
+          "name": "type",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "d3",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "type == 0 ? (i == 0 ? \"Her skin was as soft as a rose petal.\" : i == 1 ? \"He fought like a lion to win the match.\" : i == 2 ? \"The lake was as still as glass in the morning.\" : i == 3 ? \"She moved through the crowd like a shadow.\" : \"The ice was as cold as a winter night.\") : type == 1 ? (i == 0 ? \"The library was a treasure chest of stories.\" : i == 1 ? \"His words were daggers aimed at her pride.\" : i == 2 ? \"The playground was a battlefield at lunchtime.\" : i == 3 ? \"Her laughter was music drifting through the house.\" : \"The city streets were rivers of moving cars.\") : type == 2 ? (i == 0 ? \"The camera caught the moment the fireworks kissed the sky.\" : i == 1 ? \"The old clock coughed out its final chime.\" : i == 2 ? \"The waves raced each other onto the shore.\" : i == 3 ? \"The garden gate creaked a complaint when it opened.\" : \"The storm clouds argued loudly overhead.\") : type == 3 ? (i == 0 ? \"Grandpa always says it is raining cats and dogs outside.\" : i == 1 ? \"Once the news broke, the cat was out of the bag.\" : i == 2 ? \"She told him to break a leg before the concert.\" : i == 3 ? \"After the long flight, he felt under the weather.\" : \"The whole class had to hit the books before the exam.\") : (i == 0 ? \"I have told you a million times to tidy your room.\" : i == 1 ? \"This backpack weighs a tonne after a day at school.\" : i == 2 ? \"I am so hungry I could eat an entire elephant.\" : i == 3 ? \"Grandma is older than the mountains behind our house.\" : \"The queue for the roller coaster went on forever and ever.\")"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "type == 0 ? \"the word like or as\" : type == 1 ? \"saying one thing is another thing\" : type == 2 ? \"giving human actions to something that is not human\" : type == 3 ? \"a saying whose words do not mean what they seem to say\" : \"a wild exaggeration not meant to be taken literally\""
+        }
+      ],
+      "constraints": [
+        "d1 != d2",
+        "d1 != d3",
+        "d2 != d3"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "(type + d1) % 5 == 0 ? \"the word like or as\" : (type + d1) % 5 == 1 ? \"saying one thing is another thing\" : (type + d1) % 5 == 2 ? \"giving human actions to something that is not human\" : (type + d1) % 5 == 3 ? \"a saying whose words do not mean what they seem to say\" : \"a wild exaggeration not meant to be taken literally\"",
+          "(type + d2) % 5 == 0 ? \"the word like or as\" : (type + d2) % 5 == 1 ? \"saying one thing is another thing\" : (type + d2) % 5 == 2 ? \"giving human actions to something that is not human\" : (type + d2) % 5 == 3 ? \"a saying whose words do not mean what they seem to say\" : \"a wild exaggeration not meant to be taken literally\"",
+          "(type + d3) % 5 == 0 ? \"the word like or as\" : (type + d3) % 5 == 1 ? \"saying one thing is another thing\" : (type + d3) % 5 == 2 ? \"giving human actions to something that is not human\" : (type + d3) % 5 == 3 ? \"a saying whose words do not mean what they seem to say\" : \"a wild exaggeration not meant to be taken literally\""
+        ]
+      },
+      "hint": "A simile uses like or as, a metaphor says one thing is another, personification gives human actions to something not human, an idiom does not mean its literal words, and hyperbole is a wild exaggeration.",
+      "tags": [
+        "AC9E6LA08",
+        "EN3-UARL-01"
+      ]
+    },
+    {
+      "id": "english.6.figurative-language.match-the-example",
+      "subject": "english",
+      "topic": "figurative language",
+      "level": "6",
+      "prompt": "Which sentence is an example of {label}?",
+      "vars": [
+        {
+          "name": "type",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i0",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "d3",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "i1",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i2",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i3",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "label",
+          "kind": "expr",
+          "expr": "type == 0 ? \"simile\" : type == 1 ? \"metaphor\" : type == 2 ? \"personification\" : type == 3 ? \"idiom\" : \"hyperbole\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "type == 0 ? (i0 == 0 ? \"Her skin was as soft as a rose petal.\" : i0 == 1 ? \"He fought like a lion to win the match.\" : i0 == 2 ? \"The lake was as still as glass in the morning.\" : i0 == 3 ? \"She moved through the crowd like a shadow.\" : \"The ice was as cold as a winter night.\") : type == 1 ? (i0 == 0 ? \"The library was a treasure chest of stories.\" : i0 == 1 ? \"His words were daggers aimed at her pride.\" : i0 == 2 ? \"The playground was a battlefield at lunchtime.\" : i0 == 3 ? \"Her laughter was music drifting through the house.\" : \"The city streets were rivers of moving cars.\") : type == 2 ? (i0 == 0 ? \"The camera caught the moment the fireworks kissed the sky.\" : i0 == 1 ? \"The old clock coughed out its final chime.\" : i0 == 2 ? \"The waves raced each other onto the shore.\" : i0 == 3 ? \"The garden gate creaked a complaint when it opened.\" : \"The storm clouds argued loudly overhead.\") : type == 3 ? (i0 == 0 ? \"Grandpa always says it is raining cats and dogs outside.\" : i0 == 1 ? \"Once the news broke, the cat was out of the bag.\" : i0 == 2 ? \"She told him to break a leg before the concert.\" : i0 == 3 ? \"After the long flight, he felt under the weather.\" : \"The whole class had to hit the books before the exam.\") : (i0 == 0 ? \"I have told you a million times to tidy your room.\" : i0 == 1 ? \"This backpack weighs a tonne after a day at school.\" : i0 == 2 ? \"I am so hungry I could eat an entire elephant.\" : i0 == 3 ? \"Grandma is older than the mountains behind our house.\" : \"The queue for the roller coaster went on forever and ever.\")"
+        }
+      ],
+      "constraints": [
+        "d1 != d2",
+        "d1 != d3",
+        "d2 != d3"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "(type + d1) % 5 == 0 ? (i1 == 0 ? \"Her skin was as soft as a rose petal.\" : i1 == 1 ? \"He fought like a lion to win the match.\" : i1 == 2 ? \"The lake was as still as glass in the morning.\" : i1 == 3 ? \"She moved through the crowd like a shadow.\" : \"The ice was as cold as a winter night.\") : (type + d1) % 5 == 1 ? (i1 == 0 ? \"The library was a treasure chest of stories.\" : i1 == 1 ? \"His words were daggers aimed at her pride.\" : i1 == 2 ? \"The playground was a battlefield at lunchtime.\" : i1 == 3 ? \"Her laughter was music drifting through the house.\" : \"The city streets were rivers of moving cars.\") : (type + d1) % 5 == 2 ? (i1 == 0 ? \"The camera caught the moment the fireworks kissed the sky.\" : i1 == 1 ? \"The old clock coughed out its final chime.\" : i1 == 2 ? \"The waves raced each other onto the shore.\" : i1 == 3 ? \"The garden gate creaked a complaint when it opened.\" : \"The storm clouds argued loudly overhead.\") : (type + d1) % 5 == 3 ? (i1 == 0 ? \"Grandpa always says it is raining cats and dogs outside.\" : i1 == 1 ? \"Once the news broke, the cat was out of the bag.\" : i1 == 2 ? \"She told him to break a leg before the concert.\" : i1 == 3 ? \"After the long flight, he felt under the weather.\" : \"The whole class had to hit the books before the exam.\") : (i1 == 0 ? \"I have told you a million times to tidy your room.\" : i1 == 1 ? \"This backpack weighs a tonne after a day at school.\" : i1 == 2 ? \"I am so hungry I could eat an entire elephant.\" : i1 == 3 ? \"Grandma is older than the mountains behind our house.\" : \"The queue for the roller coaster went on forever and ever.\")",
+          "(type + d2) % 5 == 0 ? (i2 == 0 ? \"Her skin was as soft as a rose petal.\" : i2 == 1 ? \"He fought like a lion to win the match.\" : i2 == 2 ? \"The lake was as still as glass in the morning.\" : i2 == 3 ? \"She moved through the crowd like a shadow.\" : \"The ice was as cold as a winter night.\") : (type + d2) % 5 == 1 ? (i2 == 0 ? \"The library was a treasure chest of stories.\" : i2 == 1 ? \"His words were daggers aimed at her pride.\" : i2 == 2 ? \"The playground was a battlefield at lunchtime.\" : i2 == 3 ? \"Her laughter was music drifting through the house.\" : \"The city streets were rivers of moving cars.\") : (type + d2) % 5 == 2 ? (i2 == 0 ? \"The camera caught the moment the fireworks kissed the sky.\" : i2 == 1 ? \"The old clock coughed out its final chime.\" : i2 == 2 ? \"The waves raced each other onto the shore.\" : i2 == 3 ? \"The garden gate creaked a complaint when it opened.\" : \"The storm clouds argued loudly overhead.\") : (type + d2) % 5 == 3 ? (i2 == 0 ? \"Grandpa always says it is raining cats and dogs outside.\" : i2 == 1 ? \"Once the news broke, the cat was out of the bag.\" : i2 == 2 ? \"She told him to break a leg before the concert.\" : i2 == 3 ? \"After the long flight, he felt under the weather.\" : \"The whole class had to hit the books before the exam.\") : (i2 == 0 ? \"I have told you a million times to tidy your room.\" : i2 == 1 ? \"This backpack weighs a tonne after a day at school.\" : i2 == 2 ? \"I am so hungry I could eat an entire elephant.\" : i2 == 3 ? \"Grandma is older than the mountains behind our house.\" : \"The queue for the roller coaster went on forever and ever.\")",
+          "(type + d3) % 5 == 0 ? (i3 == 0 ? \"Her skin was as soft as a rose petal.\" : i3 == 1 ? \"He fought like a lion to win the match.\" : i3 == 2 ? \"The lake was as still as glass in the morning.\" : i3 == 3 ? \"She moved through the crowd like a shadow.\" : \"The ice was as cold as a winter night.\") : (type + d3) % 5 == 1 ? (i3 == 0 ? \"The library was a treasure chest of stories.\" : i3 == 1 ? \"His words were daggers aimed at her pride.\" : i3 == 2 ? \"The playground was a battlefield at lunchtime.\" : i3 == 3 ? \"Her laughter was music drifting through the house.\" : \"The city streets were rivers of moving cars.\") : (type + d3) % 5 == 2 ? (i3 == 0 ? \"The camera caught the moment the fireworks kissed the sky.\" : i3 == 1 ? \"The old clock coughed out its final chime.\" : i3 == 2 ? \"The waves raced each other onto the shore.\" : i3 == 3 ? \"The garden gate creaked a complaint when it opened.\" : \"The storm clouds argued loudly overhead.\") : (type + d3) % 5 == 3 ? (i3 == 0 ? \"Grandpa always says it is raining cats and dogs outside.\" : i3 == 1 ? \"Once the news broke, the cat was out of the bag.\" : i3 == 2 ? \"She told him to break a leg before the concert.\" : i3 == 3 ? \"After the long flight, he felt under the weather.\" : \"The whole class had to hit the books before the exam.\") : (i3 == 0 ? \"I have told you a million times to tidy your room.\" : i3 == 1 ? \"This backpack weighs a tonne after a day at school.\" : i3 == 2 ? \"I am so hungry I could eat an entire elephant.\" : i3 == 3 ? \"Grandma is older than the mountains behind our house.\" : \"The queue for the roller coaster went on forever and ever.\")"
+        ]
+      },
+      "hint": "A simile uses like or as, a metaphor says one thing is another, personification gives human actions to something not human, an idiom does not mean its literal words, and hyperbole is a wild exaggeration.",
+      "tags": [
+        "AC9E6LA08",
+        "EN3-UARL-01"
+      ]
+    },
+    {
+      "id": "english.6.figurative-language.same-device",
+      "subject": "english",
+      "topic": "figurative language",
+      "level": "6",
+      "prompt": "Which sentence uses the same kind of figurative language as this one? {sentence}",
+      "vars": [
+        {
+          "name": "type",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i0",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "iSame",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "d3",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "i1",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i2",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i3",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "type == 0 ? (i0 == 0 ? \"Her skin was as soft as a rose petal.\" : i0 == 1 ? \"He fought like a lion to win the match.\" : i0 == 2 ? \"The lake was as still as glass in the morning.\" : i0 == 3 ? \"She moved through the crowd like a shadow.\" : \"The ice was as cold as a winter night.\") : type == 1 ? (i0 == 0 ? \"The library was a treasure chest of stories.\" : i0 == 1 ? \"His words were daggers aimed at her pride.\" : i0 == 2 ? \"The playground was a battlefield at lunchtime.\" : i0 == 3 ? \"Her laughter was music drifting through the house.\" : \"The city streets were rivers of moving cars.\") : type == 2 ? (i0 == 0 ? \"The camera caught the moment the fireworks kissed the sky.\" : i0 == 1 ? \"The old clock coughed out its final chime.\" : i0 == 2 ? \"The waves raced each other onto the shore.\" : i0 == 3 ? \"The garden gate creaked a complaint when it opened.\" : \"The storm clouds argued loudly overhead.\") : type == 3 ? (i0 == 0 ? \"Grandpa always says it is raining cats and dogs outside.\" : i0 == 1 ? \"Once the news broke, the cat was out of the bag.\" : i0 == 2 ? \"She told him to break a leg before the concert.\" : i0 == 3 ? \"After the long flight, he felt under the weather.\" : \"The whole class had to hit the books before the exam.\") : (i0 == 0 ? \"I have told you a million times to tidy your room.\" : i0 == 1 ? \"This backpack weighs a tonne after a day at school.\" : i0 == 2 ? \"I am so hungry I could eat an entire elephant.\" : i0 == 3 ? \"Grandma is older than the mountains behind our house.\" : \"The queue for the roller coaster went on forever and ever.\")"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "type == 0 ? ((i0 + iSame) % 5 == 0 ? \"Her skin was as soft as a rose petal.\" : (i0 + iSame) % 5 == 1 ? \"He fought like a lion to win the match.\" : (i0 + iSame) % 5 == 2 ? \"The lake was as still as glass in the morning.\" : (i0 + iSame) % 5 == 3 ? \"She moved through the crowd like a shadow.\" : \"The ice was as cold as a winter night.\") : type == 1 ? ((i0 + iSame) % 5 == 0 ? \"The library was a treasure chest of stories.\" : (i0 + iSame) % 5 == 1 ? \"His words were daggers aimed at her pride.\" : (i0 + iSame) % 5 == 2 ? \"The playground was a battlefield at lunchtime.\" : (i0 + iSame) % 5 == 3 ? \"Her laughter was music drifting through the house.\" : \"The city streets were rivers of moving cars.\") : type == 2 ? ((i0 + iSame) % 5 == 0 ? \"The camera caught the moment the fireworks kissed the sky.\" : (i0 + iSame) % 5 == 1 ? \"The old clock coughed out its final chime.\" : (i0 + iSame) % 5 == 2 ? \"The waves raced each other onto the shore.\" : (i0 + iSame) % 5 == 3 ? \"The garden gate creaked a complaint when it opened.\" : \"The storm clouds argued loudly overhead.\") : type == 3 ? ((i0 + iSame) % 5 == 0 ? \"Grandpa always says it is raining cats and dogs outside.\" : (i0 + iSame) % 5 == 1 ? \"Once the news broke, the cat was out of the bag.\" : (i0 + iSame) % 5 == 2 ? \"She told him to break a leg before the concert.\" : (i0 + iSame) % 5 == 3 ? \"After the long flight, he felt under the weather.\" : \"The whole class had to hit the books before the exam.\") : ((i0 + iSame) % 5 == 0 ? \"I have told you a million times to tidy your room.\" : (i0 + iSame) % 5 == 1 ? \"This backpack weighs a tonne after a day at school.\" : (i0 + iSame) % 5 == 2 ? \"I am so hungry I could eat an entire elephant.\" : (i0 + iSame) % 5 == 3 ? \"Grandma is older than the mountains behind our house.\" : \"The queue for the roller coaster went on forever and ever.\")"
+        }
+      ],
+      "constraints": [
+        "d1 != d2",
+        "d1 != d3",
+        "d2 != d3"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "(type + d1) % 5 == 0 ? (i1 == 0 ? \"Her skin was as soft as a rose petal.\" : i1 == 1 ? \"He fought like a lion to win the match.\" : i1 == 2 ? \"The lake was as still as glass in the morning.\" : i1 == 3 ? \"She moved through the crowd like a shadow.\" : \"The ice was as cold as a winter night.\") : (type + d1) % 5 == 1 ? (i1 == 0 ? \"The library was a treasure chest of stories.\" : i1 == 1 ? \"His words were daggers aimed at her pride.\" : i1 == 2 ? \"The playground was a battlefield at lunchtime.\" : i1 == 3 ? \"Her laughter was music drifting through the house.\" : \"The city streets were rivers of moving cars.\") : (type + d1) % 5 == 2 ? (i1 == 0 ? \"The camera caught the moment the fireworks kissed the sky.\" : i1 == 1 ? \"The old clock coughed out its final chime.\" : i1 == 2 ? \"The waves raced each other onto the shore.\" : i1 == 3 ? \"The garden gate creaked a complaint when it opened.\" : \"The storm clouds argued loudly overhead.\") : (type + d1) % 5 == 3 ? (i1 == 0 ? \"Grandpa always says it is raining cats and dogs outside.\" : i1 == 1 ? \"Once the news broke, the cat was out of the bag.\" : i1 == 2 ? \"She told him to break a leg before the concert.\" : i1 == 3 ? \"After the long flight, he felt under the weather.\" : \"The whole class had to hit the books before the exam.\") : (i1 == 0 ? \"I have told you a million times to tidy your room.\" : i1 == 1 ? \"This backpack weighs a tonne after a day at school.\" : i1 == 2 ? \"I am so hungry I could eat an entire elephant.\" : i1 == 3 ? \"Grandma is older than the mountains behind our house.\" : \"The queue for the roller coaster went on forever and ever.\")",
+          "(type + d2) % 5 == 0 ? (i2 == 0 ? \"Her skin was as soft as a rose petal.\" : i2 == 1 ? \"He fought like a lion to win the match.\" : i2 == 2 ? \"The lake was as still as glass in the morning.\" : i2 == 3 ? \"She moved through the crowd like a shadow.\" : \"The ice was as cold as a winter night.\") : (type + d2) % 5 == 1 ? (i2 == 0 ? \"The library was a treasure chest of stories.\" : i2 == 1 ? \"His words were daggers aimed at her pride.\" : i2 == 2 ? \"The playground was a battlefield at lunchtime.\" : i2 == 3 ? \"Her laughter was music drifting through the house.\" : \"The city streets were rivers of moving cars.\") : (type + d2) % 5 == 2 ? (i2 == 0 ? \"The camera caught the moment the fireworks kissed the sky.\" : i2 == 1 ? \"The old clock coughed out its final chime.\" : i2 == 2 ? \"The waves raced each other onto the shore.\" : i2 == 3 ? \"The garden gate creaked a complaint when it opened.\" : \"The storm clouds argued loudly overhead.\") : (type + d2) % 5 == 3 ? (i2 == 0 ? \"Grandpa always says it is raining cats and dogs outside.\" : i2 == 1 ? \"Once the news broke, the cat was out of the bag.\" : i2 == 2 ? \"She told him to break a leg before the concert.\" : i2 == 3 ? \"After the long flight, he felt under the weather.\" : \"The whole class had to hit the books before the exam.\") : (i2 == 0 ? \"I have told you a million times to tidy your room.\" : i2 == 1 ? \"This backpack weighs a tonne after a day at school.\" : i2 == 2 ? \"I am so hungry I could eat an entire elephant.\" : i2 == 3 ? \"Grandma is older than the mountains behind our house.\" : \"The queue for the roller coaster went on forever and ever.\")",
+          "(type + d3) % 5 == 0 ? (i3 == 0 ? \"Her skin was as soft as a rose petal.\" : i3 == 1 ? \"He fought like a lion to win the match.\" : i3 == 2 ? \"The lake was as still as glass in the morning.\" : i3 == 3 ? \"She moved through the crowd like a shadow.\" : \"The ice was as cold as a winter night.\") : (type + d3) % 5 == 1 ? (i3 == 0 ? \"The library was a treasure chest of stories.\" : i3 == 1 ? \"His words were daggers aimed at her pride.\" : i3 == 2 ? \"The playground was a battlefield at lunchtime.\" : i3 == 3 ? \"Her laughter was music drifting through the house.\" : \"The city streets were rivers of moving cars.\") : (type + d3) % 5 == 2 ? (i3 == 0 ? \"The camera caught the moment the fireworks kissed the sky.\" : i3 == 1 ? \"The old clock coughed out its final chime.\" : i3 == 2 ? \"The waves raced each other onto the shore.\" : i3 == 3 ? \"The garden gate creaked a complaint when it opened.\" : \"The storm clouds argued loudly overhead.\") : (type + d3) % 5 == 3 ? (i3 == 0 ? \"Grandpa always says it is raining cats and dogs outside.\" : i3 == 1 ? \"Once the news broke, the cat was out of the bag.\" : i3 == 2 ? \"She told him to break a leg before the concert.\" : i3 == 3 ? \"After the long flight, he felt under the weather.\" : \"The whole class had to hit the books before the exam.\") : (i3 == 0 ? \"I have told you a million times to tidy your room.\" : i3 == 1 ? \"This backpack weighs a tonne after a day at school.\" : i3 == 2 ? \"I am so hungry I could eat an entire elephant.\" : i3 == 3 ? \"Grandma is older than the mountains behind our house.\" : \"The queue for the roller coaster went on forever and ever.\")"
+        ]
+      },
+      "hint": "Look at what each sentence does, not just what it is about.",
+      "tags": [
+        "AC9E6LA08",
+        "EN3-UARL-01"
+      ]
+    },
+    {
+      "id": "english.6.figurative-language.eliminate-one",
+      "subject": "english",
+      "topic": "figurative language",
+      "level": "6",
+      "prompt": "Not {wrongLabel}. Which one is it? {sentence}",
+      "vars": [
+        {
+          "name": "type",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "off",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "d3",
+          "kind": "int",
+          "min": "1",
+          "max": "4"
+        },
+        {
+          "name": "wrongType",
+          "kind": "expr",
+          "expr": "(type + off) % 5"
+        },
+        {
+          "name": "wrongLabel",
+          "kind": "expr",
+          "expr": "wrongType == 0 ? \"simile\" : wrongType == 1 ? \"metaphor\" : wrongType == 2 ? \"personification\" : wrongType == 3 ? \"idiom\" : \"hyperbole\""
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "type == 0 ? (i == 0 ? \"Her skin was as soft as a rose petal.\" : i == 1 ? \"He fought like a lion to win the match.\" : i == 2 ? \"The lake was as still as glass in the morning.\" : i == 3 ? \"She moved through the crowd like a shadow.\" : \"The ice was as cold as a winter night.\") : type == 1 ? (i == 0 ? \"The library was a treasure chest of stories.\" : i == 1 ? \"His words were daggers aimed at her pride.\" : i == 2 ? \"The playground was a battlefield at lunchtime.\" : i == 3 ? \"Her laughter was music drifting through the house.\" : \"The city streets were rivers of moving cars.\") : type == 2 ? (i == 0 ? \"The camera caught the moment the fireworks kissed the sky.\" : i == 1 ? \"The old clock coughed out its final chime.\" : i == 2 ? \"The waves raced each other onto the shore.\" : i == 3 ? \"The garden gate creaked a complaint when it opened.\" : \"The storm clouds argued loudly overhead.\") : type == 3 ? (i == 0 ? \"Grandpa always says it is raining cats and dogs outside.\" : i == 1 ? \"Once the news broke, the cat was out of the bag.\" : i == 2 ? \"She told him to break a leg before the concert.\" : i == 3 ? \"After the long flight, he felt under the weather.\" : \"The whole class had to hit the books before the exam.\") : (i == 0 ? \"I have told you a million times to tidy your room.\" : i == 1 ? \"This backpack weighs a tonne after a day at school.\" : i == 2 ? \"I am so hungry I could eat an entire elephant.\" : i == 3 ? \"Grandma is older than the mountains behind our house.\" : \"The queue for the roller coaster went on forever and ever.\")"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "type == 0 ? \"simile\" : type == 1 ? \"metaphor\" : type == 2 ? \"personification\" : type == 3 ? \"idiom\" : \"hyperbole\""
+        }
+      ],
+      "constraints": [
+        "off != d1",
+        "off != d2",
+        "off != d3",
+        "d1 != d2",
+        "d1 != d3",
+        "d2 != d3"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 4,
+        "distractors": [
+          "(type + d1) % 5 == 0 ? \"simile\" : (type + d1) % 5 == 1 ? \"metaphor\" : (type + d1) % 5 == 2 ? \"personification\" : (type + d1) % 5 == 3 ? \"idiom\" : \"hyperbole\"",
+          "(type + d2) % 5 == 0 ? \"simile\" : (type + d2) % 5 == 1 ? \"metaphor\" : (type + d2) % 5 == 2 ? \"personification\" : (type + d2) % 5 == 3 ? \"idiom\" : \"hyperbole\"",
+          "(type + d3) % 5 == 0 ? \"simile\" : (type + d3) % 5 == 1 ? \"metaphor\" : (type + d3) % 5 == 2 ? \"personification\" : (type + d3) % 5 == 3 ? \"idiom\" : \"hyperbole\""
+        ]
+      },
+      "hint": "A simile uses like or as, a metaphor says one thing is another, personification gives human actions to something not human, an idiom does not mean its literal words, and hyperbole is a wild exaggeration.",
+      "tags": [
+        "AC9E6LA08",
+        "EN3-UARL-01"
+      ]
+    },
+    {
+      "id": "english.6.punctuation.list-issue",
+      "subject": "english",
+      "topic": "punctuation",
+      "level": "6",
+      "prompt": "Which sentence {label} in its list?",
+      "vars": [
+        {
+          "name": "cat",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "i0",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i1",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i2",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "label",
+          "kind": "expr",
+          "expr": "cat == 0 ? \"is punctuated correctly\" : cat == 1 ? \"is missing a comma\" : \"has a comma in the wrong place\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "cat == 0 ? (i0 == 0 ? \"We packed apples, bananas and grapes for the picnic.\" : i0 == 1 ? \"The zoo has lions, tigers and bears in the north wing.\" : i0 == 2 ? \"She bought pencils, rulers and erasers for school.\" : i0 == 3 ? \"We saw dolphins, turtles and seals at the aquarium.\" : \"The recipe needs flour, sugar and butter for the cake.\") : cat == 1 ? (i0 == 0 ? \"We packed apples bananas and grapes for the picnic.\" : i0 == 1 ? \"The zoo has lions tigers and bears in the north wing.\" : i0 == 2 ? \"She bought pencils rulers and erasers for school.\" : i0 == 3 ? \"We saw dolphins turtles and seals at the aquarium.\" : \"The recipe needs flour sugar and butter for the cake.\") : (i0 == 0 ? \"We packed apples, bananas and, grapes for the picnic.\" : i0 == 1 ? \"The zoo has lions, tigers and, bears in the north wing.\" : i0 == 2 ? \"She bought pencils, rulers and, erasers for school.\" : i0 == 3 ? \"We saw dolphins, turtles and, seals at the aquarium.\" : \"The recipe needs flour, sugar and, butter for the cake.\")"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(cat + 1) % 3 == 0 ? (i1 == 0 ? \"We packed apples, bananas and grapes for the picnic.\" : i1 == 1 ? \"The zoo has lions, tigers and bears in the north wing.\" : i1 == 2 ? \"She bought pencils, rulers and erasers for school.\" : i1 == 3 ? \"We saw dolphins, turtles and seals at the aquarium.\" : \"The recipe needs flour, sugar and butter for the cake.\") : (cat + 1) % 3 == 1 ? (i1 == 0 ? \"We packed apples bananas and grapes for the picnic.\" : i1 == 1 ? \"The zoo has lions tigers and bears in the north wing.\" : i1 == 2 ? \"She bought pencils rulers and erasers for school.\" : i1 == 3 ? \"We saw dolphins turtles and seals at the aquarium.\" : \"The recipe needs flour sugar and butter for the cake.\") : (i1 == 0 ? \"We packed apples, bananas and, grapes for the picnic.\" : i1 == 1 ? \"The zoo has lions, tigers and, bears in the north wing.\" : i1 == 2 ? \"She bought pencils, rulers and, erasers for school.\" : i1 == 3 ? \"We saw dolphins, turtles and, seals at the aquarium.\" : \"The recipe needs flour, sugar and, butter for the cake.\")",
+          "(cat + 2) % 3 == 0 ? (i2 == 0 ? \"We packed apples, bananas and grapes for the picnic.\" : i2 == 1 ? \"The zoo has lions, tigers and bears in the north wing.\" : i2 == 2 ? \"She bought pencils, rulers and erasers for school.\" : i2 == 3 ? \"We saw dolphins, turtles and seals at the aquarium.\" : \"The recipe needs flour, sugar and butter for the cake.\") : (cat + 2) % 3 == 1 ? (i2 == 0 ? \"We packed apples bananas and grapes for the picnic.\" : i2 == 1 ? \"The zoo has lions tigers and bears in the north wing.\" : i2 == 2 ? \"She bought pencils rulers and erasers for school.\" : i2 == 3 ? \"We saw dolphins turtles and seals at the aquarium.\" : \"The recipe needs flour sugar and butter for the cake.\") : (i2 == 0 ? \"We packed apples, bananas and, grapes for the picnic.\" : i2 == 1 ? \"The zoo has lions, tigers and, bears in the north wing.\" : i2 == 2 ? \"She bought pencils, rulers and, erasers for school.\" : i2 == 3 ? \"We saw dolphins, turtles and, seals at the aquarium.\" : \"The recipe needs flour, sugar and, butter for the cake.\")"
+        ]
+      },
+      "hint": "Put a comma after every item in the list except the last one.",
+      "tags": [
+        "AC9E6LA09",
+        "EN3-CWT-01"
+      ]
+    },
+    {
+      "id": "english.6.punctuation.clause-issue",
+      "subject": "english",
+      "topic": "punctuation",
+      "level": "6",
+      "prompt": "Which sentence {label} after its opening clause?",
+      "vars": [
+        {
+          "name": "cat",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "i0",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i1",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i2",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "label",
+          "kind": "expr",
+          "expr": "cat == 0 ? \"is punctuated correctly\" : cat == 1 ? \"is missing a comma\" : \"has a comma in the wrong place\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "cat == 0 ? (i0 == 0 ? \"After the game finished, the players shook hands.\" : i0 == 1 ? \"Although it was raining, the match went ahead.\" : i0 == 2 ? \"Before the bell rang, the students packed their bags.\" : i0 == 3 ? \"Since the bus was late, we walked to school instead.\" : \"While the teacher spoke, the class listened quietly.\") : cat == 1 ? (i0 == 0 ? \"After the game finished the players shook hands.\" : i0 == 1 ? \"Although it was raining the match went ahead.\" : i0 == 2 ? \"Before the bell rang the students packed their bags.\" : i0 == 3 ? \"Since the bus was late we walked to school instead.\" : \"While the teacher spoke the class listened quietly.\") : (i0 == 0 ? \"After the game, finished the players shook hands.\" : i0 == 1 ? \"Although it, was raining the match went ahead.\" : i0 == 2 ? \"Before the bell, rang the students packed their bags.\" : i0 == 3 ? \"Since the bus, was late we walked to school instead.\" : \"While the teacher, spoke the class listened quietly.\")"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(cat + 1) % 3 == 0 ? (i1 == 0 ? \"After the game finished, the players shook hands.\" : i1 == 1 ? \"Although it was raining, the match went ahead.\" : i1 == 2 ? \"Before the bell rang, the students packed their bags.\" : i1 == 3 ? \"Since the bus was late, we walked to school instead.\" : \"While the teacher spoke, the class listened quietly.\") : (cat + 1) % 3 == 1 ? (i1 == 0 ? \"After the game finished the players shook hands.\" : i1 == 1 ? \"Although it was raining the match went ahead.\" : i1 == 2 ? \"Before the bell rang the students packed their bags.\" : i1 == 3 ? \"Since the bus was late we walked to school instead.\" : \"While the teacher spoke the class listened quietly.\") : (i1 == 0 ? \"After the game, finished the players shook hands.\" : i1 == 1 ? \"Although it, was raining the match went ahead.\" : i1 == 2 ? \"Before the bell, rang the students packed their bags.\" : i1 == 3 ? \"Since the bus, was late we walked to school instead.\" : \"While the teacher, spoke the class listened quietly.\")",
+          "(cat + 2) % 3 == 0 ? (i2 == 0 ? \"After the game finished, the players shook hands.\" : i2 == 1 ? \"Although it was raining, the match went ahead.\" : i2 == 2 ? \"Before the bell rang, the students packed their bags.\" : i2 == 3 ? \"Since the bus was late, we walked to school instead.\" : \"While the teacher spoke, the class listened quietly.\") : (cat + 2) % 3 == 1 ? (i2 == 0 ? \"After the game finished the players shook hands.\" : i2 == 1 ? \"Although it was raining the match went ahead.\" : i2 == 2 ? \"Before the bell rang the students packed their bags.\" : i2 == 3 ? \"Since the bus was late we walked to school instead.\" : \"While the teacher spoke the class listened quietly.\") : (i2 == 0 ? \"After the game, finished the players shook hands.\" : i2 == 1 ? \"Although it, was raining the match went ahead.\" : i2 == 2 ? \"Before the bell, rang the students packed their bags.\" : i2 == 3 ? \"Since the bus, was late we walked to school instead.\" : \"While the teacher, spoke the class listened quietly.\")"
+        ]
+      },
+      "hint": "A comma follows the opening clause, before the main part of the sentence begins.",
+      "tags": [
+        "AC9E6LA09",
+        "EN3-CWT-01"
+      ]
+    },
+    {
+      "id": "english.6.punctuation.compound-issue",
+      "subject": "english",
+      "topic": "punctuation",
+      "level": "6",
+      "prompt": "Which sentence is {label} before the joining word?",
+      "vars": [
+        {
+          "name": "cat",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "i0",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "i1",
+          "kind": "int",
+          "min": "0",
+          "max": "4"
+        },
+        {
+          "name": "label",
+          "kind": "expr",
+          "expr": "cat == 0 ? \"punctuated correctly\" : \"missing a comma\""
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "cat == 0 ? (i0 == 0 ? \"The rain stopped, but the sun did not come out.\" : i0 == 1 ? \"She wanted to go outside, but it started to rain.\" : i0 == 2 ? \"The team trained hard, and they won the final.\" : i0 == 3 ? \"He forgot his lunch, so he borrowed some money.\" : \"The power went out, but the lights came back on soon.\") : (i0 == 0 ? \"The rain stopped but the sun did not come out.\" : i0 == 1 ? \"She wanted to go outside but it started to rain.\" : i0 == 2 ? \"The team trained hard and they won the final.\" : i0 == 3 ? \"He forgot his lunch so he borrowed some money.\" : \"The power went out but the lights came back on soon.\")"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "1 - cat == 0 ? (i1 == 0 ? \"The rain stopped, but the sun did not come out.\" : i1 == 1 ? \"She wanted to go outside, but it started to rain.\" : i1 == 2 ? \"The team trained hard, and they won the final.\" : i1 == 3 ? \"He forgot his lunch, so he borrowed some money.\" : \"The power went out, but the lights came back on soon.\") : (i1 == 0 ? \"The rain stopped but the sun did not come out.\" : i1 == 1 ? \"She wanted to go outside but it started to rain.\" : i1 == 2 ? \"The team trained hard and they won the final.\" : i1 == 3 ? \"He forgot his lunch so he borrowed some money.\" : \"The power went out but the lights came back on soon.\")"
+        ]
+      },
+      "hint": "Two complete sentences joined by and, but or so need a comma before the joining word.",
+      "tags": [
+        "AC9E6LA09",
+        "EN3-CWT-01"
+      ]
+    },
+    {
+      "id": "english.6.punctuation.identify-issue",
+      "subject": "english",
+      "topic": "punctuation",
+      "level": "6",
+      "prompt": "What is true of the commas in this sentence? {sentence}",
+      "vars": [
+        {
+          "name": "cat",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "9"
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "cat == 0 ? (i == 0 ? \"We packed apples, bananas and grapes for the picnic.\" : i == 1 ? \"The zoo has lions, tigers and bears in the north wing.\" : i == 2 ? \"She bought pencils, rulers and erasers for school.\" : i == 3 ? \"We saw dolphins, turtles and seals at the aquarium.\" : i == 4 ? \"The recipe needs flour, sugar and butter for the cake.\" : i == 5 ? \"After the game finished, the players shook hands.\" : i == 6 ? \"Although it was raining, the match went ahead.\" : i == 7 ? \"Before the bell rang, the students packed their bags.\" : i == 8 ? \"Since the bus was late, we walked to school instead.\" : \"While the teacher spoke, the class listened quietly.\") : cat == 1 ? (i == 0 ? \"We packed apples bananas and grapes for the picnic.\" : i == 1 ? \"The zoo has lions tigers and bears in the north wing.\" : i == 2 ? \"She bought pencils rulers and erasers for school.\" : i == 3 ? \"We saw dolphins turtles and seals at the aquarium.\" : i == 4 ? \"The recipe needs flour sugar and butter for the cake.\" : i == 5 ? \"After the game finished the players shook hands.\" : i == 6 ? \"Although it was raining the match went ahead.\" : i == 7 ? \"Before the bell rang the students packed their bags.\" : i == 8 ? \"Since the bus was late we walked to school instead.\" : \"While the teacher spoke the class listened quietly.\") : (i == 0 ? \"We packed apples, bananas and, grapes for the picnic.\" : i == 1 ? \"The zoo has lions, tigers and, bears in the north wing.\" : i == 2 ? \"She bought pencils, rulers and, erasers for school.\" : i == 3 ? \"We saw dolphins, turtles and, seals at the aquarium.\" : i == 4 ? \"The recipe needs flour, sugar and, butter for the cake.\" : i == 5 ? \"After the game, finished the players shook hands.\" : i == 6 ? \"Although it, was raining the match went ahead.\" : i == 7 ? \"Before the bell, rang the students packed their bags.\" : i == 8 ? \"Since the bus, was late we walked to school instead.\" : \"While the teacher, spoke the class listened quietly.\")"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "cat == 0 ? \"punctuated correctly\" : cat == 1 ? \"missing a comma\" : \"with a comma in the wrong place\""
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(cat + 1) % 3 == 0 ? \"punctuated correctly\" : (cat + 1) % 3 == 1 ? \"missing a comma\" : \"with a comma in the wrong place\"",
+          "(cat + 2) % 3 == 0 ? \"punctuated correctly\" : (cat + 2) % 3 == 1 ? \"missing a comma\" : \"with a comma in the wrong place\""
+        ]
+      },
+      "hint": "Check whether every comma is needed, missing, or in the wrong place.",
+      "tags": [
+        "AC9E6LA09",
+        "EN3-CWT-01"
+      ]
+    },
+    {
+      "id": "english.6.spelling-patterns.write-doubled-ing",
+      "subject": "english",
+      "topic": "spelling patterns",
+      "level": "6",
+      "prompt": "Write the word formed by adding -ing to {word}.",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'run' : i == 1 ? 'stop' : i == 2 ? 'plan' : i == 3 ? 'drop' : i == 4 ? 'swim' : 'grab'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'running' : i == 1 ? 'stopping' : i == 2 ? 'planning' : i == 3 ? 'dropping' : i == 4 ? 'swimming' : 'grabbing'"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "text",
+      "hint": "Double the final consonant before adding -ing.",
+      "tags": [
+        "AC9E6LY08",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.6.spelling-patterns.which-is-doubled-ing",
+      "subject": "english",
+      "topic": "spelling patterns",
+      "level": "6",
+      "prompt": "Which word is formed by adding -ing to {word}?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'run' : i == 1 ? 'stop' : i == 2 ? 'plan' : i == 3 ? 'drop' : i == 4 ? 'swim' : 'grab'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'running' : i == 1 ? 'stopping' : i == 2 ? 'planning' : i == 3 ? 'dropping' : i == 4 ? 'swimming' : 'grabbing'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 6 == 0 ? 'running' : (i + d1) % 6 == 1 ? 'stopping' : (i + d1) % 6 == 2 ? 'planning' : (i + d1) % 6 == 3 ? 'dropping' : (i + d1) % 6 == 4 ? 'swimming' : 'grabbing'",
+          "(i + d2) % 6 == 0 ? 'running' : (i + d2) % 6 == 1 ? 'stopping' : (i + d2) % 6 == 2 ? 'planning' : (i + d2) % 6 == 3 ? 'dropping' : (i + d2) % 6 == 4 ? 'swimming' : 'grabbing'"
+        ]
+      },
+      "hint": "Double the final consonant before adding -ing.",
+      "tags": [
+        "AC9E6LY08",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.6.spelling-patterns.write-plural-y",
+      "subject": "english",
+      "topic": "spelling patterns",
+      "level": "6",
+      "prompt": "Write the plural of {word}.",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'baby' : i == 1 ? 'city' : i == 2 ? 'puppy' : i == 3 ? 'story' : i == 4 ? 'family' : 'country'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'babies' : i == 1 ? 'cities' : i == 2 ? 'puppies' : i == 3 ? 'stories' : i == 4 ? 'families' : 'countries'"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "text",
+      "hint": "Change the y to i, then add -es.",
+      "tags": [
+        "AC9E6LY08",
+        "EN3-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.6.spelling-patterns.which-is-plural-y",
+      "subject": "english",
+      "topic": "spelling patterns",
+      "level": "6",
+      "prompt": "Which word is the plural of {word}?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'baby' : i == 1 ? 'city' : i == 2 ? 'puppy' : i == 3 ? 'story' : i == 4 ? 'family' : 'country'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'babies' : i == 1 ? 'cities' : i == 2 ? 'puppies' : i == 3 ? 'stories' : i == 4 ? 'families' : 'countries'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 6 == 0 ? 'babies' : (i + d1) % 6 == 1 ? 'cities' : (i + d1) % 6 == 2 ? 'puppies' : (i + d1) % 6 == 3 ? 'stories' : (i + d1) % 6 == 4 ? 'families' : 'countries'",
+          "(i + d2) % 6 == 0 ? 'babies' : (i + d2) % 6 == 1 ? 'cities' : (i + d2) % 6 == 2 ? 'puppies' : (i + d2) % 6 == 3 ? 'stories' : (i + d2) % 6 == 4 ? 'families' : 'countries'"
+        ]
+      },
+      "hint": "Change the y to i, then add -es.",
+      "tags": [
+        "AC9E6LY08",
+        "EN3-SPELL-01"
+      ]
+    }
+  ]
+}
