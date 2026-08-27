@@ -73,6 +73,14 @@ enum Canonical {
     static func scope(_ prefix: String, _ scope: [String: Answer]) -> [Field] {
         scope.keys.sorted().map { (name: "\(prefix).\($0)", value: scope[$0]!.stringValue) }
     }
+
+    /// The same, for the `Value`-typed scope `evaluate` takes. One rule, two
+    /// entry points — written twice rather than generically so that neither can
+    /// sort differently from the other, which is the failure the TypeScript
+    /// avoids by having `canonicalScope` be the single function.
+    static func scopeOfValues(_ prefix: String, _ scope: Scope) -> [Field] {
+        scope.keys.sorted().map { (name: "\(prefix).\($0)", value: scope[$0]!.stringValue) }
+    }
 }
 
 enum CanonicalError: Error, CustomStringConvertible {
