@@ -391,6 +391,91 @@ struct SpeedSessionTests {
         #expect(store.loadRuns().first?.playedAtMs == Self.runBegins)
     }
 
+    /// A URLProtocol that records what was sent and answers 200, so the
+    /// *online* submit can be inspected. The rest of this suite points at an
+    /// unreachable port, which only ever exercises the queued path.
+    final class RecordingProtocol: URLProtocol, @unchecked Sendable {
+        nonisolated(unsafe) static var bodies: [String: Data] = [:]
+        static let lock = NSLock()
+        static let keyHeader = "X-Record-Key"
+
+        static func session() -> (URLSession, String) {
+            let key = UUID().uuidString
+            let config = URLSessionConfiguration.ephemeral
+            config.protocolClasses = [RecordingProtocol.self]
+            config.httpAdditionalHeaders = [keyHeader: key]
+            return (URLSession(configuration: config), key)
+        }
+
+        static func body(for key: String) -> Data? {
+            lock.lock(); defer { lock.unlock() }
+            return bodies[key]
+        }
+
+        override class func canInit(with request: URLRequest) -> Bool {
+            request.value(forHTTPHeaderField: keyHeader) != nil
+        }
+        override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
+
+        override func startLoading() {
+            // httpBody is nil for an upload task; the stream carries it.
+            var body = request.httpBody
+            if body == nil, let stream = request.httpBodyStream {
+                stream.open()
+                var data = Data()
+                let size = 4096
+                let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: size)
+                while stream.hasBytesAvailable {
+                    let read = stream.read(buffer, maxLength: size)
+                    if read <= 0 { break }
+                    data.append(buffer, count: read)
+                }
+                buffer.deallocate()
+                stream.close()
+                body = data
+            }
+            if let key = request.value(forHTTPHeaderField: Self.keyHeader), let body {
+                Self.lock.lock(); Self.bodies[key] = body; Self.lock.unlock()
+            }
+
+            let response = HTTPURLResponse(
+                url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            client?.urlProtocol(
+                self, didLoad: Data(#"{"previousBest":3,"best":5,"isRecord":true,"standing":null}"#.utf8))
+            client?.urlProtocolDidFinishLoading(self)
+        }
+
+        override func stopLoading() {}
+    }
+
+    @Test("a run submitted straight away carries the played-at stamp too")
+    func submittedRunCarriesThePlayedAtStamp() async throws {
+        // The mirror of the queued case above. L14 asks that a run be stamped
+        // when it was *played* and that the stamp hold across every flush —
+        // and the flush that happens most is the first one, which succeeds.
+        let (session, key) = RecordingProtocol.session()
+        let api = ApiClient(
+            baseURL: URL(string: "https://stub.invalid")!,
+            tokens: NoTokens(),
+            session: session)
+        let run = SpeedSession(
+            mode: .multiply(.single(7)), api: api, seed: "test-seed", now: { Self.start })
+
+        run.start()
+        run.tick(at: Self.runBegins)
+        for digit in Self.answer(run) {
+            run.type(String(digit), at: Self.runBegins + 1_000)
+        }
+        run.finish(at: Self.runBegins + SpeedRun.runMs + 1)
+
+        try await Task.sleep(for: .milliseconds(400))
+
+        let body = try #require(RecordingProtocol.body(for: key))
+        let sent = try #require(try JSONSerialization.jsonObject(with: body) as? [String: Any])
+        #expect(sent["playedAt"] as? String == ISO8601.string(fromEpochMs: Self.runBegins))
+    }
+
     @Test("an abandoned run is not queued")
     func abandonedRunIsNotQueued() async throws {
         let (run, queue, _) = Self.queued()

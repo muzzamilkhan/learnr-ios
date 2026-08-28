@@ -278,8 +278,13 @@ final class SpeedSession {
     /// so the three-way distinction — first run, record, short — is made in one
     /// place, and a first run is never celebrated as a record.
     private func submit(_ pending: PendingRun, previousBest result: RunResult) async {
+        // Built from `pending` in full, stamp included. The stamp is not the
+        // queue's alone: the flush that happens most is this one, the first,
+        // which succeeds - and a run sent straight away is still dated by when
+        // it was *played* rather than by when the server received it (L14).
         let request = SpeedRunRequest(
-            id: pending.id, mode: pending.mode, correct: pending.correct)
+            id: pending.id, mode: pending.mode, correct: pending.correct,
+            playedAtMs: pending.playedAtMs)
 
         guard let sent = try? await api.submitSpeedRun(request) else {
             // Queued under the id it was just sent with, so the retry is the
