@@ -1,5 +1,5 @@
 {
-  "version": "b5f2fb49fb42",
+  "version": "fc78e674ddbc",
   "subject": "maths",
   "level": "5",
   "templates": [
@@ -8,6 +8,10 @@
       "subject": "maths",
       "topic": "decimals",
       "level": "5",
+      "tags": [
+        "AC9M5N01",
+        "MA3-RN-02"
+      ],
       "prompt": "How many hundredths are there in {x}?",
       "vars": [
         {
@@ -26,17 +30,17 @@
         "mod(n, 10) != 0"
       ],
       "answer": "n",
-      "hint": "Each whole is 100 hundredths.",
-      "tags": [
-        "AC9M5N01",
-        "MA3-RN-02"
-      ]
+      "hint": "Each whole is 100 hundredths."
     },
     {
       "id": "maths.5.decimals.largest",
       "subject": "maths",
       "topic": "decimals",
       "level": "5",
+      "tags": [
+        "AC9M5N01",
+        "MA3-RN-02"
+      ],
       "prompt": "Which of these is the largest: {a}, {b} or {c}?",
       "vars": [
         {
@@ -76,17 +80,17 @@
           "c"
         ],
         "rankIsTheQuestion": true
-      },
-      "tags": [
-        "AC9M5N01",
-        "MA3-RN-02"
-      ]
+      }
     },
     {
       "id": "maths.5.decimals.add",
       "subject": "maths",
       "topic": "decimals",
       "level": "5",
+      "tags": [
+        "AC9M5N01",
+        "MA3-AR-01"
+      ],
       "prompt": "What is {a} + {b}?",
       "vars": [
         {
@@ -102,12 +106,28 @@
           "max": "995"
         },
         {
-          "name": "s",
+          "name": "u",
           "kind": "pick",
           "from": [
-            -100,
+            1,
+            10,
             100
           ]
+        },
+        {
+          "name": "k",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "lo",
+          "kind": "expr",
+          "expr": "na + nb - k * u"
         },
         {
           "name": "a",
@@ -125,22 +145,23 @@
       "choices": {
         "count": 4,
         "distractors": [
-          "(na + nb + 10) / 100",
-          "(na + nb - 1) / 100",
-          "(na + nb + s) / 100"
+          "lo / 100",
+          "(lo + u) / 100",
+          "(lo + 2 * u) / 100",
+          "(lo + 3 * u) / 100"
         ]
       },
-      "hint": "Line up the decimal points.",
-      "tags": [
-        "AC9M5N01",
-        "MA3-AR-01"
-      ]
+      "hint": "Line up the decimal points."
     },
     {
       "id": "maths.5.decimals.subtract",
       "subject": "maths",
       "topic": "decimals",
       "level": "5",
+      "tags": [
+        "AC9M5N01",
+        "MA3-AR-01"
+      ],
       "prompt": "What is {a} − {b}?",
       "vars": [
         {
@@ -186,17 +207,17 @@
           "(na - nb - 1) / 100",
           "(na + nb) / 100"
         ]
-      },
-      "tags": [
-        "AC9M5N01",
-        "MA3-AR-01"
-      ]
+      }
     },
     {
       "id": "maths.5.factors-and-multiples.is-a-factor",
       "subject": "maths",
       "topic": "factors and multiples",
       "level": "5",
+      "tags": [
+        "AC9M5N02",
+        "MA3-MR-01"
+      ],
       "prompt": "True or false: {d} is a factor of {n}.",
       "vars": [
         {
@@ -213,17 +234,17 @@
         }
       ],
       "answer": "mod(n, d) == 0",
-      "hint": "A factor divides in with nothing left over.",
-      "tags": [
-        "AC9M5N02",
-        "MA3-MR-01"
-      ]
+      "hint": "A factor divides in with nothing left over."
     },
     {
       "id": "maths.5.factors-and-multiples.divisible",
       "subject": "maths",
       "topic": "factors and multiples",
       "level": "5",
+      "tags": [
+        "AC9M5N02",
+        "MA3-MR-01"
+      ],
       "prompt": "True or false: {n} is divisible by {d}.",
       "vars": [
         {
@@ -244,17 +265,17 @@
           "max": "400"
         }
       ],
-      "answer": "mod(n, d) == 0",
-      "tags": [
-        "AC9M5N02",
-        "MA3-MR-01"
-      ]
+      "answer": "mod(n, d) == 0"
     },
     {
       "id": "maths.5.factors-and-multiples.highest-common-factor",
       "subject": "maths",
       "topic": "factors and multiples",
       "level": "5",
+      "tags": [
+        "AC9M5N02",
+        "MA3-MR-01"
+      ],
       "prompt": "What is the highest common factor of {a} and {b}?",
       "vars": [
         {
@@ -275,17 +296,17 @@
         "gcd(a, b) > 1"
       ],
       "answer": "gcd(a, b)",
-      "hint": "The largest number that divides into both.",
-      "tags": [
-        "AC9M5N02",
-        "MA3-MR-01"
-      ]
+      "hint": "The largest number that divides into both."
     },
     {
       "id": "maths.5.factors-and-multiples.lowest-common-multiple",
       "subject": "maths",
       "topic": "factors and multiples",
       "level": "5",
+      "tags": [
+        "AC9M5N02",
+        "MA3-MR-01"
+      ],
       "prompt": "What is the lowest common multiple of {a} and {b}?",
       "vars": [
         {
@@ -315,17 +336,17 @@
         "a != b"
       ],
       "answer": "lcm(a, b)",
-      "hint": "Count in {a}s and in {b}s until the lists meet.",
-      "tags": [
-        "AC9M5N02",
-        "MA3-MR-01"
-      ]
+      "hint": "Count in {a}s and in {b}s until the lists meet."
     },
     {
       "id": "maths.5.fractions.add-same-denominator",
       "subject": "maths",
       "topic": "fractions",
       "level": "5",
+      "tags": [
+        "AC9M5N05",
+        "MA3-RQF-01"
+      ],
       "prompt": "{a}/{d} + {b}/{d} = ?/{d}  What is the missing numerator?",
       "vars": [
         {
@@ -348,17 +369,17 @@
         }
       ],
       "answer": "a + b",
-      "hint": "The denominators match, so just add the numerators.",
-      "tags": [
-        "AC9M5N05",
-        "MA3-RQF-01"
-      ]
+      "hint": "The denominators match, so just add the numerators."
     },
     {
       "id": "maths.5.fractions.add-related-denominator",
       "subject": "maths",
       "topic": "fractions",
       "level": "5",
+      "tags": [
+        "AC9M5N05",
+        "MA3-RQF-01"
+      ],
       "prompt": "{a}/{d} + {b}/{d * 2} = ?/{d * 2}  What is the missing numerator?",
       "vars": [
         {
@@ -384,17 +405,17 @@
         "a * 2 + b <= d * 2"
       ],
       "answer": "a * 2 + b",
-      "hint": "{a}/{d} is the same as {a * 2}/{d * 2}.",
-      "tags": [
-        "AC9M5N05",
-        "MA3-RQF-01"
-      ]
+      "hint": "{a}/{d} is the same as {a * 2}/{d * 2}."
     },
     {
       "id": "maths.5.fractions.of-a-quantity",
       "subject": "maths",
       "topic": "fractions",
       "level": "5",
+      "tags": [
+        "AC9M5N03",
+        "MA3-RQF-02"
+      ],
       "prompt": "What is {n}/{d} of {total}?",
       "vars": [
         {
@@ -426,17 +447,17 @@
           "max": "d - 1"
         }
       ],
-      "answer": "n * part",
-      "tags": [
-        "AC9M5N03",
-        "MA3-RQF-02"
-      ]
+      "answer": "n * part"
     },
     {
       "id": "maths.5.fractions.equivalent-shaded",
       "subject": "maths",
       "topic": "fractions",
       "level": "5",
+      "tags": [
+        "AC9M5N03",
+        "MA3-RQF-01"
+      ],
       "prompt": "How much of this shape is shaded, in its simplest form?",
       "vars": [
         {
@@ -492,17 +513,17 @@
         "kind": "fraction-shape",
         "numerator": "n",
         "denominator": "d"
-      },
-      "tags": [
-        "AC9M5N03",
-        "MA3-RQF-01"
-      ]
+      }
     },
     {
       "id": "maths.5.percentages.of-a-quantity",
       "subject": "maths",
       "topic": "percentages",
       "level": "5",
+      "tags": [
+        "AC9M5N04",
+        "MA3-RN-03"
+      ],
       "prompt": "What is {p}% of {total}?",
       "vars": [
         {
@@ -528,17 +549,17 @@
         }
       ],
       "answer": "total * p / 100",
-      "hint": "10% is one tenth; 25% is one quarter.",
-      "tags": [
-        "AC9M5N04",
-        "MA3-RN-03"
-      ]
+      "hint": "10% is one tenth; 25% is one quarter."
     },
     {
       "id": "maths.5.percentages.fraction-equivalent",
       "subject": "maths",
       "topic": "percentages",
       "level": "5",
+      "tags": [
+        "AC9M5N04",
+        "MA3-RN-03"
+      ],
       "prompt": "What percentage is the same as 1/{d}?",
       "vars": [
         {
@@ -552,17 +573,17 @@
           ]
         }
       ],
-      "answer": "100 / d",
-      "tags": [
-        "AC9M5N04",
-        "MA3-RN-03"
-      ]
+      "answer": "100 / d"
     },
     {
       "id": "maths.5.percentages.whole",
       "subject": "maths",
       "topic": "percentages",
       "level": "5",
+      "tags": [
+        "AC9M5N04",
+        "MA3-RN-03"
+      ],
       "prompt": "{p}% of a class has arrived. What percentage is still to come?",
       "vars": [
         {
@@ -574,17 +595,17 @@
         }
       ],
       "answer": "100 - p",
-      "hint": "100% is the whole class.",
-      "tags": [
-        "AC9M5N04",
-        "MA3-RN-03"
-      ]
+      "hint": "100% is the whole class."
     },
     {
       "id": "maths.5.percentages.number-line-percent",
       "subject": "maths",
       "topic": "percentages",
       "level": "5",
+      "tags": [
+        "AC9M5N04",
+        "MA3-RN-03"
+      ],
       "prompt": "What percentage is the arrow pointing to?",
       "vars": [
         {
@@ -612,17 +633,17 @@
         "at": "k / 100",
         "from": "0",
         "to": "1"
-      },
-      "tags": [
-        "AC9M5N04",
-        "MA3-RN-03"
-      ]
+      }
     },
     {
       "id": "maths.5.multiplication.large-by-one-digit",
       "subject": "maths",
       "topic": "multiplication",
       "level": "5",
+      "tags": [
+        "AC9M5N06",
+        "MA3-MR-01"
+      ],
       "prompt": "What is {x} × {y}?",
       "vars": [
         {
@@ -638,17 +659,17 @@
           "max": "9"
         }
       ],
-      "answer": "x * y",
-      "tags": [
-        "AC9M5N06",
-        "MA3-MR-01"
-      ]
+      "answer": "x * y"
     },
     {
       "id": "maths.5.multiplication.two-by-two-digit",
       "subject": "maths",
       "topic": "multiplication",
       "level": "5",
+      "tags": [
+        "AC9M5N06",
+        "MA3-MR-01"
+      ],
       "prompt": "What is {x} × {y}?",
       "vars": [
         {
@@ -665,17 +686,17 @@
         }
       ],
       "answer": "x * y",
-      "hint": "Split both numbers into tens and ones.",
-      "tags": [
-        "AC9M5N06",
-        "MA3-MR-01"
-      ]
+      "hint": "Split both numbers into tens and ones."
     },
     {
       "id": "maths.5.division.exact",
       "subject": "maths",
       "topic": "division",
       "level": "5",
+      "tags": [
+        "AC9M5N07",
+        "MA3-MR-01"
+      ],
       "prompt": "What is {total} ÷ {d}?",
       "vars": [
         {
@@ -696,17 +717,17 @@
           "expr": "d * x"
         }
       ],
-      "answer": "x",
-      "tags": [
-        "AC9M5N07",
-        "MA3-MR-01"
-      ]
+      "answer": "x"
     },
     {
       "id": "maths.5.division.remainder",
       "subject": "maths",
       "topic": "division",
       "level": "5",
+      "tags": [
+        "AC9M5N07",
+        "MA3-MR-01"
+      ],
       "prompt": "What is the remainder when {total} is divided by {d}?",
       "vars": [
         {
@@ -726,17 +747,17 @@
         "mod(total, d) != 0"
       ],
       "answer": "mod(total, d)",
-      "hint": "How much is left over after the last whole group?",
-      "tags": [
-        "AC9M5N07",
-        "MA3-MR-01"
-      ]
+      "hint": "How much is left over after the last whole group?"
     },
     {
       "id": "maths.5.division.how-many-groups",
       "subject": "maths",
       "topic": "division",
       "level": "5",
+      "tags": [
+        "AC9M5N07",
+        "MA3-MR-01"
+      ],
       "prompt": "{total} students are put into teams of {d}. How many full teams are there?",
       "vars": [
         {
@@ -756,17 +777,17 @@
         "mod(total, d) != 0"
       ],
       "answer": "floor(total / d)",
-      "hint": "The leftover students do not make a full team.",
-      "tags": [
-        "AC9M5N07",
-        "MA3-MR-01"
-      ]
+      "hint": "The leftover students do not make a full team."
     },
     {
       "id": "maths.5.algebra.inverse-operations",
       "subject": "maths",
       "topic": "algebra",
       "level": "5",
+      "tags": [
+        "AC9M5A01",
+        "MA3-MR-02"
+      ],
       "prompt": "You know that {a} × {b} = {a * b}. What is {a * b} ÷ {b}?",
       "vars": [
         {
@@ -783,17 +804,17 @@
         }
       ],
       "answer": "a",
-      "hint": "Multiplying and dividing undo each other.",
-      "tags": [
-        "AC9M5A01",
-        "MA3-MR-02"
-      ]
+      "hint": "Multiplying and dividing undo each other."
     },
     {
       "id": "maths.5.algebra.unknown-value",
       "subject": "maths",
       "topic": "algebra",
       "level": "5",
+      "tags": [
+        "AC9M5A02",
+        "MA3-MR-02"
+      ],
       "prompt": "What goes in the box? {a} × ? = {product}",
       "vars": [
         {
@@ -814,17 +835,17 @@
           "expr": "a * b"
         }
       ],
-      "answer": "b",
-      "tags": [
-        "AC9M5A02",
-        "MA3-MR-02"
-      ]
+      "answer": "b"
     },
     {
       "id": "maths.5.number-patterns.multiply-rule",
       "subject": "maths",
       "topic": "number patterns",
       "level": "5",
+      "tags": [
+        "AC9M5N10",
+        "MA3-MR-01"
+      ],
       "prompt": "The rule is: multiply by {k}. Starting at {a}, what is the 4th number in the pattern?",
       "vars": [
         {
@@ -843,17 +864,17 @@
         }
       ],
       "answer": "a * pow(k, 3)",
-      "hint": "{a} is the 1st number, so multiply by {k} three more times.",
-      "tags": [
-        "AC9M5N10",
-        "MA3-MR-01"
-      ]
+      "hint": "{a} is the 1st number, so multiply by {k} three more times."
     },
     {
       "id": "maths.5.measurement.millimetres",
       "subject": "maths",
       "topic": "measurement",
       "level": "5",
+      "tags": [
+        "AC9M5M01",
+        "MA3-GM-02"
+      ],
       "prompt": "How many millimetres are there in {n} centimetres?",
       "vars": [
         {
@@ -863,17 +884,17 @@
           "max": "40"
         }
       ],
-      "answer": "n * 10",
-      "tags": [
-        "AC9M5M01",
-        "MA3-GM-02"
-      ]
+      "answer": "n * 10"
     },
     {
       "id": "maths.5.measurement.millilitres",
       "subject": "maths",
       "topic": "measurement",
       "level": "5",
+      "tags": [
+        "AC9M5M01",
+        "MA3-3DS-02"
+      ],
       "prompt": "How many millilitres are there in {n} litres?",
       "vars": [
         {
@@ -883,17 +904,17 @@
           "max": "12"
         }
       ],
-      "answer": "n * 1000",
-      "tags": [
-        "AC9M5M01",
-        "MA3-3DS-02"
-      ]
+      "answer": "n * 1000"
     },
     {
       "id": "maths.5.measurement.kilograms-to-grams",
       "subject": "maths",
       "topic": "measurement",
       "level": "5",
+      "tags": [
+        "AC9M5M01",
+        "MA3-NSM-01"
+      ],
       "prompt": "A parcel weighs {kg} kilograms. How many grams is that?",
       "vars": [
         {
@@ -912,17 +933,17 @@
         "mod(n, 10) != 0"
       ],
       "answer": "n * 100",
-      "hint": "One kilogram is 1000 grams, so a tenth of a kilogram is 100.",
-      "tags": [
-        "AC9M5M01",
-        "MA3-NSM-01"
-      ]
+      "hint": "One kilogram is 1000 grams, so a tenth of a kilogram is 100."
     },
     {
       "id": "maths.5.measurement.millilitres-to-litres",
       "subject": "maths",
       "topic": "measurement",
       "level": "5",
+      "tags": [
+        "AC9M5M01",
+        "MA3-3DS-02"
+      ],
       "prompt": "A bottle holds {ml} millilitres. How many litres is that?",
       "vars": [
         {
@@ -941,17 +962,17 @@
         "mod(n, 10) != 0"
       ],
       "answer": "n / 10",
-      "hint": "One litre is 1000 millilitres.",
-      "tags": [
-        "AC9M5M01",
-        "MA3-3DS-02"
-      ]
+      "hint": "One litre is 1000 millilitres."
     },
     {
       "id": "maths.5.measurement.fill-the-bottle",
       "subject": "maths",
       "topic": "measurement",
       "level": "5",
+      "tags": [
+        "AC9M5M01",
+        "MA3-3DS-02"
+      ],
       "prompt": "A {l} litre bottle has {ml} millilitres in it. How many more millilitres would fill it?",
       "vars": [
         {
@@ -973,17 +994,17 @@
         }
       ],
       "answer": "l * 1000 - ml",
-      "hint": "The full bottle holds {l * 1000} millilitres.",
-      "tags": [
-        "AC9M5M01",
-        "MA3-3DS-02"
-      ]
+      "hint": "The full bottle holds {l * 1000} millilitres."
     },
     {
       "id": "maths.5.perimeter-and-area.rectangle-area",
       "subject": "maths",
       "topic": "perimeter and area",
       "level": "5",
+      "tags": [
+        "AC9M5M02",
+        "MA3-2DS-02"
+      ],
       "prompt": "A rectangle is {l} cm long and {w} cm wide. What is its area, in square centimetres?",
       "vars": [
         {
@@ -999,18 +1020,18 @@
           "max": "18"
         }
       ],
-      "answer": "l * w",
-      "tags": [
-        "AC9M5M02",
-        "MA3-2DS-02"
-      ]
+      "answer": "l * w"
     },
     {
       "id": "maths.5.perimeter-and-area.missing-side",
       "subject": "maths",
       "topic": "perimeter and area",
       "level": "5",
-      "prompt": "A rectangle has an area of {area} square centimetres and is {w} cm wide. How long is it, in centimetres?",
+      "tags": [
+        "AC9M5M02",
+        "MA3-2DS-02"
+      ],
+      "prompt": "A rectangle has an area of {area} square cm and is {w} cm wide. How long is it, in centimetres?",
       "vars": [
         {
           "name": "w",
@@ -1030,17 +1051,17 @@
           "expr": "l * w"
         }
       ],
-      "answer": "l",
-      "tags": [
-        "AC9M5M02",
-        "MA3-2DS-02"
-      ]
+      "answer": "l"
     },
     {
       "id": "maths.5.time.24-hour",
       "subject": "maths",
       "topic": "time",
       "level": "5",
+      "tags": [
+        "AC9M5M03",
+        "MA3-NSM-02"
+      ],
       "prompt": "A train leaves at {h}:00 in 24-hour time. What is that hour on a 12-hour clock?",
       "vars": [
         {
@@ -1051,17 +1072,17 @@
         }
       ],
       "answer": "h - 12",
-      "hint": "After midday, take 12 off the 24-hour time.",
-      "tags": [
-        "AC9M5M03",
-        "MA3-NSM-02"
-      ]
+      "hint": "After midday, take 12 off the 24-hour time."
     },
     {
       "id": "maths.5.time.clock-24-hour",
       "subject": "maths",
       "topic": "time",
       "level": "5",
+      "tags": [
+        "AC9M5M03",
+        "MA3-NSM-02"
+      ],
       "prompt": "This clock shows a pm time. What is it in 24-hour time?",
       "vars": [
         {
@@ -1131,17 +1152,17 @@
         "minute": "m",
         "numerals": "true",
         "minuteTicks": "true"
-      },
-      "tags": [
-        "AC9M5M03",
-        "MA3-NSM-02"
-      ]
+      }
     },
     {
       "id": "maths.5.time.clock-minutes-until",
       "subject": "maths",
       "topic": "time",
       "level": "5",
+      "tags": [
+        "AC9M5M03",
+        "MA3-NSM-02"
+      ],
       "prompt": "This clock shows a pm time. How many minutes until {th}:{tms}?",
       "vars": [
         {
@@ -1196,17 +1217,17 @@
         "minute": "m",
         "numerals": "true",
         "minuteTicks": "true"
-      },
-      "tags": [
-        "AC9M5M03",
-        "MA3-NSM-02"
-      ]
+      }
     },
     {
       "id": "maths.5.angles.right-angles-in-degrees",
       "subject": "maths",
       "topic": "angles",
       "level": "5",
+      "tags": [
+        "AC9M5M04",
+        "MA3-GM-03"
+      ],
       "prompt": "How many degrees are there in {n} right angles?",
       "vars": [
         {
@@ -1217,30 +1238,45 @@
         }
       ],
       "answer": "n * 90",
-      "hint": "A right angle is 90 degrees.",
-      "tags": [
-        "AC9M5M04",
-        "MA3-GM-03"
-      ]
+      "hint": "A right angle is 90 degrees."
     },
     {
       "id": "maths.5.angles.name-from-degrees",
       "subject": "maths",
       "topic": "angles",
       "level": "5",
+      "tags": [
+        "AC9M5M04",
+        "MA3-GM-03"
+      ],
       "prompt": "Is an angle of {d} degrees acute, obtuse or reflex?",
       "vars": [
         {
+          "name": "band",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "lo",
+          "kind": "expr",
+          "expr": "band == 0 ? 5 : band == 1 ? 95 : 185"
+        },
+        {
+          "name": "hi",
+          "kind": "expr",
+          "expr": "band == 0 ? 85 : band == 1 ? 175 : 355"
+        },
+        {
           "name": "d",
           "kind": "int",
-          "min": "5",
-          "max": "355",
+          "min": "lo",
+          "max": "hi",
           "step": 5
         }
-      ],
-      "constraints": [
-        "d != 90",
-        "d != 180"
       ],
       "answer": "d < 90 ? 'acute' : d < 180 ? 'obtuse' : 'reflex'",
       "answerType": "choice",
@@ -1252,17 +1288,17 @@
           "'reflex'"
         ]
       },
-      "hint": "Under 90 is acute, between 90 and 180 is obtuse, over 180 is reflex.",
-      "tags": [
-        "AC9M5M04",
-        "MA3-GM-03"
-      ]
+      "hint": "Under 90 is acute, between 90 and 180 is obtuse, over 180 is reflex."
     },
     {
       "id": "maths.5.angles.name-picture",
       "subject": "maths",
       "topic": "angles",
       "level": "5",
+      "tags": [
+        "AC9M5M04",
+        "MA3-GM-03"
+      ],
       "prompt": "Is this angle acute, obtuse or reflex?",
       "vars": [
         {
@@ -1315,17 +1351,17 @@
       "figure": {
         "kind": "angle",
         "degrees": "d"
-      },
-      "tags": [
-        "AC9M5M04",
-        "MA3-GM-03"
-      ]
+      }
     },
     {
       "id": "maths.5.angles.estimate-degrees",
       "subject": "maths",
       "topic": "angles",
       "level": "5",
+      "tags": [
+        "AC9M5M04",
+        "MA3-GM-03"
+      ],
       "prompt": "About how many degrees is this angle?",
       "vars": [
         {
@@ -1354,17 +1390,17 @@
       "figure": {
         "kind": "angle",
         "degrees": "d"
-      },
-      "tags": [
-        "AC9M5M04",
-        "MA3-GM-03"
-      ]
+      }
     },
     {
       "id": "maths.5.symmetry.half-turn",
       "subject": "maths",
       "topic": "symmetry",
       "level": "5",
+      "tags": [
+        "AC9M4SP03",
+        "AC9M5SP03"
+      ],
       "prompt": "True or false: turning this shape half way round would leave it looking exactly the same.",
       "vars": [
         {
@@ -1393,17 +1429,17 @@
       "figure": {
         "kind": "polygon",
         "shape": "shape"
-      },
-      "tags": [
-        "AC9M4SP03",
-        "AC9M5SP03"
-      ]
+      }
     },
     {
       "id": "maths.5.symmetry.turn-matches",
       "subject": "maths",
       "topic": "symmetry",
       "level": "5",
+      "tags": [
+        "AC9M4SP03",
+        "AC9M5SP03"
+      ],
       "prompt": "In one full turn, how many times does this shape look exactly the same as it does now?",
       "vars": [
         {
@@ -1427,17 +1463,17 @@
       "figure": {
         "kind": "polygon",
         "shape": "shape"
-      },
-      "tags": [
-        "AC9M4SP03",
-        "AC9M5SP03"
-      ]
+      }
     },
     {
       "id": "maths.5.shapes.object-edges",
       "subject": "maths",
       "topic": "shapes",
       "level": "5",
+      "tags": [
+        "AC9M5SP01",
+        "MA3-3DS-01"
+      ],
       "prompt": "How many edges does this shape have?",
       "vars": [
         {
@@ -1456,17 +1492,17 @@
         "kind": "solid",
         "solid": "shape",
         "view": "'object'"
-      },
-      "tags": [
-        "AC9M5SP01",
-        "MA3-3DS-01"
-      ]
+      }
     },
     {
       "id": "maths.5.shapes.object-corners",
       "subject": "maths",
       "topic": "shapes",
       "level": "5",
+      "tags": [
+        "AC9M5SP01",
+        "MA3-3DS-01"
+      ],
       "prompt": "How many corners does this shape have?",
       "vars": [
         {
@@ -1485,17 +1521,17 @@
         "kind": "solid",
         "solid": "shape",
         "view": "'object'"
-      },
-      "tags": [
-        "AC9M5SP01",
-        "MA3-3DS-01"
-      ]
+      }
     },
     {
       "id": "maths.5.shapes.square-face",
       "subject": "maths",
       "topic": "shapes",
       "level": "5",
+      "tags": [
+        "AC9M5SP01",
+        "MA3-3DS-01"
+      ],
       "prompt": "True or false: this shape has a face shaped like a square.",
       "vars": [
         {
@@ -1513,17 +1549,17 @@
         "kind": "solid",
         "solid": "shape",
         "view": "'object'"
-      },
-      "tags": [
-        "AC9M5SP01",
-        "MA3-3DS-01"
-      ]
+      }
     },
     {
       "id": "maths.5.position.coordinates",
       "subject": "maths",
       "topic": "position",
       "level": "5",
+      "tags": [
+        "AC9M5SP02",
+        "MA3-GM-01"
+      ],
       "prompt": "What are the coordinates of the dot?",
       "vars": [
         {
@@ -1584,17 +1620,17 @@
         "columns": "cols",
         "rows": "rws",
         "onLines": "true"
-      },
-      "tags": [
-        "AC9M5SP02",
-        "MA3-GM-01"
-      ]
+      }
     },
     {
       "id": "maths.5.position.coordinate-step",
       "subject": "maths",
       "topic": "position",
       "level": "5",
+      "tags": [
+        "AC9M5SP02",
+        "MA3-GM-01"
+      ],
       "prompt": "Which point is one to the {ew} and one {ns} from the dot?",
       "vars": [
         {
@@ -1676,17 +1712,17 @@
         "columns": "cols",
         "rows": "rws",
         "onLines": "true"
-      },
-      "tags": [
-        "AC9M5SP02",
-        "MA3-GM-01"
-      ]
+      }
     },
     {
       "id": "maths.5.data.picture-key-difference",
       "subject": "maths",
       "topic": "data",
       "level": "5",
+      "tags": [
+        "AC9M5ST01",
+        "MA3-DATA-01"
+      ],
       "prompt": "Each picture stands for {k} books. How many more books did {a} read than {b}?",
       "vars": [
         {
@@ -1774,17 +1810,17 @@
         "counts": "(ada * k) + ',' + (kai * k) + ',' + (leo * k)",
         "labels": "'Ada,Kai,Leo'",
         "key": "k"
-      },
-      "tags": [
-        "AC9M5ST01",
-        "MA3-DATA-01"
-      ]
+      }
     },
     {
       "id": "maths.5.data.picture-key-halves",
       "subject": "maths",
       "topic": "data",
       "level": "5",
+      "tags": [
+        "AC9M5ST01",
+        "MA3-DATA-01"
+      ],
       "prompt": "Each picture stands for 10 goals. How many goals did {who} score?",
       "vars": [
         {
@@ -1830,17 +1866,17 @@
         "labels": "'Ada,Kai,Leo'",
         "key": "10",
         "halves": "true"
-      },
-      "tags": [
-        "AC9M5ST01",
-        "MA3-DATA-01"
-      ]
+      }
     },
     {
       "id": "maths.5.data.line-graph-read",
       "subject": "maths",
       "topic": "data",
       "level": "5",
+      "tags": [
+        "AC9M5ST02",
+        "MA3-DATA-02"
+      ],
       "prompt": "How many visitors came on {day}?",
       "vars": [
         {
@@ -1885,19 +1921,19 @@
         "kind": "bar",
         "values": "(v0 * 10) + ',' + (v1 * 10) + ',' + (v2 * 10) + ',' + (v3 * 10)",
         "labels": "'Mon,Tue,Wed,Thu'",
-        "scale": "10",
-        "style": "'line'"
-      },
-      "tags": [
-        "AC9M5ST02",
-        "MA3-DATA-02"
-      ]
+        "style": "'line'",
+        "scale": "10"
+      }
     },
     {
       "id": "maths.5.data.line-graph-rise",
       "subject": "maths",
       "topic": "data",
       "level": "5",
+      "tags": [
+        "AC9M5ST02",
+        "MA3-DATA-02"
+      ],
       "prompt": "How many more visitors came on {b} than on {a}?",
       "vars": [
         {
@@ -1972,19 +2008,19 @@
         "kind": "bar",
         "values": "(v0 * 10) + ',' + (v1 * 10) + ',' + (v2 * 10) + ',' + (v3 * 10)",
         "labels": "'Mon,Tue,Wed,Thu'",
-        "scale": "10",
-        "style": "'line'"
-      },
-      "tags": [
-        "AC9M5ST02",
-        "MA3-DATA-02"
-      ]
+        "style": "'line'",
+        "scale": "10"
+      }
     },
     {
       "id": "maths.5.chance.spinner-fraction",
       "subject": "maths",
       "topic": "chance",
       "level": "5",
+      "tags": [
+        "AC9M5P01",
+        "MA3-CHAN-01"
+      ],
       "prompt": "What is the chance the arrow stops on a shaded part?",
       "vars": [
         {
@@ -2034,17 +2070,17 @@
         "kind": "spinner",
         "sectors": "parts",
         "fills": "shading"
-      },
-      "tags": [
-        "AC9M5P01",
-        "MA3-CHAN-01"
-      ]
+      }
     },
     {
       "id": "maths.5.chance.spinner-percentage",
       "subject": "maths",
       "topic": "chance",
       "level": "5",
+      "tags": [
+        "AC9M5P01",
+        "MA3-CHAN-01"
+      ],
       "prompt": "What is the chance of stopping on a shaded part, as a percentage?",
       "vars": [
         {
@@ -2078,17 +2114,17 @@
         "kind": "spinner",
         "sectors": "parts",
         "fills": "shading"
-      },
-      "tags": [
-        "AC9M5P01",
-        "MA3-CHAN-01"
-      ]
+      }
     },
     {
       "id": "maths.5.chance.spinner-equally-likely",
       "subject": "maths",
       "topic": "chance",
       "level": "5",
+      "tags": [
+        "AC9M5P01",
+        "MA3-CHAN-01"
+      ],
       "prompt": "True or false: the arrow is equally likely to stop on any part.",
       "vars": [
         {
@@ -2125,18 +2161,18 @@
         "kind": "spinner",
         "sectors": "parts",
         "fills": "shading"
-      },
-      "tags": [
-        "AC9M5P01",
-        "MA3-CHAN-01"
-      ]
+      }
     },
     {
       "id": "maths.5.chance.most-likely-from-trials",
       "subject": "maths",
       "topic": "chance",
       "level": "5",
-      "prompt": "A spinner was spun many times. It stopped on red {r} times, blue {b} times and green {g} times. Which colour is it most likely to stop on?",
+      "tags": [
+        "AC9M5P02",
+        "MA3-CHAN-01"
+      ],
+      "prompt": "A spinner stopped on red {r} times, blue {b} and green {g}. Which colour is it most likely to stop on?",
       "vars": [
         {
           "name": "r",
@@ -2172,11 +2208,7 @@
           "'green'"
         ]
       },
-      "hint": "The colour it stopped on most often is the one to expect next time.",
-      "tags": [
-        "AC9M5P02",
-        "MA3-CHAN-01"
-      ]
+      "hint": "The colour it stopped on most often is the one to expect next time."
     }
   ]
 }

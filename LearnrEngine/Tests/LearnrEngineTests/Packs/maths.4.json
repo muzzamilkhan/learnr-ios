@@ -1,5 +1,5 @@
 {
-  "version": "26c832dc804d",
+  "version": "69e10b9a064c",
   "subject": "maths",
   "level": "4",
   "templates": [
@@ -8,6 +8,10 @@
       "subject": "maths",
       "topic": "decimals",
       "level": "4",
+      "tags": [
+        "AC9M4N01",
+        "MA2-RN-02"
+      ],
       "prompt": "Write {n} tenth{n == 1 ? '' : 's'} as a decimal.",
       "vars": [
         {
@@ -15,59 +19,20 @@
           "kind": "int",
           "min": "1",
           "max": "9"
-        },
-        {
-          "name": "k",
-          "kind": "pick",
-          "from": [
-            -1,
-            1
-          ]
-        },
-        {
-          "name": "m",
-          "kind": "expr",
-          "expr": "n + k"
-        },
-        {
-          "name": "p",
-          "kind": "pick",
-          "from": [
-            0,
-            1
-          ]
-        },
-        {
-          "name": "v",
-          "kind": "expr",
-          "expr": "p == 0 ? n : m"
         }
       ],
-      "constraints": [
-        "n + k >= 1",
-        "n + k <= 9"
-      ],
       "answer": "n / 10",
-      "answerType": "choice",
-      "choices": {
-        "count": 4,
-        "distractors": [
-          "v / 100",
-          "v",
-          "m / 10"
-        ]
-      },
-      "hint": "Tenths go in the first place after the decimal point.",
-      "tags": [
-        "AC9M4N01",
-        "MA2-RN-02"
-      ]
+      "hint": "Tenths go in the first place after the decimal point."
     },
     {
       "id": "maths.4.decimals.hundredths",
       "subject": "maths",
       "topic": "decimals",
       "level": "4",
+      "tags": [
+        "AC9M4N01",
+        "MA2-RN-02"
+      ],
       "prompt": "Write {n} hundredths as a decimal.",
       "vars": [
         {
@@ -75,58 +40,23 @@
           "kind": "int",
           "min": "11",
           "max": "99"
-        },
-        {
-          "name": "k",
-          "kind": "pick",
-          "from": [
-            -1,
-            1
-          ]
-        },
-        {
-          "name": "m",
-          "kind": "expr",
-          "expr": "n + k"
-        },
-        {
-          "name": "p",
-          "kind": "pick",
-          "from": [
-            0,
-            1
-          ]
-        },
-        {
-          "name": "v",
-          "kind": "expr",
-          "expr": "p == 0 ? n : m"
         }
       ],
       "constraints": [
-        "mod(n, 10) != 0",
-        "mod(n + k, 10) != 0"
+        "mod(n, 10) != 0"
       ],
       "answer": "n / 100",
-      "answerType": "choice",
-      "choices": {
-        "count": 4,
-        "distractors": [
-          "v / 10",
-          "v",
-          "m / 100"
-        ]
-      },
-      "tags": [
-        "AC9M4N01",
-        "MA2-RN-02"
-      ]
+      "hint": "Hundredths go in the second place after the decimal point."
     },
     {
       "id": "maths.4.decimals.larger",
       "subject": "maths",
       "topic": "decimals",
       "level": "4",
+      "tags": [
+        "AC9M4N01",
+        "MA2-RN-02"
+      ],
       "prompt": "Which is larger, {a} or {b}?",
       "vars": [
         {
@@ -156,17 +86,17 @@
         ],
         "rankIsTheQuestion": true
       },
-      "hint": "Compare the whole numbers first, then the tenths.",
-      "tags": [
-        "AC9M4N01",
-        "MA2-RN-02"
-      ]
+      "hint": "Compare the whole numbers first, then the tenths."
     },
     {
       "id": "maths.4.decimals.add-tenths",
       "subject": "maths",
       "topic": "decimals",
       "level": "4",
+      "tags": [
+        "AC9M4N01",
+        "MA2-RN-02"
+      ],
       "prompt": "What is {a} + {b}?",
       "vars": [
         {
@@ -182,12 +112,27 @@
           "max": "99"
         },
         {
-          "name": "s",
+          "name": "u",
           "kind": "pick",
           "from": [
-            -10,
+            1,
             10
           ]
+        },
+        {
+          "name": "k",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "lo",
+          "kind": "expr",
+          "expr": "na + nb - k * u"
         },
         {
           "name": "a",
@@ -205,22 +150,23 @@
       "choices": {
         "count": 4,
         "distractors": [
-          "(na + nb + 1) / 10",
-          "(na + nb - 1) / 10",
-          "(na + nb + s) / 10"
+          "lo / 10",
+          "(lo + u) / 10",
+          "(lo + 2 * u) / 10",
+          "(lo + 3 * u) / 10"
         ]
       },
-      "hint": "Add the whole numbers, then add the tenths.",
-      "tags": [
-        "AC9M4N01",
-        "MA2-RN-02"
-      ]
+      "hint": "Add the whole numbers, then add the tenths."
     },
     {
       "id": "maths.4.decimals.unit-fraction",
       "subject": "maths",
       "topic": "decimals",
       "level": "4",
+      "tags": [
+        "AC9M4N03",
+        "MA2-RN-02"
+      ],
       "prompt": "Write 1/{d} as a decimal.",
       "vars": [
         {
@@ -243,17 +189,17 @@
           "d <= 4 ? 0.2 : 0.25",
           "d == 10 ? 0.2 : 0.1"
         ]
-      },
-      "tags": [
-        "AC9M4N03",
-        "MA2-RN-02"
-      ]
+      }
     },
     {
       "id": "maths.4.decimals.number-line-tenths",
       "subject": "maths",
       "topic": "decimals",
       "level": "4",
+      "tags": [
+        "AC9M4N01",
+        "MA2-RN-02"
+      ],
       "prompt": "What number is the arrow pointing to?",
       "vars": [
         {
@@ -285,17 +231,17 @@
         "at": "n",
         "from": "w",
         "to": "w + 1"
-      },
-      "tags": [
-        "AC9M4N01",
-        "MA2-RN-02"
-      ]
+      }
     },
     {
       "id": "maths.4.even-and-odd.is-odd",
       "subject": "maths",
       "topic": "even and odd",
       "level": "4",
+      "tags": [
+        "AC9M4N02",
+        "MA2-AR-01"
+      ],
       "prompt": "True or false: {x} is an odd number.",
       "vars": [
         {
@@ -305,17 +251,17 @@
           "max": "199"
         }
       ],
-      "answer": "isOdd(x)",
-      "tags": [
-        "AC9M4N02",
-        "MA2-AR-01"
-      ]
+      "answer": "isOdd(x)"
     },
     {
       "id": "maths.4.even-and-odd.sum-parity",
       "subject": "maths",
       "topic": "even and odd",
       "level": "4",
+      "tags": [
+        "AC9M4N02",
+        "MA2-AR-01"
+      ],
       "prompt": "True or false: {x} + {y} gives an even answer.",
       "vars": [
         {
@@ -332,17 +278,17 @@
         }
       ],
       "answer": "isEven(x + y)",
-      "hint": "Two odds make an even; an odd and an even make an odd.",
-      "tags": [
-        "AC9M4N02",
-        "MA2-AR-01"
-      ]
+      "hint": "Two odds make an even; an odd and an even make an odd."
     },
     {
       "id": "maths.4.even-and-odd.product-parity",
       "subject": "maths",
       "topic": "even and odd",
       "level": "4",
+      "tags": [
+        "AC9M4N02",
+        "MA2-MR-01"
+      ],
       "prompt": "True or false: {x} × {y} gives an odd answer.",
       "vars": [
         {
@@ -359,17 +305,17 @@
         }
       ],
       "answer": "isOdd(x * y)",
-      "hint": "One even number anywhere in a product makes the answer even.",
-      "tags": [
-        "AC9M4N02",
-        "MA2-MR-01"
-      ]
+      "hint": "One even number anywhere in a product makes the answer even."
     },
     {
       "id": "maths.4.fractions.equivalent",
       "subject": "maths",
       "topic": "fractions",
       "level": "4",
+      "tags": [
+        "AC9M4N03",
+        "MA2-PF-01"
+      ],
       "prompt": "Complete the equivalent fraction: {a}/{d} = ?/{d * k}",
       "vars": [
         {
@@ -392,17 +338,17 @@
         }
       ],
       "answer": "a * k",
-      "hint": "The bottom was multiplied by {k}, so the top is too.",
-      "tags": [
-        "AC9M4N03",
-        "MA2-PF-01"
-      ]
+      "hint": "The bottom was multiplied by {k}, so the top is too."
     },
     {
       "id": "maths.4.fractions.of-a-quantity",
       "subject": "maths",
       "topic": "fractions",
       "level": "4",
+      "tags": [
+        "AC9M4N03",
+        "MA2-PF-01"
+      ],
       "prompt": "What is {n}/{d} of {total}?",
       "vars": [
         {
@@ -434,17 +380,17 @@
           "max": "d - 1"
         }
       ],
-      "answer": "n * part",
-      "tags": [
-        "AC9M4N03",
-        "MA2-PF-01"
-      ]
+      "answer": "n * part"
     },
     {
       "id": "maths.4.fractions.count-in-wholes",
       "subject": "maths",
       "topic": "fractions",
       "level": "4",
+      "tags": [
+        "AC9M4N04",
+        "MA2-PF-01"
+      ],
       "prompt": "How many {d == 2 ? 'halves' : d == 3 ? 'thirds' : d == 4 ? 'quarters' : d == 5 ? 'fifths' : 'tenths'} are there in {n} wholes?",
       "vars": [
         {
@@ -465,17 +411,17 @@
           "max": "6"
         }
       ],
-      "answer": "d * n",
-      "tags": [
-        "AC9M4N04",
-        "MA2-PF-01"
-      ]
+      "answer": "d * n"
     },
     {
       "id": "maths.4.fractions.mixed-numeral",
       "subject": "maths",
       "topic": "fractions",
       "level": "4",
+      "tags": [
+        "AC9M4N04",
+        "MA2-PF-01"
+      ],
       "prompt": "How many quarters are there in {n} and three quarters?",
       "vars": [
         {
@@ -486,17 +432,17 @@
         }
       ],
       "answer": "n * 4 + 3",
-      "hint": "Each whole is 4 quarters.",
-      "tags": [
-        "AC9M4N04",
-        "MA2-PF-01"
-      ]
+      "hint": "Each whole is 4 quarters."
     },
     {
       "id": "maths.4.fractions.same-as-half",
       "subject": "maths",
       "topic": "fractions",
       "level": "4",
+      "tags": [
+        "AC9M4N03",
+        "MA2-PF-01"
+      ],
       "prompt": "True or false: half of this shape is shaded.",
       "vars": [
         {
@@ -537,17 +483,17 @@
         "kind": "fraction-shape",
         "numerator": "n",
         "denominator": "d"
-      },
-      "tags": [
-        "AC9M4N03",
-        "MA2-PF-01"
-      ]
+      }
     },
     {
       "id": "maths.4.multiplication.by-powers-of-ten",
       "subject": "maths",
       "topic": "multiplication",
       "level": "4",
+      "tags": [
+        "AC9M4N05",
+        "MA2-MR-01"
+      ],
       "prompt": "What is {x} × {p}?",
       "vars": [
         {
@@ -567,17 +513,17 @@
         }
       ],
       "answer": "x * p",
-      "hint": "Every digit shifts up to the next place value.",
-      "tags": [
-        "AC9M4N05",
-        "MA2-MR-01"
-      ]
+      "hint": "Every digit shifts up to the next place value."
     },
     {
       "id": "maths.4.multiplication.facts",
       "subject": "maths",
       "topic": "multiplication",
       "level": "4",
+      "tags": [
+        "AC9M4A02",
+        "MA2-MR-01"
+      ],
       "prompt": "What is {x} × {y}?",
       "vars": [
         {
@@ -593,17 +539,17 @@
           "max": "10"
         }
       ],
-      "answer": "x * y",
-      "tags": [
-        "AC9M4A02",
-        "MA2-MR-01"
-      ]
+      "answer": "x * y"
     },
     {
       "id": "maths.4.multiplication.two-digit",
       "subject": "maths",
       "topic": "multiplication",
       "level": "4",
+      "tags": [
+        "AC9M4N06",
+        "MA2-MR-01"
+      ],
       "prompt": "What is {x} × {y}?",
       "vars": [
         {
@@ -620,17 +566,17 @@
         }
       ],
       "answer": "x * y",
-      "hint": "Split {x} into tens and ones, multiply each, then add.",
-      "tags": [
-        "AC9M4N06",
-        "MA2-MR-01"
-      ]
+      "hint": "Split {x} into tens and ones, multiply each, then add."
     },
     {
       "id": "maths.4.multiplication.array-more-rows",
       "subject": "maths",
       "topic": "multiplication",
       "level": "4",
+      "tags": [
+        "AC9M4A02",
+        "MA2-MR-01"
+      ],
       "prompt": "How many dots would there be with {n} more {rows}?",
       "vars": [
         {
@@ -664,17 +610,17 @@
         "rows": "r",
         "columns": "c",
         "orientation": "'rows'"
-      },
-      "tags": [
-        "AC9M4A02",
-        "MA2-MR-01"
-      ]
+      }
     },
     {
       "id": "maths.4.division.by-powers-of-ten",
       "subject": "maths",
       "topic": "division",
       "level": "4",
+      "tags": [
+        "AC9M4N05",
+        "MA2-MR-01"
+      ],
       "prompt": "What is {total} ÷ {p}?",
       "vars": [
         {
@@ -697,17 +643,17 @@
           "expr": "x * p"
         }
       ],
-      "answer": "x",
-      "tags": [
-        "AC9M4N05",
-        "MA2-MR-01"
-      ]
+      "answer": "x"
     },
     {
       "id": "maths.4.division.facts",
       "subject": "maths",
       "topic": "division",
       "level": "4",
+      "tags": [
+        "AC9M4A02",
+        "MA2-MR-01"
+      ],
       "prompt": "What is {total} ÷ {y}?",
       "vars": [
         {
@@ -728,17 +674,17 @@
           "expr": "x * y"
         }
       ],
-      "answer": "x",
-      "tags": [
-        "AC9M4A02",
-        "MA2-MR-01"
-      ]
+      "answer": "x"
     },
     {
       "id": "maths.4.estimation.round-to-hundred",
       "subject": "maths",
       "topic": "estimation",
       "level": "4",
+      "tags": [
+        "AC9M4N07",
+        "MA2-RN-01"
+      ],
       "prompt": "Round {x} to the nearest 100.",
       "vars": [
         {
@@ -752,17 +698,17 @@
         "mod(x, 100) != 50",
         "mod(x, 100) != 0"
       ],
-      "answer": "round(x / 100) * 100",
-      "tags": [
-        "AC9M4N07",
-        "MA2-RN-01"
-      ]
+      "answer": "round(x / 100) * 100"
     },
     {
       "id": "maths.4.estimation.rounded-sum",
       "subject": "maths",
       "topic": "estimation",
       "level": "4",
+      "tags": [
+        "AC9M4N07",
+        "MA2-AR-01"
+      ],
       "prompt": "Estimate {a} + {b} by rounding each number to the nearest 10 first.",
       "vars": [
         {
@@ -782,17 +728,17 @@
         "mod(a, 10) != 5",
         "mod(b, 10) != 5"
       ],
-      "answer": "round(a / 10) * 10 + round(b / 10) * 10",
-      "tags": [
-        "AC9M4N07",
-        "MA2-AR-01"
-      ]
+      "answer": "round(a / 10) * 10 + round(b / 10) * 10"
     },
     {
       "id": "maths.4.algebra.unknown-value",
       "subject": "maths",
       "topic": "algebra",
       "level": "4",
+      "tags": [
+        "AC9M4A01",
+        "MA2-AR-02"
+      ],
       "prompt": "What goes in the box? {total} − ? = {x}",
       "vars": [
         {
@@ -813,17 +759,17 @@
           "expr": "x + y"
         }
       ],
-      "answer": "y",
-      "tags": [
-        "AC9M4A01",
-        "MA2-AR-02"
-      ]
+      "answer": "y"
     },
     {
       "id": "maths.4.number-patterns.nth-term",
       "subject": "maths",
       "topic": "number patterns",
       "level": "4",
+      "tags": [
+        "AC9M4N09",
+        "MA2-AR-01"
+      ],
       "prompt": "The rule is: add {d}. Starting at {a}, what is the 5th number in the pattern?",
       "vars": [
         {
@@ -840,17 +786,17 @@
         }
       ],
       "answer": "a + 4 * d",
-      "hint": "{a} is the 1st number, so add {d} four more times.",
-      "tags": [
-        "AC9M4N09",
-        "MA2-AR-01"
-      ]
+      "hint": "{a} is the 1st number, so add {d} four more times."
     },
     {
       "id": "maths.4.perimeter-and-area.rectangle-perimeter",
       "subject": "maths",
       "topic": "perimeter and area",
       "level": "4",
+      "tags": [
+        "AC9M4M02",
+        "MA2-GM-02"
+      ],
       "prompt": "A rectangle is {l} cm long and {w} cm wide. What is its perimeter, in centimetres?",
       "vars": [
         {
@@ -867,17 +813,17 @@
         }
       ],
       "answer": "2 * (l + w)",
-      "hint": "Add up all four sides.",
-      "tags": [
-        "AC9M4M02",
-        "MA2-GM-02"
-      ]
+      "hint": "Add up all four sides."
     },
     {
       "id": "maths.4.perimeter-and-area.rectangle-area",
       "subject": "maths",
       "topic": "perimeter and area",
       "level": "4",
+      "tags": [
+        "AC9M4M02",
+        "MA2-2DS-03"
+      ],
       "prompt": "A rectangle is {l} squares long and {w} squares wide. How many squares cover it altogether?",
       "vars": [
         {
@@ -893,17 +839,17 @@
           "max": "9"
         }
       ],
-      "answer": "l * w",
-      "tags": [
-        "AC9M4M02",
-        "MA2-2DS-03"
-      ]
+      "answer": "l * w"
     },
     {
       "id": "maths.4.measurement.kilograms-and-grams",
       "subject": "maths",
       "topic": "measurement",
       "level": "4",
+      "tags": [
+        "AC9M4M01",
+        "MA2-NSM-01"
+      ],
       "prompt": "A parcel weighs {k} kilograms and {g} grams. What is its mass in grams?",
       "vars": [
         {
@@ -921,17 +867,17 @@
         }
       ],
       "answer": "k * 1000 + g",
-      "hint": "One kilogram is 1000 grams.",
-      "tags": [
-        "AC9M4M01",
-        "MA2-NSM-01"
-      ]
+      "hint": "One kilogram is 1000 grams."
     },
     {
       "id": "maths.4.measurement.which-holds-more",
       "subject": "maths",
       "topic": "measurement",
       "level": "4",
+      "tags": [
+        "AC9M4M01",
+        "MA2-3DS-02"
+      ],
       "prompt": "A bottle holds {ml} millilitres and a jug holds {l} {litres}. Which holds more?",
       "vars": [
         {
@@ -975,18 +921,18 @@
           "'the jug'"
         ]
       },
-      "hint": "One litre is 1000 millilitres.",
-      "tags": [
-        "AC9M4M01",
-        "MA2-3DS-02"
-      ]
+      "hint": "One litre is 1000 millilitres."
     },
     {
       "id": "maths.4.measurement.share-a-bottle",
       "subject": "maths",
       "topic": "measurement",
       "level": "4",
-      "prompt": "A {l} litre bottle of juice is shared equally between {c} glasses. How many millilitres are in each glass?",
+      "tags": [
+        "AC9M4M01",
+        "MA2-3DS-02"
+      ],
+      "prompt": "A {l} litre bottle is shared equally between {c} glasses. How many millilitres in each?",
       "vars": [
         {
           "name": "l",
@@ -1007,17 +953,17 @@
         }
       ],
       "answer": "l * 1000 / c",
-      "hint": "The bottle holds {l * 1000} millilitres altogether.",
-      "tags": [
-        "AC9M4M01",
-        "MA2-3DS-02"
-      ]
+      "hint": "The bottle holds {l * 1000} millilitres altogether."
     },
     {
       "id": "maths.4.time.am-or-pm",
       "subject": "maths",
       "topic": "time",
       "level": "4",
+      "tags": [
+        "AC9M4M03",
+        "MA2-NSM-02"
+      ],
       "prompt": "A film starts at {h} o’clock in the {part}. Is that am or pm?",
       "vars": [
         {
@@ -1033,6 +979,11 @@
             "morning",
             "afternoon",
             "evening"
+          ],
+          "weights": [
+            2,
+            1,
+            1
           ]
         }
       ],
@@ -1045,17 +996,17 @@
           "'pm'"
         ]
       },
-      "hint": "am runs from midnight to midday.",
-      "tags": [
-        "AC9M4M03",
-        "MA2-NSM-02"
-      ]
+      "hint": "am runs from midnight to midday."
     },
     {
       "id": "maths.4.time.convert-minutes",
       "subject": "maths",
       "topic": "time",
       "level": "4",
+      "tags": [
+        "AC9M4M03",
+        "MA2-NSM-02"
+      ],
       "prompt": "How many minutes are there in {h} hours and {m} minutes?",
       "vars": [
         {
@@ -1072,17 +1023,17 @@
           "step": 5
         }
       ],
-      "answer": "h * 60 + m",
-      "tags": [
-        "AC9M4M03",
-        "MA2-NSM-02"
-      ]
+      "answer": "h * 60 + m"
     },
     {
       "id": "maths.4.time.until-the-hour-clock",
       "subject": "maths",
       "topic": "time",
       "level": "4",
+      "tags": [
+        "AC9M4M03",
+        "MA2-NSM-02"
+      ],
       "prompt": "How many minutes until the next o’clock?",
       "vars": [
         {
@@ -1111,17 +1062,17 @@
         "minute": "m",
         "numerals": "true",
         "minuteTicks": "true"
-      },
-      "tags": [
-        "AC9M4M03",
-        "MA2-NSM-02"
-      ]
+      }
     },
     {
       "id": "maths.4.time.after-minutes",
       "subject": "maths",
       "topic": "time",
       "level": "4",
+      "tags": [
+        "AC9M4M03",
+        "MA2-NSM-02"
+      ],
       "prompt": "What time will it be {n} minutes after the time shown?",
       "vars": [
         {
@@ -1217,17 +1168,17 @@
         "minute": "m",
         "numerals": "true",
         "minuteTicks": "true"
-      },
-      "tags": [
-        "AC9M4M03",
-        "MA2-NSM-02"
-      ]
+      }
     },
     {
       "id": "maths.4.angles.larger-angle",
       "subject": "maths",
       "topic": "angles",
       "level": "4",
+      "tags": [
+        "AC9M4M04",
+        "MA2-GM-03"
+      ],
       "prompt": "Which is the larger angle, {a} or {b}?",
       "vars": [
         {
@@ -1273,17 +1224,17 @@
         ],
         "rankIsTheQuestion": true
       },
-      "hint": "Smallest to largest: acute, right, obtuse, straight.",
-      "tags": [
-        "AC9M4M04",
-        "MA2-GM-03"
-      ]
+      "hint": "Smallest to largest: acute, right, obtuse, straight."
     },
     {
       "id": "maths.4.angles.is-acute",
       "subject": "maths",
       "topic": "angles",
       "level": "4",
+      "tags": [
+        "AC9M4M04",
+        "MA2-GM-03"
+      ],
       "prompt": "True or false: an angle of {n} quarter turn{n == 1 ? '' : 's'} is larger than a right angle.",
       "vars": [
         {
@@ -1294,17 +1245,17 @@
         }
       ],
       "answer": "n > 1",
-      "hint": "One quarter turn is exactly a right angle.",
-      "tags": [
-        "AC9M4M04",
-        "MA2-GM-03"
-      ]
+      "hint": "One quarter turn is exactly a right angle."
     },
     {
       "id": "maths.4.angles.name-picture",
       "subject": "maths",
       "topic": "angles",
       "level": "4",
+      "tags": [
+        "AC9M4M04",
+        "MA2-GM-03"
+      ],
       "prompt": "What kind of angle is this?",
       "vars": [
         {
@@ -1352,17 +1303,17 @@
       "figure": {
         "kind": "angle",
         "degrees": "d"
-      },
-      "tags": [
-        "AC9M4M04",
-        "MA2-GM-03"
-      ]
+      }
     },
     {
       "id": "maths.4.angles.is-obtuse",
       "subject": "maths",
       "topic": "angles",
       "level": "4",
+      "tags": [
+        "AC9M4M04",
+        "MA2-GM-03"
+      ],
       "prompt": "True or false: this angle is obtuse.",
       "vars": [
         {
@@ -1381,17 +1332,17 @@
       "figure": {
         "kind": "angle",
         "degrees": "d"
-      },
-      "tags": [
-        "AC9M4M04",
-        "MA2-GM-03"
-      ]
+      }
     },
     {
       "id": "maths.4.symmetry.lines",
       "subject": "maths",
       "topic": "symmetry",
       "level": "4",
+      "tags": [
+        "AC9M4SP03",
+        "MA2-2DS-02"
+      ],
       "prompt": "How many lines of symmetry does {article} {shape} have?",
       "vars": [
         {
@@ -1412,17 +1363,17 @@
         }
       ],
       "answer": "shape == 'square' ? 4 : shape == 'rectangle' ? 2 : shape == 'equilateral triangle' ? 3 : shape == 'regular pentagon' ? 5 : 6",
-      "hint": "A regular shape has as many lines of symmetry as it has sides.",
-      "tags": [
-        "AC9M4SP03",
-        "MA2-2DS-02"
-      ]
+      "hint": "A regular shape has as many lines of symmetry as it has sides."
     },
     {
       "id": "maths.4.symmetry.dashed-line",
       "subject": "maths",
       "topic": "symmetry",
       "level": "4",
+      "tags": [
+        "AC9M4SP03",
+        "MA2-2DS-02"
+      ],
       "prompt": "True or false: the dashed line is a line of symmetry.",
       "vars": [
         {
@@ -1455,17 +1406,17 @@
         "kind": "polygon",
         "shape": "shape",
         "mirror": "real == 1"
-      },
-      "tags": [
-        "AC9M4SP03",
-        "MA2-2DS-02"
-      ]
+      }
     },
     {
       "id": "maths.4.symmetry.count-picture",
       "subject": "maths",
       "topic": "symmetry",
       "level": "4",
+      "tags": [
+        "AC9M4SP03",
+        "MA2-2DS-02"
+      ],
       "prompt": "How many lines of symmetry does this shape have?",
       "vars": [
         {
@@ -1492,17 +1443,17 @@
       "figure": {
         "kind": "polygon",
         "shape": "shape"
-      },
-      "tags": [
-        "AC9M4SP03",
-        "MA2-2DS-02"
-      ]
+      }
     },
     {
       "id": "maths.4.shapes.net-edges",
       "subject": "maths",
       "topic": "shapes",
       "level": "4",
+      "tags": [
+        "AC9M4SP01",
+        "MA2-3DS-01"
+      ],
       "prompt": "This is a net. How many edges will the folded shape have?",
       "vars": [
         {
@@ -1521,17 +1472,17 @@
         "kind": "solid",
         "solid": "shape",
         "view": "'net'"
-      },
-      "tags": [
-        "AC9M4SP01",
-        "MA2-3DS-01"
-      ]
+      }
     },
     {
       "id": "maths.4.shapes.net-corners",
       "subject": "maths",
       "topic": "shapes",
       "level": "4",
+      "tags": [
+        "AC9M4SP01",
+        "MA2-3DS-01"
+      ],
       "prompt": "This is a net. How many corners will the folded shape have?",
       "vars": [
         {
@@ -1550,17 +1501,17 @@
         "kind": "solid",
         "solid": "shape",
         "view": "'net'"
-      },
-      "tags": [
-        "AC9M4SP01",
-        "MA2-3DS-01"
-      ]
+      }
     },
     {
       "id": "maths.4.shapes.triangular-faces",
       "subject": "maths",
       "topic": "shapes",
       "level": "4",
+      "tags": [
+        "AC9M4SP01",
+        "MA2-3DS-01"
+      ],
       "prompt": "How many of this shape’s faces are triangles?",
       "vars": [
         {
@@ -1579,17 +1530,17 @@
         "kind": "solid",
         "solid": "shape",
         "view": "'object'"
-      },
-      "tags": [
-        "AC9M4SP01",
-        "MA2-3DS-01"
-      ]
+      }
     },
     {
       "id": "maths.4.position.grid-diagonal",
       "subject": "maths",
       "topic": "position",
       "level": "4",
+      "tags": [
+        "AC9M4SP02",
+        "MA2-GM-01"
+      ],
       "prompt": "Which square is one square {ew} and one square {ns} from the dot?",
       "vars": [
         {
@@ -1672,17 +1623,17 @@
         "rows": "rws",
         "axisLabels": "'letters'",
         "onLines": "false"
-      },
-      "tags": [
-        "AC9M4SP02",
-        "MA2-GM-01"
-      ]
+      }
     },
     {
       "id": "maths.4.position.grid-to-the-edge",
       "subject": "maths",
       "topic": "position",
       "level": "4",
+      "tags": [
+        "AC9M4SP02",
+        "MA2-GM-01"
+      ],
       "prompt": "How many squares would you move right to get from the dot to the last column?",
       "vars": [
         {
@@ -1716,17 +1667,16 @@
         "at": "c + ',' + r",
         "columns": "cols",
         "onLines": "false"
-      },
-      "tags": [
-        "AC9M4SP02",
-        "MA2-GM-01"
-      ]
+      }
     },
     {
       "id": "maths.4.data.many-to-one",
       "subject": "maths",
       "topic": "data",
       "level": "4",
+      "tags": [
+        "AC9M4ST01"
+      ],
       "prompt": "On a pictograph each picture stands for {k} children. How many children do {n} pictures show?",
       "vars": [
         {
@@ -1745,16 +1695,16 @@
           "max": "12"
         }
       ],
-      "answer": "k * n",
-      "tags": [
-        "AC9M4ST01"
-      ]
+      "answer": "k * n"
     },
     {
       "id": "maths.4.data.picture-key",
       "subject": "maths",
       "topic": "data",
       "level": "4",
+      "tags": [
+        "AC9M4ST01"
+      ],
       "prompt": "Each picture stands for {k} books. How many books did {who} read?",
       "vars": [
         {
@@ -1808,16 +1758,17 @@
         "counts": "(ia * k) + ',' + (ib * k) + ',' + (ic * k)",
         "labels": "'Ada,Kai,Leo'",
         "key": "k"
-      },
-      "tags": [
-        "AC9M4ST01"
-      ]
+      }
     },
     {
       "id": "maths.4.data.graph-scale-ten",
       "subject": "maths",
       "topic": "data",
       "level": "4",
+      "tags": [
+        "AC9M4ST01",
+        "MA2-DATA-02"
+      ],
       "prompt": "This graph shows points scored. How many more did {a} score than {b}?",
       "vars": [
         {
@@ -1892,19 +1843,19 @@
         "kind": "bar",
         "values": "ada + ',' + kai + ',' + leo",
         "labels": "'Ada,Kai,Leo'",
-        "scale": "10",
-        "style": "'column'"
-      },
-      "tags": [
-        "AC9M4ST01",
-        "MA2-DATA-02"
-      ]
+        "style": "'column'",
+        "scale": "10"
+      }
     },
     {
       "id": "maths.4.data.graph-between-rungs",
       "subject": "maths",
       "topic": "data",
       "level": "4",
+      "tags": [
+        "AC9M4ST01",
+        "MA2-DATA-02"
+      ],
       "prompt": "How many goals did {who} score?",
       "vars": [
         {
@@ -1955,19 +1906,19 @@
         "kind": "bar",
         "values": "x + ',' + y + ',' + z",
         "labels": "'Ada,Kai,Leo'",
-        "scale": "2",
-        "style": "'column'"
-      },
-      "tags": [
-        "AC9M4ST01",
-        "MA2-DATA-02"
-      ]
+        "style": "'column'",
+        "scale": "2"
+      }
     },
     {
       "id": "maths.4.data.dot-graph-who",
       "subject": "maths",
       "topic": "data",
       "level": "4",
+      "tags": [
+        "AC9M4ST01",
+        "MA2-DATA-02"
+      ],
       "prompt": "Who collected {v} shells?",
       "vars": [
         {
@@ -2020,19 +1971,19 @@
         "kind": "bar",
         "values": "x * 5 + ',' + y * 5 + ',' + z * 5",
         "labels": "'Ada,Kai,Leo'",
-        "scale": "5",
-        "style": "'dot'"
-      },
-      "tags": [
-        "AC9M4ST01",
-        "MA2-DATA-02"
-      ]
+        "style": "'dot'",
+        "scale": "5"
+      }
     },
     {
       "id": "maths.4.chance.least-likely",
       "subject": "maths",
       "topic": "chance",
       "level": "4",
+      "tags": [
+        "AC9M4P01",
+        "MA2-CHAN-01"
+      ],
       "prompt": "A bag holds {r} red, {b} blue and {g} green marbles. Which colour are you least likely to pull out?",
       "vars": [
         {
@@ -2068,17 +2019,17 @@
           "'blue'",
           "'green'"
         ]
-      },
-      "tags": [
-        "AC9M4P01",
-        "MA2-CHAN-01"
-      ]
+      }
     },
     {
       "id": "maths.4.chance.spinner-how-likely",
       "subject": "maths",
       "topic": "chance",
       "level": "4",
+      "tags": [
+        "AC9M4P01",
+        "MA2-CHAN-01"
+      ],
       "prompt": "How likely is the arrow to stop on a shaded part?",
       "vars": [
         {
@@ -2108,17 +2059,17 @@
         "kind": "spinner",
         "sectors": "'1,1,1,1,1,1,1,1'",
         "fills": "s == 2 ? 'a,a,b,b,b,b,b,b' : s == 4 ? 'a,a,a,a,b,b,b,b' : s == 6 ? 'a,a,a,a,a,a,b,b' : 'a,a,a,a,a,a,a,a'"
-      },
-      "tags": [
-        "AC9M4P01",
-        "MA2-CHAN-01"
-      ]
+      }
     },
     {
       "id": "maths.4.chance.spinner-even-chance",
       "subject": "maths",
       "topic": "chance",
       "level": "4",
+      "tags": [
+        "AC9M4P01",
+        "MA2-CHAN-01"
+      ],
       "prompt": "True or false: the arrow is equally likely to stop on shading as on no shading.",
       "vars": [
         {
@@ -2168,18 +2119,18 @@
         "kind": "spinner",
         "sectors": "g == 1 ? (sh + ',' + p + ',' + (pl - p)) : (p + ',' + (sh - p) + ',' + pl)",
         "fills": "g == 1 ? 'a,b,b' : 'a,a,b'"
-      },
-      "tags": [
-        "AC9M4P01",
-        "MA2-CHAN-01"
-      ]
+      }
     },
     {
       "id": "maths.4.chance.after-taking-one",
       "subject": "maths",
       "topic": "chance",
       "level": "4",
-      "prompt": "A bag holds {r} red and {b} blue counters. You take out a {c} one and keep it. Is a red one now more likely or less likely?",
+      "tags": [
+        "AC9M4P01",
+        "MA2-CHAN-01"
+      ],
+      "prompt": "A bag holds {r} red and {b} blue counters. You take out a {c} one. Is red now more or less likely?",
       "vars": [
         {
           "name": "r",
@@ -2211,18 +2162,18 @@
           "'less likely'"
         ]
       },
-      "hint": "There is one counter fewer in the bag now. Which colour lost one?",
-      "tags": [
-        "AC9M4P01",
-        "MA2-CHAN-01"
-      ]
+      "hint": "There is one counter fewer in the bag now. Which colour lost one?"
     },
     {
       "id": "maths.4.chance.experiment-three-outcomes",
       "subject": "maths",
       "topic": "chance",
       "level": "4",
-      "prompt": "A spinner was spun {t} times. It stopped on red {r} times and on blue {b} times. The rest were green. How many were green?",
+      "tags": [
+        "AC9M4P02",
+        "MA2-CHAN-01"
+      ],
+      "prompt": "A spinner was spun {t} times: red {r}, blue {b}, the rest green. How many were green?",
       "vars": [
         {
           "name": "t",
@@ -2245,11 +2196,7 @@
         }
       ],
       "answer": "t - r - b",
-      "hint": "Every spin was red, blue or green.",
-      "tags": [
-        "AC9M4P02",
-        "MA2-CHAN-01"
-      ]
+      "hint": "Every spin was red, blue or green."
     }
   ]
 }
