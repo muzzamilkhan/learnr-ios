@@ -246,6 +246,164 @@ struct ContentTests {
         #expect(store.name(subject: "maths", level: .k) == "maths-K")
     }
 
+
+    // MARK: Refresh cadence (L15)
+
+    /// A counter for how many times each path was asked for.
+    final class Hits: @unchecked Sendable {
+        private let lock = NSLock()
+        private var counts: [String: Int] = [:]
+        func record(_ path: String) { lock.withLock { counts[path, default: 0] += 1 } }
+        func count(_ path: String) -> Int { lock.withLock { counts[path] ?? 0 } }
+    }
+
+    @Test("play reads the cache and never waits on the network")
+    func playIsCacheFirst() async throws {
+        let store = MemoryPackStore()
+        store.seed(CachedPack(
+            data: Self.packJSON(version: "cached"), subject: "maths",
+            level: .three, etag: "\"abc\"", storedAt: 1))
+
+        let hits = Hits()
+        let library = Self.library(store: store) { request in
+            hits.record(request.url?.path ?? "")
+            return (200, Self.packJSON(version: "fresh"), ["ETag": "\"zzz\""])
+        }
+
+        let pack = try await library.packForPlay(level: .three)
+
+        // The cached bytes, and no request at all. This is the whole point of
+        // L15: a child's first question must not wait on a round trip that a
+        // flaky connection can hold open for the default sixty seconds.
+        #expect(pack.version == "cached")
+        #expect(hits.count("/content/maths/3") == 0)
+    }
+
+    @Test("play falls back to the network when nothing is cached")
+    func playFetchesOnAColdCache() async throws {
+        let store = MemoryPackStore()
+        let hits = Hits()
+        let library = Self.library(store: store) { request in
+            hits.record(request.url?.path ?? "")
+            return (200, Self.packJSON(version: "fresh"), ["ETag": "\"zzz\""])
+        }
+
+        // A device that has never played this level has nothing to read, so
+        // here the network is the only option - cache-first is not
+        // cache-only.
+        let pack = try await library.packForPlay(level: .three)
+        #expect(pack.version == "fresh")
+        #expect(hits.count("/content/maths/3") == 1)
+        // And it is cached on the way through, so the next sitting is instant.
+        #expect(store.load(subject: "maths", level: .three)?.etag == "\"zzz\"")
+    }
+
+    @Test("a refresh fetches the pack when the manifest's ETag has moved")
+    func refreshFollowsTheManifest() async throws {
+        let store = MemoryPackStore()
+        store.seed(CachedPack(
+            data: Self.packJSON(version: "old"), subject: "maths",
+            level: .three, etag: "\"stale\"", storedAt: 1))
+
+        let hits = Hits()
+        let library = Self.library(store: store) { request in
+            let path = request.url?.path ?? ""
+            hits.record(path)
+            if path.hasSuffix("/manifest") { return (200, Self.manifestJSON, [:]) }
+            return (200, Self.packJSON(version: "new"), ["ETag": "\"abc\""])
+        }
+
+        await library.refresh(subject: "maths", level: .three)
+
+        // The manifest says "abc" and the cache holds "stale", so the pack is
+        // worth fetching.
+        #expect(hits.count("/content/manifest") == 1)
+        #expect(hits.count("/content/maths/3") == 1)
+        #expect(store.load(subject: "maths", level: .three)?.pack?.version == "new")
+    }
+
+    @Test("a refresh fetches nothing when the manifest's ETag matches")
+    func refreshSkipsWhenUnchanged() async throws {
+        let store = MemoryPackStore()
+        // The manifest above says this level's ETag is "abc"; so does the
+        // cache. There is nothing to download and no request worth making.
+        store.seed(CachedPack(
+            data: Self.packJSON(version: "current"), subject: "maths",
+            level: .three, etag: "abc", storedAt: 1))
+
+        let hits = Hits()
+        let library = Self.library(store: store) { request in
+            let path = request.url?.path ?? ""
+            hits.record(path)
+            if path.hasSuffix("/manifest") { return (200, Self.manifestJSON, [:]) }
+            return (200, Self.packJSON(version: "new"), ["ETag": "abc"])
+        }
+
+        await library.refresh(subject: "maths", level: .three)
+
+        #expect(hits.count("/content/manifest") == 1)
+        // The manifest is the whole cost of a launch that is already current.
+        #expect(hits.count("/content/maths/3") == 0)
+        #expect(store.load(subject: "maths", level: .three)?.pack?.version == "current")
+    }
+
+    @Test("a refresh fetches when nothing is cached at all")
+    func refreshFillsAColdCache() async throws {
+        let store = MemoryPackStore()
+        let hits = Hits()
+        let library = Self.library(store: store) { request in
+            let path = request.url?.path ?? ""
+            hits.record(path)
+            if path.hasSuffix("/manifest") { return (200, Self.manifestJSON, [:]) }
+            return (200, Self.packJSON(version: "new"), ["ETag": "abc"])
+        }
+
+        await library.refresh(subject: "maths", level: .three)
+
+        // No cache is not "unchanged": there is nothing to compare and
+        // everything to fetch.
+        #expect(hits.count("/content/maths/3") == 1)
+        #expect(store.load(subject: "maths", level: .three)?.pack?.version == "new")
+    }
+
+    @Test("a refresh that cannot reach the server changes nothing")
+    func refreshIsBestEffort() async throws {
+        let store = MemoryPackStore()
+        store.seed(CachedPack(
+            data: Self.packJSON(version: "cached"), subject: "maths",
+            level: .three, etag: "\"abc\"", storedAt: 1))
+
+        let library = Self.library(store: store) { _ in
+            (503, Data(#"{"error":"nope"}"#.utf8), [:])
+        }
+
+        // Never throws and never clears: a refresh is an optimisation, and a
+        // failed one leaves the child exactly as playable as before.
+        await library.refresh(subject: "maths", level: .three)
+
+        #expect(store.load(subject: "maths", level: .three)?.pack?.version == "cached")
+        #expect(store.saves == 0)
+    }
+
+    @Test("a refresh for a level the manifest does not carry fetches nothing")
+    func refreshIgnoresAnUnknownLevel() async throws {
+        let store = MemoryPackStore()
+        let hits = Hits()
+        let library = Self.library(store: store) { request in
+            let path = request.url?.path ?? ""
+            hits.record(path)
+            if path.hasSuffix("/manifest") { return (200, Self.manifestJSON, [:]) }
+            return (200, Self.packJSON(version: "new"), ["ETag": "abc"])
+        }
+
+        // The manifest carries maths/3 and nothing else. A level the server
+        // does not serve is not a level worth guessing at.
+        await library.refresh(subject: "maths", level: .six)
+
+        #expect(hits.count("/content/maths/6") == 0)
+        #expect(store.load(subject: "maths", level: .six) == nil)
+    }
+
     /// A box for a value written inside a stub handler.
     final class Sent: @unchecked Sendable {
         private let lock = NSLock()

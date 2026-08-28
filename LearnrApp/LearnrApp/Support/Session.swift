@@ -27,6 +27,24 @@ final class Session {
     /// rather than an end of it, so a wrong guess is wrong by less.
     private(set) var level: YearLevel = .three
 
+    /// Brings the cached content pack up to date, from the home screen.
+    ///
+    /// The refresh cadence chosen under ledger `L15`: **on launch, gated on the
+    /// manifest**. `GET /content/manifest` is small and carries every level's
+    /// ETag, so a device that is already current pays one request and downloads
+    /// nothing; only a level whose ETag has actually moved is fetched.
+    ///
+    /// It runs here rather than in `PlaySession.start()` because the play path
+    /// must not wait on the network - see `ContentLibrary.packForPlay`. A
+    /// sitting therefore starts on content at most one launch old, which is the
+    /// right trade: a day-old template still asks a correct question, while a
+    /// spinner in front of a child costs the sitting.
+    ///
+    /// Best-effort, like everything else off the play path.
+    func refreshContent() async {
+        await library.refresh(level: level)
+    }
+
     /// Reads the stored level. Best-effort: a failure leaves the fallback.
     func refreshLevel() async {
         guard let play = try? await api.playState(level: level),

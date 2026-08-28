@@ -121,7 +121,12 @@ final class PlaySession {
 
         let pack: ContentPack
         do {
-            pack = try await library.pack(subject: subject, level: level)
+            // Cache-first (ledger `L15`): the pack on disk starts the sitting,
+            // and `Session.refreshContent()` keeps it current from the home
+            // screen. Revalidating here put a conditional GET in front of the
+            // child's first question, which a bad connection can hold open for
+            // the full default timeout.
+            pack = try await library.packForPlay(subject: subject, level: level)
         } catch {
             status = .unavailable
             return

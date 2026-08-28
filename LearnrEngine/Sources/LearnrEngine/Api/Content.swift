@@ -249,6 +249,58 @@ public actor ContentLibrary {
         store.load(subject: subject, level: level)?.pack
     }
 
+    /// The pack to start a sitting from. **Cache first, and never blocking.**
+    ///
+    /// This is the refresh cadence decided under ledger `L15`: content is
+    /// revalidated by `refresh(subject:level:)` on the home screen, not in
+    /// front of the child's first question. `pack(subject:level:)` revalidates
+    /// on every call, which put a conditional GET between a child and playing -
+    /// and `URLSession`'s default timeout is sixty seconds, so a school-run
+    /// connection that neither succeeds nor fails quickly could hold a child on
+    /// a spinner for a minute before falling back to a pack that was on disk
+    /// the whole time.
+    ///
+    /// The trade is deliberate: a sitting may start on content up to one launch
+    /// old. That is the right way round, because a pack is a set of question
+    /// templates rather than a child's data - a day-old template still asks a
+    /// correct question, while a minute of spinner costs the sitting itself.
+    ///
+    /// Cache-first is not cache-only: a device that has never fetched this
+    /// level has nothing to read, so it falls through to the network and throws
+    /// only if that fails too.
+    public func packForPlay(subject: String = "maths", level: YearLevel) async throws -> ContentPack {
+        if let cached = store.load(subject: subject, level: level)?.pack { return cached }
+        return try await pack(subject: subject, level: level)
+    }
+
+    /// Brings one level's cached pack up to date, if the manifest says it has
+    /// moved. Best-effort and silent: called off the play path.
+    ///
+    /// The manifest carries every level's ETag, so this is one small request
+    /// for a device that is already current - which is the common case, and the
+    /// reason the cadence is gated on it rather than revalidating each pack
+    /// directly. Only a level whose ETag actually differs is downloaded.
+    ///
+    /// A failure at any step leaves the cache exactly as it was. A refresh is
+    /// an optimisation, and a child who cannot reach the server keeps playing
+    /// from what they have.
+    public func refresh(subject: String = "maths", level: YearLevel) async {
+        guard let manifest = await manifest(),
+              let entry = manifest.entry(subject: subject, level: level)
+        else { return }
+
+        // Nothing cached is not "unchanged" - there is nothing to compare and
+        // everything to fetch.
+        let cached = store.load(subject: subject, level: level)
+        guard cached?.etag != entry.etag else { return }
+
+        // `pack` does the conditional GET, the decode and the write. Sending
+        // the cached ETag still matters: the manifest can move for a reason
+        // that leaves this level's bytes identical, and a 304 then costs
+        // nothing.
+        _ = try? await pack(subject: subject, level: level)
+    }
+
     /// The catalogue, when it can be had. Never throws: a caller uses this to
     /// decide what to offer, and "I could not ask" is answered by offering what
     /// is already cached.

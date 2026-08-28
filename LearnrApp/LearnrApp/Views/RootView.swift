@@ -96,7 +96,11 @@ struct HomeView: View {
         }
         .task {
             await session.refreshPendingCount()
+            // The level first: it decides which pack is worth refreshing, and
+            // refreshing the fallback level would warm a cache the child is
+            // not about to play from.
             await session.refreshLevel()
+            await session.refreshContent()
         }
     }
 }
