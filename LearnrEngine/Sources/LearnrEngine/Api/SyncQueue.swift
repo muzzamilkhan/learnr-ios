@@ -190,9 +190,14 @@ public actor SyncQueue {
     /// Send everything that will go, keeping whatever will not.
     ///
     /// A sitting is dropped from the queue only when the server has taken all
-    /// of it. A retryable failure leaves it in place for next time; a permanent
-    /// rejection drops it, because a poisoned sitting must not wedge the queue
-    /// behind it forever.
+    /// of it **and the child has finished it**. A retryable failure leaves it in
+    /// place for next time; a permanent rejection drops it, because a poisoned
+    /// sitting must not wedge the queue behind it forever; and a sitting that
+    /// sent but is still open stays, because the child is still answering into
+    /// it.
+    ///
+    /// Returns the number of sittings whose contents reached the server, which
+    /// is not the number that left the queue - an open one is counted and kept.
     @discardableResult
     public func flush() async -> Int {
         guard !flushing, await api.isSignedIn else { return 0 }
@@ -206,6 +211,20 @@ public actor SyncQueue {
             do {
                 try await send(sitting)
                 sent += 1
+
+                // A sitting that sent but has not finished stays. The child is
+                // still playing it, and the queue is where their next answer
+                // gets recorded: `record` and `finish` both find the sitting by
+                // id and no-op if it has gone, so dropping an open sitting
+                // discards the rest of the sitting in silence, and it never
+                // banks or ends. The app flushes on every foreground, so this
+                // is the ordinary case - answer two questions, background the
+                // app, come back - not a rare one.
+                //
+                // Re-sending the attempts it already sent is safe and is what
+                // the ids are for: `POST /sessions` is idempotent on the
+                // sitting id and the server dedupes attempts on theirs.
+                if !sitting.finished { kept.append(sitting) }
             } catch let error as ApiError where error.isRetryable {
                 kept.append(sitting)
             } catch {

@@ -216,6 +216,54 @@ struct SyncQueueTests {
                 "an open sitting must not bank - more answers may be coming")
     }
 
+    @Test("an open sitting stays queued after a successful flush, and still banks later")
+    func keepsAnOpenSittingAcrossFlushes() async throws {
+        StubProtocol.reset()
+        StubProtocol.handler = { request in
+            let path = request.url?.path ?? ""
+            if path.hasSuffix("/attempts") {
+                return (200, Data(#"{"streak":1,"streakAdvanced":false}"#.utf8))
+            }
+            if path.hasSuffix("/award-round") { return (200, Data(#"{"stars":2}"#.utf8)) }
+            if path.hasSuffix("/award-target") { return (200, Data(#"{"awarded":false}"#.utf8)) }
+            if path.hasSuffix("/end") { return (204, Data()) }
+            return (201, Data(#"{"id":"s1"}"#.utf8))
+        }
+
+        let queue = SyncQueue(api: makeClient(), store: MemorySittingStore())
+        var sitting = PendingSitting(subject: "maths", level: .three, seed: "seed")
+        sitting.attempts = [anAttempt(0), anAttempt(1)]
+        sitting.finished = false
+        let id = sitting.id
+        await queue.begin(sitting)
+
+        // The app flushes on every foreground, so this happens mid-sitting all
+        // the time: the child answered two questions, backgrounded the app, and
+        // came back to it.
+        _ = await queue.flush()
+
+        // The sitting sent, but it is not done - so it has to still be here.
+        // Dropping it loses the child's remaining answers in silence, because
+        // `record` and `finish` both no-op on a sitting id the queue has
+        // forgotten.
+        #expect(await queue.pendingCount == 1,
+                "an open sitting must survive its own flush - the child is still playing")
+
+        // The rest of the sitting, and the end of it.
+        await queue.record(anAttempt(2), in: id)
+        await queue.finish(id)
+        #expect(await queue.pendingAttemptCount == 3,
+                "answers after the flush must still be recorded against the sitting")
+
+        _ = await queue.flush()
+
+        let paths = StubProtocol.recorded.map(\.path)
+        #expect(paths.contains { $0.hasSuffix("/award-round") },
+                "the finished sitting must bank")
+        #expect(paths.contains { $0.hasSuffix("/end") })
+        #expect(await queue.pendingCount == 0)
+    }
+
     @Test("a sitting the server could not read is kept for next time")
     func keepsRetryableFailures() async throws {
         StubProtocol.reset()
