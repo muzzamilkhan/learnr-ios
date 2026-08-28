@@ -106,7 +106,15 @@ targets:
         # document, and a rotation mid-question moves every target under
         # their hand.
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
-        UISupportedInterfaceOrientations~ipad: [UIInterfaceOrientationPortrait]
+        # iPad also turns. An iPad lives in a case or on a stand, often
+        # landscape, and a child handed one that way should not have to turn it
+        # over. The reasoning above still holds for iPhone, which is held.
+        UISupportedInterfaceOrientations~ipad: [
+          UIInterfaceOrientationPortrait,
+          UIInterfaceOrientationPortraitUpsideDown,
+          UIInterfaceOrientationLandscapeLeft,
+          UIInterfaceOrientationLandscapeRight,
+        ]
         # Set from LEARNR_API_BASE_URL above. Note the $() in that value: a
         # bare // in an xcconfig-style setting starts a comment, so the scheme
         # is written https:/$()/ to survive substitution intact.
