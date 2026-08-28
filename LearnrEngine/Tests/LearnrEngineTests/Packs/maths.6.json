@@ -8,9 +8,6 @@
       "subject": "maths",
       "topic": "integers",
       "level": "6",
-      "tags": [
-        "AC9M6N01"
-      ],
       "prompt": "The temperature is {a}°C. Overnight it falls {d}°C. What is the new temperature, in °C?",
       "vars": [
         {
@@ -60,16 +57,16 @@
           "lo + 3 * u"
         ]
       },
-      "hint": "Count down past zero."
+      "hint": "Count down past zero.",
+      "tags": [
+        "AC9M6N01"
+      ]
     },
     {
       "id": "maths.6.integers.subtract",
       "subject": "maths",
       "topic": "integers",
       "level": "6",
-      "tags": [
-        "AC9M6N01"
-      ],
       "prompt": "What is {a} − {b}?",
       "vars": [
         {
@@ -118,16 +115,16 @@
           "lo + 2 * u",
           "lo + 3 * u"
         ]
-      }
+      },
+      "tags": [
+        "AC9M6N01"
+      ]
     },
     {
       "id": "maths.6.integers.compare",
       "subject": "maths",
       "topic": "integers",
       "level": "6",
-      "tags": [
-        "AC9M6N01"
-      ],
       "prompt": "True or false: −{a} is greater than −{b}.",
       "vars": [
         {
@@ -147,17 +144,16 @@
         "a != b"
       ],
       "answer": "-a > -b",
-      "hint": "On a number line, further left is smaller."
+      "hint": "On a number line, further left is smaller.",
+      "tags": [
+        "AC9M6N01"
+      ]
     },
     {
       "id": "maths.6.primes-and-squares.is-prime",
       "subject": "maths",
       "topic": "primes and squares",
       "level": "6",
-      "tags": [
-        "AC9M6N02",
-        "MA3-RN-01"
-      ],
       "prompt": "True or false: {n} is a prime number.",
       "vars": [
         {
@@ -188,17 +184,17 @@
         }
       ],
       "answer": "n == 2 || n == 3 || n == 5 || n == 7 || n == 11 || n == 13 || n == 17 || n == 19",
-      "hint": "A prime has exactly two factors: 1 and itself."
+      "hint": "A prime has exactly two factors: 1 and itself.",
+      "tags": [
+        "AC9M6N02",
+        "MA3-RN-01"
+      ]
     },
     {
       "id": "maths.6.primes-and-squares.square-number",
       "subject": "maths",
       "topic": "primes and squares",
       "level": "6",
-      "tags": [
-        "AC9M6N02",
-        "MA3-RN-01"
-      ],
       "prompt": "What is {n} squared?",
       "vars": [
         {
@@ -209,17 +205,17 @@
         }
       ],
       "answer": "n * n",
-      "hint": "{n} × {n}"
+      "hint": "{n} × {n}",
+      "tags": [
+        "AC9M6N02",
+        "MA3-RN-01"
+      ]
     },
     {
       "id": "maths.6.primes-and-squares.square-root",
       "subject": "maths",
       "topic": "primes and squares",
       "level": "6",
-      "tags": [
-        "AC9M6N02",
-        "MA3-RN-01"
-      ],
       "prompt": "What is the square root of {square}?",
       "vars": [
         {
@@ -235,17 +231,17 @@
         }
       ],
       "answer": "n",
-      "hint": "Which number times itself gives {square}?"
+      "hint": "Which number times itself gives {square}?",
+      "tags": [
+        "AC9M6N02",
+        "MA3-RN-01"
+      ]
     },
     {
       "id": "maths.6.decimals.add",
       "subject": "maths",
       "topic": "decimals",
       "level": "6",
-      "tags": [
-        "AC9M6N04",
-        "MA3-AR-01"
-      ],
       "prompt": "What is {a} + {b}?",
       "vars": [
         {
@@ -305,17 +301,17 @@
           "(lo + 2 * u) / 100",
           "(lo + 3 * u) / 100"
         ]
-      }
+      },
+      "tags": [
+        "AC9M6N04",
+        "MA3-AR-01"
+      ]
     },
     {
       "id": "maths.6.decimals.multiply-by-powers-of-ten",
       "subject": "maths",
       "topic": "decimals",
       "level": "6",
-      "tags": [
-        "AC9M6N06",
-        "MA3-MR-01"
-      ],
       "prompt": "What is {a} × {p}?",
       "vars": [
         {
@@ -343,17 +339,17 @@
         "mod(n, 10) != 0"
       ],
       "answer": "n * p / 100",
-      "hint": "Every digit moves left one place for each zero."
+      "hint": "Every digit moves left one place for each zero.",
+      "tags": [
+        "AC9M6N06",
+        "MA3-MR-01"
+      ]
     },
     {
       "id": "maths.6.decimals.divide-by-powers-of-ten",
       "subject": "maths",
       "topic": "decimals",
       "level": "6",
-      "tags": [
-        "AC9M6N06",
-        "MA3-MR-01"
-      ],
       "prompt": "What is {a} ÷ {p}?",
       "vars": [
         {
@@ -381,17 +377,17 @@
         "mod(n, 10) != 0"
       ],
       "answer": "n / 100",
-      "hint": "Every digit moves one place to the right."
+      "hint": "Every digit moves one place to the right.",
+      "tags": [
+        "AC9M6N06",
+        "MA3-MR-01"
+      ]
     },
     {
       "id": "maths.6.fractions.add-with-equivalence",
       "subject": "maths",
       "topic": "fractions",
       "level": "6",
-      "tags": [
-        "AC9M6N05",
-        "MA3-RQF-01"
-      ],
       "prompt": "{a}/{d} + {b}/{d * 2} = ?/{d * 2}  What is the missing numerator?",
       "vars": [
         {
@@ -417,17 +413,17 @@
         "a * 2 + b <= d * 2"
       ],
       "answer": "a * 2 + b",
-      "hint": "Rewrite {a}/{d} with {d * 2} on the bottom first."
+      "hint": "Rewrite {a}/{d} with {d * 2} on the bottom first.",
+      "tags": [
+        "AC9M6N05",
+        "MA3-RQF-01"
+      ]
     },
     {
       "id": "maths.6.fractions.subtract-with-equivalence",
       "subject": "maths",
       "topic": "fractions",
       "level": "6",
-      "tags": [
-        "AC9M6N05",
-        "MA3-RQF-01"
-      ],
       "prompt": "{a}/{d} − {b}/{d * 2} = ?/{d * 2}  What is the missing numerator?",
       "vars": [
         {
@@ -449,17 +445,17 @@
           "max": "a * 2 - 1"
         }
       ],
-      "answer": "a * 2 - b"
+      "answer": "a * 2 - b",
+      "tags": [
+        "AC9M6N05",
+        "MA3-RQF-01"
+      ]
     },
     {
       "id": "maths.6.fractions.compare",
       "subject": "maths",
       "topic": "fractions",
       "level": "6",
-      "tags": [
-        "AC9M6N03",
-        "MA3-RQF-01"
-      ],
       "prompt": "True or false: {a}/{d} is greater than {b}/{e}.",
       "vars": [
         {
@@ -499,17 +495,17 @@
         "a / d != b / e"
       ],
       "answer": "a / d > b / e",
-      "hint": "Rewrite both with the same denominator."
+      "hint": "Rewrite both with the same denominator.",
+      "tags": [
+        "AC9M6N03",
+        "MA3-RQF-01"
+      ]
     },
     {
       "id": "maths.6.percentages.of-a-quantity",
       "subject": "maths",
       "topic": "percentages",
       "level": "6",
-      "tags": [
-        "AC9M6N07",
-        "MA3-RN-03"
-      ],
       "prompt": "What is {p}% of {total}?",
       "vars": [
         {
@@ -535,17 +531,17 @@
           "expr": "k * 20"
         }
       ],
-      "answer": "total * p / 100"
+      "answer": "total * p / 100",
+      "tags": [
+        "AC9M6N07",
+        "MA3-RN-03"
+      ]
     },
     {
       "id": "maths.6.percentages.discount-saved",
       "subject": "maths",
       "topic": "percentages",
       "level": "6",
-      "tags": [
-        "AC9M6N07",
-        "MA3-RN-03"
-      ],
       "prompt": "A jacket costs ${cost}. It is reduced by {p}%. How many dollars do you save?",
       "vars": [
         {
@@ -569,17 +565,17 @@
           "expr": "k * 20"
         }
       ],
-      "answer": "cost * p / 100"
+      "answer": "cost * p / 100",
+      "tags": [
+        "AC9M6N07",
+        "MA3-RN-03"
+      ]
     },
     {
       "id": "maths.6.percentages.sale-price",
       "subject": "maths",
       "topic": "percentages",
       "level": "6",
-      "tags": [
-        "AC9M6N07",
-        "MA3-RN-03"
-      ],
       "prompt": "A game costs ${cost} and is {p}% off. What do you pay, in dollars?",
       "vars": [
         {
@@ -604,17 +600,17 @@
         }
       ],
       "answer": "cost - cost * p / 100",
-      "hint": "Work out the saving, then subtract it from {cost} dollars."
+      "hint": "Work out the saving, then subtract it from {cost} dollars.",
+      "tags": [
+        "AC9M6N07",
+        "MA3-RN-03"
+      ]
     },
     {
       "id": "maths.6.order-of-operations.multiply-first",
       "subject": "maths",
       "topic": "order of operations",
       "level": "6",
-      "tags": [
-        "AC9M6A02",
-        "MA3-MR-02"
-      ],
       "prompt": "What is {a} + {b} × {c}?",
       "vars": [
         {
@@ -637,17 +633,17 @@
         }
       ],
       "answer": "a + b * c",
-      "hint": "Multiplication happens before addition."
+      "hint": "Multiplication happens before addition.",
+      "tags": [
+        "AC9M6A02",
+        "MA3-MR-02"
+      ]
     },
     {
       "id": "maths.6.order-of-operations.brackets-first",
       "subject": "maths",
       "topic": "order of operations",
       "level": "6",
-      "tags": [
-        "AC9M6A02",
-        "MA3-MR-02"
-      ],
       "prompt": "What is ({a} + {b}) × {c}?",
       "vars": [
         {
@@ -670,17 +666,17 @@
         }
       ],
       "answer": "(a + b) * c",
-      "hint": "Do what is inside the brackets first."
+      "hint": "Do what is inside the brackets first.",
+      "tags": [
+        "AC9M6A02",
+        "MA3-MR-02"
+      ]
     },
     {
       "id": "maths.6.algebra.unknown-with-brackets",
       "subject": "maths",
       "topic": "algebra",
       "level": "6",
-      "tags": [
-        "AC9M6A02",
-        "MA3-MR-02"
-      ],
       "prompt": "What goes in the box? ({a} + ?) × {c} = {total}",
       "vars": [
         {
@@ -708,17 +704,17 @@
         }
       ],
       "answer": "b",
-      "hint": "Divide {total} by {c} first."
+      "hint": "Divide {total} by {c} first.",
+      "tags": [
+        "AC9M6A02",
+        "MA3-MR-02"
+      ]
     },
     {
       "id": "maths.6.number-patterns.two-step-rule",
       "subject": "maths",
       "topic": "number patterns",
       "level": "6",
-      "tags": [
-        "AC9M6A01",
-        "MA3-MR-01"
-      ],
       "prompt": "The rule is: multiply by {k}, then add {b}. What comes after {a}?",
       "vars": [
         {
@@ -743,17 +739,17 @@
           "max": "9"
         }
       ],
-      "answer": "a * k + b"
+      "answer": "a * k + b",
+      "tags": [
+        "AC9M6A01",
+        "MA3-MR-01"
+      ]
     },
     {
       "id": "maths.6.number-patterns.growing-pattern",
       "subject": "maths",
       "topic": "number patterns",
       "level": "6",
-      "tags": [
-        "AC9M6A01",
-        "MA3-AR-01"
-      ],
       "prompt": "A pattern starts at {a} and adds {d}, then {2 * d}, then {3 * d}. What is the 4th number?",
       "vars": [
         {
@@ -769,17 +765,17 @@
           "max": "9"
         }
       ],
-      "answer": "a + d + 2 * d + 3 * d"
+      "answer": "a + d + 2 * d + 3 * d",
+      "tags": [
+        "AC9M6A01",
+        "MA3-AR-01"
+      ]
     },
     {
       "id": "maths.6.measurement.centimetres-to-metres",
       "subject": "maths",
       "topic": "measurement",
       "level": "6",
-      "tags": [
-        "AC9M6M01",
-        "MA3-GM-02"
-      ],
       "prompt": "How many metres is {cm} centimetres?",
       "vars": [
         {
@@ -798,17 +794,17 @@
         "mod(n * 5, 100) != 0"
       ],
       "answer": "n * 5 / 100",
-      "hint": "There are 100 centimetres in a metre."
+      "hint": "There are 100 centimetres in a metre.",
+      "tags": [
+        "AC9M6M01",
+        "MA3-GM-02"
+      ]
     },
     {
       "id": "maths.6.measurement.grams-to-kilograms",
       "subject": "maths",
       "topic": "measurement",
       "level": "6",
-      "tags": [
-        "AC9M6M01",
-        "MA3-NSM-01"
-      ],
       "prompt": "How many kilograms is {g} grams?",
       "vars": [
         {
@@ -827,17 +823,17 @@
         "mod(n * 5, 100) != 0"
       ],
       "answer": "n * 50 / 1000",
-      "hint": "There are 1000 grams in a kilogram."
+      "hint": "There are 1000 grams in a kilogram.",
+      "tags": [
+        "AC9M6M01",
+        "MA3-NSM-01"
+      ]
     },
     {
       "id": "maths.6.measurement.number-line-centimetres",
       "subject": "maths",
       "topic": "measurement",
       "level": "6",
-      "tags": [
-        "AC9M6M01",
-        "MA3-GM-02"
-      ],
       "prompt": "The arrow shows a length in metres. How many centimetres is that?",
       "vars": [
         {
@@ -891,17 +887,17 @@
         "from": "lo",
         "to": "hi",
         "step": "0.1"
-      }
+      },
+      "tags": [
+        "AC9M6M01",
+        "MA3-GM-02"
+      ]
     },
     {
       "id": "maths.6.measurement.total-mass",
       "subject": "maths",
       "topic": "measurement",
       "level": "6",
-      "tags": [
-        "AC9M6M01",
-        "MA3-NSM-01"
-      ],
       "prompt": "{n} tins each weigh {g} grams. What is the total mass, in kilograms?",
       "vars": [
         {
@@ -923,17 +919,17 @@
         }
       ],
       "answer": "n * g / 1000",
-      "hint": "Work out the total in grams first. There are 1000 grams in a kilogram."
+      "hint": "Work out the total in grams first. There are 1000 grams in a kilogram.",
+      "tags": [
+        "AC9M6M01",
+        "MA3-NSM-01"
+      ]
     },
     {
       "id": "maths.6.measurement.litres-to-millilitres",
       "subject": "maths",
       "topic": "measurement",
       "level": "6",
-      "tags": [
-        "AC9M6M01",
-        "MA3-3DS-02"
-      ],
       "prompt": "A jug holds {l} litres. How many millilitres is that?",
       "vars": [
         {
@@ -952,17 +948,17 @@
         "mod(n, 10) != 0"
       ],
       "answer": "n * 10",
-      "hint": "There are 1000 millilitres in a litre."
+      "hint": "There are 1000 millilitres in a litre.",
+      "tags": [
+        "AC9M6M01",
+        "MA3-3DS-02"
+      ]
     },
     {
       "id": "maths.6.measurement.full-glasses",
       "subject": "maths",
       "topic": "measurement",
       "level": "6",
-      "tags": [
-        "AC9M6M01",
-        "MA3-3DS-02"
-      ],
       "prompt": "A {l} litre bottle is poured into glasses holding {ml} millilitres each. How many glasses does it fill?",
       "vars": [
         {
@@ -984,17 +980,17 @@
         }
       ],
       "answer": "l * 1000 / ml",
-      "hint": "The bottle holds {l * 1000} millilitres."
+      "hint": "The bottle holds {l * 1000} millilitres.",
+      "tags": [
+        "AC9M6M01",
+        "MA3-3DS-02"
+      ]
     },
     {
       "id": "maths.6.perimeter-and-area.rectangle-formula",
       "subject": "maths",
       "topic": "perimeter and area",
       "level": "6",
-      "tags": [
-        "AC9M6M02",
-        "MA3-2DS-02"
-      ],
       "prompt": "A rectangle is {l} m long and {w} m wide. What is its area, in square metres?",
       "vars": [
         {
@@ -1011,17 +1007,17 @@
         }
       ],
       "answer": "l * w",
-      "hint": "Area of a rectangle is length times width."
+      "hint": "Area of a rectangle is length times width.",
+      "tags": [
+        "AC9M6M02",
+        "MA3-2DS-02"
+      ]
     },
     {
       "id": "maths.6.perimeter-and-area.square-area",
       "subject": "maths",
       "topic": "perimeter and area",
       "level": "6",
-      "tags": [
-        "AC9M6M02",
-        "MA3-2DS-02"
-      ],
       "prompt": "A square has sides of {s} m. What is its area, in square metres?",
       "vars": [
         {
@@ -1031,17 +1027,17 @@
           "max": "20"
         }
       ],
-      "answer": "s * s"
+      "answer": "s * s",
+      "tags": [
+        "AC9M6M02",
+        "MA3-2DS-02"
+      ]
     },
     {
       "id": "maths.6.angles.on-a-straight-line",
       "subject": "maths",
       "topic": "angles",
       "level": "6",
-      "tags": [
-        "AC9M6M04",
-        "MA3-GM-03"
-      ],
       "prompt": "Two angles sit on a straight line. One is {a} degrees. What is the other, in degrees?",
       "vars": [
         {
@@ -1053,17 +1049,17 @@
         }
       ],
       "answer": "180 - a",
-      "hint": "Angles on a straight line add to 180 degrees."
+      "hint": "Angles on a straight line add to 180 degrees.",
+      "tags": [
+        "AC9M6M04",
+        "MA3-GM-03"
+      ]
     },
     {
       "id": "maths.6.angles.at-a-point",
       "subject": "maths",
       "topic": "angles",
       "level": "6",
-      "tags": [
-        "AC9M6M04",
-        "MA3-GM-03"
-      ],
       "prompt": "Three angles meet at a point. Two are {a} and {b} degrees. What is the third, in degrees?",
       "vars": [
         {
@@ -1085,17 +1081,17 @@
         "a + b < 350"
       ],
       "answer": "360 - a - b",
-      "hint": "Angles at a point add to 360 degrees."
+      "hint": "Angles at a point add to 360 degrees.",
+      "tags": [
+        "AC9M6M04",
+        "MA3-GM-03"
+      ]
     },
     {
       "id": "maths.6.angles.vertically-opposite",
       "subject": "maths",
       "topic": "angles",
       "level": "6",
-      "tags": [
-        "AC9M6M04",
-        "MA3-GM-03"
-      ],
       "prompt": "Two lines cross. One angle is {a} degrees. What is the angle opposite it, in degrees?",
       "vars": [
         {
@@ -1107,17 +1103,17 @@
         }
       ],
       "answer": "a",
-      "hint": "Vertically opposite angles are equal."
+      "hint": "Vertically opposite angles are equal.",
+      "tags": [
+        "AC9M6M04",
+        "MA3-GM-03"
+      ]
     },
     {
       "id": "maths.6.angles.rest-of-a-turn",
       "subject": "maths",
       "topic": "angles",
       "level": "6",
-      "tags": [
-        "AC9M6M04",
-        "MA3-GM-03"
-      ],
       "prompt": "The marked angle is {d} degrees. How many degrees is the angle on the other side of it?",
       "vars": [
         {
@@ -1136,17 +1132,17 @@
       "figure": {
         "kind": "angle",
         "degrees": "d"
-      }
+      },
+      "tags": [
+        "AC9M6M04",
+        "MA3-GM-03"
+      ]
     },
     {
       "id": "maths.6.angles.rest-of-a-line",
       "subject": "maths",
       "topic": "angles",
       "level": "6",
-      "tags": [
-        "AC9M6M04",
-        "MA3-GM-03"
-      ],
       "prompt": "Another angle beside this one would make a straight line. Is it bigger or smaller than this one?",
       "vars": [
         {
@@ -1173,17 +1169,17 @@
       "figure": {
         "kind": "angle",
         "degrees": "d"
-      }
+      },
+      "tags": [
+        "AC9M6M04",
+        "MA3-GM-03"
+      ]
     },
     {
       "id": "maths.6.time.journey-length",
       "subject": "maths",
       "topic": "time",
       "level": "6",
-      "tags": [
-        "AC9M6M03",
-        "MA3-NSM-02"
-      ],
       "prompt": "A bus leaves at 9:{a} and arrives at 10:{b}. How many minutes does the journey take?",
       "vars": [
         {
@@ -1202,17 +1198,17 @@
         }
       ],
       "answer": "60 - a + b",
-      "hint": "Count up to 10 o’clock first."
+      "hint": "Count up to 10 o’clock first.",
+      "tags": [
+        "AC9M6M03",
+        "MA3-NSM-02"
+      ]
     },
     {
       "id": "maths.6.time.clock-arrival",
       "subject": "maths",
       "topic": "time",
       "level": "6",
-      "tags": [
-        "AC9M6M03",
-        "MA3-NSM-02"
-      ],
       "prompt": "This clock shows when the bus leaves. The trip takes {n} minutes. What time does it arrive?",
       "vars": [
         {
@@ -1310,17 +1306,17 @@
         "minute": "m",
         "numerals": "true",
         "minuteTicks": "true"
-      }
+      },
+      "tags": [
+        "AC9M6M03",
+        "MA3-NSM-02"
+      ]
     },
     {
       "id": "maths.6.time.clock-leave-by",
       "subject": "maths",
       "topic": "time",
       "level": "6",
-      "tags": [
-        "AC9M6M03",
-        "MA3-NSM-02"
-      ],
       "prompt": "This clock shows when the train leaves. The walk takes {n} minutes. What time should you set off?",
       "vars": [
         {
@@ -1418,17 +1414,17 @@
         "minute": "m",
         "numerals": "true",
         "minuteTicks": "true"
-      }
+      },
+      "tags": [
+        "AC9M6M03",
+        "MA3-NSM-02"
+      ]
     },
     {
       "id": "maths.6.position.move-a-point",
       "subject": "maths",
       "topic": "position",
       "level": "6",
-      "tags": [
-        "AC9M6SP02",
-        "MA3-GM-01"
-      ],
       "prompt": "A point sits at ({x}, {y}) on a grid. It moves {d} units to the right. What is its new x-coordinate?",
       "vars": [
         {
@@ -1450,17 +1446,17 @@
           "max": "9"
         }
       ],
-      "answer": "x + d"
+      "answer": "x + d",
+      "tags": [
+        "AC9M6SP02",
+        "MA3-GM-01"
+      ]
     },
     {
       "id": "maths.6.position.move-right",
       "subject": "maths",
       "topic": "position",
       "level": "6",
-      "tags": [
-        "AC9M6SP02",
-        "MA3-GM-01"
-      ],
       "prompt": "The dot moves {d} {sq} right. What is its new x-coordinate?",
       "vars": [
         {
@@ -1507,17 +1503,17 @@
         "columns": "cols",
         "rows": "rws",
         "onLines": "true"
-      }
+      },
+      "tags": [
+        "AC9M6SP02",
+        "MA3-GM-01"
+      ]
     },
     {
       "id": "maths.6.position.move-back",
       "subject": "maths",
       "topic": "position",
       "level": "6",
-      "tags": [
-        "AC9M6SP02",
-        "MA3-GM-01"
-      ],
       "prompt": "The dot has just moved {d} {sq} up. What was its y-coordinate before?",
       "vars": [
         {
@@ -1564,17 +1560,17 @@
         "columns": "cols",
         "rows": "rws",
         "onLines": "true"
-      }
+      },
+      "tags": [
+        "AC9M6SP02",
+        "MA3-GM-01"
+      ]
     },
     {
       "id": "maths.6.shapes.is-a-prism",
       "subject": "maths",
       "topic": "shapes",
       "level": "6",
-      "tags": [
-        "AC9M6SP01",
-        "MA3-3DS-01"
-      ],
       "prompt": "True or false: this shape is a prism.",
       "vars": [
         {
@@ -1603,17 +1599,17 @@
         "kind": "solid",
         "solid": "shape",
         "view": "'object'"
-      }
+      },
+      "tags": [
+        "AC9M6SP01",
+        "MA3-3DS-01"
+      ]
     },
     {
       "id": "maths.6.shapes.cross-section",
       "subject": "maths",
       "topic": "shapes",
       "level": "6",
-      "tags": [
-        "AC9M6SP01",
-        "MA3-3DS-01"
-      ],
       "prompt": "This shape is cut straight across, parallel to its ends. What shape is the cut face?",
       "vars": [
         {
@@ -1641,17 +1637,17 @@
         "kind": "solid",
         "solid": "shape",
         "view": "'object'"
-      }
+      },
+      "tags": [
+        "AC9M6SP01",
+        "MA3-3DS-01"
+      ]
     },
     {
       "id": "maths.6.shapes.net-is-a-prism",
       "subject": "maths",
       "topic": "shapes",
       "level": "6",
-      "tags": [
-        "AC9M6SP01",
-        "MA3-3DS-01"
-      ],
       "prompt": "True or false: this net folds up into a prism.",
       "vars": [
         {
@@ -1686,17 +1682,17 @@
         "kind": "solid",
         "solid": "shape",
         "view": "'net'"
-      }
+      },
+      "tags": [
+        "AC9M6SP01",
+        "MA3-3DS-01"
+      ]
     },
     {
       "id": "maths.6.data.column-range",
       "subject": "maths",
       "topic": "data",
       "level": "6",
-      "tags": [
-        "AC9M6ST01",
-        "MA3-DATA-02"
-      ],
       "prompt": "What is the range of these scores?",
       "vars": [
         {
@@ -1772,19 +1768,19 @@
         "kind": "bar",
         "values": "(v0 * 10) + ',' + (v1 * 10) + ',' + (v2 * 10) + ',' + (v3 * 10)",
         "labels": "'Ada,Kai,Leo,Mia'",
-        "style": "'column'",
-        "scale": "10"
-      }
+        "scale": "10",
+        "style": "'column'"
+      },
+      "tags": [
+        "AC9M6ST01",
+        "MA3-DATA-02"
+      ]
     },
     {
       "id": "maths.6.data.column-mode",
       "subject": "maths",
       "topic": "data",
       "level": "6",
-      "tags": [
-        "AC9M6ST01",
-        "MA3-DATA-02"
-      ],
       "prompt": "Which pet is the mode?",
       "vars": [
         {
@@ -1860,19 +1856,19 @@
         "kind": "bar",
         "values": "(v0 * 10) + ',' + (v1 * 10) + ',' + (v2 * 10) + ',' + (v3 * 10)",
         "labels": "'Cat,Dog,Rat,Pig'",
-        "style": "'column'",
-        "scale": "10"
-      }
+        "scale": "10",
+        "style": "'column'"
+      },
+      "tags": [
+        "AC9M6ST01",
+        "MA3-DATA-02"
+      ]
     },
     {
       "id": "maths.6.data.line-graph-steepest",
       "subject": "maths",
       "topic": "data",
       "level": "6",
-      "tags": [
-        "AC9M6ST01",
-        "MA3-DATA-02"
-      ],
       "prompt": "Between which two days did the visitors rise the most?",
       "vars": [
         {
@@ -1964,19 +1960,19 @@
         "kind": "bar",
         "values": "(v0 * 10) + ',' + (v1 * 10) + ',' + (v2 * 10) + ',' + (v3 * 10)",
         "labels": "'Mon,Tue,Wed,Thu'",
-        "style": "'line'",
-        "scale": "10"
-      }
+        "scale": "10",
+        "style": "'line'"
+      },
+      "tags": [
+        "AC9M6ST01",
+        "MA3-DATA-02"
+      ]
     },
     {
       "id": "maths.6.data.picture-key-total",
       "subject": "maths",
       "topic": "data",
       "level": "6",
-      "tags": [
-        "AC9M6ST01",
-        "MA3-DATA-01"
-      ],
       "prompt": "Each picture stands for 20 books. How many books did the three read altogether?",
       "vars": [
         {
@@ -2006,17 +2002,17 @@
         "labels": "'Ada,Kai,Leo'",
         "key": "20",
         "halves": "true"
-      }
+      },
+      "tags": [
+        "AC9M6ST01",
+        "MA3-DATA-01"
+      ]
     },
     {
       "id": "maths.6.chance.spinner-decimal",
       "subject": "maths",
       "topic": "chance",
       "level": "6",
-      "tags": [
-        "AC9M6P01",
-        "MA3-CHAN-01"
-      ],
       "prompt": "What is the chance of stopping on a shaded part, as a decimal?",
       "vars": [
         {
@@ -2050,17 +2046,17 @@
         "kind": "spinner",
         "sectors": "parts",
         "fills": "shading"
-      }
+      },
+      "tags": [
+        "AC9M6P01",
+        "MA3-CHAN-01"
+      ]
     },
     {
       "id": "maths.6.chance.spinner-not-shaded",
       "subject": "maths",
       "topic": "chance",
       "level": "6",
-      "tags": [
-        "AC9M6P01",
-        "MA3-CHAN-01"
-      ],
       "prompt": "What is the chance of not stopping on a shaded part, as a percentage?",
       "vars": [
         {
@@ -2094,17 +2090,17 @@
         "kind": "spinner",
         "sectors": "parts",
         "fills": "shading"
-      }
+      },
+      "tags": [
+        "AC9M6P01",
+        "MA3-CHAN-01"
+      ]
     },
     {
       "id": "maths.6.chance.spinner-and-coin",
       "subject": "maths",
       "topic": "chance",
       "level": "6",
-      "tags": [
-        "AC9M6P01",
-        "MA3-CHAN-01"
-      ],
       "prompt": "You spin this spinner once and toss a coin. How many different results are there?",
       "vars": [
         {
@@ -2124,7 +2120,11 @@
       "figure": {
         "kind": "spinner",
         "sectors": "parts"
-      }
+      },
+      "tags": [
+        "AC9M6P01",
+        "MA3-CHAN-01"
+      ]
     }
   ]
 }

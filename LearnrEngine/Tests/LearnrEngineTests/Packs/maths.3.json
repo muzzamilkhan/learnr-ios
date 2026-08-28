@@ -8,10 +8,6 @@
       "subject": "maths",
       "topic": "place value",
       "level": "3",
-      "tags": [
-        "AC9M3N01",
-        "MA2-RN-01"
-      ],
       "prompt": "How many whole thousands are there in {x}?",
       "vars": [
         {
@@ -21,17 +17,17 @@
           "max": "99999"
         }
       ],
-      "answer": "floor(x / 1000)"
+      "answer": "floor(x / 1000)",
+      "tags": [
+        "AC9M3N01",
+        "MA2-RN-01"
+      ]
     },
     {
       "id": "maths.3.place-value.digit-value",
       "subject": "maths",
       "topic": "place value",
       "level": "3",
-      "tags": [
-        "AC9M3N01",
-        "MA2-RN-01"
-      ],
       "prompt": "In the number {x}, what is the value of the digit in the hundreds place?",
       "vars": [
         {
@@ -45,17 +41,17 @@
         "mod(floor(x / 100), 10) != 0"
       ],
       "answer": "mod(floor(x / 100), 10) * 100",
-      "hint": "A digit in the hundreds place is worth that many hundreds."
+      "hint": "A digit in the hundreds place is worth that many hundreds.",
+      "tags": [
+        "AC9M3N01",
+        "MA2-RN-01"
+      ]
     },
     {
       "id": "maths.3.counting-numbers.round-to-ten",
       "subject": "maths",
       "topic": "counting numbers",
       "level": "3",
-      "tags": [
-        "AC9M3N05",
-        "MA2-RN-01"
-      ],
       "prompt": "Round {x} to the nearest 10.",
       "vars": [
         {
@@ -69,17 +65,17 @@
         "mod(x, 10) != 5",
         "mod(x, 10) != 0"
       ],
-      "answer": "round(x / 10) * 10"
+      "answer": "round(x / 10) * 10",
+      "tags": [
+        "AC9M3N05",
+        "MA2-RN-01"
+      ]
     },
     {
       "id": "maths.3.counting-numbers.number-line",
       "subject": "maths",
       "topic": "counting numbers",
       "level": "3",
-      "tags": [
-        "AC9M3N01",
-        "MA2-RN-01"
-      ],
       "prompt": "What number is the arrow pointing to?",
       "vars": [
         {
@@ -117,17 +113,17 @@
         "from": "start",
         "to": "start + 100",
         "step": "100"
-      }
+      },
+      "tags": [
+        "AC9M3N01",
+        "MA2-RN-01"
+      ]
     },
     {
       "id": "maths.3.addition.three-digit",
       "subject": "maths",
       "topic": "addition",
       "level": "3",
-      "tags": [
-        "AC9M3N03",
-        "MA2-AR-01"
-      ],
       "prompt": "What is {x} + {y}?",
       "vars": [
         {
@@ -144,17 +140,17 @@
         }
       ],
       "answer": "x + y",
-      "hint": "Add the hundreds, then the tens, then the ones."
+      "hint": "Add the hundreds, then the tens, then the ones.",
+      "tags": [
+        "AC9M3N03",
+        "MA2-AR-01"
+      ]
     },
     {
       "id": "maths.3.addition.regrouping",
       "subject": "maths",
       "topic": "addition",
       "level": "3",
-      "tags": [
-        "AC9M3N03",
-        "MA2-AR-01"
-      ],
       "prompt": "What is {x} + {y}?",
       "vars": [
         {
@@ -174,17 +170,17 @@
         "mod(x, 10) + mod(y, 10) > 10"
       ],
       "answer": "x + y",
-      "hint": "The ones make more than ten, so one ten is carried over."
+      "hint": "The ones make more than ten, so one ten is carried over.",
+      "tags": [
+        "AC9M3N03",
+        "MA2-AR-01"
+      ]
     },
     {
       "id": "maths.3.subtraction.three-digit",
       "subject": "maths",
       "topic": "subtraction",
       "level": "3",
-      "tags": [
-        "AC9M3N03",
-        "MA2-AR-01"
-      ],
       "prompt": "What is {x} − {y}?",
       "vars": [
         {
@@ -200,17 +196,17 @@
           "max": "299"
         }
       ],
-      "answer": "x - y"
+      "answer": "x - y",
+      "tags": [
+        "AC9M3N03",
+        "MA2-AR-01"
+      ]
     },
     {
       "id": "maths.3.multiplication.tables",
       "subject": "maths",
       "topic": "multiplication",
       "level": "3",
-      "tags": [
-        "AC9M3N04",
-        "MA2-MR-01"
-      ],
       "prompt": "What is {x} × {y}?",
       "vars": [
         {
@@ -227,17 +223,17 @@
         }
       ],
       "answer": "x * y",
-      "hint": "{y} groups of {x}."
+      "hint": "{y} groups of {x}.",
+      "tags": [
+        "AC9M3N04",
+        "MA2-MR-01"
+      ]
     },
     {
       "id": "maths.3.multiplication.groups",
       "subject": "maths",
       "topic": "multiplication",
       "level": "3",
-      "tags": [
-        "AC9M3N06",
-        "MA2-MR-01"
-      ],
       "prompt": "There are {x} boxes with {y} pencils in each. How many pencils altogether?",
       "vars": [
         {
@@ -253,17 +249,17 @@
           "max": "9"
         }
       ],
-      "answer": "x * y"
+      "answer": "x * y",
+      "tags": [
+        "AC9M3N06",
+        "MA2-MR-01"
+      ]
     },
     {
       "id": "maths.3.multiplication.known-facts",
       "subject": "maths",
       "topic": "multiplication",
       "level": "3",
-      "tags": [
-        "AC9M3A03",
-        "MA2-MR-01"
-      ],
       "prompt": "What is {x} × {fact}?",
       "vars": [
         {
@@ -283,17 +279,17 @@
           "max": "10"
         }
       ],
-      "answer": "x * fact"
+      "answer": "x * fact",
+      "tags": [
+        "AC9M3A03",
+        "MA2-MR-01"
+      ]
     },
     {
       "id": "maths.3.division.exact",
       "subject": "maths",
       "topic": "division",
       "level": "3",
-      "tags": [
-        "AC9M3N04",
-        "MA2-MR-01"
-      ],
       "prompt": "What is {total} ÷ {y}?",
       "vars": [
         {
@@ -315,17 +311,17 @@
         }
       ],
       "answer": "x",
-      "hint": "How many {y}s fit into {total}?"
+      "hint": "How many {y}s fit into {total}?",
+      "tags": [
+        "AC9M3N04",
+        "MA2-MR-01"
+      ]
     },
     {
       "id": "maths.3.division.sharing",
       "subject": "maths",
       "topic": "division",
       "level": "3",
-      "tags": [
-        "AC9M3N06",
-        "MA2-MR-01"
-      ],
       "prompt": "{total} sweets are shared equally between {y} children. How many does each child get?",
       "vars": [
         {
@@ -346,17 +342,17 @@
           "expr": "x * y"
         }
       ],
-      "answer": "x"
+      "answer": "x",
+      "tags": [
+        "AC9M3N06",
+        "MA2-MR-01"
+      ]
     },
     {
       "id": "maths.3.division.related-fact",
       "subject": "maths",
       "topic": "division",
       "level": "3",
-      "tags": [
-        "AC9M3A03",
-        "MA2-MR-02"
-      ],
       "prompt": "You know {x} × {fact} = {x * fact}. What is {x * fact} ÷ {fact}?",
       "vars": [
         {
@@ -377,17 +373,17 @@
         }
       ],
       "answer": "x",
-      "hint": "Division undoes multiplication."
+      "hint": "Division undoes multiplication.",
+      "tags": [
+        "AC9M3A03",
+        "MA2-MR-02"
+      ]
     },
     {
       "id": "maths.3.division.array-in-each-row",
       "subject": "maths",
       "topic": "division",
       "level": "3",
-      "tags": [
-        "AC9M3N04",
-        "MA2-MR-01"
-      ],
       "prompt": "These {total} dots are set out in {r} equal rows. How many dots are in each row?",
       "vars": [
         {
@@ -415,17 +411,17 @@
         "rows": "r",
         "columns": "c",
         "orientation": "'rows'"
-      }
+      },
+      "tags": [
+        "AC9M3N04",
+        "MA2-MR-01"
+      ]
     },
     {
       "id": "maths.3.fractions.unit-fraction-of",
       "subject": "maths",
       "topic": "fractions",
       "level": "3",
-      "tags": [
-        "AC9M3N02",
-        "MA2-PF-01"
-      ],
       "prompt": "What is one {name} of {total}?",
       "vars": [
         {
@@ -456,17 +452,17 @@
         }
       ],
       "answer": "part",
-      "hint": "Split {total} into {d} equal parts."
+      "hint": "Split {total} into {d} equal parts.",
+      "tags": [
+        "AC9M3N02",
+        "MA2-PF-01"
+      ]
     },
     {
       "id": "maths.3.fractions.multiple-of-unit",
       "subject": "maths",
       "topic": "fractions",
       "level": "3",
-      "tags": [
-        "AC9M3N02",
-        "MA2-PF-01"
-      ],
       "prompt": "What is {n} {plural} of {total}?",
       "vars": [
         {
@@ -508,17 +504,17 @@
         }
       ],
       "answer": "n * part",
-      "hint": "One {name} of {total} is {part}."
+      "hint": "One {name} of {total} is {part}.",
+      "tags": [
+        "AC9M3N02",
+        "MA2-PF-01"
+      ]
     },
     {
       "id": "maths.3.fractions.complete-the-whole",
       "subject": "maths",
       "topic": "fractions",
       "level": "3",
-      "tags": [
-        "AC9M3N02",
-        "MA2-PF-01"
-      ],
       "prompt": "You have {n} {plural} of a cake. How many more {plural} do you need to make a whole cake?",
       "vars": [
         {
@@ -543,17 +539,17 @@
           "max": "d - 1"
         }
       ],
-      "answer": "d - n"
+      "answer": "d - n",
+      "tags": [
+        "AC9M3N02",
+        "MA2-PF-01"
+      ]
     },
     {
       "id": "maths.3.fractions.how-much-shaded",
       "subject": "maths",
       "topic": "fractions",
       "level": "3",
-      "tags": [
-        "AC9M3N02",
-        "MA2-PF-01"
-      ],
       "prompt": "How much of this shape is shaded?",
       "vars": [
         {
@@ -593,17 +589,17 @@
         "kind": "fraction-shape",
         "numerator": "n",
         "denominator": "d"
-      }
+      },
+      "tags": [
+        "AC9M3N02",
+        "MA2-PF-01"
+      ]
     },
     {
       "id": "maths.3.algebra.unknown-value",
       "subject": "maths",
       "topic": "algebra",
       "level": "3",
-      "tags": [
-        "AC9M3A01",
-        "MA2-AR-02"
-      ],
       "prompt": "What goes in the box? ? + {y} = {total}",
       "vars": [
         {
@@ -625,17 +621,17 @@
         }
       ],
       "answer": "x",
-      "hint": "Take {y} away from {total}."
+      "hint": "Take {y} away from {total}.",
+      "tags": [
+        "AC9M3A01",
+        "MA2-AR-02"
+      ]
     },
     {
       "id": "maths.3.algebra.inverse-operations",
       "subject": "maths",
       "topic": "algebra",
       "level": "3",
-      "tags": [
-        "AC9M3A01",
-        "MA2-AR-02"
-      ],
       "prompt": "You know that {x} + {y} = {total}. What is {total} − {y}?",
       "vars": [
         {
@@ -657,17 +653,17 @@
         }
       ],
       "answer": "x",
-      "hint": "Adding and subtracting undo each other."
+      "hint": "Adding and subtracting undo each other.",
+      "tags": [
+        "AC9M3A01",
+        "MA2-AR-02"
+      ]
     },
     {
       "id": "maths.3.algebra.mental-strategy",
       "subject": "maths",
       "topic": "algebra",
       "level": "3",
-      "tags": [
-        "AC9M3A02",
-        "MA2-AR-01"
-      ],
       "prompt": "You know {x} + {y} = {x + y}. What is {x * 10} + {y * 10}?",
       "vars": [
         {
@@ -684,17 +680,17 @@
         }
       ],
       "answer": "(x + y) * 10",
-      "hint": "Ten times bigger in, ten times bigger out."
+      "hint": "Ten times bigger in, ten times bigger out.",
+      "tags": [
+        "AC9M3A02",
+        "MA2-AR-01"
+      ]
     },
     {
       "id": "maths.3.time.minutes-in-hours",
       "subject": "maths",
       "topic": "time",
       "level": "3",
-      "tags": [
-        "AC9M3M03",
-        "MA2-NSM-02"
-      ],
       "prompt": "How many minutes are there in {n} hours?",
       "vars": [
         {
@@ -704,17 +700,17 @@
           "max": "8"
         }
       ],
-      "answer": "n * 60"
+      "answer": "n * 60",
+      "tags": [
+        "AC9M3M03",
+        "MA2-NSM-02"
+      ]
     },
     {
       "id": "maths.3.time.seconds-in-minutes",
       "subject": "maths",
       "topic": "time",
       "level": "3",
-      "tags": [
-        "AC9M3M03",
-        "MA2-NSM-02"
-      ],
       "prompt": "How many seconds are there in {n} minutes?",
       "vars": [
         {
@@ -724,17 +720,17 @@
           "max": "9"
         }
       ],
-      "answer": "n * 60"
+      "answer": "n * 60",
+      "tags": [
+        "AC9M3M03",
+        "MA2-NSM-02"
+      ]
     },
     {
       "id": "maths.3.time.until-the-hour",
       "subject": "maths",
       "topic": "time",
       "level": "3",
-      "tags": [
-        "AC9M3M04",
-        "MA2-NSM-02"
-      ],
       "prompt": "It is {m} minutes past {h} o’clock. How many minutes until {h + 1} o’clock?",
       "vars": [
         {
@@ -751,17 +747,17 @@
           "step": 5
         }
       ],
-      "answer": "60 - m"
+      "answer": "60 - m",
+      "tags": [
+        "AC9M3M04",
+        "MA2-NSM-02"
+      ]
     },
     {
       "id": "maths.3.time.clock-five-minutes",
       "subject": "maths",
       "topic": "time",
       "level": "3",
-      "tags": [
-        "AC9M3M04",
-        "MA2-NSM-02"
-      ],
       "prompt": "What time does this clock show?",
       "vars": [
         {
@@ -831,17 +827,17 @@
         "minute": "m",
         "numerals": "true",
         "minuteTicks": "true"
-      }
+      },
+      "tags": [
+        "AC9M3M04",
+        "MA2-NSM-02"
+      ]
     },
     {
       "id": "maths.3.time.minutes-past",
       "subject": "maths",
       "topic": "time",
       "level": "3",
-      "tags": [
-        "AC9M3M04",
-        "MA2-NSM-02"
-      ],
       "prompt": "How many minutes past {h} o’clock is this clock showing?",
       "vars": [
         {
@@ -870,17 +866,17 @@
         "minute": "m",
         "numerals": "true",
         "minuteTicks": "true"
-      }
+      },
+      "tags": [
+        "AC9M3M04",
+        "MA2-NSM-02"
+      ]
     },
     {
       "id": "maths.3.measurement.centimetres",
       "subject": "maths",
       "topic": "measurement",
       "level": "3",
-      "tags": [
-        "AC9M3M02",
-        "MA2-GM-02"
-      ],
       "prompt": "How many centimetres are there in {n} metres?",
       "vars": [
         {
@@ -891,17 +887,17 @@
         }
       ],
       "answer": "n * 100",
-      "hint": "One metre is 100 centimetres."
+      "hint": "One metre is 100 centimetres.",
+      "tags": [
+        "AC9M3M02",
+        "MA2-GM-02"
+      ]
     },
     {
       "id": "maths.3.measurement.grams",
       "subject": "maths",
       "topic": "measurement",
       "level": "3",
-      "tags": [
-        "AC9M3M02",
-        "MA2-NSM-01"
-      ],
       "prompt": "How many grams are there in {n} kilograms?",
       "vars": [
         {
@@ -911,17 +907,17 @@
           "max": "9"
         }
       ],
-      "answer": "n * 1000"
+      "answer": "n * 1000",
+      "tags": [
+        "AC9M3M02",
+        "MA2-NSM-01"
+      ]
     },
     {
       "id": "maths.3.measurement.choose-unit",
       "subject": "maths",
       "topic": "measurement",
       "level": "3",
-      "tags": [
-        "AC9M3M01",
-        "MA2-GM-02"
-      ],
       "prompt": "Would you measure the {thing} in metres or in centimetres?",
       "vars": [
         {
@@ -943,17 +939,17 @@
           "'metres'",
           "'centimetres'"
         ]
-      }
+      },
+      "tags": [
+        "AC9M3M01",
+        "MA2-GM-02"
+      ]
     },
     {
       "id": "maths.3.measurement.mass-to-a-kilogram",
       "subject": "maths",
       "topic": "measurement",
       "level": "3",
-      "tags": [
-        "AC9M3M01",
-        "MA2-NSM-01"
-      ],
       "prompt": "A bag of flour holds {g} grams. How many more grams would make it 1 kilogram?",
       "vars": [
         {
@@ -965,17 +961,17 @@
         }
       ],
       "answer": "1000 - g",
-      "hint": "One kilogram is 1000 grams."
+      "hint": "One kilogram is 1000 grams.",
+      "tags": [
+        "AC9M3M01",
+        "MA2-NSM-01"
+      ]
     },
     {
       "id": "maths.3.measurement.millilitres",
       "subject": "maths",
       "topic": "measurement",
       "level": "3",
-      "tags": [
-        "AC9M3M02",
-        "MA2-3DS-02"
-      ],
       "prompt": "How many millilitres are there in {n} litres?",
       "vars": [
         {
@@ -986,17 +982,17 @@
         }
       ],
       "answer": "n * 1000",
-      "hint": "One litre is 1000 millilitres."
+      "hint": "One litre is 1000 millilitres.",
+      "tags": [
+        "AC9M3M02",
+        "MA2-3DS-02"
+      ]
     },
     {
       "id": "maths.3.measurement.cups-from-a-jug",
       "subject": "maths",
       "topic": "measurement",
       "level": "3",
-      "tags": [
-        "AC9M3M01",
-        "MA2-3DS-02"
-      ],
       "prompt": "A jug holds {n} litres of juice. Each cup holds {c} millilitres. How many cups can you fill?",
       "vars": [
         {
@@ -1017,17 +1013,17 @@
         }
       ],
       "answer": "n * 1000 / c",
-      "hint": "The jug holds {n * 1000} millilitres altogether."
+      "hint": "The jug holds {n * 1000} millilitres altogether.",
+      "tags": [
+        "AC9M3M01",
+        "MA2-3DS-02"
+      ]
     },
     {
       "id": "maths.3.money.change",
       "subject": "maths",
       "topic": "money",
       "level": "3",
-      "tags": [
-        "AC9M3M06",
-        "MA2-AR-01"
-      ],
       "prompt": "A sticker costs {c}c. You pay with a $2 coin. How much change do you get, in cents?",
       "vars": [
         {
@@ -1039,17 +1035,17 @@
         }
       ],
       "answer": "200 - c",
-      "hint": "A $2 coin is 200 cents."
+      "hint": "A $2 coin is 200 cents.",
+      "tags": [
+        "AC9M3M06",
+        "MA2-AR-01"
+      ]
     },
     {
       "id": "maths.3.money.cents-in-dollars",
       "subject": "maths",
       "topic": "money",
       "level": "3",
-      "tags": [
-        "AC9M3M06",
-        "MA2-AR-01"
-      ],
       "prompt": "How many cents are there in ${d}?",
       "vars": [
         {
@@ -1059,17 +1055,17 @@
           "max": "9"
         }
       ],
-      "answer": "d * 100"
+      "answer": "d * 100",
+      "tags": [
+        "AC9M3M06",
+        "MA2-AR-01"
+      ]
     },
     {
       "id": "maths.3.angles.right-angles-in-a-turn",
       "subject": "maths",
       "topic": "angles",
       "level": "3",
-      "tags": [
-        "AC9M3M05",
-        "MA2-GM-03"
-      ],
       "prompt": "How many right angles are there in a {turn} turn?",
       "vars": [
         {
@@ -1083,17 +1079,17 @@
         }
       ],
       "answer": "turn == 'half' ? 2 : turn == 'three-quarter' ? 3 : 4",
-      "hint": "A quarter turn is one right angle."
+      "hint": "A quarter turn is one right angle.",
+      "tags": [
+        "AC9M3M05",
+        "MA2-GM-03"
+      ]
     },
     {
       "id": "maths.3.angles.against-a-right-angle",
       "subject": "maths",
       "topic": "angles",
       "level": "3",
-      "tags": [
-        "AC9M3M05",
-        "MA2-GM-03"
-      ],
       "prompt": "Is this angle bigger or smaller than a right angle?",
       "vars": [
         {
@@ -1120,17 +1116,17 @@
       "figure": {
         "kind": "angle",
         "degrees": "d"
-      }
+      },
+      "tags": [
+        "AC9M3M05",
+        "MA2-GM-03"
+      ]
     },
     {
       "id": "maths.3.angles.is-a-right-angle",
       "subject": "maths",
       "topic": "angles",
       "level": "3",
-      "tags": [
-        "AC9M3M05",
-        "MA2-GM-03"
-      ],
       "prompt": "True or false: this is a right angle.",
       "vars": [
         {
@@ -1167,17 +1163,17 @@
       "figure": {
         "kind": "angle",
         "degrees": "d"
-      }
+      },
+      "tags": [
+        "AC9M3M05",
+        "MA2-GM-03"
+      ]
     },
     {
       "id": "maths.3.shapes.net-folds-to",
       "subject": "maths",
       "topic": "shapes",
       "level": "3",
-      "tags": [
-        "AC9M3SP01",
-        "MA2-3DS-01"
-      ],
       "prompt": "Which shape would this net fold up to make?",
       "vars": [
         {
@@ -1207,17 +1203,17 @@
         "kind": "solid",
         "solid": "shape",
         "view": "'net'"
-      }
+      },
+      "tags": [
+        "AC9M3SP01",
+        "MA2-3DS-01"
+      ]
     },
     {
       "id": "maths.3.shapes.net-faces",
       "subject": "maths",
       "topic": "shapes",
       "level": "3",
-      "tags": [
-        "AC9M3SP01",
-        "MA2-3DS-01"
-      ],
       "prompt": "This is the net of a shape. How many faces will it have when it is folded up?",
       "vars": [
         {
@@ -1237,17 +1233,17 @@
         "kind": "solid",
         "solid": "shape",
         "view": "'net'"
-      }
+      },
+      "tags": [
+        "AC9M3SP01",
+        "MA2-3DS-01"
+      ]
     },
     {
       "id": "maths.3.shapes.triangle-face",
       "subject": "maths",
       "topic": "shapes",
       "level": "3",
-      "tags": [
-        "AC9M3SP01",
-        "MA2-3DS-01"
-      ],
       "prompt": "True or false: this shape has a face shaped like a triangle.",
       "vars": [
         {
@@ -1267,17 +1263,17 @@
         "kind": "solid",
         "solid": "shape",
         "view": "'object'"
-      }
+      },
+      "tags": [
+        "AC9M3SP01",
+        "MA2-3DS-01"
+      ]
     },
     {
       "id": "maths.3.position.grid-reference",
       "subject": "maths",
       "topic": "position",
       "level": "3",
-      "tags": [
-        "AC9M3SP02",
-        "MA2-GM-01"
-      ],
       "prompt": "What square is the dot in?",
       "vars": [
         {
@@ -1345,17 +1341,17 @@
         "rows": "rws",
         "axisLabels": "'letters'",
         "onLines": "false"
-      }
+      },
+      "tags": [
+        "AC9M3SP02",
+        "MA2-GM-01"
+      ]
     },
     {
       "id": "maths.3.position.grid-direction",
       "subject": "maths",
       "topic": "position",
       "level": "3",
-      "tags": [
-        "AC9M3SP02",
-        "MA2-GM-01"
-      ],
       "prompt": "Which square is {dir} the dot?",
       "vars": [
         {
@@ -1464,17 +1460,17 @@
         "rows": "rws",
         "axisLabels": "'letters'",
         "onLines": "false"
-      }
+      },
+      "tags": [
+        "AC9M3SP02",
+        "MA2-GM-01"
+      ]
     },
     {
       "id": "maths.3.chance.more-likely",
       "subject": "maths",
       "topic": "chance",
       "level": "3",
-      "tags": [
-        "AC9M3P01",
-        "MA2-CHAN-01"
-      ],
       "prompt": "A bag holds {r} red and {b} blue counters. True or false: you are more likely to pull out red.",
       "vars": [
         {
@@ -1493,17 +1489,17 @@
       "constraints": [
         "r != b"
       ],
-      "answer": "r > b"
+      "answer": "r > b",
+      "tags": [
+        "AC9M3P01",
+        "MA2-CHAN-01"
+      ]
     },
     {
       "id": "maths.3.chance.which-colour",
       "subject": "maths",
       "topic": "chance",
       "level": "3",
-      "tags": [
-        "AC9M3P01",
-        "MA2-CHAN-01"
-      ],
       "prompt": "A bag holds {r} red counters and {b} blue counters. Which colour are you more likely to pull out?",
       "vars": [
         {
@@ -1530,17 +1526,17 @@
           "'red'",
           "'blue'"
         ]
-      }
+      },
+      "tags": [
+        "AC9M3P01",
+        "MA2-CHAN-01"
+      ]
     },
     {
       "id": "maths.3.chance.spinner-uneven",
       "subject": "maths",
       "topic": "chance",
       "level": "3",
-      "tags": [
-        "AC9M3P01",
-        "MA2-CHAN-01"
-      ],
       "prompt": "The parts are different sizes. Where is the arrow more likely to stop?",
       "vars": [
         {
@@ -1596,17 +1592,17 @@
         "kind": "spinner",
         "sectors": "g == 1 ? (sh + ',' + p + ',' + (pl - p)) : (p + ',' + (sh - p) + ',' + pl)",
         "fills": "g == 1 ? 'a,b,b' : 'a,a,b'"
-      }
+      },
+      "tags": [
+        "AC9M3P01",
+        "MA2-CHAN-01"
+      ]
     },
     {
       "id": "maths.3.chance.experiment-rolls",
       "subject": "maths",
       "topic": "chance",
       "level": "3",
-      "tags": [
-        "AC9M3P02",
-        "MA2-CHAN-01"
-      ],
       "prompt": "A dice was rolled {t} times. It landed on an even number {e} times. How many were odd?",
       "vars": [
         {
@@ -1624,17 +1620,17 @@
         }
       ],
       "answer": "t - e",
-      "hint": "Every roll was either even or odd."
+      "hint": "Every roll was either even or odd.",
+      "tags": [
+        "AC9M3P02",
+        "MA2-CHAN-01"
+      ]
     },
     {
       "id": "maths.3.chance.most-likely-of-three",
       "subject": "maths",
       "topic": "chance",
       "level": "3",
-      "tags": [
-        "AC9M3P01",
-        "MA2-CHAN-01"
-      ],
       "prompt": "A bag holds {r} red, {b} blue and {g} green counters. Which colour are you most likely to take?",
       "vars": [
         {
@@ -1671,17 +1667,17 @@
           "'green'"
         ]
       },
-      "hint": "The colour with the most counters is the one you are most likely to take."
+      "hint": "The colour with the most counters is the one you are most likely to take.",
+      "tags": [
+        "AC9M3P01",
+        "MA2-CHAN-01"
+      ]
     },
     {
       "id": "maths.3.data.survey-total",
       "subject": "maths",
       "topic": "data",
       "level": "3",
-      "tags": [
-        "AC9M3ST01",
-        "MA2-DATA-01"
-      ],
       "prompt": "In a survey {a} children chose apples, {b} bananas and {c} cherries. How many were surveyed?",
       "vars": [
         {
@@ -1703,17 +1699,17 @@
           "max": "25"
         }
       ],
-      "answer": "a + b + c"
+      "answer": "a + b + c",
+      "tags": [
+        "AC9M3ST01",
+        "MA2-DATA-01"
+      ]
     },
     {
       "id": "maths.3.data.dot-graph",
       "subject": "maths",
       "topic": "data",
       "level": "3",
-      "tags": [
-        "AC9M3ST02",
-        "MA2-DATA-02"
-      ],
       "prompt": "This graph shows how many goals each child scored. How many goals did {who} score?",
       "vars": [
         {
@@ -1758,19 +1754,19 @@
         "kind": "bar",
         "values": "eve + ',' + kit + ',' + rex + ',' + zoe",
         "labels": "'Eve,Kit,Rex,Zoe'",
-        "style": "'dot'",
-        "scale": "1"
-      }
+        "scale": "1",
+        "style": "'dot'"
+      },
+      "tags": [
+        "AC9M3ST02",
+        "MA2-DATA-02"
+      ]
     },
     {
       "id": "maths.3.data.graph-scale-five",
       "subject": "maths",
       "topic": "data",
       "level": "3",
-      "tags": [
-        "AC9M3ST02",
-        "MA2-DATA-02"
-      ],
       "prompt": "This graph shows how many stickers each child has. How many stickers do they have altogether?",
       "vars": [
         {
@@ -1798,19 +1794,19 @@
         "kind": "bar",
         "values": "a * 5 + ',' + b * 5 + ',' + c * 5",
         "labels": "'Ada,Kai,Leo'",
-        "style": "'column'",
-        "scale": "5"
-      }
+        "scale": "5",
+        "style": "'column'"
+      },
+      "tags": [
+        "AC9M3ST02",
+        "MA2-DATA-02"
+      ]
     },
     {
       "id": "maths.3.data.graph-who",
       "subject": "maths",
       "topic": "data",
       "level": "3",
-      "tags": [
-        "AC9M3ST02",
-        "MA2-DATA-02"
-      ],
       "prompt": "This graph shows how many books each child read. Who read {v} {books}?",
       "vars": [
         {
@@ -1878,19 +1874,19 @@
         "kind": "bar",
         "values": "amy + ',' + ben + ',' + joe + ',' + sam",
         "labels": "'Amy,Ben,Joe,Sam'",
-        "style": "'column'",
-        "scale": "1"
-      }
+        "scale": "1",
+        "style": "'column'"
+      },
+      "tags": [
+        "AC9M3ST02",
+        "MA2-DATA-02"
+      ]
     },
     {
       "id": "maths.3.data.picture-difference",
       "subject": "maths",
       "topic": "data",
       "level": "3",
-      "tags": [
-        "AC9M3ST02",
-        "MA2-DATA-02"
-      ],
       "prompt": "Each picture stands for one shell. How many more shells did {a} find than {b}?",
       "vars": [
         {
@@ -1969,7 +1965,11 @@
         "counts": "mia + ',' + zac + ',' + ivy",
         "labels": "'Mia,Zac,Ivy'",
         "key": "1"
-      }
+      },
+      "tags": [
+        "AC9M3ST02",
+        "MA2-DATA-02"
+      ]
     }
   ]
 }

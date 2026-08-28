@@ -58,7 +58,7 @@ struct DigestTests {
     @Test("every template the corpus hashes is present in the vendored packs")
     func vendoredPacksCoverTheCorpus() {
         let ids = Set(Fixtures.templates.map(\.id))
-        #expect(ids.count == 505, "expected the 505 shipped templates, got \(ids.count)")
+        #expect(ids.count == 507, "expected the 507 shipped templates, got \(ids.count)")
 
         for pack in Fixtures.packs {
             let digest = Fixtures.digest(set: "\(pack.subject).\(pack.level)")
@@ -68,7 +68,7 @@ struct DigestTests {
         }
     }
 
-    // MARK: - The corpus: 505 templates, 100 draws each
+    // MARK: - The corpus: 507 templates, 100 draws each
 
     /// Every shipped template drawn a hundred times on the seed the contract
     /// names, hashed, and compared against the oracle.
@@ -104,6 +104,6 @@ struct DigestTests {
             }
         }
 
-        #expect(checked == 505, "expected 505 templates, hashed \(checked)")
+        #expect(checked == 507, "expected 507 templates, hashed \(checked)")
     }
 }

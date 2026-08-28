@@ -8,10 +8,6 @@
       "subject": "english",
       "topic": "word roots",
       "level": "5",
-      "tags": [
-        "AC9E5LY09",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Which word has the same root as {target}?",
       "vars": [
         {
@@ -80,17 +76,17 @@
           "(f + d2) % 6 == 0 ? (e2 == 0 ? 'transport' : e2 == 1 ? 'export' : e2 == 2 ? 'import' : 'report') : (f + d2) % 6 == 1 ? (e2 == 0 ? 'predict' : e2 == 1 ? 'verdict' : e2 == 2 ? 'dictate' : 'contradict') : (f + d2) % 6 == 2 ? (e2 == 0 ? 'inspect' : e2 == 1 ? 'respect' : e2 == 2 ? 'suspect' : 'spectator') : (f + d2) % 6 == 3 ? (e2 == 0 ? 'construct' : e2 == 1 ? 'instruct' : e2 == 2 ? 'destruct' : 'structure') : (f + d2) % 6 == 4 ? (e2 == 0 ? 'reject' : e2 == 1 ? 'inject' : e2 == 2 ? 'project' : 'eject') : (e2 == 0 ? 'describe' : e2 == 1 ? 'subscribe' : e2 == 2 ? 'inscribe' : 'prescribe')"
         ]
       },
-      "hint": "Look for the part of the word that stays the same and means the same thing."
+      "hint": "Look for the part of the word that stays the same and means the same thing.",
+      "tags": [
+        "AC9E5LY09",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.5.word-roots.which-comes-from-root",
       "subject": "english",
       "topic": "word roots",
       "level": "5",
-      "tags": [
-        "AC9E5LY09",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Which word comes from a root meaning to {meaning}?",
       "vars": [
         {
@@ -152,17 +148,17 @@
           "(f + d2) % 6 == 0 ? (e2 == 0 ? 'transport' : e2 == 1 ? 'export' : e2 == 2 ? 'import' : 'report') : (f + d2) % 6 == 1 ? (e2 == 0 ? 'predict' : e2 == 1 ? 'verdict' : e2 == 2 ? 'dictate' : 'contradict') : (f + d2) % 6 == 2 ? (e2 == 0 ? 'inspect' : e2 == 1 ? 'respect' : e2 == 2 ? 'suspect' : 'spectator') : (f + d2) % 6 == 3 ? (e2 == 0 ? 'construct' : e2 == 1 ? 'instruct' : e2 == 2 ? 'destruct' : 'structure') : (f + d2) % 6 == 4 ? (e2 == 0 ? 'reject' : e2 == 1 ? 'inject' : e2 == 2 ? 'project' : 'eject') : (e2 == 0 ? 'describe' : e2 == 1 ? 'subscribe' : e2 == 2 ? 'inscribe' : 'prescribe')"
         ]
       },
-      "hint": "The root inside each word shows which family it belongs to."
+      "hint": "The root inside each word shows which family it belongs to.",
+      "tags": [
+        "AC9E5LY09",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.5.word-roots.root-meaning",
       "subject": "english",
       "topic": "word roots",
       "level": "5",
-      "tags": [
-        "AC9E5LY09",
-        "EN3-SPELL-01"
-      ],
       "prompt": "What does the root in {word} mean?",
       "vars": [
         {
@@ -212,17 +208,17 @@
           "(f + d2) % 6 == 0 ? \"carry\" : (f + d2) % 6 == 1 ? \"say\" : (f + d2) % 6 == 2 ? \"look\" : (f + d2) % 6 == 3 ? \"build\" : (f + d2) % 6 == 4 ? \"throw\" : \"write\""
         ]
       },
-      "hint": "Think about what all the words in that family have in common."
+      "hint": "Think about what all the words in that family have in common.",
+      "tags": [
+        "AC9E5LY09",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.5.word-roots.write-root",
       "subject": "english",
       "topic": "word roots",
       "level": "5",
-      "tags": [
-        "AC9E5LY09",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Write the root inside {word}.",
       "vars": [
         {
@@ -253,17 +249,17 @@
       ],
       "answer": "answer",
       "answerType": "text",
-      "hint": "Look for the meaningful chunk of letters shared by that word family."
+      "hint": "Look for the meaningful chunk of letters shared by that word family.",
+      "tags": [
+        "AC9E5LY09",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.5.word-roots.write-by-clue",
       "subject": "english",
       "topic": "word roots",
       "level": "5",
-      "tags": [
-        "AC9E5LY09",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Write the word that {clue}.",
       "vars": [
         {
@@ -285,17 +281,17 @@
       ],
       "answer": "answer",
       "answerType": "text",
-      "hint": "Break the clue down into the single action it describes."
+      "hint": "Break the clue down into the single action it describes.",
+      "tags": [
+        "AC9E5LY09",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.5.prefixes-and-suffixes.write-able",
       "subject": "english",
       "topic": "prefixes and suffixes",
       "level": "5",
-      "tags": [
-        "AC9E5LY10",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Write the adjective made by adding -able to {word}.",
       "vars": [
         {
@@ -312,17 +308,17 @@
       ],
       "answer": "word + 'able'",
       "answerType": "text",
-      "hint": "Add -able to the end of the word."
+      "hint": "Add -able to the end of the word.",
+      "tags": [
+        "AC9E5LY10",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.5.prefixes-and-suffixes.write-ness",
       "subject": "english",
       "topic": "prefixes and suffixes",
       "level": "5",
-      "tags": [
-        "AC9E5LY10",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Write the noun made by adding -ness to {word}.",
       "vars": [
         {
@@ -339,17 +335,17 @@
       ],
       "answer": "word + 'ness'",
       "answerType": "text",
-      "hint": "Add -ness to the end of the word."
+      "hint": "Add -ness to the end of the word.",
+      "tags": [
+        "AC9E5LY10",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.5.prefixes-and-suffixes.which-can-be-done",
       "subject": "english",
       "topic": "prefixes and suffixes",
       "level": "5",
-      "tags": [
-        "AC9E5LY10",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Which word describes something that can be {word}ed?",
       "vars": [
         {
@@ -393,17 +389,17 @@
           "((i + d2) % 6 == 0 ? 'afford' : (i + d2) % 6 == 1 ? 'accept' : (i + d2) % 6 == 2 ? 'adjust' : (i + d2) % 6 == 3 ? 'avoid' : (i + d2) % 6 == 4 ? 'prevent' : 'defend') + 'able'"
         ]
       },
-      "hint": "Add -able to the end of the word."
+      "hint": "Add -able to the end of the word.",
+      "tags": [
+        "AC9E5LY10",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.5.prefixes-and-suffixes.which-is-the-state",
       "subject": "english",
       "topic": "prefixes and suffixes",
       "level": "5",
-      "tags": [
-        "AC9E5LY10",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Which word means the state of being {word}?",
       "vars": [
         {
@@ -447,17 +443,17 @@
           "((i + d2) % 6 == 0 ? 'kind' : (i + d2) % 6 == 1 ? 'sad' : (i + d2) % 6 == 2 ? 'dark' : (i + d2) % 6 == 3 ? 'weak' : (i + d2) % 6 == 4 ? 'calm' : 'quiet') + 'ness'"
         ]
       },
-      "hint": "Add -ness to the end of the word."
+      "hint": "Add -ness to the end of the word.",
+      "tags": [
+        "AC9E5LY10",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.5.homophones.stationary-stationery",
       "subject": "english",
       "topic": "homophones",
       "level": "5",
-      "tags": [
-        "AC9E5LY08",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Which word completes the sentence? {sentence}",
       "vars": [
         {
@@ -487,17 +483,17 @@
           "1 - j == 0 ? 'stationary' : 'stationery'"
         ]
       },
-      "hint": "One of these words means not moving, and the other is paper and pens for writing."
+      "hint": "One of these words means not moving, and the other is paper and pens for writing.",
+      "tags": [
+        "AC9E5LY08",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.5.homophones.principal-principle",
       "subject": "english",
       "topic": "homophones",
       "level": "5",
-      "tags": [
-        "AC9E5LY08",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Which word completes the sentence? {sentence}",
       "vars": [
         {
@@ -527,17 +523,17 @@
           "1 - j == 0 ? 'principal' : 'principle'"
         ]
       },
-      "hint": "One of these words is the head of a school, and the other is a rule you believe in."
+      "hint": "One of these words is the head of a school, and the other is a rule you believe in.",
+      "tags": [
+        "AC9E5LY08",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.5.homophones.council-counsel",
       "subject": "english",
       "topic": "homophones",
       "level": "5",
-      "tags": [
-        "AC9E5LY08",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Which word completes the sentence? {sentence}",
       "vars": [
         {
@@ -567,17 +563,17 @@
           "1 - j == 0 ? 'council' : 'counsel'"
         ]
       },
-      "hint": "One of these words is a group that governs, and the other is advice."
+      "hint": "One of these words is a group that governs, and the other is advice.",
+      "tags": [
+        "AC9E5LY08",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.5.homophones.affect-effect",
       "subject": "english",
       "topic": "homophones",
       "level": "5",
-      "tags": [
-        "AC9E5LY08",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Which word completes the sentence? {sentence}",
       "vars": [
         {
@@ -607,17 +603,17 @@
           "1 - j == 0 ? 'affect' : 'effect'"
         ]
       },
-      "hint": "One of these words is usually a verb meaning to change something, and the other is usually a noun for a result."
+      "hint": "One of these words is usually a verb meaning to change something, and the other is usually a noun for a result.",
+      "tags": [
+        "AC9E5LY08",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.5.figurative-language.identify",
       "subject": "english",
       "topic": "figurative language",
       "level": "5",
-      "tags": [
-        "AC9E5LE04",
-        "EN3-UARL-01"
-      ],
       "prompt": "Which one is this? {sentence}",
       "vars": [
         {
@@ -655,17 +651,17 @@
           "(type + 2) % 3 == 0 ? \"simile\" : (type + 2) % 3 == 1 ? \"metaphor\" : \"personification\""
         ]
       },
-      "hint": "A simile uses like or as, a metaphor says one thing is another, and personification gives human actions to something that is not human."
+      "hint": "A simile uses like or as, a metaphor says one thing is another, and personification gives human actions to something that is not human.",
+      "tags": [
+        "AC9E5LE04",
+        "EN3-UARL-01"
+      ]
     },
     {
       "id": "english.5.figurative-language.what-signals-it",
       "subject": "english",
       "topic": "figurative language",
       "level": "5",
-      "tags": [
-        "AC9E5LE04",
-        "EN3-UARL-01"
-      ],
       "prompt": "What makes this sentence figurative? {sentence}",
       "vars": [
         {
@@ -703,17 +699,17 @@
           "(type + 2) % 3 == 0 ? \"the word like or as\" : (type + 2) % 3 == 1 ? \"saying one thing is another\" : \"giving human actions to something that is not human\""
         ]
       },
-      "hint": "A simile uses like or as, a metaphor says one thing is another, and personification gives human actions to something that is not human."
+      "hint": "A simile uses like or as, a metaphor says one thing is another, and personification gives human actions to something that is not human.",
+      "tags": [
+        "AC9E5LE04",
+        "EN3-UARL-01"
+      ]
     },
     {
       "id": "english.5.figurative-language.match-the-example",
       "subject": "english",
       "topic": "figurative language",
       "level": "5",
-      "tags": [
-        "AC9E5LE04",
-        "EN3-UARL-01"
-      ],
       "prompt": "Which sentence is an example of {label}?",
       "vars": [
         {
@@ -763,17 +759,17 @@
           "(type + 2) % 3 == 0 ? (i2 == 0 ? \"The wind roared like a lion through the valley.\" : i2 == 1 ? \"Her smile was as bright as the morning sun.\" : i2 == 2 ? \"He ran as fast as a cheetah chasing its prey.\" : i2 == 3 ? \"The old car rattled like a bag of tin cans.\" : \"Her voice was as smooth as silk.\") : (type + 2) % 3 == 1 ? (i2 == 0 ? \"The classroom was a zoo during the fire drill.\" : i2 == 1 ? \"Time is a thief that steals our best moments.\" : i2 == 2 ? \"The stars were diamonds scattered across the sky.\" : i2 == 3 ? \"Her eyes were pools of sparkling water.\" : \"The kitchen was a disaster zone after the party.\") : (i2 == 0 ? \"The wind whispered secrets through the trees.\" : i2 == 1 ? \"The old house groaned when the storm rolled in.\" : i2 == 2 ? \"The sun smiled down on the sleepy village.\" : i2 == 3 ? \"The angry clouds glared at the picnic below.\" : \"The leaves danced across the playground.\")"
         ]
       },
-      "hint": "A simile uses like or as, a metaphor says one thing is another, and personification gives human actions to something that is not human."
+      "hint": "A simile uses like or as, a metaphor says one thing is another, and personification gives human actions to something that is not human.",
+      "tags": [
+        "AC9E5LE04",
+        "EN3-UARL-01"
+      ]
     },
     {
       "id": "english.5.figurative-language.same-device",
       "subject": "english",
       "topic": "figurative language",
       "level": "5",
-      "tags": [
-        "AC9E5LE04",
-        "EN3-UARL-01"
-      ],
       "prompt": "Same figurative language as this one? {sentence}",
       "vars": [
         {
@@ -829,17 +825,17 @@
           "(type + 2) % 3 == 0 ? (i2 == 0 ? \"The wind roared like a lion through the valley.\" : i2 == 1 ? \"Her smile was as bright as the morning sun.\" : i2 == 2 ? \"He ran as fast as a cheetah chasing its prey.\" : i2 == 3 ? \"The old car rattled like a bag of tin cans.\" : \"Her voice was as smooth as silk.\") : (type + 2) % 3 == 1 ? (i2 == 0 ? \"The classroom was a zoo during the fire drill.\" : i2 == 1 ? \"Time is a thief that steals our best moments.\" : i2 == 2 ? \"The stars were diamonds scattered across the sky.\" : i2 == 3 ? \"Her eyes were pools of sparkling water.\" : \"The kitchen was a disaster zone after the party.\") : (i2 == 0 ? \"The wind whispered secrets through the trees.\" : i2 == 1 ? \"The old house groaned when the storm rolled in.\" : i2 == 2 ? \"The sun smiled down on the sleepy village.\" : i2 == 3 ? \"The angry clouds glared at the picnic below.\" : \"The leaves danced across the playground.\")"
         ]
       },
-      "hint": "Look for what the sentences do, not just what they are about."
+      "hint": "Look for what the sentences do, not just what they are about.",
+      "tags": [
+        "AC9E5LE04",
+        "EN3-UARL-01"
+      ]
     },
     {
       "id": "english.5.figurative-language.eliminate-one",
       "subject": "english",
       "topic": "figurative language",
       "level": "5",
-      "tags": [
-        "AC9E5LE04",
-        "EN3-UARL-01"
-      ],
       "prompt": "This is not a {wrongLabel}. What is it? {sentence}",
       "vars": [
         {
@@ -895,17 +891,17 @@
           "(type + 2) % 3 == 0 ? \"simile\" : (type + 2) % 3 == 1 ? \"metaphor\" : \"personification\""
         ]
       },
-      "hint": "A simile uses like or as, a metaphor says one thing is another, and personification gives human actions to something that is not human."
+      "hint": "A simile uses like or as, a metaphor says one thing is another, and personification gives human actions to something that is not human.",
+      "tags": [
+        "AC9E5LE04",
+        "EN3-UARL-01"
+      ]
     },
     {
       "id": "english.5.spelling-patterns.write-plural",
       "subject": "english",
       "topic": "spelling patterns",
       "level": "5",
-      "tags": [
-        "AC9E5LY08",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Write the plural of {word}.",
       "vars": [
         {
@@ -927,17 +923,17 @@
       ],
       "answer": "answer",
       "answerType": "text",
-      "hint": "Change the f or fe to v, then add -es."
+      "hint": "Change the f or fe to v, then add -es.",
+      "tags": [
+        "AC9E5LY08",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.5.spelling-patterns.write-singular",
       "subject": "english",
       "topic": "spelling patterns",
       "level": "5",
-      "tags": [
-        "AC9E5LY08",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Write the singular of {word}.",
       "vars": [
         {
@@ -959,17 +955,17 @@
       ],
       "answer": "answer",
       "answerType": "text",
-      "hint": "Change the v back to f or fe."
+      "hint": "Change the v back to f or fe.",
+      "tags": [
+        "AC9E5LY08",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.5.spelling-patterns.which-is-plural",
       "subject": "english",
       "topic": "spelling patterns",
       "level": "5",
-      "tags": [
-        "AC9E5LY08",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Which word is the plural of {word}?",
       "vars": [
         {
@@ -1013,17 +1009,17 @@
           "(i + d2) % 6 == 0 ? 'leaves' : (i + d2) % 6 == 1 ? 'wolves' : (i + d2) % 6 == 2 ? 'thieves' : (i + d2) % 6 == 3 ? 'lives' : (i + d2) % 6 == 4 ? 'shelves' : 'wives'"
         ]
       },
-      "hint": "Change the f or fe to v, then add -es."
+      "hint": "Change the f or fe to v, then add -es.",
+      "tags": [
+        "AC9E5LY08",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.5.spelling-patterns.same-silent-pattern",
       "subject": "english",
       "topic": "spelling patterns",
       "level": "5",
-      "tags": [
-        "AC9E5LY08",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Which word has the same silent letter pattern as {target}?",
       "vars": [
         {
@@ -1092,7 +1088,11 @@
           "(f + d2) % 6 == 0 ? (e2 == 0 ? 'knee' : e2 == 1 ? 'knife' : e2 == 2 ? 'knot' : e2 == 3 ? 'knock' : e2 == 4 ? 'know' : 'knight') : (f + d2) % 6 == 1 ? (e2 == 0 ? 'wrist' : e2 == 1 ? 'wrong' : e2 == 2 ? 'write' : e2 == 3 ? 'wreck' : e2 == 4 ? 'wrap' : 'wrinkle') : (f + d2) % 6 == 2 ? (e2 == 0 ? 'thumb' : e2 == 1 ? 'climb' : e2 == 2 ? 'comb' : e2 == 3 ? 'lamb' : e2 == 4 ? 'limb' : 'crumb') : (f + d2) % 6 == 3 ? (e2 == 0 ? 'gnome' : e2 == 1 ? 'gnat' : e2 == 2 ? 'sign' : e2 == 3 ? 'design' : e2 == 4 ? 'gnaw' : 'foreign') : (f + d2) % 6 == 4 ? (e2 == 0 ? 'listen' : e2 == 1 ? 'castle' : e2 == 2 ? 'often' : e2 == 3 ? 'fasten' : e2 == 4 ? 'soften' : 'hasten') : (e2 == 0 ? 'walk' : e2 == 1 ? 'talk' : e2 == 2 ? 'half' : e2 == 3 ? 'yolk' : e2 == 4 ? 'chalk' : 'folk')"
         ]
       },
-      "hint": "Look for the same silent letter combination."
+      "hint": "Look for the same silent letter combination.",
+      "tags": [
+        "AC9E5LY08",
+        "EN3-SPELL-01"
+      ]
     }
   ]
 }

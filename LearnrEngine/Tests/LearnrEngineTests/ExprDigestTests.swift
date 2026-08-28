@@ -182,11 +182,12 @@ struct ExprDigestTests {
             checked += 1
         }
 
-        #expect(checked == 505, "expected all 505 templates, hashed \(checked)")
-        // The figure-bearing ones were the 127 that L8 blocked. Counted rather
-        // than assumed, so that the day one is added or removed this says so
-        // instead of the coverage quietly changing.
-        #expect(withFigure == 127, "expected 127 figure-bearing templates, saw \(withFigure)")
+        #expect(checked == 507, "expected all 507 templates, hashed \(checked)")
+        // The figure-bearing ones were the 127 that L8 blocked, and are 129
+        // since the two `timeline` templates landed with the twelfth kind
+        // (L21). Counted rather than assumed, so that the day one is added or
+        // removed this says so instead of the coverage quietly changing.
+        #expect(withFigure == 129, "expected 129 figure-bearing templates, saw \(withFigure)")
     }
 
     /// **The half that asserts rather than records.** Everywhere else the

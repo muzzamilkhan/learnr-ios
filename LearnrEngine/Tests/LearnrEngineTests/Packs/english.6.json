@@ -8,10 +8,6 @@
       "subject": "english",
       "topic": "word roots",
       "level": "6",
-      "tags": [
-        "AC9E6LY09",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Which word has the same root as {target}?",
       "vars": [
         {
@@ -80,17 +76,17 @@
           "(f + d2) % 6 == 0 ? (i2 == 0 ? 'transport' : i2 == 1 ? 'import' : i2 == 2 ? 'export' : 'portable') : (f + d2) % 6 == 1 ? (i2 == 0 ? 'photograph' : i2 == 1 ? 'autograph' : i2 == 2 ? 'paragraph' : 'graphic') : (f + d2) % 6 == 2 ? (i2 == 0 ? 'aquarium' : i2 == 1 ? 'aquatic' : i2 == 2 ? 'aqueduct' : 'aquamarine') : (f + d2) % 6 == 3 ? (i2 == 0 ? 'telephone' : i2 == 1 ? 'television' : i2 == 2 ? 'telescope' : 'telepathy') : (f + d2) % 6 == 4 ? (i2 == 0 ? 'scribble' : i2 == 1 ? 'ascribe' : i2 == 2 ? 'inscribe' : 'describe') : (i2 == 0 ? 'dictionary' : i2 == 1 ? 'dictator' : i2 == 2 ? 'predict' : 'verdict')"
         ]
       },
-      "hint": "Look for the part of the word that stays the same and means the same thing."
+      "hint": "Look for the part of the word that stays the same and means the same thing.",
+      "tags": [
+        "AC9E6LY09",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.6.word-roots.which-root-is-in",
       "subject": "english",
       "topic": "word roots",
       "level": "6",
-      "tags": [
-        "AC9E6LY09",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Which root is inside the word {word}?",
       "vars": [
         {
@@ -140,17 +136,17 @@
           "(f + d2) % 6 == 0 ? \"port\" : (f + d2) % 6 == 1 ? \"graph\" : (f + d2) % 6 == 2 ? \"aqua\" : (f + d2) % 6 == 3 ? \"tele\" : (f + d2) % 6 == 4 ? \"scrib\" : \"dict\""
         ]
       },
-      "hint": "Look for the meaningful chunk of letters shared by that word family."
+      "hint": "Look for the meaningful chunk of letters shared by that word family.",
+      "tags": [
+        "AC9E6LY09",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.6.word-roots.root-meaning",
       "subject": "english",
       "topic": "word roots",
       "level": "6",
-      "tags": [
-        "AC9E6LY09",
-        "EN3-SPELL-01"
-      ],
       "prompt": "What does the root {root} mean?",
       "vars": [
         {
@@ -194,17 +190,17 @@
           "(i + d2) % 4 == 0 ? \"carry\" : (i + d2) % 4 == 1 ? \"water\" : (i + d2) % 4 == 2 ? \"far\" : \"say\""
         ]
       },
-      "hint": "Think about what all the words built from that root have in common."
+      "hint": "Think about what all the words built from that root have in common.",
+      "tags": [
+        "AC9E6LY09",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.6.word-roots.write-root",
       "subject": "english",
       "topic": "word roots",
       "level": "6",
-      "tags": [
-        "AC9E6LY09",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Write the root inside {word}.",
       "vars": [
         {
@@ -236,17 +232,17 @@
       ],
       "answer": "answer",
       "answerType": "text",
-      "hint": "Look for the meaningful chunk of letters shared by that word family."
+      "hint": "Look for the meaningful chunk of letters shared by that word family.",
+      "tags": [
+        "AC9E6LY09",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.6.word-roots.write-meaning",
       "subject": "english",
       "topic": "word roots",
       "level": "6",
-      "tags": [
-        "AC9E6LY09",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Write what the root in {word} means.",
       "vars": [
         {
@@ -274,17 +270,17 @@
       ],
       "answer": "answer",
       "answerType": "text",
-      "hint": "Think about what all the words built from that root have in common."
+      "hint": "Think about what all the words built from that root have in common.",
+      "tags": [
+        "AC9E6LY09",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.6.word-classes.identify-tense",
       "subject": "english",
       "topic": "word classes",
       "level": "6",
-      "tags": [
-        "AC9E6LA06",
-        "EN3-CWT-01"
-      ],
       "prompt": "Which one is this? {sentence}",
       "vars": [
         {
@@ -322,17 +318,17 @@
           "(type + 2) % 3 == 0 ? \"past\" : (type + 2) % 3 == 1 ? \"present\" : \"future\""
         ]
       },
-      "hint": "Look at the verb group to see when the action happens."
+      "hint": "Look at the verb group to see when the action happens.",
+      "tags": [
+        "AC9E6LA06",
+        "EN3-CWT-01"
+      ]
     },
     {
       "id": "english.6.word-classes.same-tense",
       "subject": "english",
       "topic": "word classes",
       "level": "6",
-      "tags": [
-        "AC9E6LA06",
-        "EN3-CWT-01"
-      ],
       "prompt": "Which sentence is in the same tense as this one? {sentence}",
       "vars": [
         {
@@ -388,17 +384,17 @@
           "(type + 2) % 3 == 0 ? (i2 == 0 ? \"The chef cooked dinner for the whole family.\" : i2 == 1 ? \"She had finished her homework before dinner.\" : i2 == 2 ? \"The dog was barking loudly all morning.\" : \"They walked to the park after school.\") : (type + 2) % 3 == 1 ? (i2 == 0 ? \"The chef cooks dinner for the whole family.\" : i2 == 1 ? \"She is finishing her homework before dinner.\" : i2 == 2 ? \"The dog barks loudly every morning.\" : \"They walk to the park after school.\") : (i2 == 0 ? \"The chef will cook dinner for the whole family.\" : i2 == 1 ? \"She will finish her homework before dinner.\" : i2 == 2 ? \"The dog will bark loudly tomorrow morning.\" : \"They will walk to the park after school.\")"
         ]
       },
-      "hint": "Look at what each verb group is doing, not just what the sentence is about."
+      "hint": "Look at what each verb group is doing, not just what the sentence is about.",
+      "tags": [
+        "AC9E6LA06",
+        "EN3-CWT-01"
+      ]
     },
     {
       "id": "english.6.word-classes.which-is-adverb",
       "subject": "english",
       "topic": "word classes",
       "level": "6",
-      "tags": [
-        "AC9E6LA06",
-        "EN3-CWT-01"
-      ],
       "prompt": "Which of these adverbs is used in this sentence? {sentence}",
       "vars": [
         {
@@ -442,17 +438,17 @@
           "(i + d2) % 5 == 0 ? \"beautifully\" : (i + d2) % 5 == 1 ? \"quietly\" : (i + d2) % 5 == 2 ? \"quickly\" : (i + d2) % 5 == 3 ? \"loudly\" : \"early\""
         ]
       },
-      "hint": "Find the word that describes how the action happens, and check it is the one used here."
+      "hint": "Find the word that describes how the action happens, and check it is the one used here.",
+      "tags": [
+        "AC9E6LA06",
+        "EN3-CWT-01"
+      ]
     },
     {
       "id": "english.6.word-classes.has-adverb",
       "subject": "english",
       "topic": "word classes",
       "level": "6",
-      "tags": [
-        "AC9E6LA06",
-        "EN3-CWT-01"
-      ],
       "prompt": "Does this sentence contain an adverb group? {sentence}",
       "vars": [
         {
@@ -476,17 +472,17 @@
         }
       ],
       "answer": "ok == 1",
-      "hint": "An adverb usually describes how, when or where something happens."
+      "hint": "An adverb usually describes how, when or where something happens.",
+      "tags": [
+        "AC9E6LA06",
+        "EN3-CWT-01"
+      ]
     },
     {
       "id": "english.6.figurative-language.identify",
       "subject": "english",
       "topic": "figurative language",
       "level": "6",
-      "tags": [
-        "AC9E6LA08",
-        "EN3-UARL-01"
-      ],
       "prompt": "Which one is this? {sentence}",
       "vars": [
         {
@@ -545,17 +541,17 @@
           "(type + d3) % 5 == 0 ? \"simile\" : (type + d3) % 5 == 1 ? \"metaphor\" : (type + d3) % 5 == 2 ? \"personification\" : (type + d3) % 5 == 3 ? \"idiom\" : \"hyperbole\""
         ]
       },
-      "hint": "A simile uses like or as, a metaphor says one thing is another, personification gives human actions to something not human, an idiom does not mean its literal words, and hyperbole is a wild exaggeration."
+      "hint": "A simile uses like or as, a metaphor says one thing is another, personification gives human actions to something not human, an idiom does not mean its literal words, and hyperbole is a wild exaggeration.",
+      "tags": [
+        "AC9E6LA08",
+        "EN3-UARL-01"
+      ]
     },
     {
       "id": "english.6.figurative-language.what-signals-it",
       "subject": "english",
       "topic": "figurative language",
       "level": "6",
-      "tags": [
-        "AC9E6LA08",
-        "EN3-UARL-01"
-      ],
       "prompt": "What makes this sentence figurative? {sentence}",
       "vars": [
         {
@@ -614,17 +610,17 @@
           "(type + d3) % 5 == 0 ? \"the word like or as\" : (type + d3) % 5 == 1 ? \"saying one thing is another thing\" : (type + d3) % 5 == 2 ? \"giving human actions to something that is not human\" : (type + d3) % 5 == 3 ? \"a saying whose words do not mean what they seem to say\" : \"a wild exaggeration not meant to be taken literally\""
         ]
       },
-      "hint": "A simile uses like or as, a metaphor says one thing is another, personification gives human actions to something not human, an idiom does not mean its literal words, and hyperbole is a wild exaggeration."
+      "hint": "A simile uses like or as, a metaphor says one thing is another, personification gives human actions to something not human, an idiom does not mean its literal words, and hyperbole is a wild exaggeration.",
+      "tags": [
+        "AC9E6LA08",
+        "EN3-UARL-01"
+      ]
     },
     {
       "id": "english.6.figurative-language.match-the-example",
       "subject": "english",
       "topic": "figurative language",
       "level": "6",
-      "tags": [
-        "AC9E6LA08",
-        "EN3-UARL-01"
-      ],
       "prompt": "Which sentence is an example of {label}?",
       "vars": [
         {
@@ -701,17 +697,17 @@
           "(type + d3) % 5 == 0 ? (i3 == 0 ? \"Her skin was as soft as a rose petal.\" : i3 == 1 ? \"He fought like a lion to win the match.\" : i3 == 2 ? \"The lake was as still as glass in the morning.\" : i3 == 3 ? \"She moved through the crowd like a shadow.\" : \"The ice was as cold as a winter night.\") : (type + d3) % 5 == 1 ? (i3 == 0 ? \"The library was a treasure chest of stories.\" : i3 == 1 ? \"His words were daggers to her pride.\" : i3 == 2 ? \"The playground was a battlefield.\" : i3 == 3 ? \"Her laughter was music in the house.\" : \"The city streets were rivers of moving cars.\") : (type + d3) % 5 == 2 ? (i3 == 0 ? \"The fireworks kissed the night sky.\" : i3 == 1 ? \"The old clock coughed out its final chime.\" : i3 == 2 ? \"The waves raced each other onto the shore.\" : i3 == 3 ? \"The garden gate creaked a complaint.\" : \"The storm clouds argued loudly overhead.\") : (type + d3) % 5 == 3 ? (i3 == 0 ? \"Grandpa says it is raining cats and dogs.\" : i3 == 1 ? \"By lunchtime the cat was out of the bag.\" : i3 == 2 ? \"She told him to break a leg on stage.\" : i3 == 3 ? \"After the flight he felt under the weather.\" : \"Our class had to hit the books all week.\") : (i3 == 0 ? \"I have told you a million times to tidy up.\" : i3 == 1 ? \"This backpack weighs a tonne after school.\" : i3 == 2 ? \"I am so hungry I could eat an elephant.\" : i3 == 3 ? \"Grandma is older than the mountains.\" : \"The queue went on forever and ever.\")"
         ]
       },
-      "hint": "A simile uses like or as, a metaphor says one thing is another, personification gives human actions to something not human, an idiom does not mean its literal words, and hyperbole is a wild exaggeration."
+      "hint": "A simile uses like or as, a metaphor says one thing is another, personification gives human actions to something not human, an idiom does not mean its literal words, and hyperbole is a wild exaggeration.",
+      "tags": [
+        "AC9E6LA08",
+        "EN3-UARL-01"
+      ]
     },
     {
       "id": "english.6.figurative-language.same-device",
       "subject": "english",
       "topic": "figurative language",
       "level": "6",
-      "tags": [
-        "AC9E6LA08",
-        "EN3-UARL-01"
-      ],
       "prompt": "Same figurative language as this one? {sentence}",
       "vars": [
         {
@@ -794,17 +790,17 @@
           "(type + d3) % 5 == 0 ? (i3 == 0 ? \"Her skin was as soft as a rose petal.\" : i3 == 1 ? \"He fought like a lion to win the match.\" : i3 == 2 ? \"The lake was as still as glass in the morning.\" : i3 == 3 ? \"She moved through the crowd like a shadow.\" : \"The ice was as cold as a winter night.\") : (type + d3) % 5 == 1 ? (i3 == 0 ? \"The library was a treasure chest of stories.\" : i3 == 1 ? \"His words were daggers to her pride.\" : i3 == 2 ? \"The playground was a battlefield.\" : i3 == 3 ? \"Her laughter was music in the house.\" : \"The city streets were rivers of moving cars.\") : (type + d3) % 5 == 2 ? (i3 == 0 ? \"The fireworks kissed the night sky.\" : i3 == 1 ? \"The old clock coughed out its final chime.\" : i3 == 2 ? \"The waves raced each other onto the shore.\" : i3 == 3 ? \"The garden gate creaked a complaint.\" : \"The storm clouds argued loudly overhead.\") : (type + d3) % 5 == 3 ? (i3 == 0 ? \"Grandpa says it is raining cats and dogs.\" : i3 == 1 ? \"By lunchtime the cat was out of the bag.\" : i3 == 2 ? \"She told him to break a leg on stage.\" : i3 == 3 ? \"After the flight he felt under the weather.\" : \"Our class had to hit the books all week.\") : (i3 == 0 ? \"I have told you a million times to tidy up.\" : i3 == 1 ? \"This backpack weighs a tonne after school.\" : i3 == 2 ? \"I am so hungry I could eat an elephant.\" : i3 == 3 ? \"Grandma is older than the mountains.\" : \"The queue went on forever and ever.\")"
         ]
       },
-      "hint": "Look at what each sentence does, not just what it is about."
+      "hint": "Look at what each sentence does, not just what it is about.",
+      "tags": [
+        "AC9E6LA08",
+        "EN3-UARL-01"
+      ]
     },
     {
       "id": "english.6.figurative-language.eliminate-one",
       "subject": "english",
       "topic": "figurative language",
       "level": "6",
-      "tags": [
-        "AC9E6LA08",
-        "EN3-UARL-01"
-      ],
       "prompt": "Not {wrongLabel}. Which one is it? {sentence}",
       "vars": [
         {
@@ -882,17 +878,17 @@
           "(type + d3) % 5 == 0 ? \"simile\" : (type + d3) % 5 == 1 ? \"metaphor\" : (type + d3) % 5 == 2 ? \"personification\" : (type + d3) % 5 == 3 ? \"idiom\" : \"hyperbole\""
         ]
       },
-      "hint": "A simile uses like or as, a metaphor says one thing is another, personification gives human actions to something not human, an idiom does not mean its literal words, and hyperbole is a wild exaggeration."
+      "hint": "A simile uses like or as, a metaphor says one thing is another, personification gives human actions to something not human, an idiom does not mean its literal words, and hyperbole is a wild exaggeration.",
+      "tags": [
+        "AC9E6LA08",
+        "EN3-UARL-01"
+      ]
     },
     {
       "id": "english.6.punctuation.list-issue",
       "subject": "english",
       "topic": "punctuation",
       "level": "6",
-      "tags": [
-        "AC9E6LA09",
-        "EN3-CWT-01"
-      ],
       "prompt": "Which sentence {label} in its list?",
       "vars": [
         {
@@ -942,17 +938,17 @@
           "(cat + 2) % 3 == 0 ? (i2 == 0 ? \"We packed apples, bananas and grapes for the picnic.\" : i2 == 1 ? \"The zoo has lions, tigers and bears in the north wing.\" : i2 == 2 ? \"She bought pencils, rulers and erasers for school.\" : i2 == 3 ? \"We saw dolphins, turtles and seals at the aquarium.\" : \"The recipe needs flour, sugar and butter for the cake.\") : (cat + 2) % 3 == 1 ? (i2 == 0 ? \"We packed apples bananas and grapes for the picnic.\" : i2 == 1 ? \"The zoo has lions tigers and bears in the north wing.\" : i2 == 2 ? \"She bought pencils rulers and erasers for school.\" : i2 == 3 ? \"We saw dolphins turtles and seals at the aquarium.\" : \"The recipe needs flour sugar and butter for the cake.\") : (i2 == 0 ? \"We packed apples, bananas and, grapes for the picnic.\" : i2 == 1 ? \"The zoo has lions, tigers and, bears in the north wing.\" : i2 == 2 ? \"She bought pencils, rulers and, erasers for school.\" : i2 == 3 ? \"We saw dolphins, turtles and, seals at the aquarium.\" : \"The recipe needs flour, sugar and, butter for the cake.\")"
         ]
       },
-      "hint": "Put a comma after every item in the list except the last one."
+      "hint": "Put a comma after every item in the list except the last one.",
+      "tags": [
+        "AC9E6LA09",
+        "EN3-CWT-01"
+      ]
     },
     {
       "id": "english.6.punctuation.clause-issue",
       "subject": "english",
       "topic": "punctuation",
       "level": "6",
-      "tags": [
-        "AC9E6LA09",
-        "EN3-CWT-01"
-      ],
       "prompt": "Which sentence {label} after its opening clause?",
       "vars": [
         {
@@ -1002,17 +998,17 @@
           "(cat + 2) % 3 == 0 ? (i2 == 0 ? \"After the game finished, the players shook hands.\" : i2 == 1 ? \"Although it was raining, the match went ahead.\" : i2 == 2 ? \"Before the bell rang, the students packed their bags.\" : i2 == 3 ? \"Since the bus was late, we walked to school instead.\" : \"While the teacher spoke, the class listened quietly.\") : (cat + 2) % 3 == 1 ? (i2 == 0 ? \"After the game finished the players shook hands.\" : i2 == 1 ? \"Although it was raining the match went ahead.\" : i2 == 2 ? \"Before the bell rang the students packed their bags.\" : i2 == 3 ? \"Since the bus was late we walked to school instead.\" : \"While the teacher spoke the class listened quietly.\") : (i2 == 0 ? \"After the game, finished the players shook hands.\" : i2 == 1 ? \"Although it, was raining the match went ahead.\" : i2 == 2 ? \"Before the bell, rang the students packed their bags.\" : i2 == 3 ? \"Since the bus, was late we walked to school instead.\" : \"While the teacher, spoke the class listened quietly.\")"
         ]
       },
-      "hint": "A comma follows the opening clause, before the main part of the sentence begins."
+      "hint": "A comma follows the opening clause, before the main part of the sentence begins.",
+      "tags": [
+        "AC9E6LA09",
+        "EN3-CWT-01"
+      ]
     },
     {
       "id": "english.6.punctuation.compound-issue",
       "subject": "english",
       "topic": "punctuation",
       "level": "6",
-      "tags": [
-        "AC9E6LA09",
-        "EN3-CWT-01"
-      ],
       "prompt": "Which sentence is {label} before the joining word?",
       "vars": [
         {
@@ -1054,17 +1050,17 @@
           "1 - cat == 0 ? (i1 == 0 ? \"The rain stopped, but the sun did not come out.\" : i1 == 1 ? \"She wanted to go outside, but it started to rain.\" : i1 == 2 ? \"The team trained hard, and they won the final.\" : i1 == 3 ? \"He forgot his lunch, so he borrowed some money.\" : \"The power went out, but the lights came back on soon.\") : (i1 == 0 ? \"The rain stopped but the sun did not come out.\" : i1 == 1 ? \"She wanted to go outside but it started to rain.\" : i1 == 2 ? \"The team trained hard and they won the final.\" : i1 == 3 ? \"He forgot his lunch so he borrowed some money.\" : \"The power went out but the lights came back on soon.\")"
         ]
       },
-      "hint": "Two complete sentences joined by and, but or so need a comma before the joining word."
+      "hint": "Two complete sentences joined by and, but or so need a comma before the joining word.",
+      "tags": [
+        "AC9E6LA09",
+        "EN3-CWT-01"
+      ]
     },
     {
       "id": "english.6.punctuation.identify-issue",
       "subject": "english",
       "topic": "punctuation",
       "level": "6",
-      "tags": [
-        "AC9E6LA09",
-        "EN3-CWT-01"
-      ],
       "prompt": "What is true of the commas in this sentence? {sentence}",
       "vars": [
         {
@@ -1102,17 +1098,17 @@
           "(cat + 2) % 3 == 0 ? \"punctuated correctly\" : (cat + 2) % 3 == 1 ? \"missing a comma\" : \"with a comma in the wrong place\""
         ]
       },
-      "hint": "Check whether every comma is needed, missing, or in the wrong place."
+      "hint": "Check whether every comma is needed, missing, or in the wrong place.",
+      "tags": [
+        "AC9E6LA09",
+        "EN3-CWT-01"
+      ]
     },
     {
       "id": "english.6.spelling-patterns.write-doubled-ing",
       "subject": "english",
       "topic": "spelling patterns",
       "level": "6",
-      "tags": [
-        "AC9E6LY08",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Write the word formed by adding -ing to {word}.",
       "vars": [
         {
@@ -1134,17 +1130,17 @@
       ],
       "answer": "answer",
       "answerType": "text",
-      "hint": "Double the final consonant before adding -ing."
+      "hint": "Double the final consonant before adding -ing.",
+      "tags": [
+        "AC9E6LY08",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.6.spelling-patterns.which-is-doubled-ing",
       "subject": "english",
       "topic": "spelling patterns",
       "level": "6",
-      "tags": [
-        "AC9E6LY08",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Which word is formed by adding -ing to {word}?",
       "vars": [
         {
@@ -1188,17 +1184,17 @@
           "(i + d2) % 6 == 0 ? 'running' : (i + d2) % 6 == 1 ? 'stopping' : (i + d2) % 6 == 2 ? 'planning' : (i + d2) % 6 == 3 ? 'dropping' : (i + d2) % 6 == 4 ? 'swimming' : 'grabbing'"
         ]
       },
-      "hint": "Double the final consonant before adding -ing."
+      "hint": "Double the final consonant before adding -ing.",
+      "tags": [
+        "AC9E6LY08",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.6.spelling-patterns.write-plural-y",
       "subject": "english",
       "topic": "spelling patterns",
       "level": "6",
-      "tags": [
-        "AC9E6LY08",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Write the plural of {word}.",
       "vars": [
         {
@@ -1220,17 +1216,17 @@
       ],
       "answer": "answer",
       "answerType": "text",
-      "hint": "Change the y to i, then add -es."
+      "hint": "Change the y to i, then add -es.",
+      "tags": [
+        "AC9E6LY08",
+        "EN3-SPELL-01"
+      ]
     },
     {
       "id": "english.6.spelling-patterns.which-is-plural-y",
       "subject": "english",
       "topic": "spelling patterns",
       "level": "6",
-      "tags": [
-        "AC9E6LY08",
-        "EN3-SPELL-01"
-      ],
       "prompt": "Which word is the plural of {word}?",
       "vars": [
         {
@@ -1274,7 +1270,11 @@
           "(i + d2) % 6 == 0 ? 'babies' : (i + d2) % 6 == 1 ? 'cities' : (i + d2) % 6 == 2 ? 'puppies' : (i + d2) % 6 == 3 ? 'stories' : (i + d2) % 6 == 4 ? 'families' : 'countries'"
         ]
       },
-      "hint": "Change the y to i, then add -es."
+      "hint": "Change the y to i, then add -es.",
+      "tags": [
+        "AC9E6LY08",
+        "EN3-SPELL-01"
+      ]
     }
   ]
 }

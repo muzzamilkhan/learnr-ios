@@ -100,7 +100,7 @@ struct GradingDigestTests {
             checked += 1
         }
 
-        #expect(checked == 505)
+        #expect(checked == 507)
     }
 }
 

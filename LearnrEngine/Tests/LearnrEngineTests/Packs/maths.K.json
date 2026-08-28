@@ -8,10 +8,6 @@
       "subject": "maths",
       "topic": "counting numbers",
       "level": "K",
-      "tags": [
-        "AC9MFN01",
-        "MAE-RWN-02"
-      ],
       "prompt": "What number comes after {x}?",
       "vars": [
         {
@@ -22,17 +18,17 @@
         }
       ],
       "answer": "x + 1",
-      "hint": "Count up one from {x}."
+      "hint": "Count up one from {x}.",
+      "tags": [
+        "AC9MFN01",
+        "MAE-RWN-02"
+      ]
     },
     {
       "id": "maths.K.counting-numbers.before",
       "subject": "maths",
       "topic": "counting numbers",
       "level": "K",
-      "tags": [
-        "AC9MFN01",
-        "MAE-RWN-02"
-      ],
       "prompt": "What number comes before {x}?",
       "vars": [
         {
@@ -43,17 +39,17 @@
         }
       ],
       "answer": "x - 1",
-      "hint": "Count back one from {x}."
+      "hint": "Count back one from {x}.",
+      "tags": [
+        "AC9MFN01",
+        "MAE-RWN-02"
+      ]
     },
     {
       "id": "maths.K.counting-numbers.missing",
       "subject": "maths",
       "topic": "counting numbers",
       "level": "K",
-      "tags": [
-        "AC9MFN01",
-        "MAE-RWN-02"
-      ],
       "prompt": "Fill in the gap: {x}, {x + 1}, ?, {x + 3}",
       "vars": [
         {
@@ -63,17 +59,17 @@
           "max": "16"
         }
       ],
-      "answer": "x + 2"
+      "answer": "x + 2",
+      "tags": [
+        "AC9MFN01",
+        "MAE-RWN-02"
+      ]
     },
     {
       "id": "maths.K.counting-numbers.count-back",
       "subject": "maths",
       "topic": "counting numbers",
       "level": "K",
-      "tags": [
-        "AC9MFN01",
-        "MAE-RWN-02"
-      ],
       "prompt": "Counting backwards: {x}, {x - 1}, ?, {x - 3}",
       "vars": [
         {
@@ -84,17 +80,17 @@
         }
       ],
       "answer": "x - 2",
-      "hint": "Take away one each time."
+      "hint": "Take away one each time.",
+      "tags": [
+        "AC9MFN01",
+        "MAE-RWN-02"
+      ]
     },
     {
       "id": "maths.K.counting-numbers.skip-twos",
       "subject": "maths",
       "topic": "counting numbers",
       "level": "K",
-      "tags": [
-        "AC9MFA01",
-        "MAE-FG-02"
-      ],
       "prompt": "Counting by twos: {x}, {x + 2}, {x + 4}, ?",
       "vars": [
         {
@@ -106,17 +102,17 @@
         }
       ],
       "answer": "x + 6",
-      "hint": "Add two more each time."
+      "hint": "Add two more each time.",
+      "tags": [
+        "AC9MFA01",
+        "MAE-FG-02"
+      ]
     },
     {
       "id": "maths.K.counting-numbers.number-line",
       "subject": "maths",
       "topic": "counting numbers",
       "level": "K",
-      "tags": [
-        "AC9MFN01",
-        "MAE-RWN-02"
-      ],
       "prompt": "What number is the arrow pointing to?",
       "vars": [
         {
@@ -146,17 +142,17 @@
         "from": "base",
         "to": "base + 10",
         "step": "5"
-      }
+      },
+      "tags": [
+        "AC9MFN01",
+        "MAE-RWN-02"
+      ]
     },
     {
       "id": "maths.K.comparing-numbers.larger",
       "subject": "maths",
       "topic": "comparing numbers",
       "level": "K",
-      "tags": [
-        "AC9MFN03",
-        "MAE-RWN-01"
-      ],
       "prompt": "Which number is larger, {x} or {y}?",
       "vars": [
         {
@@ -175,17 +171,17 @@
       "constraints": [
         "x != y"
       ],
-      "answer": "max(x, y)"
+      "answer": "max(x, y)",
+      "tags": [
+        "AC9MFN03",
+        "MAE-RWN-01"
+      ]
     },
     {
       "id": "maths.K.comparing-numbers.smaller",
       "subject": "maths",
       "topic": "comparing numbers",
       "level": "K",
-      "tags": [
-        "AC9MFN03",
-        "MAE-RWN-01"
-      ],
       "prompt": "Which number is smaller, {x} or {y}?",
       "vars": [
         {
@@ -204,17 +200,17 @@
       "constraints": [
         "x != y"
       ],
-      "answer": "min(x, y)"
+      "answer": "min(x, y)",
+      "tags": [
+        "AC9MFN03",
+        "MAE-RWN-01"
+      ]
     },
     {
       "id": "maths.K.comparing-numbers.more-than",
       "subject": "maths",
       "topic": "comparing numbers",
       "level": "K",
-      "tags": [
-        "AC9MFN03",
-        "MAE-RWN-01"
-      ],
       "prompt": "True or false: {x} is more than {y}.",
       "vars": [
         {
@@ -233,17 +229,17 @@
       "constraints": [
         "x != y"
       ],
-      "answer": "x > y"
+      "answer": "x > y",
+      "tags": [
+        "AC9MFN03",
+        "MAE-RWN-01"
+      ]
     },
     {
       "id": "maths.K.comparing-numbers.between",
       "subject": "maths",
       "topic": "comparing numbers",
       "level": "K",
-      "tags": [
-        "AC9MFN01",
-        "MAE-RWN-02"
-      ],
       "prompt": "Which number goes between {x} and {x + 2}?",
       "vars": [
         {
@@ -253,17 +249,17 @@
           "max": "18"
         }
       ],
-      "answer": "x + 1"
+      "answer": "x + 1",
+      "tags": [
+        "AC9MFN01",
+        "MAE-RWN-02"
+      ]
     },
     {
       "id": "maths.K.addition.to-ten",
       "subject": "maths",
       "topic": "addition",
       "level": "K",
-      "tags": [
-        "AC9MFN05",
-        "MAE-CSQ-01"
-      ],
       "prompt": "What is {x} + {y}?",
       "vars": [
         {
@@ -280,17 +276,17 @@
         }
       ],
       "answer": "x + y",
-      "hint": "Start at {x} and count on {y} more."
+      "hint": "Start at {x} and count on {y} more.",
+      "tags": [
+        "AC9MFN05",
+        "MAE-CSQ-01"
+      ]
     },
     {
       "id": "maths.K.addition.story",
       "subject": "maths",
       "topic": "addition",
       "level": "K",
-      "tags": [
-        "AC9MFN05",
-        "MAE-CSQ-01"
-      ],
       "prompt": "Ali has {x} shells. He finds {y} more. How many shells does he have now?",
       "vars": [
         {
@@ -306,17 +302,17 @@
           "max": "6"
         }
       ],
-      "answer": "x + y"
+      "answer": "x + y",
+      "tags": [
+        "AC9MFN05",
+        "MAE-CSQ-01"
+      ]
     },
     {
       "id": "maths.K.addition.part-part-whole",
       "subject": "maths",
       "topic": "addition",
       "level": "K",
-      "tags": [
-        "AC9MFN04",
-        "MAE-CSQ-02"
-      ],
       "prompt": "You need 10 counters. You already have {x}. How many more do you need?",
       "vars": [
         {
@@ -327,17 +323,17 @@
         }
       ],
       "answer": "10 - x",
-      "hint": "Count on from {x} up to 10."
+      "hint": "Count on from {x} up to 10.",
+      "tags": [
+        "AC9MFN04",
+        "MAE-CSQ-02"
+      ]
     },
     {
       "id": "maths.K.subtraction.to-ten",
       "subject": "maths",
       "topic": "subtraction",
       "level": "K",
-      "tags": [
-        "AC9MFN05",
-        "MAE-CSQ-01"
-      ],
       "prompt": "What is {x} − {y}?",
       "vars": [
         {
@@ -354,17 +350,17 @@
         }
       ],
       "answer": "x - y",
-      "hint": "Count back {y} from {x}."
+      "hint": "Count back {y} from {x}.",
+      "tags": [
+        "AC9MFN05",
+        "MAE-CSQ-01"
+      ]
     },
     {
       "id": "maths.K.subtraction.story",
       "subject": "maths",
       "topic": "subtraction",
       "level": "K",
-      "tags": [
-        "AC9MFN05",
-        "MAE-CSQ-01"
-      ],
       "prompt": "There are {x} ducks on a pond. {y} of them swim away. How many are left?",
       "vars": [
         {
@@ -380,17 +376,17 @@
           "max": "x - 1"
         }
       ],
-      "answer": "x - y"
+      "answer": "x - y",
+      "tags": [
+        "AC9MFN05",
+        "MAE-CSQ-01"
+      ]
     },
     {
       "id": "maths.K.sharing.equal-groups",
       "subject": "maths",
       "topic": "sharing",
       "level": "K",
-      "tags": [
-        "AC9MFN06",
-        "MAE-FG-02"
-      ],
       "prompt": "{total} apples are shared equally between {n} children. How many does each child get?",
       "vars": [
         {
@@ -414,17 +410,17 @@
         }
       ],
       "answer": "each",
-      "hint": "Share them out one at a time until they are all gone."
+      "hint": "Share them out one at a time until they are all gone.",
+      "tags": [
+        "AC9MFN06",
+        "MAE-FG-02"
+      ]
     },
     {
       "id": "maths.K.sharing.how-many-groups",
       "subject": "maths",
       "topic": "sharing",
       "level": "K",
-      "tags": [
-        "AC9MFN06",
-        "MAE-FG-02"
-      ],
       "prompt": "You have {total} stickers. How many children get {n} stickers each?",
       "vars": [
         {
@@ -447,17 +443,17 @@
           "expr": "n * groups"
         }
       ],
-      "answer": "groups"
+      "answer": "groups",
+      "tags": [
+        "AC9MFN06",
+        "MAE-FG-02"
+      ]
     },
     {
       "id": "maths.K.even-and-odd.next-even",
       "subject": "maths",
       "topic": "even and odd",
       "level": "K",
-      "tags": [
-        "AC9MFA01",
-        "MAE-FG-02"
-      ],
       "prompt": "{x} is an even number. What is the next even number?",
       "vars": [
         {
@@ -472,17 +468,17 @@
         "isEven(x)"
       ],
       "answer": "x + 2",
-      "hint": "Count on two from {x}."
+      "hint": "Count on two from {x}.",
+      "tags": [
+        "AC9MFA01",
+        "MAE-FG-02"
+      ]
     },
     {
       "id": "maths.K.patterns.repeating-two",
       "subject": "maths",
       "topic": "patterns",
       "level": "K",
-      "tags": [
-        "AC9MFA01",
-        "MAE-FG-01"
-      ],
       "prompt": "What comes next? {a}, {b}, {a}, {b}, {a}, ?",
       "vars": [
         {
@@ -536,17 +532,17 @@
           "c"
         ]
       },
-      "hint": "The pattern goes {a}, {b}, over and over."
+      "hint": "The pattern goes {a}, {b}, over and over.",
+      "tags": [
+        "AC9MFA01",
+        "MAE-FG-01"
+      ]
     },
     {
       "id": "maths.K.patterns.repeating-three",
       "subject": "maths",
       "topic": "patterns",
       "level": "K",
-      "tags": [
-        "AC9MFA01",
-        "MAE-FG-01"
-      ],
       "prompt": "What comes next? {a}, {b}, {c}, {a}, {b}, {c}, {a}, ?",
       "vars": [
         {
@@ -600,17 +596,17 @@
           "c"
         ]
       },
-      "hint": "The part that repeats is {a}, {b}, {c}."
+      "hint": "The part that repeats is {a}, {b}, {c}.",
+      "tags": [
+        "AC9MFA01",
+        "MAE-FG-01"
+      ]
     },
     {
       "id": "maths.K.measurement.longer",
       "subject": "maths",
       "topic": "measurement",
       "level": "K",
-      "tags": [
-        "AC9MFM01",
-        "MAE-GM-02"
-      ],
       "prompt": "A red ribbon is {a} blocks long and a blue one is {b}. Which is longer, red or blue?",
       "vars": [
         {
@@ -637,17 +633,17 @@
           "'red'",
           "'blue'"
         ]
-      }
+      },
+      "tags": [
+        "AC9MFM01",
+        "MAE-GM-02"
+      ]
     },
     {
       "id": "maths.K.measurement.holds-more",
       "subject": "maths",
       "topic": "measurement",
       "level": "K",
-      "tags": [
-        "AC9MFM01",
-        "MAE-3DS-02"
-      ],
       "prompt": "A box holds {a} cups of sand. A jar holds {b} cups of sand. Which holds more, the box or the jar?",
       "vars": [
         {
@@ -674,17 +670,17 @@
           "'box'",
           "'jar'"
         ]
-      }
+      },
+      "tags": [
+        "AC9MFM01",
+        "MAE-3DS-02"
+      ]
     },
     {
       "id": "maths.K.measurement.heavier",
       "subject": "maths",
       "topic": "measurement",
       "level": "K",
-      "tags": [
-        "AC9MFM01",
-        "MAE-NSM-01"
-      ],
       "prompt": "A book balances {a} blocks. A shoe balances {b} blocks. Which is heavier, the book or the shoe?",
       "vars": [
         {
@@ -711,17 +707,17 @@
           "'book'",
           "'shoe'"
         ]
-      }
+      },
+      "tags": [
+        "AC9MFM01",
+        "MAE-NSM-01"
+      ]
     },
     {
       "id": "maths.K.measurement.lightest",
       "subject": "maths",
       "topic": "measurement",
       "level": "K",
-      "tags": [
-        "AC9MFM01",
-        "MAE-NSM-01"
-      ],
       "prompt": "The red bag balances {a} blocks, the blue {b} and the green {c}. Which bag is the lightest?",
       "vars": [
         {
@@ -757,17 +753,17 @@
           "'blue'",
           "'green'"
         ]
-      }
+      },
+      "tags": [
+        "AC9MFM01",
+        "MAE-NSM-01"
+      ]
     },
     {
       "id": "maths.K.time.day-after",
       "subject": "maths",
       "topic": "time",
       "level": "K",
-      "tags": [
-        "AC9MFM02",
-        "MAE-NSM-02"
-      ],
       "prompt": "Which day comes after {day}?",
       "vars": [
         {
@@ -820,17 +816,17 @@
           "d2",
           "d3"
         ]
-      }
+      },
+      "tags": [
+        "AC9MFM02",
+        "MAE-NSM-02"
+      ]
     },
     {
       "id": "maths.K.time.day-before",
       "subject": "maths",
       "topic": "time",
       "level": "K",
-      "tags": [
-        "AC9MFM02",
-        "MAE-NSM-02"
-      ],
       "prompt": "Which day comes before {day}?",
       "vars": [
         {
@@ -883,16 +879,17 @@
           "d2",
           "d3"
         ]
-      }
+      },
+      "tags": [
+        "AC9MFM02",
+        "MAE-NSM-02"
+      ]
     },
     {
       "id": "maths.K.time.oclock",
       "subject": "maths",
       "topic": "time",
       "level": "K",
-      "tags": [
-        "MAE-NSM-02"
-      ],
       "prompt": "What time is this?",
       "vars": [
         {
@@ -934,16 +931,16 @@
         "hour": "h",
         "minute": "0",
         "numerals": "true"
-      }
+      },
+      "tags": [
+        "MAE-NSM-02"
+      ]
     },
     {
       "id": "maths.K.time.clock-says",
       "subject": "maths",
       "topic": "time",
       "level": "K",
-      "tags": [
-        "MAE-NSM-02"
-      ],
       "prompt": "True or false: this clock shows {h} o’clock.",
       "vars": [
         {
@@ -976,17 +973,16 @@
         "hour": "shown",
         "minute": "0",
         "numerals": "true"
-      }
+      },
+      "tags": [
+        "MAE-NSM-02"
+      ]
     },
     {
       "id": "maths.K.shapes.sides",
       "subject": "maths",
       "topic": "shapes",
       "level": "K",
-      "tags": [
-        "AC9MFSP01",
-        "MAE-2DS-01"
-      ],
       "prompt": "How many sides does a {shape} have?",
       "vars": [
         {
@@ -1001,17 +997,17 @@
           ]
         }
       ],
-      "answer": "shape == 'triangle' ? 3 : shape == 'square' ? 4 : shape == 'rectangle' ? 4 : shape == 'pentagon' ? 5 : 6"
+      "answer": "shape == 'triangle' ? 3 : shape == 'square' ? 4 : shape == 'rectangle' ? 4 : shape == 'pentagon' ? 5 : 6",
+      "tags": [
+        "AC9MFSP01",
+        "MAE-2DS-01"
+      ]
     },
     {
       "id": "maths.K.shapes.name",
       "subject": "maths",
       "topic": "shapes",
       "level": "K",
-      "tags": [
-        "AC9MFSP01",
-        "MAE-2DS-01"
-      ],
       "prompt": "A shape has {n} equal sides and {n} corners. What is it called?",
       "vars": [
         {
@@ -1034,17 +1030,17 @@
           "mod(n - 1, 4) + 3 == 3 ? 'triangle' : mod(n - 1, 4) + 3 == 4 ? 'square' : mod(n - 1, 4) + 3 == 5 ? 'pentagon' : 'hexagon'",
           "mod(n, 4) + 3 == 3 ? 'triangle' : mod(n, 4) + 3 == 4 ? 'square' : mod(n, 4) + 3 == 5 ? 'pentagon' : 'hexagon'"
         ]
-      }
+      },
+      "tags": [
+        "AC9MFSP01",
+        "MAE-2DS-01"
+      ]
     },
     {
       "id": "maths.K.shapes.name-picture",
       "subject": "maths",
       "topic": "shapes",
       "level": "K",
-      "tags": [
-        "AC9MFSP01",
-        "MAE-2DS-01"
-      ],
       "prompt": "What shape is this?",
       "vars": [
         {
@@ -1084,17 +1080,17 @@
       "figure": {
         "kind": "polygon",
         "shape": "drawn"
-      }
+      },
+      "tags": [
+        "AC9MFSP01",
+        "MAE-2DS-01"
+      ]
     },
     {
       "id": "maths.K.shapes.sides-picture",
       "subject": "maths",
       "topic": "shapes",
       "level": "K",
-      "tags": [
-        "AC9MFSP01",
-        "MAE-2DS-01"
-      ],
       "prompt": "How many sides does this shape have?",
       "vars": [
         {
@@ -1117,17 +1113,17 @@
       "figure": {
         "kind": "polygon",
         "shape": "shape"
-      }
+      },
+      "tags": [
+        "AC9MFSP01",
+        "MAE-2DS-01"
+      ]
     },
     {
       "id": "maths.K.shapes.is-a-triangle",
       "subject": "maths",
       "topic": "shapes",
       "level": "K",
-      "tags": [
-        "AC9MFSP01",
-        "MAE-2DS-01"
-      ],
       "prompt": "True or false: this shape is a triangle.",
       "vars": [
         {
@@ -1155,17 +1151,17 @@
       "figure": {
         "kind": "polygon",
         "shape": "shape"
-      }
+      },
+      "tags": [
+        "AC9MFSP01",
+        "MAE-2DS-01"
+      ]
     },
     {
       "id": "maths.K.shapes.solid-name",
       "subject": "maths",
       "topic": "shapes",
       "level": "K",
-      "tags": [
-        "AC9MFSP01",
-        "MAE-3DS-01"
-      ],
       "prompt": "What is this called?",
       "vars": [
         {
@@ -1194,17 +1190,17 @@
         "kind": "solid",
         "solid": "shape",
         "view": "'object'"
-      }
+      },
+      "tags": [
+        "AC9MFSP01",
+        "MAE-3DS-01"
+      ]
     },
     {
       "id": "maths.K.shapes.solid-rolls",
       "subject": "maths",
       "topic": "shapes",
       "level": "K",
-      "tags": [
-        "AC9MFSP01",
-        "MAE-3DS-01"
-      ],
       "prompt": "True or false: this shape can roll.",
       "vars": [
         {
@@ -1224,17 +1220,17 @@
         "kind": "solid",
         "solid": "shape",
         "view": "'object'"
-      }
+      },
+      "tags": [
+        "AC9MFSP01",
+        "MAE-3DS-01"
+      ]
     },
     {
       "id": "maths.K.shapes.solid-everyday",
       "subject": "maths",
       "topic": "shapes",
       "level": "K",
-      "tags": [
-        "AC9MFSP01",
-        "MAE-3DS-01"
-      ],
       "prompt": "Which of these is shaped like this?",
       "vars": [
         {
@@ -1271,17 +1267,17 @@
         "kind": "solid",
         "solid": "shape",
         "view": "'object'"
-      }
+      },
+      "tags": [
+        "AC9MFSP01",
+        "MAE-3DS-01"
+      ]
     },
     {
       "id": "maths.K.data.most-counted",
       "subject": "maths",
       "topic": "data",
       "level": "K",
-      "tags": [
-        "AC9MFST01",
-        "MAE-DATA-01"
-      ],
       "prompt": "Sam counted cars: {a} red, {b} blue and {c} green. Which colour did he see most of?",
       "vars": [
         {
@@ -1317,17 +1313,17 @@
           "'blue'",
           "'green'"
         ]
-      }
+      },
+      "tags": [
+        "AC9MFST01",
+        "MAE-DATA-01"
+      ]
     },
     {
       "id": "maths.K.data.graph-count",
       "subject": "maths",
       "topic": "data",
       "level": "K",
-      "tags": [
-        "AC9MFST01",
-        "MAE-DATA-01"
-      ],
       "prompt": "This graph shows the pets in our class. How many children have a {pet}?",
       "vars": [
         {
@@ -1370,17 +1366,17 @@
         "values": "dog + ',' + cat + ',' + fish",
         "labels": "'Dog,Cat,Fish'",
         "scale": "1"
-      }
+      },
+      "tags": [
+        "AC9MFST01",
+        "MAE-DATA-01"
+      ]
     },
     {
       "id": "maths.K.data.graph-most",
       "subject": "maths",
       "topic": "data",
       "level": "K",
-      "tags": [
-        "AC9MFST01",
-        "MAE-DATA-01"
-      ],
       "prompt": "This graph shows our favourite toys. Which toy did the most children pick?",
       "vars": [
         {
@@ -1422,17 +1418,17 @@
         "values": "ball + ',' + bike + ',' + doll",
         "labels": "'Ball,Bike,Doll'",
         "scale": "1"
-      }
+      },
+      "tags": [
+        "AC9MFST01",
+        "MAE-DATA-01"
+      ]
     },
     {
       "id": "maths.K.data.picture-count",
       "subject": "maths",
       "topic": "data",
       "level": "K",
-      "tags": [
-        "AC9MFST01",
-        "MAE-DATA-01"
-      ],
       "prompt": "Each picture stands for one book. How many books did {who} read?",
       "vars": [
         {
@@ -1472,17 +1468,17 @@
         "counts": "ana + ',' + ben + ',' + kim",
         "labels": "'Ana,Ben,Kim'",
         "key": "1"
-      }
+      },
+      "tags": [
+        "AC9MFST01",
+        "MAE-DATA-01"
+      ]
     },
     {
       "id": "maths.K.data.picture-fewest",
       "subject": "maths",
       "topic": "data",
       "level": "K",
-      "tags": [
-        "AC9MFST01",
-        "MAE-DATA-01"
-      ],
       "prompt": "Each picture stands for one shell. Who found the fewest shells?",
       "vars": [
         {
@@ -1525,7 +1521,11 @@
         "counts": "ana + ',' + ben + ',' + kim",
         "labels": "'Ana,Ben,Kim'",
         "key": "1"
-      }
+      },
+      "tags": [
+        "AC9MFST01",
+        "MAE-DATA-01"
+      ]
     }
   ]
 }
