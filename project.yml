@@ -69,6 +69,21 @@ targets:
     info:
       path: LearnrApp/Info.plist
       properties:
+        # Export compliance, answered here so it is not asked on every upload.
+        #
+        # False means "uses no non-exempt encryption", which is the accurate
+        # answer rather than the convenient one: the app imports neither
+        # CryptoKit nor CommonCrypto, calls no cipher or digest API, and the one
+        # `import Security` is Keychain.swift storing the login token as a
+        # kSecClassGenericPassword. Talking to the API is URLSession over HTTPS.
+        # All of that is encryption *within* the operating system, which is
+        # exempt - the question is about algorithms an app implements itself or
+        # supplies in addition to Apple's.
+        #
+        # Without this key App Store Connect holds every TestFlight build at
+        # "Missing Compliance" until the same question is answered by hand.
+        # Revisit it if the app ever ships its own crypto.
+        ITSAppUsesNonExemptEncryption: false
         # xcodegen writes this plist from these properties, so a hand edit to
         # LearnrApp/Info.plist is lost on the next run - these two keys included.
         # Without them the plist's committed 1.0/1 would be what every upload
