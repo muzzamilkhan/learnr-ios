@@ -67,8 +67,35 @@ public struct Account: Codable, Sendable, Equatable {
     public let image: String?
     public let photo: String?
 
+    public init(
+        id: String, role: String?, parentId: String?, name: String?,
+        avatar: String?, image: String?, photo: String?
+    ) {
+        self.id = id
+        self.role = role
+        self.parentId = parentId
+        self.name = name
+        self.avatar = avatar
+        self.image = image
+        self.photo = photo
+    }
+
     /// A managed child - the only kind this app can sign in.
     public var isManagedChild: Bool { role == "child" && parentId != nil }
+
+    /// A signed-in child whose account has not been read yet.
+    ///
+    /// The narrow case behind `L17`: a launch with no network and nothing
+    /// cached, which is a device that signed in and was force-quit before
+    /// `GET /me` ever came back. The token is good, so the child is in; there
+    /// is simply no name to greet them by until the server can be reached.
+    ///
+    /// Deliberately not a managed child: `isManagedChild` is false here,
+    /// because nothing has confirmed it and guessing the affirmative is how a
+    /// client ends up trusting a role the server never gave it.
+    public static let unread = Account(
+        id: "", role: nil, parentId: nil, name: nil,
+        avatar: nil, image: nil, photo: nil)
 }
 
 // MARK: - Play

@@ -40,12 +40,25 @@ final class Session {
     let queue: SyncQueue
     let library: ContentLibrary
 
+    /// The last account the server gave us, for a launch that cannot reach it.
+    private let accounts: any AccountCache
+
     init(baseURL: URL) {
         let tokens = KeychainTokenStore()
         let store = FileSittingStore(url: Self.queueURL)
         self.api = ApiClient(baseURL: baseURL, tokens: tokens)
         self.queue = SyncQueue(api: api, store: store)
         self.library = ContentLibrary(api: api, store: FilePackStore(directory: Self.packsURL))
+        self.accounts = FileAccountCache(url: Self.accountURL)
+    }
+
+    /// For tests: the same object wired to whatever they need to drive.
+    init(api: ApiClient, queue: SyncQueue, library: ContentLibrary,
+         accounts: any AccountCache = NoAccountCache()) {
+        self.api = api
+        self.queue = queue
+        self.library = library
+        self.accounts = accounts
     }
 
     /// Cached content packs. Beside the queue in Application Support, which is
@@ -56,6 +69,15 @@ final class Session {
         return directory.appendingPathComponent("content-packs", isDirectory: true)
     }
 
+    /// Beside the queue: what the app can rebuild from the server but should
+    /// not lose while the server is out of reach.
+    private static var accountURL: URL {
+        let directory = FileManager.default.urls(for: .applicationSupportDirectory,
+                                                 in: .userDomainMask)[0]
+        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        return directory.appendingPathComponent("account.json")
+    }
+
     private static var queueURL: URL {
         let directory = FileManager.default.urls(for: .applicationSupportDirectory,
                                                  in: .userDomainMask)[0]
@@ -63,8 +85,26 @@ final class Session {
         return directory.appendingPathComponent("pending-sittings.json")
     }
 
-    /// Called at launch. A token that no longer resolves signs the child out
-    /// rather than leaving them staring at a screen that cannot load.
+    /// Called at launch.
+    ///
+    /// **Only a 401 signs a child out** (ledger `L17`). That is the one answer
+    /// that means the token is dead, and it can only come from a server that
+    /// actually replied. Everything else - no network, DNS, a timeout, a 5xx,
+    /// the 503 `GET /me` declares for a failed account read - means *could not
+    /// read*, which is a different thing from *not signed in* and must not be
+    /// treated as one.
+    ///
+    /// The costs are wildly asymmetric, which is why this is a rule rather than
+    /// a preference. A child's only way back in is a four-character code that
+    /// lasts an hour and only a parent can issue, so a wrong sign-out is not an
+    /// annoyance - it is being locked out of a maths app mid-term, needing to
+    /// find a grown-up, which is the exact friction the login code exists to
+    /// remove. Against that, staying signed in through an outage that later
+    /// turns out to be a real 401 costs one sign-out, deferred to the next
+    /// launch that reaches the server. Nothing is lost by waiting: a session
+    /// has a hundred-year life and does not expire on a schedule, and the one
+    /// thing that does kill a token - a parent removing the child - arrives as
+    /// a 401 the moment the device is next online.
     func restore() async {
         guard await api.isSignedIn else {
             state = .signedOut
@@ -72,26 +112,43 @@ final class Session {
         }
 
         do {
-            state = .signedIn(try await api.me())
+            let account = try await api.me()
+            accounts.write(account)
+            state = .signedIn(account)
             await sync()
         } catch ApiError.unauthorised {
+            // The server answered, and it said this token is no longer anyone.
             await api.signOut()
+            accounts.write(nil)
             state = .signedOut
         } catch {
-            // Offline at launch is ordinary, not a reason to sign out: the
-            // token is still good and play does not need the network.
-            state = .signedOut
+            // Could not read. The token is still good and play does not need
+            // the network - the packs are cached and the queue keeps what is
+            // answered - so the child carries on under the account we last saw.
+            //
+            // Falling back to `.signedOut` here is what stranded them: it asks
+            // for a code to fix a problem the code has nothing to do with.
+            state = .signedIn(accounts.read() ?? Account.unread)
+            await sync()
         }
     }
 
     func signIn(code: String) async throws {
         _ = try await api.redeem(code: code)
-        state = .signedIn(try await api.me())
+        let account = try await api.me()
+        // Cached here as well as in `restore()`, so the very next launch
+        // survives a flat network rather than having to reach the server once
+        // more before it knows who this is.
+        accounts.write(account)
+        state = .signedIn(account)
         await sync()
     }
 
     func signOut() async {
         await api.signOut()
+        // Forget the name with the token: the next child to use this device
+        // must not be greeted as the last one.
+        accounts.write(nil)
         state = .signedOut
     }
 
