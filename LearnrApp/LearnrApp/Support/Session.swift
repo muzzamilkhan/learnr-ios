@@ -45,13 +45,40 @@ final class Session {
         await library.refresh(level: level)
     }
 
-    /// Reads the stored level. Best-effort: a failure leaves the fallback.
-    func refreshLevel() async {
-        guard let play = try? await api.playState(level: level),
-              let stored = play.player.selectedLevel,
-              let parsed = YearLevel(rawValue: stored)
-        else { return }
-        level = parsed
+    /// What the home screen shows between sittings: stars, streak, and the
+    /// level. Nil until something has actually been read.
+    private(set) var player: PlayerSnapshot?
+
+    /// Reads the stored level and the figures beside it.
+    ///
+    /// One call, because `GET /play/state` already carries all three and this
+    /// used to read the level and throw the rest away. Best-effort: a failure
+    /// leaves the fallback level and whatever figures were last known, which
+    /// are still the truest thing about this child.
+    func refreshPlayer() async {
+        guard let play = try? await api.playState(level: level) else { return }
+
+        if let stored = play.player.selectedLevel, let parsed = YearLevel(rawValue: stored) {
+            level = parsed
+        }
+        let snapshot = PlayerSnapshot(
+            stars: play.player.stars,
+            streakDays: play.player.streak.days,
+            level: play.player.selectedLevel)
+        player = snapshot
+        snapshots.write(snapshot)
+    }
+
+    /// Puts the last known figures back before the network is tried, so an
+    /// offline launch shows what it last saw rather than nothing - and
+    /// refreshes the content pack for the level this child actually plays
+    /// rather than the fallback.
+    func restorePlayer() {
+        guard let cached = snapshots.read() else { return }
+        player = cached
+        if let stored = cached.level, let parsed = YearLevel(rawValue: stored) {
+            level = parsed
+        }
     }
 
     let api: ApiClient
@@ -61,6 +88,9 @@ final class Session {
     /// The last account the server gave us, for a launch that cannot reach it.
     private let accounts: any AccountCache
 
+    /// The last stars and streak it gave us, for the same launch.
+    private let snapshots: any PlayerSnapshotCache
+
     init(baseURL: URL) {
         let tokens = KeychainTokenStore()
         let store = FileSittingStore(url: Self.queueURL)
@@ -68,15 +98,18 @@ final class Session {
         self.queue = SyncQueue(api: api, store: store)
         self.library = ContentLibrary(api: api, store: FilePackStore(directory: Self.packsURL))
         self.accounts = FileAccountCache(url: Self.accountURL)
+        self.snapshots = FilePlayerSnapshotCache(url: Self.playerURL)
     }
 
     /// For tests: the same object wired to whatever they need to drive.
     init(api: ApiClient, queue: SyncQueue, library: ContentLibrary,
-         accounts: any AccountCache = NoAccountCache()) {
+         accounts: any AccountCache = NoAccountCache(),
+         snapshots: any PlayerSnapshotCache = NoPlayerSnapshotCache()) {
         self.api = api
         self.queue = queue
         self.library = library
         self.accounts = accounts
+        self.snapshots = snapshots
     }
 
     /// Cached content packs. Beside the queue in Application Support, which is
@@ -94,6 +127,15 @@ final class Session {
                                                  in: .userDomainMask)[0]
         try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         return directory.appendingPathComponent("account.json")
+    }
+
+    /// Beside the account: small, not secret, and rebuildable from the
+    /// server - but not while the server is out of reach.
+    private static var playerURL: URL {
+        let directory = FileManager.default.urls(for: .applicationSupportDirectory,
+                                                 in: .userDomainMask)[0]
+        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        return directory.appendingPathComponent("player.json")
     }
 
     private static var queueURL: URL {
@@ -165,8 +207,10 @@ final class Session {
     func signOut() async {
         await api.signOut()
         // Forget the name with the token: the next child to use this device
-        // must not be greeted as the last one.
+        // must not be greeted as the last one, nor shown the stars they left.
         accounts.write(nil)
+        snapshots.write(nil)
+        player = nil
         state = .signedOut
     }
 

@@ -36,6 +36,14 @@ struct HomeView: View {
                     .font(.system(size: 40, weight: .bold, design: .rounded))
                     .foregroundStyle(Palette.ink)
 
+                // What yesterday came to. Absent entirely until something has
+                // been read: a child who has never been fetched sees the screen
+                // they saw before this existed, rather than two zeros claiming
+                // they have nothing.
+                if let player = session.player {
+                    StatsRow(player: player)
+                }
+
                 Button {
                     playing = true
                 } label: {
@@ -95,12 +103,72 @@ struct HomeView: View {
                 .environment(session)
         }
         .task {
+            // The cache first, and synchronously: it carries the level, and an
+            // offline launch would otherwise refresh the fallback level's pack
+            // rather than the one this child plays.
+            session.restorePlayer()
             await session.refreshPendingCount()
-            // The level first: it decides which pack is worth refreshing, and
-            // refreshing the fallback level would warm a cache the child is
-            // not about to play from.
-            await session.refreshLevel()
+            // Then the server, which brings the level and the figures together
+            // and leaves both alone if it cannot be reached.
+            await session.refreshPlayer()
             await session.refreshContent()
+        }
+    }
+}
+
+/// Stars and a streak, between the greeting and the Play button.
+///
+/// Read-only and past tense: this is what a child has already done, not
+/// something to act on. The buttons beneath it are the actions, and nothing
+/// here competes with them for the tap.
+private struct StatsRow: View {
+    let player: PlayerSnapshot
+
+    var body: some View {
+        HStack(spacing: 14) {
+            if player.showsStars {
+                Stat(symbol: "star.fill",
+                     tint: Palette.brand,
+                     value: "\(player.stars)",
+                     label: player.stars == 1 ? "star" : "stars")
+            }
+            if player.showsStreak {
+                Stat(symbol: "flame.fill",
+                     tint: Palette.wrong,
+                     value: "\(player.streakDays)",
+                     label: player.streakDays == 1 ? "day" : "days")
+            }
+        }
+        // One label for the pair, so VoiceOver reads "24 stars, 3 days" rather
+        // than stopping on each glyph.
+        .accessibilityElement(children: .combine)
+    }
+
+    private struct Stat: View {
+        let symbol: String
+        let tint: Color
+        let value: String
+        let label: String
+
+        var body: some View {
+            HStack(spacing: 7) {
+                Image(systemName: symbol)
+                    .font(.system(size: 19, weight: .semibold))
+                    .foregroundStyle(tint)
+                // The number leads and the word follows it, small: a child
+                // reading "24" first gets the figure they came for.
+                Text(value)
+                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                    .foregroundStyle(Palette.ink)
+                    .monospacedDigit()
+                Text(label)
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(Palette.inkSoft)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+            .background(Palette.card, in: Capsule())
+            .accessibilityLabel("\(value) \(label)")
         }
     }
 }
