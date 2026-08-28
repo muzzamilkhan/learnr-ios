@@ -25,7 +25,7 @@ LearnrEngine/          Swift package - the ported engine
     Rng/               mulberry32 + FNV-1a, bit-exact with the web app
     Expr/              tokenizer, Pratt parser, evaluator, JS number semantics
     Templates/         binding, constraints, {expr} holes
-    Figures/           all eleven builders
+    Figures/           all twelve builders
     Session/           the state machine, grading, the profile and the selector
     SpeedRun/          the second state machine, and the modes
     Api/               models, client, offline sync queue
