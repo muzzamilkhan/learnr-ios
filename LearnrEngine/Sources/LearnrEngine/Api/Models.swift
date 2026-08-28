@@ -379,6 +379,25 @@ public struct SpeedOutcome: Codable, Sendable {
     public let previousBest: Int?
     public let best: Int
     public let isRecord: Bool
+    /// Where this run left the child on the family board, and where they were
+    /// before. Null when the run placed nowhere.
+    ///
+    /// The contract marks it `required`; this model omitted it altogether
+    /// until the `L1` spike generated the types and the two were diffed. It
+    /// decodes today only because nothing reads it - which is the whole
+    /// argument for generating these rather than transcribing them, and the
+    /// reason this drift is worth a commit of its own rather than waiting on
+    /// `L18`.
+    public let standing: StandingChange?
+}
+
+/// A run's place on the family board, and the place it displaced.
+public struct StandingChange: Codable, Sendable, Equatable {
+    public let place: Int
+    /// Null when the child had no place before this run.
+    public let previousPlace: Int?
+    /// How many others are on the board.
+    public let rivals: Int
 }
 
 // MARK: - Errors

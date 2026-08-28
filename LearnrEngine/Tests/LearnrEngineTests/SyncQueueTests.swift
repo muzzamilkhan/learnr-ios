@@ -748,6 +748,27 @@ struct PlayStateTests {
         // The contract's enum lists K last; the product sorts it first.
         #expect(YearLevel.schoolOrder.first == .k)
     }
+
+    @Test("SpeedOutcome reads the standing the contract requires")
+    func speedOutcomeCarriesStanding() throws {
+        // `standing` is `required` on the contract's `SpeedOutcome` and was
+        // missing from this model entirely - found by generating from
+        // openapi.json under L1 and diffing against what is written here.
+        // It is nullable: a run that placed nowhere has none.
+        let placed = try ApiCoding.decoder().decode(
+            SpeedOutcome.self,
+            from: Data(#"{"previousBest":3,"best":5,"isRecord":true,"standing":{"place":2,"previousPlace":4,"rivals":6}}"#.utf8))
+        #expect(placed.standing?.place == 2)
+        #expect(placed.standing?.previousPlace == 4)
+        #expect(placed.standing?.rivals == 6)
+
+        // A first-ever placing has no previous one, and a run outside the
+        // board has no standing at all. Both are null, not absent.
+        let unplaced = try ApiCoding.decoder().decode(
+            SpeedOutcome.self,
+            from: Data(#"{"previousBest":null,"best":5,"isRecord":false,"standing":null}"#.utf8))
+        #expect(unplaced.standing == nil)
+    }
 }
 
 }
