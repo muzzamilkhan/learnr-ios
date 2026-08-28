@@ -20,7 +20,7 @@ conformance-suite section is superseded by
 ## Layout
 
 ```
-LearnrEngine/          Swift package - the ported engine, no dependencies
+LearnrEngine/          Swift package - the ported engine
   Sources/LearnrEngine/
     Rng/               mulberry32 + FNV-1a, bit-exact with the web app
     Expr/              tokenizer, Pratt parser, evaluator, JS number semantics
@@ -29,6 +29,7 @@ LearnrEngine/          Swift package - the ported engine, no dependencies
     Session/           the state machine, grading, the profile and the selector
     SpeedRun/          the second state machine, and the modes
     Api/               models, client, offline sync queue
+    Contract/          the vendored openapi.yaml - wire types generate from it
   Tests/LearnrEngineTests/
     Digests/           the vendored golden corpus - the oracle
     Vectors/           the older per-case oracle data
@@ -72,6 +73,19 @@ brew install xcodegen     # once
 xcodegen                  # writes LearnrApp.xcodeproj
 open LearnrApp.xcodeproj
 ```
+
+**Once per machine**, before the first build: Xcode will not run a SwiftPM build
+plugin until it has been trusted, and the engine uses one to generate the wire
+types from the contract. In Xcode that is a dialog; a command-line build cannot
+answer it and fails with `Validate plug-in "OpenAPIGenerator"` instead. Trust it
+for good with
+
+```bash
+defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
+```
+
+or pass `-skipPackagePluginValidation` to a one-off `xcodebuild`. `swift build`
+and `swift test` need neither - the prompt is Xcode's alone.
 
 Or from the command line:
 
@@ -126,10 +140,22 @@ The contract is complete - 32 paths, and the four endpoints this app depends on
 that once declared `schema: {}` (`/me`, `/play/state`, `/speed/runs`,
 `/speed/records`) all carry real schemas now. `learnr#4` is closed.
 
-The models in `Api/Models.swift` are still **transcribed by hand**, and have been
-checked field for field against the live contract. Whether to replace them with
-generated ones - and take on the generator dependency this package currently
-does without - is an open call, tracked as ledger item `L1`.
+**The wire types are generated from it**, by `swift-openapi-generator` running as
+a build plugin over `Sources/LearnrEngine/Contract/openapi.yaml` - a vendored
+copy of `apps/api/contract/openapi.yaml`, verified byte-identical to the served
+document. Nothing generated is committed, so the types cannot drift from the
+contract; `Package.resolved` pins the generator so a rebuild cannot change what
+they are. Types only - `ApiClient` is hand-written on purpose, because the rules
+it encodes (a 503 is retryable and a 400 is not, a 304 is a success) are this
+app's and are not in the document.
+
+The models in `Api/Models.swift` are **still transcribed by hand**, and are still
+what the call sites use. Six properties are nullable `$ref`s that the contract
+encodes as `allOf: [{$ref}]` while also listing them in `required`, which makes
+the generator emit them non-optional so they throw on a null - and two of the six
+(`PlayerState.target`, `SpeedOutcome.standing`) are null on the ordinary path.
+The web side has ruled the fix and it is ledger item `L24`; deleting the models
+is one regeneration once it ships, which is the rest of `L1`.
 
 ## The server
 
