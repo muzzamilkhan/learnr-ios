@@ -53,12 +53,9 @@ a divergence names the template it diverged on.
 cd LearnrEngine && swift test
 ```
 
-**Status: one suite is red.** The corpus, grading, expression and figure sets all
-reproduce the oracle. `ProfileDigestTests` does not - 14 of its 15 scenarios
-disagree, `empty` being the one that matches. That suite is new and
-**uncommitted**, and the divergence is under a ledger ask (`L9`) rather than
-being guessed at, since chasing a digest by editing `Profile` until it matches
-would prove nothing.
+**Status: green.** The corpus, grading, expression, figure and profile sets all
+reproduce the oracle. The profile divergence this section used to describe was
+`L9`, and it is answered and fixed.
 
 Regenerate fixtures only after an intentional engine change, in a commit that
 does nothing else and says why.
