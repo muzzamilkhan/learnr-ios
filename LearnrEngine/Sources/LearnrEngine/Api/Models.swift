@@ -276,19 +276,35 @@ public struct SpeedRunRequest: Codable, Sendable {
 /// under `L1` emits `Date` for all ten at once, which is why this lands first
 /// and on its own.
 ///
-/// **Why not the bare `.iso8601` strategy `L1` names.** Measured on Swift 6.3.3
-/// / macOS 26.5.1, `.iso8601` accepts both `...:20.123Z` and `...:20Z`, so the
-/// fractional-second hazard this was first written to dodge is not present on
-/// this toolchain. It is a documented property of `ISO8601DateFormatter`'s
-/// default options that they omit `.withFractionalSeconds`, and older Foundation
-/// did reject the fractional form - so the tolerance is a version-dependent
-/// convenience rather than a guarantee to build on.
+/// **The wire form, confirmed** (ledger `L16`): always fractional, always
+/// exactly three digits, always a literal `Z`. Nothing in the chain formats a
+/// date - `z.date()` validates a `Date` and yields the same `Date`, so what
+/// reaches `JSON.stringify` is live and `Date.prototype.toJSON` calls
+/// `toISOString`, whose shape ECMA-262 pins. The fraction is what the language
+/// emits, not a convention the server chose.
 ///
-/// Being explicit costs one fallback and buys two things worth having: the
-/// parse cannot change under a toolchain or deployment-target move, and a
-/// failure says which value was rejected instead of "The data couldn't be read".
-/// Both shapes are pinned by tests either way. (Which shape the API actually
-/// sends is ledger ask `L16`, still open at the time of writing.)
+/// **So why parse leniently rather than take `.iso8601`.** Two reasons, and
+/// neither is the one this was first written for - measured on Swift 6.3.3 /
+/// macOS 26.5.1, `.iso8601` accepts both shapes, so it would work today:
+///
+/// - Nothing on the server pins the three digits with a test. Its serialization
+///   suite asserts only that the field is a string `Date.parse` can read, so a
+///   serializer swap would redden nothing there and surface here, on a device,
+///   as "The data couldn't be read".
+/// - `ISO8601DateFormatter`'s default options omit `.withFractionalSeconds` by
+///   documented behaviour, so the strategy's tolerance is a Foundation version's
+///   convenience rather than a guarantee. Being explicit means a toolchain or
+///   deployment-target move cannot change what parses.
+///
+/// The web client is lenient the same way - `ISO_TIMESTAMP` in
+/// `src/lib/revive.ts` makes the fraction optional - so this matches it rather
+/// than hedging against it.
+///
+/// **Not every time-shaped field is a `Date`.** `answeredAt` and
+/// `lastAnsweredAt` are epoch-millisecond integers, because the engine does its
+/// day and recency arithmetic in numbers and a `Date` there would put a
+/// conversion in front of `nextSkill` and `buildProfile` - the two things the
+/// digests hold this port to. The nine response fields are the complete set.
 public enum ApiCoding {
     nonisolated(unsafe) private static let withFraction: ISO8601DateFormatter = {
         let formatter = ISO8601DateFormatter()

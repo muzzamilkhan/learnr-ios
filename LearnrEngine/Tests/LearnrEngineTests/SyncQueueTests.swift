@@ -592,6 +592,27 @@ struct SpeedRunQueueTests {
         }
     }
 
+    @Test("the stamp is shaped the way the server's parsePlayedAt accepts")
+    func stampSatisfiesTheServerPattern() {
+        // `parsePlayedAt` (`src/lib/day.ts`) tests against `ISO_TIMESTAMP` and
+        // is stricter than "an ISO 8601 date-time" in two ways worth pinning
+        // (L16): it needs a full timestamp - a bare `2026-08-28` is refused,
+        // deliberately, because `new Date` would read it as midnight UTC and
+        // call that the moment a run was played - and it needs a zone written
+        // as `Z` or a signed offset *with a colon*, so `+1000` would be
+        // refused where `+10:00` is accepted.
+        //
+        // A refused stamp is not a refused run - the server falls back to the
+        // receipt time and the run still banks - which is exactly why this
+        // needs a test: the failure is silent, and would show up only as an
+        // afternoon of runs dated wrongly.
+        let stamp = ISO8601.string(fromEpochMs: Self.playedAtMs)
+
+        #expect(stamp.contains("T"), "a date alone is refused")
+        #expect(stamp.hasSuffix("Z"), "the zone must be Z or a colon-bearing offset")
+        #expect(stamp == "2023-11-14T22:13:20.000Z")
+    }
+
     @Test("a run queued before the stamp existed still decodes")
     func decodesARunWithoutAStamp() throws {
         // The persisted queue outlives the app version that wrote it. A run on
