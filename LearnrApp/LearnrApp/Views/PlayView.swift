@@ -19,13 +19,20 @@ struct PlayView: View {
             Palette.paper.ignoresSafeArea()
 
             if let play {
-                switch play.status {
-                case .loading:
-                    ProgressView().controlSize(.large).tint(Palette.brand)
-                case .unavailable:
-                    unavailable
-                case .playing:
-                    playing(play)
+                // The summary wins over the sitting once it exists: `finish()`
+                // has run, the answers are queued, and there is nothing left to
+                // answer.
+                if let summary = play.summary {
+                    SittingSummaryView(summary: summary) { dismiss() }
+                } else {
+                    switch play.status {
+                    case .loading:
+                        ProgressView().controlSize(.large).tint(Palette.brand)
+                    case .unavailable:
+                        unavailable
+                    case .playing:
+                        playing(play)
+                    }
                 }
             } else {
                 ProgressView().controlSize(.large).tint(Palette.brand)
@@ -67,7 +74,11 @@ struct PlayView: View {
                 Task {
                     await play.finish()
                     await session.refreshPendingCount()
-                    dismiss()
+                    // A child who answered something gets told how it went;
+                    // `finish()` sets a summary only when there is one, so a
+                    // sitting nobody answered still leaves straight away rather
+                    // than stopping to say nothing.
+                    if play.summary == nil { dismiss() }
                 }
             } label: {
                 Image(systemName: "xmark")
@@ -245,5 +256,79 @@ struct PlayView: View {
                 .font(.system(size: 17))
                 .foregroundStyle(Palette.inkSoft)
         }
+    }
+}
+
+/// What a sitting says for itself when the child is done.
+///
+/// The counterpart to the speed run's result screen, and deliberately quieter
+/// than one. A speed run is a score by design — ninety seconds against a
+/// personal best — while a sitting is practice, so the number that leads is how
+/// many questions were *answered* rather than how many were right.
+///
+/// That framing is the whole point of the screen. A child who answered four of
+/// thirty correctly still sat down and answered thirty questions, and the app's
+/// existing stance backs this up: a wrong answer is held on screen with the
+/// right one behind a Continue rather than being marked and buried. Telling
+/// that child they scored 13% is what teaches them not to come back.
+struct SittingSummaryView: View {
+    let summary: PlaySession.Summary
+    let onDone: () -> Void
+
+    var body: some View {
+        VStack(spacing: 24) {
+            Spacer()
+
+            Text("You answered")
+                .font(.system(size: 22, weight: .semibold, design: .rounded))
+                .foregroundStyle(Palette.inkSoft)
+
+            Text("\(summary.answered)")
+                .font(.system(size: 120, weight: .bold, design: .rounded))
+                .foregroundStyle(Palette.ink)
+                .monospacedDigit()
+                .accessibilityLabel("\(summary.answered) questions answered")
+
+            Text(summary.answered == 1 ? "question" : "questions")
+                .font(.system(size: 22, weight: .semibold, design: .rounded))
+                .foregroundStyle(Palette.inkSoft)
+
+            breakdown
+                .padding(.top, 8)
+
+            Spacer()
+
+            Button(action: onDone) {
+                Text("Done")
+                    .font(.system(size: 24, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity, minHeight: 68)
+                    .background(Palette.brand, in: RoundedRectangle(cornerRadius: 16))
+            }
+            .frame(maxWidth: 420)
+            .padding(.horizontal, 24)
+            .padding(.bottom, 24)
+        }
+        .accessibilityElement(children: .contain)
+    }
+
+    /// Right and left-to-practise, side by side and the same size as each
+    /// other: neither is the headline, and one is not the failure of the other.
+    @ViewBuilder
+    private var breakdown: some View {
+        HStack(spacing: 10) {
+            Text("\(summary.correct) right")
+                .foregroundStyle(Palette.right)
+
+            if summary.toPractise > 0 {
+                Text("·").foregroundStyle(Palette.line)
+                // Not "wrong": these are the ones worth another go, and the
+                // sitting already showed the right answer for each of them.
+                Text("\(summary.toPractise) to practise")
+                    .foregroundStyle(Palette.inkSoft)
+            }
+        }
+        .font(.system(size: 20, weight: .medium, design: .rounded))
+        .accessibilityElement(children: .combine)
     }
 }

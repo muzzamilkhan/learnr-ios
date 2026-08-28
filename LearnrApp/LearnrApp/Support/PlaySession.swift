@@ -37,6 +37,37 @@ final class PlaySession {
 
     private(set) var status: Status = .loading
 
+    /// What a finished sitting has to say for itself.
+    ///
+    /// Deliberately framed as effort rather than as a score. The count of
+    /// questions *answered* leads, because that is the thing a child chose to
+    /// do and the thing that is true regardless of how hard the sitting was;
+    /// how many were right is secondary, and the rest are "to practise" rather
+    /// than wrong. A child who got four out of thirty still sat down and
+    /// answered thirty questions, and a screen that tells them they scored 13%
+    /// is a screen that teaches them not to come back.
+    ///
+    /// It carries no stars and no streak on purpose: those are banked by
+    /// `SyncQueue.flush` and a device that finished offline has not banked
+    /// anything yet, so showing them here would mean either a number that is
+    /// sometimes a lie or a spinner in front of a child who has finished
+    /// playing.
+    struct Summary: Equatable {
+        let answered: Int
+        let correct: Int
+
+        /// The ones worth another go. Named for what happens next rather than
+        /// for what went wrong.
+        var toPractise: Int { answered - correct }
+    }
+
+    /// Set by `finish()`, and nil until then.
+    ///
+    /// Nil also for a sitting nobody answered: opening the app and closing it
+    /// is not a sitting, it is not queued as one, and a summary reading "you
+    /// answered 0 questions" would be a telling-off for having opened the app.
+    private(set) var summary: Summary?
+
     /// The engine's state, which advances the instant an answer is submitted.
     ///
     /// It is deliberately *not* held back during feedback. An earlier version
@@ -278,6 +309,16 @@ final class PlaySession {
     /// Closes the sitting so it can bank. Called when the child leaves.
     func finish() async {
         advanceTask?.cancel()
+
+        // Read from the engine's own attempts rather than from a counter kept
+        // beside them: `attempts` is what was actually graded, so the summary
+        // cannot drift from the answers that were queued.
+        if let attempts = state?.attempts, !attempts.isEmpty {
+            summary = Summary(
+                answered: attempts.count,
+                correct: attempts.filter(\.correct).count)
+        }
+
         guard began else { return }
         await queue.finish(sittingId)
         _ = await queue.flush()

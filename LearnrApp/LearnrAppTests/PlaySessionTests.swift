@@ -253,6 +253,68 @@ struct PlaySessionTests {
         #expect(sittings.load().first?.finished == true)
     }
 
+    // MARK: The summary
+
+    @Test("a finished sitting reports what was answered")
+    func summaryCountsTheSitting() async throws {
+        let (play, _) = Self.session()
+        await play.start()
+
+        // Three right, two wrong. The pack's one template always expects "5",
+        // so the answers are deterministic.
+        for _ in 0..<3 {
+            play.type("5")
+            play.check()
+            try await Task.sleep(for: .milliseconds(PlaySession.correctMs + 250))
+        }
+        for _ in 0..<2 {
+            play.type("9")
+            play.check()
+            play.advance()
+        }
+
+        await play.finish()
+
+        let summary = try #require(play.summary)
+        #expect(summary.answered == 5)
+        #expect(summary.correct == 3)
+        // What is left to practise, said as a count rather than as a failure.
+        #expect(summary.toPractise == 2)
+    }
+
+    @Test("a sitting with nothing answered has no summary")
+    func nothingAnsweredHasNoSummary() async {
+        let (play, _) = Self.session()
+        await play.start()
+        await play.finish()
+
+        // Opened and abandoned is not a sitting, and it is not queued either.
+        // A summary saying "you answered 0 questions" would be a telling-off
+        // for having opened the app.
+        #expect(play.summary == nil)
+    }
+
+    @Test("a sitting answered entirely wrong still reports the effort")
+    func allWrongStillCounts() async throws {
+        let (play, _) = Self.session()
+        await play.start()
+
+        for _ in 0..<4 {
+            play.type("9")
+            play.check()
+            play.advance()
+        }
+
+        await play.finish()
+
+        let summary = try #require(play.summary)
+        // The count leads and it is the effort: four questions answered is four
+        // questions answered. A child who found it hard is not shown a nought.
+        #expect(summary.answered == 4)
+        #expect(summary.correct == 0)
+        #expect(summary.toPractise == 4)
+    }
+
     @Test("leaving without answering queues nothing")
     func nothingAnsweredQueuesNothing() async {
         let (play, sittings) = Self.session()
