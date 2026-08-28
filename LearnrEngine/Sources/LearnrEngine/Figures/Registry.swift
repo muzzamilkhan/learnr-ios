@@ -21,4 +21,5 @@ let allFigureKindBuilders: [FigureKindBuilder] = [
     solidBuilder,
     gridBuilder,
     numberLineBuilder,
+    timelineBuilder,
 ]
