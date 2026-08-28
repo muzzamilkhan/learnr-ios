@@ -343,7 +343,7 @@ public enum ApiCoding {
 /// included because the contract's `format: date-time` accepts them and the
 /// server's tie-break on `playedAt` is finer than a second.
 public enum ISO8601 {
-    nonisolated(unsafe) private static let formatter: DateFormatter = {
+    private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
