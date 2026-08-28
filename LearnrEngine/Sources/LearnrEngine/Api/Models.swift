@@ -14,9 +14,11 @@ import Foundation
 /// `swift-openapi-generator` and reshaping every call site, which is a trade
 /// nobody has made - ledger item `L1`.
 ///
-/// One trap if that ever happens: ten contract fields carry `format: date-time`,
-/// and `ApiClient` decodes with a bare `JSONDecoder()`. Generating `Date`-typed
-/// properties needs `dateDecodingStrategy = .iso8601` in the same change.
+/// Ten contract fields carry `format: date-time`. `ApiClient` no longer decodes
+/// with a bare `JSONDecoder()` - it reads and writes through `ApiCoding` below,
+/// so generated `Date`-typed properties decode the day they arrive. Only
+/// `RedeemResponse.expiresAt` is typed as a `Date` so far; the other nine are
+/// still unmodelled and follow with the generator.
 
 /// Australian school year. Note the contract orders `K` last in its enum, even
 /// though it sorts first everywhere in the product.
@@ -43,9 +45,14 @@ public struct RedeemRequest: Codable, Sendable {
 public struct RedeemResponse: Codable, Sendable {
     public let token: String
     public let childId: String
-    /// ISO 8601. A hundred years out in practice: the code is the short-lived
-    /// half of signing in, not the session it buys.
-    public let expiresAt: String
+    /// A hundred years out in practice: the code is the short-lived half of
+    /// signing in, not the session it buys.
+    ///
+    /// The first of the contract's ten `format: date-time` fields to be typed
+    /// as a `Date` rather than carried as an unparsed String. It decodes only
+    /// because `ApiClient` reads through `ApiCoding`; the remaining nine follow
+    /// with the generator under `L1`.
+    public let expiresAt: Date
 }
 
 /// `GET /me`. **Hand-written** (ledger `L1`), originally from `Account` in
@@ -260,7 +267,74 @@ public struct SpeedRunRequest: Codable, Sendable {
     }
 }
 
-/// The one date format the API speaks.
+/// How the client reads and writes the contract's `format: date-time`.
+///
+/// Ten fields carry it, and `ApiClient` decoded with a bare `JSONDecoder()`
+/// until this existed - so a `Date`-typed property would simply fail, and fail
+/// as "The data couldn't be read" with no field named. None of the hand-written
+/// models types one as a `Date` yet, which is why nothing was red; the generator
+/// under `L1` emits `Date` for all ten at once, which is why this lands first
+/// and on its own.
+///
+/// **Why not the bare `.iso8601` strategy `L1` names.** Measured on Swift 6.3.3
+/// / macOS 26.5.1, `.iso8601` accepts both `...:20.123Z` and `...:20Z`, so the
+/// fractional-second hazard this was first written to dodge is not present on
+/// this toolchain. It is a documented property of `ISO8601DateFormatter`'s
+/// default options that they omit `.withFractionalSeconds`, and older Foundation
+/// did reject the fractional form - so the tolerance is a version-dependent
+/// convenience rather than a guarantee to build on.
+///
+/// Being explicit costs one fallback and buys two things worth having: the
+/// parse cannot change under a toolchain or deployment-target move, and a
+/// failure says which value was rejected instead of "The data couldn't be read".
+/// Both shapes are pinned by tests either way. (Which shape the API actually
+/// sends is ledger ask `L16`, still open at the time of writing.)
+public enum ApiCoding {
+    nonisolated(unsafe) private static let withFraction: ISO8601DateFormatter = {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return formatter
+    }()
+
+    nonisolated(unsafe) private static let withoutFraction: ISO8601DateFormatter = {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime]
+        return formatter
+    }()
+
+    /// Parses either shape, and any offset - a stamp is an instant, not a wall
+    /// clock, so `+11:00` and `Z` land on the same `Date`.
+    public static func date(from text: String) -> Date? {
+        withFraction.date(from: text) ?? withoutFraction.date(from: text)
+    }
+
+    public static func decoder() -> JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .custom { decoder in
+            let text = try decoder.singleValueContainer().decode(String.self)
+            guard let date = Self.date(from: text) else {
+                throw DecodingError.dataCorrupted(.init(
+                    codingPath: decoder.codingPath,
+                    debugDescription: "Not an ISO 8601 date-time: \(text)"))
+            }
+            return date
+        }
+        return decoder
+    }
+
+    /// Writes what the contract asks for, fractional seconds included: the
+    /// server tie-breaks `playedAt` finer than a second.
+    public static func encoder() -> JSONEncoder {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .custom { date, encoder in
+            var container = encoder.singleValueContainer()
+            try container.encode(Self.withFraction.string(from: date))
+        }
+        return encoder
+    }
+}
+
+/// The one date format the client writes by hand.
 ///
 /// Fixed to UTC and to `en_US_POSIX` rather than taking the device's locale or
 /// zone: a child in Sydney and a child in London must send the same instant the

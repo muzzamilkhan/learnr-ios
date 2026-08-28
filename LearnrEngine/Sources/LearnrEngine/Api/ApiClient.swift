@@ -206,7 +206,7 @@ public actor ApiClient {
         _ method: String, _ path: String, body: Body, authorised: Bool = true
     ) async throws -> Response {
         var request = try request(method, path, authorised: authorised)
-        request.httpBody = try JSONEncoder().encode(body)
+        request.httpBody = try ApiCoding.encoder().encode(body)
         let (data, http) = try await perform(request)
         try check(data, http)
         return try decode(data)
@@ -221,7 +221,7 @@ public actor ApiClient {
         _ method: String, _ path: String, body: Body
     ) async throws {
         var request = try request(method, path, authorised: true)
-        request.httpBody = try JSONEncoder().encode(body)
+        request.httpBody = try ApiCoding.encoder().encode(body)
         let (data, http) = try await perform(request)
         try check(data, http)
     }
@@ -249,9 +249,12 @@ public actor ApiClient {
         return .fetched(try decode(data), etag: tag, data: data)
     }
 
+    /// Every response body decodes here, which is what makes one date strategy
+    /// enough. Ten contract fields carry `format: date-time`, and a bare
+    /// `JSONDecoder()` reads none of them - see `ApiCoding`.
     private func decode<T: Decodable>(_ data: Data) throws -> T {
         do {
-            return try JSONDecoder().decode(T.self, from: data)
+            return try ApiCoding.decoder().decode(T.self, from: data)
         } catch {
             throw ApiError.decoding("\(T.self): \(error)")
         }
