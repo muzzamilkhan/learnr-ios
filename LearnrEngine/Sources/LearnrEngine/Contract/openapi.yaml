@@ -1,0 +1,2767 @@
+openapi: 3.1.0
+info:
+  title: LearnR API
+  version: 0.1.0
+components:
+  schemas:
+    AttemptInput:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/AttemptInput'
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+        templateId:
+          type: string
+          minLength: 1
+        subject:
+          type: string
+          minLength: 1
+        topic:
+          type: string
+          minLength: 1
+        level:
+          $ref: '#/components/schemas/YearLevelInput'
+        prompt:
+          type: string
+        expected:
+          type: string
+        response:
+          type: string
+        correct:
+          type: boolean
+        timeTakenMs:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        answeredAt:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        offsetMinutes:
+          type: integer
+          minimum: -840
+          maximum: 840
+        figure: {}
+      required:
+        - id
+        - templateId
+        - subject
+        - topic
+        - level
+        - prompt
+        - expected
+        - response
+        - correct
+        - timeTakenMs
+        - answeredAt
+        - offsetMinutes
+    AttemptsBodyInput:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/AttemptsBodyInput'
+      type: object
+      properties:
+        attempts:
+          minItems: 1
+          maxItems: 200
+          type: array
+          items:
+            $ref: '#/components/schemas/AttemptInput'
+      required:
+        - attempts
+    ChildDetailsInput:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/ChildDetailsInput'
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 40
+        avatar:
+          type: string
+          minLength: 1
+        level:
+          $ref: '#/components/schemas/YearLevelInput'
+        targetKind:
+          type:
+            - string
+            - 'null'
+          enum:
+            - questions
+            - minutes
+            - null
+        targetValue:
+          type:
+            - integer
+            - 'null'
+          exclusiveMinimum: 0
+          maximum: 9007199254740991
+        photo:
+          type:
+            - string
+            - 'null'
+      required:
+        - name
+        - avatar
+        - level
+        - targetKind
+        - targetValue
+        - photo
+    CreateSessionInput:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/CreateSessionInput'
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+        subject:
+          type: string
+          minLength: 1
+        level:
+          $ref: '#/components/schemas/YearLevelInput'
+        seed:
+          type: string
+          minLength: 1
+      required:
+        - id
+        - subject
+        - level
+        - seed
+    YearLevelInput:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/YearLevelInput'
+      type: string
+      enum:
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+        - '6'
+        - K
+    AcceptResult:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/AcceptResult'
+      oneOf:
+        - type: object
+          properties:
+            ok:
+              type: boolean
+              const: true
+            children:
+              type: integer
+              minimum: -9007199254740991
+              maximum: 9007199254740991
+          required:
+            - ok
+            - children
+          additionalProperties: false
+        - type: object
+          properties:
+            ok:
+              type: boolean
+              const: false
+            reason:
+              type: string
+              enum:
+                - unavailable
+                - own-link
+                - error
+          required:
+            - ok
+            - reason
+          additionalProperties: false
+    Account:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/Account'
+      type: object
+      properties:
+        id:
+          type: string
+        role:
+          description: >-
+            May be null. The null is not expressible beside a $ref in OpenAPI
+            3.1, so it is said here instead.
+          allOf:
+            - $ref: '#/components/schemas/Role'
+        parentId:
+          type:
+            - string
+            - 'null'
+        name:
+          type:
+            - string
+            - 'null'
+        avatar:
+          description: >-
+            May be null. The null is not expressible beside a $ref in OpenAPI
+            3.1, so it is said here instead.
+          allOf:
+            - $ref: '#/components/schemas/Avatar'
+        image:
+          type:
+            - string
+            - 'null'
+        photo:
+          type:
+            - string
+            - 'null'
+      required:
+        - id
+        - role
+        - parentId
+        - name
+        - avatar
+        - image
+        - photo
+      additionalProperties: false
+    AnsweredQuestion:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/AnsweredQuestion'
+      type: object
+      properties:
+        topic:
+          type: string
+        level:
+          $ref: '#/components/schemas/YearLevel'
+        prompt:
+          type: string
+        expected:
+          type: string
+        response:
+          type: string
+        correct:
+          type: boolean
+        answeredAt:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        figure:
+          $ref: '#/components/schemas/Figure'
+      required:
+        - topic
+        - level
+        - prompt
+        - expected
+        - response
+        - correct
+        - answeredAt
+      additionalProperties: false
+    AttemptResult:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/AttemptResult'
+      type: object
+      properties:
+        streak:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        streakAdvanced:
+          type: boolean
+      required:
+        - streak
+        - streakAdvanced
+      additionalProperties: false
+    Avatar:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/Avatar'
+      type: string
+      enum:
+        - fox
+        - bear
+        - cat
+        - owl
+        - frog
+        - whale
+        - rabbit
+        - panda
+    BucketUnit:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/BucketUnit'
+      type: string
+      enum:
+        - day
+        - week
+    ChildAccess:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/ChildAccess'
+      type: string
+      enum:
+        - owner
+        - viewer
+    ChildHistory:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/ChildHistory'
+      type: object
+      properties:
+        observations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Observation'
+        sittings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sitting'
+        answers:
+          type:
+            - array
+            - 'null'
+          items:
+            $ref: '#/components/schemas/AnsweredQuestion'
+        recentAnswers:
+          type:
+            - array
+            - 'null'
+          items:
+            $ref: '#/components/schemas/TargetAnswer'
+        speedRuns:
+          type:
+            - array
+            - 'null'
+          items:
+            $ref: '#/components/schemas/SummaryRun'
+      required:
+        - observations
+        - sittings
+        - answers
+        - recentAnswers
+        - speedRuns
+      additionalProperties: false
+    ChildProfile:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/ChildProfile'
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        avatar:
+          $ref: '#/components/schemas/Avatar'
+        photo:
+          type:
+            - string
+            - 'null'
+        level:
+          type:
+            - string
+            - 'null'
+        target:
+          description: >-
+            May be null. The null is not expressible beside a $ref in OpenAPI
+            3.1, so it is said here instead.
+          allOf:
+            - $ref: '#/components/schemas/DailyTarget'
+        code:
+          type:
+            - string
+            - 'null'
+        codeExpiresAt:
+          type:
+            - string
+            - 'null'
+          format: date-time
+      required:
+        - id
+        - name
+        - avatar
+        - photo
+        - level
+        - target
+        - code
+        - codeExpiresAt
+      additionalProperties: false
+    ChildRecord:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/ChildRecord'
+      type: object
+      properties:
+        childId:
+          type: string
+        childName:
+          type: string
+        mode:
+          type: string
+        best:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        achievedAt:
+          type: string
+          format: date-time
+      required:
+        - childId
+        - childName
+        - mode
+        - best
+        - achievedAt
+      additionalProperties: false
+    ChoiceSpec:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/ChoiceSpec'
+      type: object
+      properties:
+        count:
+          type: number
+        distractors:
+          readOnly: true
+          type: array
+          items:
+            type: string
+        jitter:
+          type: object
+          properties:
+            min:
+              type: string
+            max:
+              type: string
+          required:
+            - min
+            - max
+          additionalProperties: false
+        rankIsTheQuestion:
+          type: boolean
+        propertyIsTheQuestion:
+          type: boolean
+      required:
+        - count
+      additionalProperties: false
+    ContentManifestLevel:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/ContentManifestLevel'
+      type: object
+      properties:
+        level:
+          $ref: '#/components/schemas/YearLevel'
+        topics:
+          type: array
+          items:
+            type: string
+        templateCount:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        etag:
+          type: string
+      required:
+        - level
+        - topics
+        - templateCount
+        - etag
+      additionalProperties: false
+    ContentManifest:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/ContentManifest'
+      type: object
+      properties:
+        version:
+          type: string
+        subjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentManifestSubject'
+      required:
+        - version
+        - subjects
+      additionalProperties: false
+    ContentManifestSubject:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/ContentManifestSubject'
+      type: object
+      properties:
+        subject:
+          type: string
+        levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentManifestLevel'
+      required:
+        - subject
+        - levels
+      additionalProperties: false
+    ContentPack:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/ContentPack'
+      type: object
+      properties:
+        version:
+          type: string
+        subject:
+          type: string
+        level:
+          $ref: '#/components/schemas/YearLevel'
+        templates:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionTemplate'
+      required:
+        - version
+        - subject
+        - level
+        - templates
+      additionalProperties: false
+    DailyTarget:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/DailyTarget'
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - questions
+            - minutes
+        value:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+      required:
+        - kind
+        - value
+      additionalProperties: false
+    ErrorCluster:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/ErrorCluster'
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/ErrorKind'
+        count:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        topics:
+          type: array
+          items:
+            type: object
+            properties:
+              topic:
+                type: string
+              level:
+                $ref: '#/components/schemas/YearLevel'
+            required:
+              - topic
+              - level
+            additionalProperties: false
+        examples:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnsweredQuestion'
+      required:
+        - kind
+        - count
+        - topics
+        - examples
+      additionalProperties: false
+    ErrorKind:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/ErrorKind'
+      type: string
+      enum:
+        - copied
+        - power-of-ten
+        - sign-dropped
+        - added-not-multiplied
+        - clock-format
+    Error:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/Error'
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+      additionalProperties: false
+    FamilyRecord:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/FamilyRecord'
+      type: object
+      properties:
+        playerId:
+          type: string
+        playerName:
+          type: string
+        playerPhoto:
+          type:
+            - string
+            - 'null'
+        playerAvatar:
+          description: >-
+            May be null. The null is not expressible beside a $ref in OpenAPI
+            3.1, so it is said here instead.
+          allOf:
+            - $ref: '#/components/schemas/Avatar'
+        playerImage:
+          type:
+            - string
+            - 'null'
+        mode:
+          type: string
+        best:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        achievedAt:
+          type: string
+          format: date-time
+      required:
+        - playerId
+        - playerName
+        - mode
+        - best
+        - achievedAt
+      additionalProperties: false
+    Figure:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/Figure'
+      type: object
+      properties:
+        width:
+          type: number
+        height:
+          type: number
+        marks:
+          readOnly: true
+          maxItems: 200
+          type: array
+          items:
+            $ref: '#/components/schemas/Mark'
+      required:
+        - width
+        - height
+        - marks
+      additionalProperties: false
+    FigureSpec:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/FigureSpec'
+      oneOf:
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: polygon
+            shape:
+              type: string
+            rotation:
+              type: string
+            mirror:
+              type: string
+            rightAngles:
+              type: string
+          required:
+            - kind
+            - shape
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: angle
+            degrees:
+              type: string
+            rotation:
+              type: string
+            armLength:
+              type: string
+            arc:
+              type: string
+          required:
+            - kind
+            - degrees
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: bar
+            values:
+              type: string
+            labels:
+              type: string
+            style:
+              type: string
+            scale:
+              type: string
+          required:
+            - kind
+            - values
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: pictograph
+            counts:
+              type: string
+            labels:
+              type: string
+            key:
+              type: string
+            halves:
+              type: string
+          required:
+            - kind
+            - counts
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: spinner
+            sectors:
+              type: string
+            fills:
+              type: string
+            rotation:
+              type: string
+          required:
+            - kind
+            - sectors
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: solid
+            solid:
+              type: string
+            view:
+              type: string
+            rotation:
+              type: string
+          required:
+            - kind
+            - solid
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: number-line
+            at:
+              type: string
+            from:
+              type: string
+            to:
+              type: string
+            step:
+              type: string
+            minorTicks:
+              type: string
+          required:
+            - kind
+            - at
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: clock
+            hour:
+              type: string
+            minute:
+              type: string
+            numerals:
+              type: string
+            minuteTicks:
+              type: string
+          required:
+            - kind
+            - hour
+            - minute
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: array
+            rows:
+              type: string
+            columns:
+              type: string
+            orientation:
+              type: string
+          required:
+            - kind
+            - rows
+            - columns
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: fraction-shape
+            numerator:
+              type: string
+            denominator:
+              type: string
+            shape:
+              type: string
+            rotation:
+              type: string
+          required:
+            - kind
+            - numerator
+            - denominator
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: grid
+            at:
+              type: string
+            columns:
+              type: string
+            rows:
+              type: string
+            axisLabels:
+              type: string
+            onLines:
+              type: string
+          required:
+            - kind
+            - at
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: timeline
+            years:
+              type: string
+            labels:
+              type: string
+            from:
+              type: string
+            to:
+              type: string
+            step:
+              type: string
+          required:
+            - kind
+            - years
+          additionalProperties: false
+    Headline:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/Headline'
+      type: object
+      properties:
+        minutes:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        questions:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        accuracy:
+          type:
+            - number
+            - 'null'
+        minutesDelta:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        questionsDelta:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        accuracyDelta:
+          type:
+            - number
+            - 'null'
+      required:
+        - minutes
+        - questions
+        - accuracy
+        - minutesDelta
+        - questionsDelta
+        - accuracyDelta
+      additionalProperties: false
+    Id:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/Id'
+      type: string
+      minLength: 1
+      maxLength: 64
+    InviteDetails:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/InviteDetails'
+      type: object
+      properties:
+        ownerId:
+          type: string
+        ownerName:
+          type:
+            - string
+            - 'null'
+        children:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              avatar:
+                $ref: '#/components/schemas/Avatar'
+              photo:
+                type:
+                  - string
+                  - 'null'
+              level:
+                type:
+                  - string
+                  - 'null'
+            required:
+              - id
+              - name
+              - avatar
+              - photo
+              - level
+            additionalProperties: false
+        expiresAt:
+          type: string
+          format: date-time
+        live:
+          type: boolean
+      required:
+        - ownerId
+        - ownerName
+        - children
+        - expiresAt
+        - live
+      additionalProperties: false
+    LearnerProfile:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/LearnerProfile'
+      type: object
+      properties:
+        skills:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicSkill'
+      required:
+        - skills
+      additionalProperties: false
+    LoginCode:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/LoginCode'
+      type: object
+      properties:
+        code:
+          type: string
+        expiresAt:
+          type: string
+      required:
+        - code
+        - expiresAt
+      additionalProperties: false
+    Mark:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/Mark'
+      oneOf:
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: path
+            points:
+              readOnly: true
+              type: array
+              items:
+                readOnly: true
+                type: array
+                prefixItems:
+                  - type: number
+                  - type: number
+            closed:
+              type: boolean
+            fill:
+              type: boolean
+            dashed:
+              type: boolean
+          required:
+            - kind
+            - points
+            - closed
+            - fill
+            - dashed
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: arc
+            at:
+              readOnly: true
+              type: array
+              prefixItems:
+                - type: number
+                - type: number
+            radius:
+              type: number
+            from:
+              type: number
+            to:
+              type: number
+          required:
+            - kind
+            - at
+            - radius
+            - from
+            - to
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: dot
+            at:
+              readOnly: true
+              type: array
+              prefixItems:
+                - type: number
+                - type: number
+          required:
+            - kind
+            - at
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: label
+            at:
+              readOnly: true
+              type: array
+              prefixItems:
+                - type: number
+                - type: number
+            text:
+              type: string
+          required:
+            - kind
+            - at
+            - text
+          additionalProperties: false
+    ModeListing:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/ModeListing'
+      anyOf:
+        - type: object
+          properties:
+            key:
+              type: string
+            op:
+              type: string
+              enum:
+                - add
+                - subtract
+                - divide
+                - mixed
+            difficulty:
+              type: string
+              enum:
+                - easy
+                - moderate
+                - hard
+          required:
+            - key
+            - op
+            - difficulty
+          additionalProperties: false
+        - type: object
+          properties:
+            key:
+              type: string
+            op:
+              type: string
+              const: multiply
+            tables:
+              $ref: '#/components/schemas/TableChoice'
+          required:
+            - key
+            - op
+            - tables
+          additionalProperties: false
+    Observation:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/Observation'
+      type: object
+      properties:
+        topic:
+          type: string
+        level:
+          $ref: '#/components/schemas/YearLevel'
+        correct:
+          type: boolean
+        templateId:
+          type: string
+        timeTakenMs:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        answeredAt:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        offsetMinutes:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+      required:
+        - topic
+        - level
+        - correct
+        - timeTakenMs
+        - answeredAt
+      additionalProperties: false
+    PendingInvite:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/PendingInvite'
+      type: object
+      properties:
+        id:
+          type: string
+        token:
+          type: string
+        childIds:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - token
+        - childIds
+        - createdAt
+        - expiresAt
+      additionalProperties: false
+    PlayState:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/PlayState'
+      type: object
+      properties:
+        player:
+          $ref: '#/components/schemas/PlayerState'
+        targetAnswers:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetAnswer'
+        profile:
+          $ref: '#/components/schemas/LearnerProfile'
+        recentTopics:
+          type: array
+          items:
+            type: string
+      required:
+        - player
+        - targetAnswers
+        - profile
+        - recentTopics
+      additionalProperties: false
+    PlayStreak:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/PlayStreak'
+      type: object
+      properties:
+        days:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        lastDay:
+          type:
+            - integer
+            - 'null'
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+      required:
+        - days
+        - lastDay
+      additionalProperties: false
+    PlayerRead:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/PlayerRead'
+      type: object
+      properties:
+        player:
+          $ref: '#/components/schemas/PlayerState'
+        targetAnswers:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetAnswer'
+      required:
+        - player
+        - targetAnswers
+      additionalProperties: false
+    PlayerState:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/PlayerState'
+      type: object
+      properties:
+        selectedLevel:
+          type:
+            - string
+            - 'null'
+        streak:
+          $ref: '#/components/schemas/PlayStreak'
+        stars:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        target:
+          description: >-
+            May be null. The null is not expressible beside a $ref in OpenAPI
+            3.1, so it is said here instead.
+          allOf:
+            - $ref: '#/components/schemas/DailyTarget'
+        targetDay:
+          type:
+            - integer
+            - 'null'
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+      required:
+        - selectedLevel
+        - streak
+        - stars
+        - target
+        - targetDay
+      additionalProperties: false
+    ProgressBucket:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/ProgressBucket'
+      type: object
+      properties:
+        start:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        unit:
+          $ref: '#/components/schemas/BucketUnit'
+        attempts:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        correct:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        accuracy:
+          type:
+            - number
+            - 'null'
+      required:
+        - start
+        - unit
+        - attempts
+        - correct
+        - accuracy
+      additionalProperties: false
+    QuestionTemplate:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/QuestionTemplate'
+      type: object
+      properties:
+        id:
+          type: string
+        subject:
+          type: string
+        topic:
+          type: string
+        level:
+          $ref: '#/components/schemas/YearLevel'
+        tags:
+          readOnly: true
+          type: array
+          items:
+            type: string
+        prompt:
+          type: string
+        vars:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/VarSpec'
+        constraints:
+          readOnly: true
+          type: array
+          items:
+            type: string
+        answer:
+          type: string
+        answerType:
+          type: string
+          enum:
+            - number
+            - text
+            - choice
+            - boolean
+        choices:
+          $ref: '#/components/schemas/ChoiceSpec'
+        hint:
+          type: string
+        figure:
+          $ref: '#/components/schemas/FigureSpec'
+      required:
+        - id
+        - subject
+        - topic
+        - level
+        - prompt
+        - vars
+        - answer
+      additionalProperties: false
+    Report:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/Report'
+      type: object
+      properties:
+        headline:
+          $ref: '#/components/schemas/Headline'
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicReport'
+        problems:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicReport'
+        due:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicReport'
+        strengths:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicReport'
+        progress:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProgressBucket'
+        clusters:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorCluster'
+        sittings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sitting'
+      required:
+        - headline
+        - topics
+        - problems
+        - due
+        - strengths
+        - progress
+        - clusters
+        - sittings
+      additionalProperties: false
+    Role:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/Role'
+      type: string
+      enum:
+        - parent
+        - child
+    Session:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/Session'
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Id'
+      required:
+        - id
+      additionalProperties: false
+    SharedViewer:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/SharedViewer'
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type:
+            - string
+            - 'null'
+        email:
+          type:
+            - string
+            - 'null'
+        image:
+          type:
+            - string
+            - 'null'
+        children:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+            required:
+              - id
+              - name
+            additionalProperties: false
+      required:
+        - id
+        - name
+        - email
+        - image
+        - children
+      additionalProperties: false
+    Shares:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/Shares'
+      type: object
+      properties:
+        invites:
+          type: array
+          items:
+            $ref: '#/components/schemas/PendingInvite'
+        viewers:
+          type: array
+          items:
+            $ref: '#/components/schemas/SharedViewer'
+      required:
+        - invites
+        - viewers
+      additionalProperties: false
+    Sitting:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/Sitting'
+      type: object
+      properties:
+        id:
+          type: string
+        startedAt:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        level:
+          $ref: '#/components/schemas/YearLevel'
+        attempts:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        correct:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        timeMs:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+      required:
+        - id
+        - startedAt
+        - level
+        - attempts
+        - correct
+        - timeMs
+      additionalProperties: false
+    SkillStatus:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/SkillStatus'
+      type: string
+      enum:
+        - new
+        - struggling
+        - developing
+        - secure
+        - review-due
+    SpeedAttempt:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/SpeedAttempt'
+      type: object
+      properties:
+        mode:
+          type: string
+        correct:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        playedAt:
+          type: string
+          format: date-time
+      required:
+        - mode
+        - correct
+        - playedAt
+      additionalProperties: false
+    SpeedOutcome:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/SpeedOutcome'
+      type: object
+      properties:
+        previousBest:
+          type:
+            - integer
+            - 'null'
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        best:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        isRecord:
+          type: boolean
+        standing:
+          description: >-
+            May be null. The null is not expressible beside a $ref in OpenAPI
+            3.1, so it is said here instead.
+          allOf:
+            - $ref: '#/components/schemas/StandingChange'
+      required:
+        - previousBest
+        - best
+        - isRecord
+        - standing
+      additionalProperties: false
+    SpeedRecords:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/SpeedRecords'
+      type: object
+      properties:
+        attempts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SpeedAttempt'
+        family:
+          type:
+            - array
+            - 'null'
+          items:
+            $ref: '#/components/schemas/FamilyRecord'
+      required:
+        - attempts
+        - family
+      additionalProperties: false
+    StandingChange:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/StandingChange'
+      type: object
+      properties:
+        place:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        previousPlace:
+          type:
+            - integer
+            - 'null'
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        rivals:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+      required:
+        - place
+        - previousPlace
+        - rivals
+      additionalProperties: false
+    SummaryRun:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/SummaryRun'
+      type: object
+      properties:
+        mode:
+          type: string
+        correct:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        playedAt:
+          type: string
+          format: date-time
+      required:
+        - mode
+        - correct
+        - playedAt
+      additionalProperties: false
+    TableChoice:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/TableChoice'
+      anyOf:
+        - type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        - type: string
+          enum:
+            - 2-5
+            - 6-9
+            - 11-12
+            - all
+    TargetAnswer:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/TargetAnswer'
+      type: object
+      properties:
+        answeredAt:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        timeTakenMs:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+      required:
+        - answeredAt
+        - timeTakenMs
+      additionalProperties: false
+    TopicReport:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/TopicReport'
+      type: object
+      properties:
+        topic:
+          type: string
+        level:
+          $ref: '#/components/schemas/YearLevel'
+        status:
+          $ref: '#/components/schemas/SkillStatus'
+        attempts:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        correct:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        accuracy:
+          type: number
+        strength:
+          type: number
+        streak:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        correctDays:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        averageTimeMs:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        lastAnsweredAt:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        reviewDueAt:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        trend:
+          $ref: '#/components/schemas/Trend'
+      required:
+        - topic
+        - level
+        - status
+        - attempts
+        - correct
+        - accuracy
+        - strength
+        - streak
+        - correctDays
+        - averageTimeMs
+        - lastAnsweredAt
+        - reviewDueAt
+        - trend
+      additionalProperties: false
+    TopicSkill:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/TopicSkill'
+      type: object
+      properties:
+        topic:
+          type: string
+        level:
+          $ref: '#/components/schemas/YearLevel'
+        attempts:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        correct:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        strength:
+          type: number
+        streak:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        correctDays:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        lastCorrectDay:
+          type:
+            - integer
+            - 'null'
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        totalTimeMs:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+        lastAnsweredAt:
+          type: integer
+          minimum: -9007199254740991
+          maximum: 9007199254740991
+      required:
+        - topic
+        - level
+        - attempts
+        - correct
+        - strength
+        - streak
+        - correctDays
+        - lastCorrectDay
+        - totalTimeMs
+        - lastAnsweredAt
+      additionalProperties: false
+    Trend:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/Trend'
+      type: string
+      enum:
+        - improving
+        - steady
+        - slipping
+        - unknown
+    VarSpec:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/VarSpec'
+      oneOf:
+        - type: object
+          properties:
+            name:
+              type: string
+            kind:
+              type: string
+              const: int
+            min:
+              type: string
+            max:
+              type: string
+            step:
+              type: number
+          required:
+            - name
+            - kind
+            - min
+            - max
+          additionalProperties: false
+        - type: object
+          properties:
+            name:
+              type: string
+            kind:
+              type: string
+              const: number
+            min:
+              type: string
+            max:
+              type: string
+            decimals:
+              type: number
+          required:
+            - name
+            - kind
+            - min
+            - max
+          additionalProperties: false
+        - type: object
+          properties:
+            name:
+              type: string
+            kind:
+              type: string
+              const: pick
+            from:
+              readOnly: true
+              type: array
+              items:
+                anyOf:
+                  - type: string
+                  - type: number
+            weights:
+              readOnly: true
+              type: array
+              items:
+                type: number
+          required:
+            - name
+            - kind
+            - from
+          additionalProperties: false
+        - type: object
+          properties:
+            name:
+              type: string
+            kind:
+              type: string
+              const: expr
+            expr:
+              type: string
+          required:
+            - name
+            - kind
+            - expr
+          additionalProperties: false
+    ViewableChild:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/ViewableChild'
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        avatar:
+          $ref: '#/components/schemas/Avatar'
+        photo:
+          type:
+            - string
+            - 'null'
+        level:
+          type:
+            - string
+            - 'null'
+        target:
+          description: >-
+            May be null. The null is not expressible beside a $ref in OpenAPI
+            3.1, so it is said here instead.
+          allOf:
+            - $ref: '#/components/schemas/DailyTarget'
+        code:
+          type:
+            - string
+            - 'null'
+        codeExpiresAt:
+          type:
+            - string
+            - 'null'
+          format: date-time
+        access:
+          $ref: '#/components/schemas/ChildAccess'
+        sharedBy:
+          type:
+            - string
+            - 'null'
+      required:
+        - id
+        - name
+        - avatar
+        - photo
+        - level
+        - target
+        - code
+        - codeExpiresAt
+        - access
+        - sharedBy
+      additionalProperties: false
+    YearLevel:
+      $schema: https://json-schema.org/draft/2020-12/schema
+      $id: '#/components/schemas/YearLevel'
+      type: string
+      enum:
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+        - '6'
+        - K
+paths:
+  /auth/redeem:
+    post:
+      operationId: redeemLoginCode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  minLength: 1
+                  maxLength: 16
+              required:
+                - code
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  childId:
+                    type: string
+                  expiresAt:
+                    type: string
+                required:
+                  - token
+                  - childId
+                  - expiresAt
+                additionalProperties: false
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /me/claim-parent:
+    post:
+      operationId: claimParentRole
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  claimed:
+                    type: boolean
+                required:
+                  - claimed
+                additionalProperties: false
+  /me:
+    get:
+      operationId: readAccount
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '503':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /sessions:
+    post:
+      operationId: startSession
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSessionInput'
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '503':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /sessions/{id}/attempts:
+    post:
+      operationId: recordAttempt
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttemptsBodyInput'
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: id
+          required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttemptResult'
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /sessions/{id}/award-round:
+    post:
+      operationId: awardRound
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: id
+          required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stars:
+                    type:
+                      - integer
+                      - 'null'
+                    minimum: -9007199254740991
+                    maximum: 9007199254740991
+                required:
+                  - stars
+                additionalProperties: false
+  /sessions/{id}/award-target:
+    post:
+      operationId: awardDailyTarget
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                offsetMinutes:
+                  type: integer
+                  minimum: -840
+                  maximum: 840
+              required:
+                - offsetMinutes
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: id
+          required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  awarded:
+                    type: boolean
+                required:
+                  - awarded
+                additionalProperties: false
+  /sessions/{id}/end:
+    post:
+      operationId: endSession
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: id
+          required: true
+      responses:
+        '204':
+          description: Default Response
+  /children:
+    get:
+      operationId: listChildren
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChildProfile'
+        '503':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: addChild
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChildDetailsInput'
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                required:
+                  - id
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /children/viewable:
+    get:
+      operationId: listViewableChildren
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ViewableChild'
+        '503':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /children/{id}:
+    patch:
+      operationId: updateChild
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChildDetailsInput'
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: id
+          required: true
+      responses:
+        '204':
+          description: Default Response
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: removeChild
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: id
+          required: true
+      responses:
+        '204':
+          description: Default Response
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /children/{id}/login-code:
+    post:
+      operationId: issueLoginCode
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: id
+          required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginCode'
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /children/{id}/report:
+    get:
+      operationId: readReport
+      parameters:
+        - schema:
+            default: maths
+            type: string
+          in: query
+          name: subject
+          required: false
+        - schema:
+            type: string
+          in: path
+          name: id
+          required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /children/{id}/record:
+    get:
+      operationId: readChildRecord
+      parameters:
+        - schema:
+            default: maths
+            type: string
+          in: query
+          name: subject
+          required: false
+        - schema:
+            default: 3
+            type: integer
+            minimum: 1
+            maximum: 50
+          in: query
+          name: perTopic
+          required: false
+        - schema:
+            default: 2505600000
+            type: integer
+            minimum: 1
+            maximum: 2505600000
+          in: query
+          name: windowMs
+          required: false
+        - schema:
+            default: 'false'
+            type: string
+            enum:
+              - 'true'
+              - 'false'
+          in: query
+          name: speedRuns
+          required: false
+        - schema:
+            type: string
+          in: path
+          name: id
+          required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChildHistory'
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /children/{id}/answers:
+    get:
+      operationId: readAnsweredQuestions
+      parameters:
+        - schema:
+            default: maths
+            type: string
+          in: query
+          name: subject
+          required: false
+        - schema:
+            default: 3
+            type: integer
+            minimum: 1
+            maximum: 50
+          in: query
+          name: perTopic
+          required: false
+        - schema:
+            type: string
+          in: path
+          name: id
+          required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnsweredQuestion'
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /shares:
+    get:
+      operationId: readShares
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shares'
+        '503':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: createShareInvite
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                childIds:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+              required:
+                - childIds
+      responses:
+        '201':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  expiresAt:
+                    type: string
+                required:
+                  - token
+                  - expiresAt
+                additionalProperties: false
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /shares/{token}:
+    get:
+      operationId: readShareInvite
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: token
+          required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InviteDetails'
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /shares/{id}:
+    delete:
+      operationId: cancelShareInvite
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: id
+          required: true
+      responses:
+        '204':
+          description: Default Response
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /shares/{token}/accept:
+    post:
+      operationId: acceptShareInvite
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: token
+          required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptResult'
+  /shares/viewers/{viewerId}:
+    delete:
+      operationId: revokeShare
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: childId
+          required: false
+        - schema:
+            type: string
+          in: path
+          name: viewerId
+          required: true
+      responses:
+        '204':
+          description: Default Response
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /shares/mine/{childId}:
+    delete:
+      operationId: leaveShare
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: childId
+          required: true
+      responses:
+        '204':
+          description: Default Response
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /speed/modes:
+    get:
+      operationId: listSpeedModes
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModeListing'
+  /speed/runs:
+    post:
+      operationId: submitSpeedRun
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                  pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                mode:
+                  type: string
+                  minLength: 1
+                correct:
+                  type: integer
+                  minimum: 0
+                  maximum: 10000
+                playedAt:
+                  type: string
+                  format: date-time
+                  description: >-
+                    When the run was played, ISO 8601. Omit it and the server
+                    stamps receipt. Hold one stamp per run across every flush of
+                    it, as with `id`.
+              required:
+                - id
+                - mode
+                - correct
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpeedOutcome'
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /speed/records:
+    get:
+      operationId: readFamilyRecords
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpeedRecords'
+        '503':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /speed/summaries:
+    get:
+      operationId: readSpeedSummaries
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SummaryRun'
+        '503':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /speed/unseen:
+    get:
+      operationId: readUnseenRecords
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChildRecord'
+        '503':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /speed/unseen/{childId}:
+    delete:
+      operationId: dismissSpeedRecords
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: childId
+          required: true
+      responses:
+        '204':
+          description: Default Response
+  /me/player:
+    get:
+      operationId: readPlayerState
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerRead'
+  /play/state:
+    get:
+      operationId: readPlayState
+      parameters:
+        - schema:
+            default: maths
+            type: string
+            minLength: 1
+          in: query
+          name: subject
+          required: false
+        - schema:
+            $ref: '#/components/schemas/YearLevelInput'
+          in: query
+          name: level
+          required: false
+        - schema:
+            default: 5
+            type: integer
+            minimum: 1
+            maximum: 50
+          in: query
+          name: recentTopics
+          required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayState'
+  /me/level:
+    put:
+      operationId: writeSelectedLevel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                level:
+                  $ref: '#/components/schemas/YearLevelInput'
+              required:
+                - level
+      responses:
+        '204':
+          description: Default Response
+        '400':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /content/manifest:
+    get:
+      operationId: readContentManifest
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: if-none-match
+          required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentManifest'
+        '304':
+          description: Default Response
+  /content/{subject}/{level}:
+    get:
+      operationId: readContentPack
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: subject
+          required: true
+        - schema:
+            type: string
+          in: path
+          name: level
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: if-none-match
+          required: false
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentPack'
+        '304':
+          description: Default Response
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'

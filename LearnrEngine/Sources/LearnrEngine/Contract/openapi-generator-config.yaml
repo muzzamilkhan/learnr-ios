@@ -1,0 +1,16 @@
+# Types only. The generator can also emit a `Client` and a `Server`, and this
+# takes neither.
+#
+# `Client` would replace `ApiClient` wholesale, and `ApiClient` is not a
+# transcription of the contract - it is where this app's rules about the network
+# live. A 503 is `couldNotRead` and retryable while a 400 is not, so the sync
+# queue can drop a poisoned sitting instead of wedging behind it forever; a 304
+# is a *success* that means "your cache is current", which `check` would
+# otherwise treat as a failure. None of that is in the document, and a generated
+# client would either lose it or have it bolted back on.
+#
+# `Server` is for serving the API, which this app does not do.
+generate:
+  - types
+
+accessModifier: public
