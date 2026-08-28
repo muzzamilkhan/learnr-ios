@@ -48,6 +48,11 @@ targets:
         # No Google sign-in, so no third-party SDK and no ATS exception. The
         # deployed API is https, which is what App Transport Security requires.
         ENABLE_USER_SCRIPT_SANDBOXING: YES
+        # The catalog holds one 1024 image and Xcode cuts every other size from
+        # it. Naming it here rather than letting the default apply, because the
+        # default is only "AppIcon" when GENERATE_INFOPLIST_FILE is YES, and
+        # this target ships a committed plist instead.
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
 
     info:
       path: LearnrApp/Info.plist
