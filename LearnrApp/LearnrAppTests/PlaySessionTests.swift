@@ -102,14 +102,40 @@ struct PlaySessionTests {
         #expect(play.entry == "")
     }
 
-    @Test("no cache and no network is the one unplayable state")
-    func unplayable() async {
+    @Test("a first launch with no cache and no network still deals a question")
+    func playsFromTheBundleOffline() async {
+        // This used to assert `.unavailable`, and that was the defect rather
+        // than the specification: a freshly installed app on a device with no
+        // network had nothing to play from at all. The port design asks for a
+        // bundled copy precisely so this case deals a question, and the app now
+        // ships one for every level.
         let api = ApiClient(
             baseURL: URL(string: "http://127.0.0.1:1")!,
             tokens: NoTokens(),
             session: URLSession(configuration: .ephemeral))
         let play = PlaySession(
             library: ContentLibrary(api: api, store: MemoryPackStore()),
+            queue: SyncQueue(api: api, store: MemorySittingStore()),
+            api: api,
+            level: .three)
+
+        await play.start()
+        #expect(play.status == .playing)
+        #expect(play.question != nil)
+    }
+
+    @Test("a level the app does not ship, with no network, is unplayable")
+    func unplayableWithoutABundledPack() async {
+        // The unavailable state still exists and still has to be handled - it
+        // is now reached only by asking for content that was never bundled and
+        // cannot be fetched, rather than by every first launch.
+        let api = ApiClient(
+            baseURL: URL(string: "http://127.0.0.1:1")!,
+            tokens: NoTokens(),
+            session: URLSession(configuration: .ephemeral))
+        let play = PlaySession(
+            library: ContentLibrary(
+                api: api, store: MemoryPackStore(), bundled: nil),
             queue: SyncQueue(api: api, store: MemorySittingStore()),
             api: api,
             level: .three)

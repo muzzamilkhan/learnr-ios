@@ -172,6 +172,63 @@ public struct FilePackStore: PackStore {
     }
 }
 
+// MARK: - What ships in the app
+
+/// The packs bundled with the app, for a device that has never fetched one.
+///
+/// The port design asks for this in as many words - "iOS ships a bundled copy
+/// and updates in the background, so new templates do not require an App Store
+/// release". The update half is `refresh(subject:level:)`, gated on the
+/// manifest (ledger `L15`); this is the other half, and without it the first
+/// launch of a freshly installed app with no network has nothing to play from
+/// at all. That is not a contrived case: a child handed a device at school, on a
+/// plane, or anywhere the wifi asks for a password they do not have.
+///
+/// **A bundled pack is the floor, never the ceiling.** It is consulted only when
+/// the disk cache misses, so a device that has ever fetched a level plays that
+/// level's real content and this is never consulted again for it. What ships
+/// here goes stale by design - it is whatever was current when the binary was
+/// cut - and that is the right trade for a fallback: a template from last month
+/// still asks a correct question, and the alternative is no question.
+///
+/// The bytes are the packs the digests are verified against, vendored from
+/// `GET /content/:subject/:level` at manifest `c2c14f686ce1`. They move only in
+/// a re-vendoring commit, like the digests, because they are content rather
+/// than code.
+public struct BundledPacks: Sendable {
+    /// The manifest that shipped beside the packs, read once.
+    ///
+    /// It carries each level's ETag, which is what makes a bundled pack worth
+    /// seeding the cache with rather than merely reading: seeded with its real
+    /// ETag, the first refresh of an unchanged level costs a 304 instead of a
+    /// download.
+    public static let manifest: ContentManifest? = {
+        guard let url = Bundle.module.url(
+                forResource: "manifest", withExtension: "json", subdirectory: "Packs"),
+              let data = try? Data(contentsOf: url)
+        else { return nil }
+        return try? JSONDecoder().decode(ContentManifest.self, from: data)
+    }()
+
+    public init() {}
+
+    /// The bundled bytes for one subject and level, if the app shipped with
+    /// that level, along with the ETag the manifest recorded for it.
+    ///
+    /// Returns the bytes rather than a decoded pack so a caller can store what
+    /// shipped, exactly as `CachedPack` stores what arrived.
+    public func data(subject: String, level: YearLevel) -> (data: Data, etag: String?)? {
+        guard let url = Bundle.module.url(
+                forResource: "\(subject).\(level.rawValue)", withExtension: "json",
+                subdirectory: "Packs"),
+              let data = try? Data(contentsOf: url)
+        else { return nil }
+
+        let etag = Self.manifest?.entry(subject: subject, level: level)?.etag
+        return (data, etag)
+    }
+}
+
 // MARK: - The library
 
 /// Where the play screen gets its templates.
@@ -185,16 +242,54 @@ public struct FilePackStore: PackStore {
 public actor ContentLibrary {
     private let api: ApiClient
     private let store: any PackStore
+    private let bundled: BundledPacks?
     private let now: @Sendable () -> Int
 
+    /// `bundled` is optional so a test can run without the app's shipped
+    /// content underneath it - several assert on the behaviour of an *empty*
+    /// cache, and a bundled pack is by design the thing that makes a cache
+    /// never empty.
     public init(
         api: ApiClient,
         store: any PackStore,
+        bundled: BundledPacks? = BundledPacks(),
         now: @escaping @Sendable () -> Int = { Int(Date().timeIntervalSince1970 * 1000) }
     ) {
         self.api = api
         self.store = store
+        self.bundled = bundled
         self.now = now
+    }
+
+    /// What is cached for this level, seeding the cache from the bundle the
+    /// first time if nothing is cached yet.
+    ///
+    /// Seeding rather than merely reading, so the bundled bytes take part in
+    /// everything the cache does: `refresh` can compare their ETag against the
+    /// manifest and skip a download that would change nothing, and the seed
+    /// happens once rather than on every read.
+    ///
+    /// A pack whose bytes will not decode is treated as absent, exactly as a
+    /// corrupt cache is - which also means a bundled pack that has gone bad
+    /// cannot wedge a level closed.
+    private func cachedOrBundled(subject: String, level: YearLevel) -> CachedPack? {
+        if let cached = store.load(subject: subject, level: level), cached.pack != nil {
+            return cached
+        }
+
+        guard let bundled, let shipped = bundled.data(subject: subject, level: level) else {
+            return nil
+        }
+
+        let seeded = CachedPack(
+            data: shipped.data, subject: subject, level: level,
+            etag: shipped.etag, storedAt: now())
+
+        // Only a pack that decodes is worth storing or returning.
+        guard seeded.pack != nil else { return nil }
+
+        store.save(seeded)
+        return seeded
     }
 
     public enum LibraryError: Error, Equatable {
@@ -209,7 +304,7 @@ public actor ContentLibrary {
     /// pack is returned even when the revalidation fails, and the *only* time
     /// this throws is when there is no cache and the fetch failed too.
     public func pack(subject: String = "maths", level: YearLevel) async throws -> ContentPack {
-        let cached = store.load(subject: subject, level: level)
+        let cached = cachedOrBundled(subject: subject, level: level)
 
         do {
             let result = try await api.contentPack(
@@ -246,7 +341,7 @@ public actor ContentLibrary {
     /// For the launch path: a child who opens the app offline should see a
     /// question rather than a spinner waiting on a request that will time out.
     public func cachedPack(subject: String = "maths", level: YearLevel) -> ContentPack? {
-        store.load(subject: subject, level: level)?.pack
+        cachedOrBundled(subject: subject, level: level)?.pack
     }
 
     /// The pack to start a sitting from. **Cache first, and never blocking.**
@@ -269,7 +364,7 @@ public actor ContentLibrary {
     /// level has nothing to read, so it falls through to the network and throws
     /// only if that fails too.
     public func packForPlay(subject: String = "maths", level: YearLevel) async throws -> ContentPack {
-        if let cached = store.load(subject: subject, level: level)?.pack { return cached }
+        if let cached = cachedOrBundled(subject: subject, level: level)?.pack { return cached }
         return try await pack(subject: subject, level: level)
     }
 
@@ -291,7 +386,7 @@ public actor ContentLibrary {
 
         // Nothing cached is not "unchanged" - there is nothing to compare and
         // everything to fetch.
-        let cached = store.load(subject: subject, level: level)
+        let cached = cachedOrBundled(subject: subject, level: level)
         guard cached?.etag != entry.etag else { return }
 
         // `pack` does the conditional GET, the decode and the write. Sending

@@ -83,7 +83,12 @@ struct ContentTests {
             baseURL: URL(string: "https://example.test")!,
             tokens: MemoryTokenStore("token"),
             session: StubProtocol.session(handler))
-        return ContentLibrary(api: api, store: store, now: { 1_000 })
+        // No bundled packs. Most of these tests are about what happens with an
+        // empty cache, and a bundled pack is precisely the thing that makes a
+        // cache never empty - so the default would quietly turn "nothing
+        // cached" into "the app's shipped content" and several of them would
+        // stop testing what they name. `BundledPacksTests` covers the bundle.
+        return ContentLibrary(api: api, store: store, bundled: nil, now: { 1_000 })
     }
 
     @Test("a fetched pack is cached with its ETag")
@@ -412,5 +417,100 @@ struct ContentTests {
             get { lock.withLock { stored } }
             set { lock.withLock { stored = newValue } }
         }
+    }
+}
+
+/// The packs the app ships with, and the first launch that has no network.
+///
+/// These read the real bundled resources rather than a fixture, because the
+/// thing worth testing is that the app actually *ships* them: a `.process`
+/// resource rule instead of `.copy`, or a renamed directory, breaks the lookup
+/// and nothing else would notice until a child with no wifi opened the app.
+@Suite(.serialized)
+struct BundledPacksTests {
+    @Test("the app ships a pack for every level of both subjects")
+    func shipsEveryLevel() {
+        let bundled = BundledPacks()
+        for subject in ["maths", "english"] {
+            for level in YearLevel.schoolOrder {
+                #expect(bundled.data(subject: subject, level: level) != nil,
+                        "\(subject).\(level.rawValue) is not in the bundle")
+            }
+        }
+    }
+
+    @Test("a bundled pack carries the ETag its manifest recorded")
+    func carriesTheManifestETag() throws {
+        let shipped = try #require(BundledPacks().data(subject: "maths", level: .three))
+        let entry = try #require(
+            BundledPacks.manifest?.entry(subject: "maths", level: .three))
+
+        // A seeded pack claiming the wrong ETag would make the server answer
+        // 304 for a pack the device does not have.
+        #expect(shipped.etag == entry.etag)
+    }
+
+    @Test("a bundled pack decodes into real templates")
+    func decodesIntoTemplates() throws {
+        let shipped = try #require(BundledPacks().data(subject: "maths", level: .three))
+        let cached = CachedPack(
+            data: shipped.data, subject: "maths", level: .three,
+            etag: shipped.etag, storedAt: 0)
+        let pack = try #require(cached.pack)
+
+        #expect(!pack.templates.isEmpty)
+    }
+
+    @Test("a first launch with no cache and no network still deals a question")
+    func firstLaunchOffline() async throws {
+        // The case the port design asks for and `LibraryError.unavailable` is
+        // otherwise the answer to: freshly installed, never fetched, no network.
+        let store = ContentTests.MemoryPackStore()
+        let api = ApiClient(
+            baseURL: URL(string: "https://example.test")!,
+            tokens: MemoryTokenStore("token"),
+            session: StubProtocol.session { _ in (503, Data(), [:]) })
+        let library = ContentLibrary(api: api, store: store, now: { 1_000 })
+
+        let pack = try await library.packForPlay(subject: "maths", level: .three)
+        #expect(!pack.templates.isEmpty)
+    }
+
+    @Test("the bundled pack seeds the cache, so it is read from disk after that")
+    func seedsTheCache() async throws {
+        let store = ContentTests.MemoryPackStore()
+        let api = ApiClient(
+            baseURL: URL(string: "https://example.test")!,
+            tokens: MemoryTokenStore("token"),
+            session: StubProtocol.session { _ in (503, Data(), [:]) })
+        let library = ContentLibrary(api: api, store: store, now: { 1_000 })
+
+        _ = try await library.packForPlay(subject: "maths", level: .three)
+
+        // Seeded with its real ETag, so the first refresh of an unchanged level
+        // costs a 304 rather than a download.
+        let seeded = try #require(store.load(subject: "maths", level: .three))
+        #expect(seeded.etag != nil)
+        #expect(seeded.etag == BundledPacks.manifest?
+            .entry(subject: "maths", level: .three)?.etag)
+    }
+
+    @Test("a fetched pack wins over the bundled one")
+    func fetchedWinsOverBundled() async throws {
+        // The bundle is the floor, never the ceiling: a device that has fetched
+        // this level must play what it fetched, however old the binary is.
+        let store = ContentTests.MemoryPackStore()
+        store.seed(CachedPack(
+            data: ContentTests.packJSON(version: "fetched", templateId: "from-the-server"),
+            subject: "maths", level: .three, etag: "fetched", storedAt: 2))
+
+        let api = ApiClient(
+            baseURL: URL(string: "https://example.test")!,
+            tokens: MemoryTokenStore("token"),
+            session: StubProtocol.session { _ in (503, Data(), [:]) })
+        let library = ContentLibrary(api: api, store: store, now: { 1_000 })
+
+        let pack = try await library.packForPlay(subject: "maths", level: .three)
+        #expect(pack.templates.first?.id == "from-the-server")
     }
 }

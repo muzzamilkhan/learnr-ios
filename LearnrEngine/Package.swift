@@ -42,7 +42,13 @@ let package = Package(
             // `.copy` rather than `.process`: nothing needs transforming, and
             // `.process` on a `.yaml` is a no-op that only reads as intent.
             resources: [
-                .process("Resources"),
+                .process("Resources/speed-modes.json"),
+                // `.copy` keeps the `Packs/` directory in the bundle, which
+                // `.process` would flatten - and `BundledPacks` looks the packs
+                // up by `subdirectory: "Packs"`. These are the content packs the
+                // app ships with so a first launch with no network still has
+                // questions; they move only in a re-vendoring commit.
+                .copy("Resources/Packs"),
                 .copy("Contract/openapi.yaml"),
                 .copy("Contract/openapi-generator-config.yaml"),
             ],
