@@ -64,6 +64,12 @@ targets:
     info:
       path: LearnrApp/Info.plist
       properties:
+        # xcodegen writes this plist from these properties, so a hand edit to
+        # LearnrApp/Info.plist is lost on the next run - these two keys included.
+        # Without them the plist's committed 1.0/1 would be what every upload
+        # carried, and App Store Connect rejects a build number it has seen.
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         # "LearnR" is taken on the App Store, so the listing and the home
         # screen read "LearnR AU". Only the label changes: the bundle id,
         # the target name and what the app calls itself to a child are all
