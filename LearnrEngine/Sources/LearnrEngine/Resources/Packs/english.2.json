@@ -1,0 +1,1116 @@
+{
+  "version": "8d7f7d44373c",
+  "subject": "english",
+  "level": "2",
+  "templates": [
+    {
+      "id": "english.2.plurals.add-ies",
+      "subject": "english",
+      "topic": "plurals",
+      "level": "2",
+      "prompt": "Write the plural of {word}.",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "stem",
+          "kind": "expr",
+          "expr": "i == 0 ? 'bab' : i == 1 ? 'cit' : i == 2 ? 'lad' : i == 3 ? 'part' : i == 4 ? 'pupp' : 'famil'"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "stem + 'y'"
+        }
+      ],
+      "answer": "stem + 'ies'",
+      "answerType": "text",
+      "hint": "Change the y to an i and add -es.",
+      "tags": [
+        "AC9E2LY12",
+        "EN1-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.2.plurals.add-ves",
+      "subject": "english",
+      "topic": "plurals",
+      "level": "2",
+      "prompt": "Write the plural of {word}.",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "stem",
+          "kind": "expr",
+          "expr": "i == 0 ? 'lea' : i == 1 ? 'loa' : i == 2 ? 'shel' : i == 3 ? 'wol' : i == 4 ? 'scar' : 'cal'"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "stem + 'f'"
+        }
+      ],
+      "answer": "stem + 'ves'",
+      "answerType": "text",
+      "hint": "Change the f to v and add -es.",
+      "tags": [
+        "AC9E2LY12",
+        "EN1-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.2.plurals.which-is-plural",
+      "subject": "english",
+      "topic": "plurals",
+      "level": "2",
+      "prompt": "Which word means more than one {word}?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'baby' : i == 1 ? 'city' : i == 2 ? 'lady' : i == 3 ? 'leaf' : i == 4 ? 'wolf' : 'shelf'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'babies' : i == 1 ? 'cities' : i == 2 ? 'ladies' : i == 3 ? 'leaves' : i == 4 ? 'wolves' : 'shelves'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 6 == 0 ? 'babies' : (i + d1) % 6 == 1 ? 'cities' : (i + d1) % 6 == 2 ? 'ladies' : (i + d1) % 6 == 3 ? 'leaves' : (i + d1) % 6 == 4 ? 'wolves' : 'shelves'",
+          "(i + d2) % 6 == 0 ? 'babies' : (i + d2) % 6 == 1 ? 'cities' : (i + d2) % 6 == 2 ? 'ladies' : (i + d2) % 6 == 3 ? 'leaves' : (i + d2) % 6 == 4 ? 'wolves' : 'shelves'"
+        ]
+      },
+      "hint": "A plural word means more than one.",
+      "tags": [
+        "AC9E2LY12",
+        "EN1-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.2.plurals.which-is-singular",
+      "subject": "english",
+      "topic": "plurals",
+      "level": "2",
+      "prompt": "Which word means just one, if {form} means more than one?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "form",
+          "kind": "expr",
+          "expr": "i == 0 ? 'babies' : i == 1 ? 'cities' : i == 2 ? 'ladies' : i == 3 ? 'leaves' : i == 4 ? 'wolves' : 'shelves'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'baby' : i == 1 ? 'city' : i == 2 ? 'lady' : i == 3 ? 'leaf' : i == 4 ? 'wolf' : 'shelf'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 6 == 0 ? 'baby' : (i + d1) % 6 == 1 ? 'city' : (i + d1) % 6 == 2 ? 'lady' : (i + d1) % 6 == 3 ? 'leaf' : (i + d1) % 6 == 4 ? 'wolf' : 'shelf'",
+          "(i + d2) % 6 == 0 ? 'baby' : (i + d2) % 6 == 1 ? 'city' : (i + d2) % 6 == 2 ? 'lady' : (i + d2) % 6 == 3 ? 'leaf' : (i + d2) % 6 == 4 ? 'wolf' : 'shelf'"
+        ]
+      },
+      "hint": "Take away the plural ending to find just one.",
+      "tags": [
+        "AC9E2LY12",
+        "EN1-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.2.past-tense.write-past-tense",
+      "subject": "english",
+      "topic": "past tense",
+      "level": "2",
+      "prompt": "Write the past tense of {word}.",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'jump' : i == 1 ? 'walk' : i == 2 ? 'play' : i == 3 ? 'look' : i == 4 ? 'call' : 'wash'"
+        }
+      ],
+      "answer": "word + 'ed'",
+      "answerType": "text",
+      "hint": "Add -ed to show it already happened.",
+      "tags": [
+        "AC9E2LY12",
+        "EN1-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.2.past-tense.which-is-past-tense",
+      "subject": "english",
+      "topic": "past tense",
+      "level": "2",
+      "prompt": "Which word means {word} already happened?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'jump' : i == 1 ? 'walk' : i == 2 ? 'play' : i == 3 ? 'look' : i == 4 ? 'call' : 'wash'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "(i == 0 ? 'jump' : i == 1 ? 'walk' : i == 2 ? 'play' : i == 3 ? 'look' : i == 4 ? 'call' : 'wash') + 'ed'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "((i + d1) % 6 == 0 ? 'jump' : (i + d1) % 6 == 1 ? 'walk' : (i + d1) % 6 == 2 ? 'play' : (i + d1) % 6 == 3 ? 'look' : (i + d1) % 6 == 4 ? 'call' : 'wash') + 'ed'",
+          "((i + d2) % 6 == 0 ? 'jump' : (i + d2) % 6 == 1 ? 'walk' : (i + d2) % 6 == 2 ? 'play' : (i + d2) % 6 == 3 ? 'look' : (i + d2) % 6 == 4 ? 'call' : 'wash') + 'ed'"
+        ]
+      },
+      "hint": "Add -ed to the word to make it past tense.",
+      "tags": [
+        "AC9E2LY12",
+        "EN1-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.2.past-tense.which-is-present",
+      "subject": "english",
+      "topic": "past tense",
+      "level": "2",
+      "prompt": "Which word means this is happening now, if {form} means it already happened?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "form",
+          "kind": "expr",
+          "expr": "(i == 0 ? 'jump' : i == 1 ? 'walk' : i == 2 ? 'play' : i == 3 ? 'look' : i == 4 ? 'call' : 'wash') + 'ed'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'jump' : i == 1 ? 'walk' : i == 2 ? 'play' : i == 3 ? 'look' : i == 4 ? 'call' : 'wash'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 6 == 0 ? 'jump' : (i + d1) % 6 == 1 ? 'walk' : (i + d1) % 6 == 2 ? 'play' : (i + d1) % 6 == 3 ? 'look' : (i + d1) % 6 == 4 ? 'call' : 'wash'",
+          "(i + d2) % 6 == 0 ? 'jump' : (i + d2) % 6 == 1 ? 'walk' : (i + d2) % 6 == 2 ? 'play' : (i + d2) % 6 == 3 ? 'look' : (i + d2) % 6 == 4 ? 'call' : 'wash'"
+        ]
+      },
+      "hint": "Take away the -ed to find the word for right now.",
+      "tags": [
+        "AC9E2LY12",
+        "EN1-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.2.past-tense.worked-example",
+      "subject": "english",
+      "topic": "past tense",
+      "level": "2",
+      "prompt": "Here, {eWord} became {eForm} yesterday. Which word means {word} already happened?",
+      "vars": [
+        {
+          "name": "ei",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "eWord",
+          "kind": "expr",
+          "expr": "ei == 0 ? 'jump' : ei == 1 ? 'walk' : ei == 2 ? 'play' : ei == 3 ? 'look' : ei == 4 ? 'call' : 'wash'"
+        },
+        {
+          "name": "eForm",
+          "kind": "expr",
+          "expr": "(ei == 0 ? 'jump' : ei == 1 ? 'walk' : ei == 2 ? 'play' : ei == 3 ? 'look' : ei == 4 ? 'call' : 'wash') + 'ed'"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "(ei + i) % 6 == 0 ? 'jump' : (ei + i) % 6 == 1 ? 'walk' : (ei + i) % 6 == 2 ? 'play' : (ei + i) % 6 == 3 ? 'look' : (ei + i) % 6 == 4 ? 'call' : 'wash'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "((ei + i) % 6 == 0 ? 'jump' : (ei + i) % 6 == 1 ? 'walk' : (ei + i) % 6 == 2 ? 'play' : (ei + i) % 6 == 3 ? 'look' : (ei + i) % 6 == 4 ? 'call' : 'wash') + 'ed'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2",
+        "d1 != i",
+        "d2 != i"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "((ei + d1) % 6 == 0 ? 'jump' : (ei + d1) % 6 == 1 ? 'walk' : (ei + d1) % 6 == 2 ? 'play' : (ei + d1) % 6 == 3 ? 'look' : (ei + d1) % 6 == 4 ? 'call' : 'wash') + 'ed'",
+          "((ei + d2) % 6 == 0 ? 'jump' : (ei + d2) % 6 == 1 ? 'walk' : (ei + d2) % 6 == 2 ? 'play' : (ei + d2) % 6 == 3 ? 'look' : (ei + d2) % 6 == 4 ? 'call' : 'wash') + 'ed'"
+        ]
+      },
+      "hint": "Use the example to see how -ed is added.",
+      "tags": [
+        "AC9E2LY12",
+        "EN1-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.2.compound-words.combine",
+      "subject": "english",
+      "topic": "compound words",
+      "level": "2",
+      "prompt": "What word do you get from {word1} and {word2}?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "word1",
+          "kind": "expr",
+          "expr": "i == 0 ? 'cup' : i == 1 ? 'sun' : i == 2 ? 'foot' : i == 3 ? 'rain' : i == 4 ? 'tooth' : 'bed'"
+        },
+        {
+          "name": "word2",
+          "kind": "expr",
+          "expr": "i == 0 ? 'cake' : i == 1 ? 'flower' : i == 2 ? 'ball' : i == 3 ? 'bow' : i == 4 ? 'brush' : 'room'"
+        }
+      ],
+      "answer": "word1 + word2",
+      "answerType": "text",
+      "hint": "Join the two words together, with nothing in between.",
+      "tags": [
+        "AC9E2LY11",
+        "EN1-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.2.compound-words.find-missing-part",
+      "subject": "english",
+      "topic": "compound words",
+      "level": "2",
+      "prompt": "{frame}",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "blankFirst",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "word1",
+          "kind": "expr",
+          "expr": "i == 0 ? 'cup' : i == 1 ? 'sun' : i == 2 ? 'foot' : i == 3 ? 'rain' : i == 4 ? 'tooth' : 'bed'"
+        },
+        {
+          "name": "word2",
+          "kind": "expr",
+          "expr": "i == 0 ? 'cake' : i == 1 ? 'flower' : i == 2 ? 'ball' : i == 3 ? 'bow' : i == 4 ? 'brush' : 'room'"
+        },
+        {
+          "name": "full",
+          "kind": "expr",
+          "expr": "word1 + word2"
+        },
+        {
+          "name": "frame",
+          "kind": "expr",
+          "expr": "blankFirst == 1 ? ('Here, ? and ' + word2 + ' make ' + full + '.') : ('Here, ' + word1 + ' and ? make ' + full + '.')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "blankFirst == 1 ? word1 : word2"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "text",
+      "hint": "Say the whole word out loud and listen for the missing part.",
+      "tags": [
+        "AC9E2LY11",
+        "EN1-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.2.compound-words.which-is-compound",
+      "subject": "english",
+      "topic": "compound words",
+      "level": "2",
+      "prompt": "Which word is made by joining {word1} and {word2}?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word1",
+          "kind": "expr",
+          "expr": "i == 0 ? 'cup' : i == 1 ? 'sun' : i == 2 ? 'foot' : i == 3 ? 'rain' : i == 4 ? 'tooth' : 'bed'"
+        },
+        {
+          "name": "word2",
+          "kind": "expr",
+          "expr": "i == 0 ? 'cake' : i == 1 ? 'flower' : i == 2 ? 'ball' : i == 3 ? 'bow' : i == 4 ? 'brush' : 'room'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "(i == 0 ? 'cup' : i == 1 ? 'sun' : i == 2 ? 'foot' : i == 3 ? 'rain' : i == 4 ? 'tooth' : 'bed') + (i == 0 ? 'cake' : i == 1 ? 'flower' : i == 2 ? 'ball' : i == 3 ? 'bow' : i == 4 ? 'brush' : 'room')"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "((i + d1) % 6 == 0 ? 'cup' : (i + d1) % 6 == 1 ? 'sun' : (i + d1) % 6 == 2 ? 'foot' : (i + d1) % 6 == 3 ? 'rain' : (i + d1) % 6 == 4 ? 'tooth' : 'bed') + ((i + d1) % 6 == 0 ? 'cake' : (i + d1) % 6 == 1 ? 'flower' : (i + d1) % 6 == 2 ? 'ball' : (i + d1) % 6 == 3 ? 'bow' : (i + d1) % 6 == 4 ? 'brush' : 'room')",
+          "((i + d2) % 6 == 0 ? 'cup' : (i + d2) % 6 == 1 ? 'sun' : (i + d2) % 6 == 2 ? 'foot' : (i + d2) % 6 == 3 ? 'rain' : (i + d2) % 6 == 4 ? 'tooth' : 'bed') + ((i + d2) % 6 == 0 ? 'cake' : (i + d2) % 6 == 1 ? 'flower' : (i + d2) % 6 == 2 ? 'ball' : (i + d2) % 6 == 3 ? 'bow' : (i + d2) % 6 == 4 ? 'brush' : 'room')"
+        ]
+      },
+      "hint": "Put the two words together to make one word.",
+      "tags": [
+        "AC9E2LY11",
+        "EN1-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.2.compound-words.which-word-completes",
+      "subject": "english",
+      "topic": "compound words",
+      "level": "2",
+      "prompt": "Which word goes with {word1} to make {full}?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "word1",
+          "kind": "expr",
+          "expr": "i == 0 ? 'cup' : i == 1 ? 'sun' : i == 2 ? 'foot' : i == 3 ? 'rain' : i == 4 ? 'tooth' : 'bed'"
+        },
+        {
+          "name": "full",
+          "kind": "expr",
+          "expr": "(i == 0 ? 'cup' : i == 1 ? 'sun' : i == 2 ? 'foot' : i == 3 ? 'rain' : i == 4 ? 'tooth' : 'bed') + (i == 0 ? 'cake' : i == 1 ? 'flower' : i == 2 ? 'ball' : i == 3 ? 'bow' : i == 4 ? 'brush' : 'room')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "i == 0 ? 'cake' : i == 1 ? 'flower' : i == 2 ? 'ball' : i == 3 ? 'bow' : i == 4 ? 'brush' : 'room'"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(i + d1) % 6 == 0 ? 'cake' : (i + d1) % 6 == 1 ? 'flower' : (i + d1) % 6 == 2 ? 'ball' : (i + d1) % 6 == 3 ? 'bow' : (i + d1) % 6 == 4 ? 'brush' : 'room'",
+          "(i + d2) % 6 == 0 ? 'cake' : (i + d2) % 6 == 1 ? 'flower' : (i + d2) % 6 == 2 ? 'ball' : (i + d2) % 6 == 3 ? 'bow' : (i + d2) % 6 == 4 ? 'brush' : 'room'"
+        ]
+      },
+      "hint": "Think about what word finishes {full}.",
+      "tags": [
+        "AC9E2LY11",
+        "EN1-SPELL-01"
+      ]
+    },
+    {
+      "id": "english.2.word-classes.identify-in-sentence",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "2",
+      "prompt": "Which word in this sentence is the {kind}? {sentence}",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "role",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "'The ' + (i == 0 ? 'big' : i == 1 ? 'small' : i == 2 ? 'happy' : i == 3 ? 'fast' : i == 4 ? 'funny' : 'little') + ' ' + (i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'bird' : i == 3 ? 'horse' : i == 4 ? 'monkey' : 'mouse') + ' can ' + (i == 0 ? 'run' : i == 1 ? 'jump' : i == 2 ? 'sing' : i == 3 ? 'gallop' : i == 4 ? 'climb' : 'hide') + '.'"
+        },
+        {
+          "name": "kind",
+          "kind": "expr",
+          "expr": "role == 1 ? 'doing word' : (role == 2 ? 'describing word' : 'naming word')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "role == 1 ? (i == 0 ? 'run' : i == 1 ? 'jump' : i == 2 ? 'sing' : i == 3 ? 'gallop' : i == 4 ? 'climb' : 'hide') : role == 2 ? (i == 0 ? 'big' : i == 1 ? 'small' : i == 2 ? 'happy' : i == 3 ? 'fast' : i == 4 ? 'funny' : 'little') : (i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'bird' : i == 3 ? 'horse' : i == 4 ? 'monkey' : 'mouse')"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(role + 1) % 3 == 1 ? (i == 0 ? 'run' : i == 1 ? 'jump' : i == 2 ? 'sing' : i == 3 ? 'gallop' : i == 4 ? 'climb' : 'hide') : (role + 1) % 3 == 2 ? (i == 0 ? 'big' : i == 1 ? 'small' : i == 2 ? 'happy' : i == 3 ? 'fast' : i == 4 ? 'funny' : 'little') : (i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'bird' : i == 3 ? 'horse' : i == 4 ? 'monkey' : 'mouse')",
+          "(role + 2) % 3 == 1 ? (i == 0 ? 'run' : i == 1 ? 'jump' : i == 2 ? 'sing' : i == 3 ? 'gallop' : i == 4 ? 'climb' : 'hide') : (role + 2) % 3 == 2 ? (i == 0 ? 'big' : i == 1 ? 'small' : i == 2 ? 'happy' : i == 3 ? 'fast' : i == 4 ? 'funny' : 'little') : (i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'bird' : i == 3 ? 'horse' : i == 4 ? 'monkey' : 'mouse')"
+        ]
+      },
+      "hint": "A naming word names something, a doing word tells you what it does, and a describing word tells you what it is like.",
+      "tags": [
+        "AC9E2LA07",
+        "EN1-CWT-01"
+      ]
+    },
+    {
+      "id": "english.2.word-classes.name-the-word-type",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "2",
+      "prompt": "In this sentence, what kind of word is {candidate}? {sentence}",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "role",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "'The ' + (i == 0 ? 'big' : i == 1 ? 'small' : i == 2 ? 'happy' : i == 3 ? 'fast' : i == 4 ? 'funny' : 'little') + ' ' + (i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'bird' : i == 3 ? 'horse' : i == 4 ? 'monkey' : 'mouse') + ' can ' + (i == 0 ? 'run' : i == 1 ? 'jump' : i == 2 ? 'sing' : i == 3 ? 'gallop' : i == 4 ? 'climb' : 'hide') + '.'"
+        },
+        {
+          "name": "candidate",
+          "kind": "expr",
+          "expr": "role == 1 ? (i == 0 ? 'run' : i == 1 ? 'jump' : i == 2 ? 'sing' : i == 3 ? 'gallop' : i == 4 ? 'climb' : 'hide') : role == 2 ? (i == 0 ? 'big' : i == 1 ? 'small' : i == 2 ? 'happy' : i == 3 ? 'fast' : i == 4 ? 'funny' : 'little') : (i == 0 ? 'dog' : i == 1 ? 'cat' : i == 2 ? 'bird' : i == 3 ? 'horse' : i == 4 ? 'monkey' : 'mouse')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "role == 1 ? 'doing word' : (role == 2 ? 'describing word' : 'naming word')"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(role + 1) % 3 == 1 ? 'doing word' : ((role + 1) % 3 == 2 ? 'describing word' : 'naming word')",
+          "(role + 2) % 3 == 1 ? 'doing word' : ((role + 2) % 3 == 2 ? 'describing word' : 'naming word')"
+        ]
+      },
+      "hint": "A naming word names something, a doing word tells you what it does, and a describing word tells you what it is like.",
+      "tags": [
+        "AC9E2LA07",
+        "EN1-CWT-01"
+      ]
+    },
+    {
+      "id": "english.2.word-classes.is-adjective",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "2",
+      "prompt": "Is {word} a describing word?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "15"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'loud' : i == 1 ? 'quiet' : i == 2 ? 'tall' : i == 3 ? 'short' : i == 4 ? 'soft' : i == 5 ? 'bright' : i == 6 ? 'gentle' : i == 7 ? 'brave' : i == 8 ? 'table' : i == 9 ? 'chair' : i == 10 ? 'apple' : i == 11 ? 'swim' : i == 12 ? 'read' : i == 13 ? 'write' : i == 14 ? 'window' : 'pencil'"
+        }
+      ],
+      "answer": "i < 8",
+      "hint": "A describing word tells you what something is like.",
+      "tags": [
+        "AC9E2LA07",
+        "EN1-CWT-01"
+      ]
+    },
+    {
+      "id": "english.2.word-classes.is-doing-word",
+      "subject": "english",
+      "topic": "word classes",
+      "level": "2",
+      "prompt": "Is {word} a doing word?",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "15"
+        },
+        {
+          "name": "word",
+          "kind": "expr",
+          "expr": "i == 0 ? 'skip' : i == 1 ? 'dance' : i == 2 ? 'draw' : i == 3 ? 'paint' : i == 4 ? 'laugh' : i == 5 ? 'clap' : i == 6 ? 'shout' : i == 7 ? 'crawl' : i == 8 ? 'kite' : i == 9 ? 'boat' : i == 10 ? 'shiny' : i == 11 ? 'cold' : i == 12 ? 'basket' : i == 13 ? 'sharp' : i == 14 ? 'garden' : 'quick'"
+        }
+      ],
+      "answer": "i < 8",
+      "hint": "A doing word tells you what someone or something does.",
+      "tags": [
+        "AC9E2LA07",
+        "EN1-CWT-01"
+      ]
+    },
+    {
+      "id": "english.2.punctuation.which-mark",
+      "subject": "english",
+      "topic": "punctuation",
+      "level": "2",
+      "prompt": "Which mark finishes this sentence? {sentence}",
+      "vars": [
+        {
+          "name": "i",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "i == 0 ? 'I like ice cream' : i == 1 ? 'What is your name' : i == 2 ? 'That is amazing' : i == 3 ? 'The sun is hot' : i == 4 ? 'Where do you live' : 'Watch out'"
+        },
+        {
+          "name": "markIdx",
+          "kind": "expr",
+          "expr": "i % 3"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "markIdx == 0 ? '.' : (markIdx == 1 ? '?' : '!')"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(markIdx + 1) % 3 == 0 ? '.' : ((markIdx + 1) % 3 == 1 ? '?' : '!')",
+          "(markIdx + 2) % 3 == 0 ? '.' : ((markIdx + 2) % 3 == 1 ? '?' : '!')"
+        ]
+      },
+      "hint": "A telling sentence ends with a full stop, a question ends with a question mark, and an exciting sentence ends with an exclamation mark.",
+      "tags": [
+        "AC9E2LY06",
+        "EN1-CWT-01"
+      ]
+    },
+    {
+      "id": "english.2.punctuation.name-the-mark",
+      "subject": "english",
+      "topic": "punctuation",
+      "level": "2",
+      "prompt": "Which mark ends {article} {kind} sentence?",
+      "vars": [
+        {
+          "name": "k",
+          "kind": "pick",
+          "from": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "name": "kind",
+          "kind": "expr",
+          "expr": "k == 0 ? 'telling' : (k == 1 ? 'asking' : 'exciting')"
+        },
+        {
+          "name": "article",
+          "kind": "expr",
+          "expr": "k == 0 ? 'a' : 'an'"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "k == 0 ? '.' : (k == 1 ? '?' : '!')"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "(k + 1) % 3 == 0 ? '.' : ((k + 1) % 3 == 1 ? '?' : '!')",
+          "(k + 2) % 3 == 0 ? '.' : ((k + 2) % 3 == 1 ? '?' : '!')"
+        ]
+      },
+      "hint": "A full stop ends telling sentences, a question mark ends asking sentences, and an exclamation mark ends exciting sentences.",
+      "tags": [
+        "AC9E2LY06",
+        "EN1-CWT-01"
+      ]
+    },
+    {
+      "id": "english.2.punctuation.is-question",
+      "subject": "english",
+      "topic": "punctuation",
+      "level": "2",
+      "prompt": "Does this sentence need a question mark? {sentence}",
+      "vars": [
+        {
+          "name": "ok",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "j",
+          "kind": "int",
+          "min": "0",
+          "max": "2"
+        },
+        {
+          "name": "sentence",
+          "kind": "expr",
+          "expr": "ok == 1 ? (j == 0 ? 'Is the dog asleep' : j == 1 ? 'What colour is your bag' : 'Can we go outside') : (j == 0 ? 'The dog is asleep' : j == 1 ? 'My bag is red' : 'The classroom is quiet')"
+        }
+      ],
+      "answer": "ok == 1",
+      "hint": "A question mark comes at the end of a sentence that asks something.",
+      "tags": [
+        "AC9E2LY06",
+        "EN1-CWT-01"
+      ]
+    },
+    {
+      "id": "english.2.synonyms.which-synonym",
+      "subject": "english",
+      "topic": "synonyms",
+      "level": "2",
+      "prompt": "Which word means the same as {target}?",
+      "vars": [
+        {
+          "name": "p",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "s",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "s2",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "s3",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "s == 0 ? (p == 0 ? 'happy' : p == 1 ? 'big' : p == 2 ? 'small' : p == 3 ? 'quick' : p == 4 ? 'sad' : 'scared') : (p == 0 ? 'glad' : p == 1 ? 'large' : p == 2 ? 'little' : p == 3 ? 'fast' : p == 4 ? 'unhappy' : 'afraid')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "1 - s == 0 ? (p == 0 ? 'happy' : p == 1 ? 'big' : p == 2 ? 'small' : p == 3 ? 'quick' : p == 4 ? 'sad' : 'scared') : (p == 0 ? 'glad' : p == 1 ? 'large' : p == 2 ? 'little' : p == 3 ? 'fast' : p == 4 ? 'unhappy' : 'afraid')"
+        }
+      ],
+      "constraints": [
+        "d1 != d2"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "s2 == 0 ? ((p + d1) % 6 == 0 ? 'happy' : (p + d1) % 6 == 1 ? 'big' : (p + d1) % 6 == 2 ? 'small' : (p + d1) % 6 == 3 ? 'quick' : (p + d1) % 6 == 4 ? 'sad' : 'scared') : ((p + d1) % 6 == 0 ? 'glad' : (p + d1) % 6 == 1 ? 'large' : (p + d1) % 6 == 2 ? 'little' : (p + d1) % 6 == 3 ? 'fast' : (p + d1) % 6 == 4 ? 'unhappy' : 'afraid')",
+          "s3 == 0 ? ((p + d2) % 6 == 0 ? 'happy' : (p + d2) % 6 == 1 ? 'big' : (p + d2) % 6 == 2 ? 'small' : (p + d2) % 6 == 3 ? 'quick' : (p + d2) % 6 == 4 ? 'sad' : 'scared') : ((p + d2) % 6 == 0 ? 'glad' : (p + d2) % 6 == 1 ? 'large' : (p + d2) % 6 == 2 ? 'little' : (p + d2) % 6 == 3 ? 'fast' : (p + d2) % 6 == 4 ? 'unhappy' : 'afraid')"
+        ]
+      },
+      "hint": "A synonym means almost the same thing.",
+      "tags": [
+        "AC9E2LA09",
+        "EN1-VOCAB-01"
+      ]
+    },
+    {
+      "id": "english.2.synonyms.worked-example",
+      "subject": "english",
+      "topic": "synonyms",
+      "level": "2",
+      "prompt": "Here, {eTarget} and {eAnswer} mean the same thing. Which word means the same as {target}?",
+      "vars": [
+        {
+          "name": "ep",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "es",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "p",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "s",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "d1",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "d2",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "s2",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "s3",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "eTarget",
+          "kind": "expr",
+          "expr": "es == 0 ? (ep == 0 ? 'happy' : ep == 1 ? 'big' : ep == 2 ? 'small' : ep == 3 ? 'quick' : ep == 4 ? 'sad' : 'scared') : (ep == 0 ? 'glad' : ep == 1 ? 'large' : ep == 2 ? 'little' : ep == 3 ? 'fast' : ep == 4 ? 'unhappy' : 'afraid')"
+        },
+        {
+          "name": "eAnswer",
+          "kind": "expr",
+          "expr": "1 - es == 0 ? (ep == 0 ? 'happy' : ep == 1 ? 'big' : ep == 2 ? 'small' : ep == 3 ? 'quick' : ep == 4 ? 'sad' : 'scared') : (ep == 0 ? 'glad' : ep == 1 ? 'large' : ep == 2 ? 'little' : ep == 3 ? 'fast' : ep == 4 ? 'unhappy' : 'afraid')"
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "s == 0 ? ((ep + p) % 6 == 0 ? 'happy' : (ep + p) % 6 == 1 ? 'big' : (ep + p) % 6 == 2 ? 'small' : (ep + p) % 6 == 3 ? 'quick' : (ep + p) % 6 == 4 ? 'sad' : 'scared') : ((ep + p) % 6 == 0 ? 'glad' : (ep + p) % 6 == 1 ? 'large' : (ep + p) % 6 == 2 ? 'little' : (ep + p) % 6 == 3 ? 'fast' : (ep + p) % 6 == 4 ? 'unhappy' : 'afraid')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "1 - s == 0 ? ((ep + p) % 6 == 0 ? 'happy' : (ep + p) % 6 == 1 ? 'big' : (ep + p) % 6 == 2 ? 'small' : (ep + p) % 6 == 3 ? 'quick' : (ep + p) % 6 == 4 ? 'sad' : 'scared') : ((ep + p) % 6 == 0 ? 'glad' : (ep + p) % 6 == 1 ? 'large' : (ep + p) % 6 == 2 ? 'little' : (ep + p) % 6 == 3 ? 'fast' : (ep + p) % 6 == 4 ? 'unhappy' : 'afraid')"
+        }
+      ],
+      "constraints": [
+        "d1 != d2",
+        "d1 != p",
+        "d2 != p"
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 3,
+        "distractors": [
+          "s2 == 0 ? ((ep + d1) % 6 == 0 ? 'happy' : (ep + d1) % 6 == 1 ? 'big' : (ep + d1) % 6 == 2 ? 'small' : (ep + d1) % 6 == 3 ? 'quick' : (ep + d1) % 6 == 4 ? 'sad' : 'scared') : ((ep + d1) % 6 == 0 ? 'glad' : (ep + d1) % 6 == 1 ? 'large' : (ep + d1) % 6 == 2 ? 'little' : (ep + d1) % 6 == 3 ? 'fast' : (ep + d1) % 6 == 4 ? 'unhappy' : 'afraid')",
+          "s3 == 0 ? ((ep + d2) % 6 == 0 ? 'happy' : (ep + d2) % 6 == 1 ? 'big' : (ep + d2) % 6 == 2 ? 'small' : (ep + d2) % 6 == 3 ? 'quick' : (ep + d2) % 6 == 4 ? 'sad' : 'scared') : ((ep + d2) % 6 == 0 ? 'glad' : (ep + d2) % 6 == 1 ? 'large' : (ep + d2) % 6 == 2 ? 'little' : (ep + d2) % 6 == 3 ? 'fast' : (ep + d2) % 6 == 4 ? 'unhappy' : 'afraid')"
+        ]
+      },
+      "hint": "Use the example to see what \"means the same\" looks like.",
+      "tags": [
+        "AC9E2LA09",
+        "EN1-VOCAB-01"
+      ]
+    },
+    {
+      "id": "english.2.synonyms.two-choices",
+      "subject": "english",
+      "topic": "synonyms",
+      "level": "2",
+      "prompt": "Which word means the same as {target}?",
+      "vars": [
+        {
+          "name": "p",
+          "kind": "int",
+          "min": "0",
+          "max": "5"
+        },
+        {
+          "name": "s",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "d",
+          "kind": "int",
+          "min": "1",
+          "max": "5"
+        },
+        {
+          "name": "sw",
+          "kind": "pick",
+          "from": [
+            0,
+            1
+          ]
+        },
+        {
+          "name": "target",
+          "kind": "expr",
+          "expr": "s == 0 ? (p == 0 ? 'happy' : p == 1 ? 'big' : p == 2 ? 'small' : p == 3 ? 'quick' : p == 4 ? 'sad' : 'scared') : (p == 0 ? 'glad' : p == 1 ? 'large' : p == 2 ? 'little' : p == 3 ? 'fast' : p == 4 ? 'unhappy' : 'afraid')"
+        },
+        {
+          "name": "answer",
+          "kind": "expr",
+          "expr": "1 - s == 0 ? (p == 0 ? 'happy' : p == 1 ? 'big' : p == 2 ? 'small' : p == 3 ? 'quick' : p == 4 ? 'sad' : 'scared') : (p == 0 ? 'glad' : p == 1 ? 'large' : p == 2 ? 'little' : p == 3 ? 'fast' : p == 4 ? 'unhappy' : 'afraid')"
+        }
+      ],
+      "answer": "answer",
+      "answerType": "choice",
+      "choices": {
+        "count": 2,
+        "distractors": [
+          "sw == 0 ? ((p + d) % 6 == 0 ? 'happy' : (p + d) % 6 == 1 ? 'big' : (p + d) % 6 == 2 ? 'small' : (p + d) % 6 == 3 ? 'quick' : (p + d) % 6 == 4 ? 'sad' : 'scared') : ((p + d) % 6 == 0 ? 'glad' : (p + d) % 6 == 1 ? 'large' : (p + d) % 6 == 2 ? 'little' : (p + d) % 6 == 3 ? 'fast' : (p + d) % 6 == 4 ? 'unhappy' : 'afraid')"
+        ]
+      },
+      "hint": "Think of a word that means the same as {target}.",
+      "tags": [
+        "AC9E2LA09",
+        "EN1-VOCAB-01"
+      ]
+    }
+  ]
+}
