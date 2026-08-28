@@ -53,11 +53,22 @@ targets:
         # default is only "AppIcon" when GENERATE_INFOPLIST_FILE is YES, and
         # this target ships a committed plist instead.
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        # Signing. Set here rather than in Xcode's UI, which would not survive
+        # the next xcodegen. T3UMXQFC6X is the "Abu Khan" team - the OU of the
+        # only signing identity on this Mac, and the TeamIdentifier of the one
+        # provisioning profile. A simulator build ignores both; a device build
+        # needs them, and picked the wrong team by hand more than once.
+        DEVELOPMENT_TEAM: T3UMXQFC6X
+        CODE_SIGN_STYLE: Automatic
 
     info:
       path: LearnrApp/Info.plist
       properties:
-        CFBundleDisplayName: LearnR
+        # "LearnR" is taken on the App Store, so the listing and the home
+        # screen read "LearnR AU". Only the label changes: the bundle id,
+        # the target name and what the app calls itself to a child are all
+        # still LearnR, and the web app is unchanged.
+        CFBundleDisplayName: LearnR AU
         UIRequiresFullScreen: true
         # Without this key iOS takes the app for a pre-iPhone-X binary and
         # runs it letterboxed at 320x568. It has to be a real plist key: the
