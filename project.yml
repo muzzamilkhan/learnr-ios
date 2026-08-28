@@ -45,12 +45,6 @@ targets:
         MARKETING_VERSION: "0.1.0"
         CURRENT_PROJECT_VERSION: "1"
         SWIFT_VERSION: "6.0"
-        # Portrait only. A child is answering questions, not reading a
-        # document, and a rotation mid-question moves every target under
-        # their hand.
-        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
-        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: UIInterfaceOrientationPortrait
-        INFOPLIST_KEY_UILaunchScreen_Generation: YES
         # No Google sign-in, so no third-party SDK and no ATS exception. The
         # deployed API is https, which is what App Transport Security requires.
         ENABLE_USER_SCRIPT_SANDBOXING: YES
@@ -60,6 +54,17 @@ targets:
       properties:
         CFBundleDisplayName: LearnR
         UIRequiresFullScreen: true
+        # Without this key iOS takes the app for a pre-iPhone-X binary and
+        # runs it letterboxed at 320x568. It has to be a real plist key: the
+        # INFOPLIST_KEY_* build settings that would otherwise set it are only
+        # merged when GENERATE_INFOPLIST_FILE is YES, and this target ships
+        # the committed plist instead.
+        UILaunchScreen: {}
+        # Portrait only. A child is answering questions, not reading a
+        # document, and a rotation mid-question moves every target under
+        # their hand.
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UISupportedInterfaceOrientations~ipad: [UIInterfaceOrientationPortrait]
         # Set from LEARNR_API_BASE_URL above. Note the $() in that value: a
         # bare // in an xcconfig-style setting starts a comment, so the scheme
         # is written https:/$()/ to survive substitution intact.
