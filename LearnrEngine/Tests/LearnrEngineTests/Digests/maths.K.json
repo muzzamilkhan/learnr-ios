@@ -1,5 +1,5 @@
 {
-  "version": "b8eb6d8ac08c",
+  "version": "8ac55b6f7266",
   "set": "maths.K",
   "draws": 100,
   "groups": {
@@ -24,16 +24,16 @@
     "maths.K.even-and-odd.next-even": "8b9068d885bd",
     "maths.K.measurement.heavier": "2aa5c0b2c855",
     "maths.K.measurement.holds-more": "81efa9520225",
-    "maths.K.measurement.lightest": "22d408010e3e",
-    "maths.K.measurement.longer": "4e40db08334a",
+    "maths.K.measurement.lightest": "20914a76a9ca",
+    "maths.K.measurement.longer": "912b630a7f1e",
     "maths.K.patterns.repeating-three": "0160b9dfc05e",
-    "maths.K.patterns.repeating-two": "75fbf1d3bc06",
+    "maths.K.patterns.repeating-two": "c8d56b4ea895",
     "maths.K.shapes.is-a-triangle": "d231439a5eec",
     "maths.K.shapes.name": "df12066912fe",
     "maths.K.shapes.name-picture": "af1dd448aba7",
     "maths.K.shapes.sides": "90f5546c999b",
     "maths.K.shapes.sides-picture": "318b52c208fa",
-    "maths.K.shapes.solid-everyday": "bed5065fcb94",
+    "maths.K.shapes.solid-everyday": "cd6c308b3a67",
     "maths.K.shapes.solid-name": "4dbcded24b90",
     "maths.K.shapes.solid-rolls": "44f2c45b3de2",
     "maths.K.sharing.equal-groups": "e551b3a08d31",
@@ -43,6 +43,6 @@
     "maths.K.time.clock-says": "b2a8274ac347",
     "maths.K.time.day-after": "038e3ce12240",
     "maths.K.time.day-before": "f7cb532b7515",
-    "maths.K.time.oclock": "5ea0e55a5a74"
+    "maths.K.time.oclock": "94daaaa0fe0c"
   }
 }
