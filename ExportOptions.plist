@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+	  Options for `xcodebuild -exportArchive`, so an upload does not depend on
+	  clicking through Xcode's Organizer and remembering the same six answers.
+
+	      xcodebuild -project LearnrApp.xcodeproj -scheme LearnrApp \
+	        -destination 'generic/platform=iOS' -configuration Release \
+	        archive -archivePath build/LearnrAU.xcarchive
+
+	      xcodebuild -exportArchive \
+	        -archivePath build/LearnrAU.xcarchive \
+	        -exportOptionsPlist ExportOptions.plist \
+	        -exportPath build/export
+
+	  Bump CURRENT_PROJECT_VERSION in project.yml before every upload after the
+	  first: App Store Connect refuses a build number it has already seen.
+	-->
+
+	<!-- App Store Connect, as opposed to ad-hoc, enterprise or development. -->
+	<key>method</key>
+	<string>app-store-connect</string>
+
+	<!-- The "Abu Khan" team, matching DEVELOPMENT_TEAM in project.yml. -->
+	<key>teamID</key>
+	<string>T3UMXQFC6X</string>
+
+	<!--
+	  Let Xcode manage the signing certificate and provisioning profile, which
+	  is what CODE_SIGN_STYLE: Automatic in project.yml already asks for. The
+	  alternative is naming a profile here by name, which then has to be kept in
+	  step with whatever the account actually holds.
+	-->
+	<key>signingStyle</key>
+	<string>automatic</string>
+
+	<!--
+	  Upload the symbol file so crash reports from TestFlight and the store come
+	  back symbolicated rather than as hex addresses. No third-party crash
+	  reporter is involved - this is Apple's own.
+	-->
+	<key>uploadSymbols</key>
+	<true/>
+
+	<!--
+	  Do not let the export step rewrite the build number. The version is set in
+	  project.yml and verified in the archive; silently incrementing it here
+	  would make the reviewable file disagree with what was uploaded.
+	-->
+	<key>manageAppVersionAndBuildNumber</key>
+	<false/>
+
+	<!--
+	  Ship the app for every device it supports rather than thinning to one.
+	  The target is deviceFamily [1, 2] - iPhone and iPad - and a child may be
+	  handed either.
+	-->
+	<key>thinning</key>
+	<string>&lt;none&gt;</string>
+</dict>
+</plist>

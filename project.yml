@@ -29,6 +29,11 @@ targets:
 
     sources:
       - path: LearnrApp/LearnrApp
+      # Apple requires the privacy manifest, and it has to be copied into the
+      # bundle rather than merely committed - a file sitting beside Info.plist
+      # that no target lists is not in the app, and the upload is rejected for
+      # a manifest that is technically present in the repository.
+      - path: LearnrApp/PrivacyInfo.xcprivacy
 
     dependencies:
       - package: LearnrEngine

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+	  Apple requires this file, and it is a declaration rather than a
+	  description: what it claims has to match what the binary does, and the
+	  answers below were each checked against the source rather than assumed.
+
+	  The app tracks nobody. There is no analytics SDK, no crash reporter and no
+	  third-party package of any kind - LearnrEngine is the only dependency and
+	  it is in this repository. The seven endpoints the client calls are all
+	  first-party: /auth/redeem, /me, /me/level, /play/state, /sessions,
+	  /speed/runs and /content/manifest.
+	-->
+
+	<!--
+	  Never. Tracking in Apple's sense is linking this app's data to data from
+	  other companies' apps or sites, and nothing here leaves the LearnR API.
+	-->
+	<key>NSPrivacyTracking</key>
+	<false/>
+	<key>NSPrivacyTrackingDomains</key>
+	<array/>
+
+	<!--
+	  What the app sends to its own server, and why.
+
+	  A child signs in with a four-character code a parent hands over. There is
+	  no name, no email address, no date of birth and no device identifier in
+	  any request: the code redeems to a token, and everything after that is
+	  answers to maths and English questions.
+
+	  "Other Data" is the honest category for an attempt - which question, what
+	  the child answered, whether it was right, how long it took. It is not
+	  contact info, not identifiers, not usage data in Apple's sense (that
+	  category is about advertising and product analytics), and there is no
+	  category that fits schoolwork more closely.
+
+	  Linked to the child's account, because that is the whole point - a parent
+	  reads the report. Not used for tracking.
+	-->
+	<key>NSPrivacyCollectedDataTypes</key>
+	<array>
+		<dict>
+			<key>NSPrivacyCollectedDataType</key>
+			<string>NSPrivacyCollectedDataTypeOtherDataTypes</string>
+			<key>NSPrivacyCollectedDataTypeLinked</key>
+			<true/>
+			<key>NSPrivacyCollectedDataTypeTracking</key>
+			<false/>
+			<key>NSPrivacyCollectedDataTypePurposes</key>
+			<array>
+				<string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string>
+			</array>
+		</dict>
+	</array>
+
+	<!--
+	  Required-reason APIs. All four audited categories were grepped for across
+	  the app and the engine, and this is the only one the code touches.
+
+	  UserDefaults is NOT declared: the app uses none. The login token lives in
+	  the Keychain (Keychain.swift), and the queue, the packs, the account and
+	  the player snapshot are files in Application Support. Keychain access
+	  inside a single app needs no entitlement and no declaration.
+
+	  The file-timestamp APIs (C617.1), disk space (E174.1), boot time (35F9.1)
+	  and active keyboards (54BD.1) are all unused - so nothing about them is
+	  declared here, and this array stays empty rather than carrying a reason
+	  the binary cannot justify.
+	-->
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array/>
+</dict>
+</plist>
