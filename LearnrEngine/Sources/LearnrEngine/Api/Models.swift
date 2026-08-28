@@ -237,11 +237,48 @@ public struct SpeedRunRequest: Codable, Sendable {
     public let id: String
     public let mode: String
     public let correct: Int
+    /// ISO 8601, as the contract's `format: date-time` requires. Omitted
+    /// entirely when there is nothing to say, rather than sent as null - the
+    /// field is optional and the server stamps receipt in its absence.
+    public let playedAt: String?
 
-    public init(id: String = UUID().uuidString.lowercased(), mode: String, correct: Int) {
+    public init(
+        id: String = UUID().uuidString.lowercased(),
+        mode: String, correct: Int, playedAt: String? = nil
+    ) {
         self.id = id
         self.mode = mode
         self.correct = correct
+        self.playedAt = playedAt
+    }
+
+    /// Formats the stamp at the boundary, from the epoch milliseconds the
+    /// engine and the queue speak.
+    public init(id: String, mode: String, correct: Int, playedAtMs: Int?) {
+        self.init(id: id, mode: mode, correct: correct,
+                  playedAt: playedAtMs.map(ISO8601.string(fromEpochMs:)))
+    }
+}
+
+/// The one date format the API speaks.
+///
+/// Fixed to UTC and to `en_US_POSIX` rather than taking the device's locale or
+/// zone: a child in Sydney and a child in London must send the same instant the
+/// same way, and a formatter that reads the system locale is one that produces
+/// Arabic-Indic digits or a Buddhist year on somebody's phone. Milliseconds are
+/// included because the contract's `format: date-time` accepts them and the
+/// server's tie-break on `playedAt` is finer than a second.
+public enum ISO8601 {
+    nonisolated(unsafe) private static let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        return formatter
+    }()
+
+    public static func string(fromEpochMs ms: Int) -> String {
+        formatter.string(from: Date(timeIntervalSince1970: Double(ms) / 1000))
     }
 }
 

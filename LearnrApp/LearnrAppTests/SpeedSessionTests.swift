@@ -373,6 +373,24 @@ struct SpeedSessionTests {
         #expect(await queue.pendingRunCount == 0)
     }
 
+    @Test("a queued run is stamped with when it was played, not when it was queued")
+    func queuedRunCarriesThePlayedAtStamp() async throws {
+        // `runBegins` is `start + countdownMs` - the instant the run itself
+        // began, from the injected clock. The queue drains much later in real
+        // life, and the stamp must not move with it.
+        let (run, _, store) = Self.queued()
+        run.start()
+        run.tick(at: Self.runBegins)
+        for digit in Self.answer(run) {
+            run.type(String(digit), at: Self.runBegins + 1_000)
+        }
+        run.finish(at: Self.runBegins + SpeedRun.runMs + 1)
+
+        try await Task.sleep(for: .milliseconds(400))
+
+        #expect(store.loadRuns().first?.playedAtMs == Self.runBegins)
+    }
+
     @Test("an abandoned run is not queued")
     func abandonedRunIsNotQueued() async throws {
         let (run, queue, _) = Self.queued()

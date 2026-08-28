@@ -259,7 +259,13 @@ final class SpeedSession {
         // `POST /speed/runs` dedupes on it, so every flush of this run - now,
         // and after any number of relaunches - has to carry this same id. One
         // minted per request would dedupe nothing.
-        let pending = PendingRun(mode: result.mode.key, correct: result.correct)
+        // Stamped with when the run was *played* - `startedAt` from the
+        // injected clock - not with when the queue drains (L14). An afternoon
+        // of offline runs flushed at five o'clock would otherwise all be dated
+        // five o'clock, and that stamp orders the cabinet, the report table and
+        // the family board, and tie-breaks which of two equal runs is starred.
+        let pending = PendingRun(
+            mode: result.mode.key, correct: result.correct, playedAtMs: state.startedAt)
 
         Task { [weak self] in await self?.submit(pending, previousBest: result) }
     }

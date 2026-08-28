@@ -349,6 +349,7 @@ struct SpeedRunQueueTests {
     final class SeenRuns: @unchecked Sendable {
         private let lock = NSLock()
         private var ids: [String] = []
+        private var stamps: [String?] = []
 
         func note(_ request: URLRequest) {
             guard request.url?.path == "/speed/runs" else { return }
@@ -373,11 +374,18 @@ struct SpeedRunQueueTests {
             else { return }
             lock.lock(); defer { lock.unlock() }
             ids.append(id)
+            stamps.append(json["playedAt"] as? String)
         }
 
         var all: [String] {
             lock.lock(); defer { lock.unlock() }
             return ids
+        }
+
+        /// The `playedAt` each call carried, `nil` where it carried none.
+        var playedAt: [String?] {
+            lock.lock(); defer { lock.unlock() }
+            return stamps
         }
     }
 
@@ -497,6 +505,106 @@ struct SpeedRunQueueTests {
 
         #expect(seen.all.isEmpty)
         #expect(await queue.pendingRunCount == 1)
+    }
+
+    // MARK: The played-at stamp (L14)
+
+    /// 2023-11-14T22:13:20.000Z, hand-derived rather than formatted by the code
+    /// under test - an expectation the implementation computes proves nothing.
+    static let playedAtMs = 1_700_000_000_000
+    static let playedAtISO = "2023-11-14T22:13:20.000Z"
+
+    @Test("a run is sent stamped with when it was played")
+    func sendsThePlayedAtStamp() async throws {
+        let seen = SeenRuns()
+        let queue = SyncQueue(api: client(stubRuns(seen: seen)), store: MemorySittingStore())
+        await queue.recordRun(
+            PendingRun(mode: "add.easy", correct: 7, playedAtMs: Self.playedAtMs))
+
+        _ = await queue.flush()
+
+        #expect(seen.playedAt == [Self.playedAtISO])
+    }
+
+    @Test("a run retried later carries the stamp it was played at, not the retry's")
+    func holdsOneStampAcrossFlushes() async throws {
+        let seen = SeenRuns()
+        let attempts = Counter()
+        let session = StubProtocol.session { request in
+            seen.note(request)
+            return attempts.next() == 1
+                ? (503, Data(#"{"error":"Could not record"}"#.utf8), [:])
+                : (200, Data(#"{"previousBest":3,"best":5,"isRecord":true}"#.utf8), [:])
+        }
+
+        let queue = SyncQueue(api: client(session), store: MemorySittingStore())
+        await queue.recordRun(
+            PendingRun(mode: "add.easy", correct: 7, playedAtMs: Self.playedAtMs))
+
+        _ = await queue.flush()
+        _ = await queue.flush()
+
+        #expect(seen.playedAt == [Self.playedAtISO, Self.playedAtISO],
+                "an afternoon of offline runs must not be dated by whenever the queue drained")
+    }
+
+    @Test("a run stamped before a relaunch keeps that stamp after it")
+    func stampSurvivesARelaunch() async throws {
+        let seen = SeenRuns()
+        let store = MemorySittingStore()
+
+        let first = SyncQueue(api: client(stubRuns(seen: SeenRuns())), store: store)
+        await first.recordRun(
+            PendingRun(mode: "add.easy", correct: 7, playedAtMs: Self.playedAtMs))
+
+        let second = SyncQueue(api: client(stubRuns(seen: seen)), store: store)
+        _ = await second.flush()
+
+        #expect(seen.playedAt == [Self.playedAtISO])
+    }
+
+    @Test("an unstamped run sends no playedAt, so the server stamps receipt")
+    func omitsTheStampWhenThereIsNone() async throws {
+        // Optional on the wire: omitting it is today's behaviour, and a run
+        // queued by a build that predates the stamp must still send.
+        let seen = SeenRuns()
+        let queue = SyncQueue(api: client(stubRuns(seen: seen)), store: MemorySittingStore())
+        await queue.recordRun(PendingRun(mode: "add.easy", correct: 7))
+
+        _ = await queue.flush()
+
+        #expect(seen.playedAt == [nil])
+    }
+
+    @Test("the boundary formats an instant the way the contract's date-time reads")
+    func formatsISO8601() {
+        // Derived independently of the formatter, in UTC, including a non-zero
+        // millisecond - a `.SSS` that silently dropped its fraction would look
+        // right at every round second.
+        let cases: [(Int, String)] = [
+            (1_700_000_000_000, "2023-11-14T22:13:20.000Z"),
+            (1_700_000_003_000, "2023-11-14T22:13:23.000Z"),
+            (1_756_197_600_123, "2025-08-26T08:40:00.123Z"),
+            (0, "1970-01-01T00:00:00.000Z"),
+        ]
+        for (ms, expected) in cases {
+            #expect(ISO8601.string(fromEpochMs: ms) == expected)
+        }
+    }
+
+    @Test("a run queued before the stamp existed still decodes")
+    func decodesARunWithoutAStamp() throws {
+        // The persisted queue outlives the app version that wrote it. A run on
+        // disk from the build before L14 has no `playedAtMs` key at all.
+        let onDisk = Data(#"[{"id":"5b1f...","mode":"add.easy","correct":7}]"#
+            .replacingOccurrences(of: "5b1f...", with: "5b1fdc1e-0000-4000-8000-000000000000")
+            .utf8)
+
+        let runs = try JSONDecoder().decode([PendingRun].self, from: onDisk)
+
+        #expect(runs.count == 1)
+        #expect(runs[0].playedAtMs == nil, "an older run has no stamp and must not invent one")
+        #expect(runs[0].correct == 7)
     }
 }
 

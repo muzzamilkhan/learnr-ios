@@ -51,10 +51,29 @@ public struct PendingRun: Codable, Sendable, Equatable {
     public let mode: String
     public let correct: Int
 
-    public init(id: String = UUID().uuidString.lowercased(), mode: String, correct: Int) {
+    /// When the run was **played**, in epoch milliseconds.
+    ///
+    /// Held across every flush for the same reason the id is (L14): without it
+    /// an afternoon of offline runs is dated by whenever the queue happened to
+    /// drain, and that stamp orders the cabinet, the report table and the family
+    /// board, and tie-breaks which of two equal runs gets starred.
+    ///
+    /// Milliseconds rather than a formatted string or a `Date`: it is the unit
+    /// the engine's injected clock and `RunState.startedAt` already speak, so
+    /// nothing is converted until the boundary formats it. Optional because the
+    /// field is optional on the wire, and because a run queued by a build that
+    /// predates it has none - omitting it means the server stamps receipt, which
+    /// is exactly the old behaviour.
+    public let playedAtMs: Int?
+
+    public init(
+        id: String = UUID().uuidString.lowercased(),
+        mode: String, correct: Int, playedAtMs: Int? = nil
+    ) {
         self.id = id
         self.mode = mode
         self.correct = correct
+        self.playedAtMs = playedAtMs
     }
 }
 
@@ -214,8 +233,9 @@ public actor SyncQueue {
 
         for run in runs {
             do {
-                try await api.submitSpeedRun(
-                    SpeedRunRequest(id: run.id, mode: run.mode, correct: run.correct))
+                try await api.submitSpeedRun(SpeedRunRequest(
+                    id: run.id, mode: run.mode, correct: run.correct,
+                    playedAtMs: run.playedAtMs))
             } catch let error as ApiError where error.isRetryable {
                 kept.append(run)
             } catch {
