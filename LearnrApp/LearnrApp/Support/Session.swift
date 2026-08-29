@@ -251,7 +251,15 @@ final class Session {
 
     /// Best-effort, always. A failed sync costs history, never the question in
     /// front of the child.
+    ///
+    /// Guarded for demo for the same reason `refreshPendingCount()` is, and it
+    /// is not enough that `flush()` returns early without a token: the count
+    /// assignment below runs whether or not the flush did, so an unguarded
+    /// `sync()` would put a signed-out child's pending count back on a demo
+    /// home screen. This is called on every foreground, so that is one
+    /// backgrounding away rather than a corner.
     func sync() async {
+        guard !isDemo else { return }
         _ = await queue.flush()
         pendingAttempts = await queue.pendingAttemptCount
     }

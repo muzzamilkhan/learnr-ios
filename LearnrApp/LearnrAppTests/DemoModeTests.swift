@@ -356,6 +356,15 @@ struct DemoModeTests {
         // `refreshPendingCount()`, this read straight through to the real
         // queue and picked up the left-behind child's pending attempt.
         #expect(session.pendingAttempts == 0)
+
+        // The same defect through the other door. `sync()` writes the same
+        // property and runs on EVERY foreground, so a demo child who
+        // backgrounds the app and comes back would have seen the count
+        // reappear. `flush()` returning early without a token is not enough to
+        // save it: the count assignment after the flush runs regardless.
+        await session.sync()
+
+        #expect(session.pendingAttempts == 0)
     }
 
     @Test("demo plays from the bundle with no cache and no network")
