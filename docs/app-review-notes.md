@@ -50,7 +50,9 @@ WHAT THE APP DOES NOT DO
 - No name, email address, date of birth or device identifier is collected.
 - No analytics, no crash reporting, no advertising, and no third-party
   SDKs of any kind.
-- No in-app purchases, no external links, and no user-to-user communication.
+- No in-app purchases and no user-to-user communication. The one external
+  link — a grown-up setting up an account — sits behind a date-of-birth
+  parental gate and is account-only wording, not a purchase route.
 - No camera, microphone, location or contacts access.
 
 The app talks only to our own API at learnr-api-syd.fly.dev.
@@ -106,5 +108,7 @@ asked about in a rejection.
 One point to be ready to defend rather than assert: **the code entry screen is
 not a parental gate**, and it is not claimed to be one. It is a credential
 prompt. If a reviewer raises the gate requirement, the answer is that the app
-has no purchases, no external links and no outbound web content — the things a
-gate exists to protect — so there is nothing behind a gate to guard.
+has no purchases and no outbound web content reachable by a child — the one
+external link (a grown-up setting up an account, from `GrownUpGate.swift`) sits
+behind its own date-of-birth gate, asked fresh every time and never stored,
+matching `LearnrApp/PrivacyInfo.xcprivacy`'s "no date of birth collected".

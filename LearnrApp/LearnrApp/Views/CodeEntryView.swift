@@ -20,6 +20,7 @@ struct CodeEntryView: View {
     @State private var entry = ""
     @State private var error: String?
     @State private var busy = false
+    @State private var showingGate = false
     @FocusState private var typing: Bool
 
     /// The server's charset, minus the characters a child would misread:
@@ -64,6 +65,18 @@ struct CodeEntryView: View {
             }
             .padding(.top, 4)
 
+            // One external link, gated. Account-only wording: no prices and
+            // nothing that reads as a purchase route (Guideline 3.1.1).
+            Button {
+                showingGate = true
+            } label: {
+                Text("New here? Grown-ups can set up an account")
+                    .font(.footnote)
+                    .foregroundStyle(Palette.inkSoft)
+                    .underline()
+            }
+            .padding(.top, 8)
+
             Spacer(minLength: 0)
         }
         .padding(28)
@@ -74,6 +87,7 @@ struct CodeEntryView: View {
         // arrival rather than waiting for a tap on something that does not look
         // like a text field.
         .onAppear { typing = true }
+        .sheet(isPresented: $showingGate) { GrownUpGateSheet() }
     }
 
     /// Four boxes, with the real field behind them taking the keystrokes.
