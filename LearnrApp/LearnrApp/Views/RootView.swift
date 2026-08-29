@@ -16,7 +16,9 @@ struct RootView: View {
             HomeView(account: account)
 
         case .demo:
-            CodeEntryView()
+            // The same home screen a signed-in child sees. What differs is what
+            // it is handed: no queue, and no reads (ledger `L26`).
+            HomeView(account: .unread)
         }
     }
 }
@@ -89,8 +91,12 @@ struct HomeView: View {
 
                 Spacer()
 
-                Button("Sign out") {
-                    Task { await session.signOut() }
+                Button(session.isDemo ? "Finish looking around" : "Sign out") {
+                    if session.isDemo {
+                        session.leaveDemo()
+                    } else {
+                        Task { await session.signOut() }
+                    }
                 }
                 .foregroundStyle(Palette.inkSoft)
                 .buttonStyle(.bordered)
@@ -98,7 +104,7 @@ struct HomeView: View {
             .padding()
         }
         .fullScreenCover(isPresented: $playing) {
-            PlayView(level: session.level)
+            PlayView(level: session.level, queue: session.isDemo ? nil : session.queue)
                 .environment(session)
         }
         .fullScreenCover(isPresented: $speeding) {
@@ -106,6 +112,10 @@ struct HomeView: View {
                 .environment(session)
         }
         .task {
+            // Demo reads nothing and caches nothing: it has no account to read
+            // for, and a write here would outlive the session it belongs to.
+            guard !session.isDemo else { return }
+
             // The cache first, and synchronously: it carries the level, and an
             // offline launch would otherwise refresh the fallback level's pack
             // rather than the one this child plays.

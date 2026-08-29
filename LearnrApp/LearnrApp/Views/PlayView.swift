@@ -13,6 +13,8 @@ struct PlayView: View {
 
     @State private var play: PlaySession?
     let level: YearLevel
+    /// Nil in demo, which is what makes a demo sitting unqueueable.
+    let queue: SyncQueue?
 
     var body: some View {
         ZStack {
@@ -41,7 +43,7 @@ struct PlayView: View {
         .task {
             guard play == nil else { return }
             let session = PlaySession(
-                library: session.library, queue: session.queue, api: session.api, level: level)
+                library: session.library, queue: queue, api: session.api, level: level)
             play = session
             await session.start()
         }
