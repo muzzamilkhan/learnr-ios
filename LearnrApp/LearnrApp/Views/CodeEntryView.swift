@@ -47,6 +47,23 @@ struct CodeEntryView: View {
                     .transition(.opacity)
             }
 
+            // Reachable in the shipped build, because a reviewer uses the same
+            // binary as every child (ledger `L26`). Worded for both: a child
+            // who taps it gets maths that does not count, which is a fair thing
+            // for it to be.
+            Button {
+                session.enterDemo()
+            } label: {
+                HStack(spacing: 6) {
+                    Text("Have a look around")
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 14, weight: .semibold))
+                }
+                .font(.system(size: 19, weight: .semibold, design: .rounded))
+                .foregroundStyle(Palette.brand)
+            }
+            .padding(.top, 4)
+
             Spacer(minLength: 0)
         }
         .padding(28)

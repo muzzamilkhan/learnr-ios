@@ -235,6 +235,7 @@ final class Session {
     func enterDemo() {
         level = .three
         player = nil
+        pendingAttempts = 0  // HomeView shows a pending-count label when > 0
         state = .demo
     }
 
