@@ -26,7 +26,8 @@ enum GrownUpGate {
     /// recorded rather than hidden: `/signup`, `/sign-up`, `/register` and
     /// `/login` all 404, there is no `learnr` clone on this machine, and parent
     /// sign-in is Google-only, so the right destination is not knowable from
-    /// this side. A ledger ask is open; this is one constant to change.
+    /// this side. An ask to the web side for the real sign-up route is
+    /// planned (see the plan's Task 7); this is one constant to change.
     static let signUpURL = URL(string: "https://learnr.muzza.tech")!
 
     /// Eighteen years, by the calendar rather than by 365-day arithmetic - leap

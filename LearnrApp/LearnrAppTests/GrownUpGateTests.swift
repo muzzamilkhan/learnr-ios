@@ -67,11 +67,18 @@ struct GrownUpGateTests {
 
     @Test("GrownUpGate has no cases and cannot be instantiated")
     func gateHasNoCases() {
-        // Belt and braces on top of `gateStoresNothing`: that test can only
-        // check keys it happens to name. This checks the type itself has no
-        // room to hold state at all - an uninhabited enum has no stored
-        // properties and no instance ever exists, so there is nowhere for a
-        // date of birth to live between one sheet presentation and the next.
+        // `GrownUpGate` is an uninhabited enum, so no INSTANCE of it can ever
+        // exist or hold state - there is no `self` for a date of birth to
+        // live on between one sheet presentation and the next.
+        //
+        // What this does NOT catch: `Mirror(reflecting:)` on a type reflects
+        // its instance-side shape, which is empty for an uninhabited enum
+        // regardless of what static members it declares. A `static var
+        // cachedPass: Bool = false` added later - the plausible shape a
+        // "remember the gate was passed" regression would actually take -
+        // would not trip this assertion. Guarding against that is a
+        // code-review concern, not something this test or the type system
+        // enforces.
         #expect(Mirror(reflecting: GrownUpGate.self).children.isEmpty)
     }
 
