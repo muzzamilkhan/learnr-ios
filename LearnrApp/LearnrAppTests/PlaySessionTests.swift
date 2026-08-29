@@ -279,6 +279,38 @@ struct PlaySessionTests {
         #expect(sittings.load().first?.finished == true)
     }
 
+    @Test("a session with no queue plays and records nothing")
+    func noQueueRecordsNothing() async throws {
+        // The demo path, proved at its narrowest: the same session, the same
+        // answers, and no queue for them to land in. This is ledger L26's
+        // requirement - not filtered at flush, but structurally absent.
+        let packs = MemoryPackStore()
+        packs.seed(CachedPack(
+            data: Self.packJSON, subject: "maths", level: .three, etag: nil, storedAt: 0))
+        let api = ApiClient(
+            baseURL: URL(string: "http://127.0.0.1:1")!,
+            tokens: NoTokens(),
+            session: URLSession(configuration: .ephemeral))
+
+        let play = PlaySession(
+            library: ContentLibrary(api: api, store: packs),
+            queue: nil,
+            api: api,
+            level: .three)
+
+        await play.start()
+        #expect(play.status == .playing)
+
+        play.type("5")
+        play.check()
+        play.advance()
+        try await Task.sleep(for: .milliseconds(50))
+
+        // It played. The answer was graded and the summary counts it.
+        await play.finish()
+        #expect(play.summary?.answered == 1)
+    }
+
     // MARK: The summary
 
     @Test("a finished sitting reports what was answered")

@@ -101,7 +101,12 @@ final class PlaySession {
     static let correctMs = 700
 
     private let library: ContentLibrary
-    private let queue: SyncQueue
+    /// Where answers go, or `nil` in demo mode.
+    ///
+    /// Optional for the same reason `SpeedSession`'s is: a demo sitting must be
+    /// unable to reach the queue rather than filtered out of it (ledger `L26`).
+    /// There is no object here to record onto, so there is nothing to seal.
+    private let queue: SyncQueue?
     private let api: ApiClient
     private let level: YearLevel
     private let subject: String
@@ -112,7 +117,7 @@ final class PlaySession {
     private var advanceTask: Task<Void, Never>?
 
     init(
-        library: ContentLibrary, queue: SyncQueue, api: ApiClient,
+        library: ContentLibrary, queue: SyncQueue? = nil, api: ApiClient,
         subject: String = "maths", level: YearLevel
     ) {
         self.library = library
@@ -306,6 +311,7 @@ final class PlaySession {
         began = true
 
         Task { [queue] in
+            guard let queue else { return }
             if opening { await queue.begin(sitting) }
             await queue.record(payload, in: sitting.id)
         }
@@ -324,7 +330,7 @@ final class PlaySession {
                 correct: attempts.filter(\.correct).count)
         }
 
-        guard began else { return }
+        guard began, let queue else { return }
         await queue.finish(sittingId)
         _ = await queue.flush()
     }
