@@ -184,12 +184,13 @@ dependency cannot resolve across two clones.
   `npm run contract --workspace apps/api`, and served by the deployed API at
   `/openapi.json` - which is how to read it from this Mac, there being no
   `learnr` clone here
-- Deployed: `https://learnr-api-syd.fly.dev`
+- Deployed: `https://api.learnr.muzza.tech` (the Fly name,
+  `learnr-api-syd.fly.dev`, still answers and serves the same document)
 
 `AppConfig.apiBaseURL` is `url(from:) ?? http://localhost:3001`. The localhost
 half is a **fallback for when the plist key is missing or unsubstituted**, not
 what a configured build uses: `project.yml` ships
-`https://learnr-api-syd.fly.dev`, so a normal build talks to the deployed API.
+`https://api.learnr.muzza.tech`, so a normal build talks to the deployed API.
 
 The fallback is the thing to watch on a device. An unset or empty
 `LEARNR_API_BASE_URL` expands to nothing, the key is dropped from the plist, and

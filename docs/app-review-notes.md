@@ -58,7 +58,7 @@ WHAT THE APP DOES NOT DO
   parental gate and is account-only wording, not a purchase route.
 - No camera, microphone, location or contacts access.
 
-The app talks only to our own API at learnr-api-syd.fly.dev.
+The app talks only to our own API at api.learnr.muzza.tech.
 ```
 
 ---

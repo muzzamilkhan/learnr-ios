@@ -64,8 +64,8 @@ The GitHub issues the two repos used to raise on each other are retired;
 | | |
 | --- | --- |
 | Server, contract, web app | `muzzamilkhan/learnr` — API is the `apps/api` workspace |
-| Contract | `learnr/apps/api/contract/openapi.yaml`, served live at `https://learnr-api-syd.fly.dev/openapi.json` |
-| Deployed API | `https://learnr-api-syd.fly.dev` |
+| Contract | `learnr/apps/api/contract/openapi.yaml`, served live at `https://api.learnr.muzza.tech/openapi.json` |
+| Deployed API | `https://api.learnr.muzza.tech` |
 | Spec | `learnr/docs/superpowers/specs/2026-08-26-ios-port-design.md` |
 | Fixtures spec | `learnr/docs/superpowers/specs/2026-08-26-fixture-generation-design.md` — supersedes the conformance-suite section of the above |
 

@@ -46,7 +46,11 @@ targets:
         # configuration or it expands to nothing and the key is dropped from
         # the built plist entirely - which is how this silently fell back to
         # localhost the first time.
-        LEARNR_API_BASE_URL: https:/$()/learnr-api-syd.fly.dev
+        # The owned name rather than the Fly one, so the API can move off Fly
+        # without a client change - ledger `L28`. `learnr-api-syd.fly.dev` still
+        # answers and serves a byte-identical document; this is about not
+        # pinning a shipped binary to a host we do not own.
+        LEARNR_API_BASE_URL: https:/$()/api.learnr.muzza.tech
         MARKETING_VERSION: "0.1.0"
         CURRENT_PROJECT_VERSION: "1"
         SWIFT_VERSION: "6.0"
