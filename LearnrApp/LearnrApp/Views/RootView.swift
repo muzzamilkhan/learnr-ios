@@ -14,6 +14,9 @@ struct RootView: View {
 
         case .signedIn(let account):
             HomeView(account: account)
+
+        case .demo:
+            CodeEntryView()
         }
     }
 }

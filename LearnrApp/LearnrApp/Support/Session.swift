@@ -14,6 +14,12 @@ final class Session {
         case loading
         case signedOut
         case signedIn(Account)
+        /// A local child nobody is signed in as - ledger `L26`.
+        ///
+        /// Deliberately carries no `Account`: there is no account, and giving
+        /// it an empty one would let demo be mistaken for a signed-in child by
+        /// anything that pattern-matches on the payload rather than the case.
+        case demo
     }
 
     private(set) var state: State = .loading
@@ -210,6 +216,34 @@ final class Session {
         // must not be greeted as the last one, nor shown the stars they left.
         accounts.write(nil)
         snapshots.write(nil)
+        player = nil
+        state = .signedOut
+    }
+
+    /// Whether this is the local demo child rather than a signed-in one.
+    var isDemo: Bool { state == .demo }
+
+    /// Enter the demo. Reachable with no token, no code and no network.
+    ///
+    /// Year 3 and maths, which is `level`'s existing fallback rather than a
+    /// second demo-only constant - there is one rule about "what level when
+    /// nobody has said", not two.
+    ///
+    /// Nothing is written: no account is cached, no snapshot is stored, and the
+    /// sync queue is never handed to the sessions this state builds (see
+    /// `HomeView`). The demo child exists only in memory.
+    func enterDemo() {
+        level = .three
+        player = nil
+        state = .demo
+    }
+
+    /// Leave the demo, discarding it.
+    ///
+    /// Releasing the play and speed sessions is the discard - there is nothing
+    /// persisted to tear down, which is the point of building it with no queue
+    /// and no caches.
+    func leaveDemo() {
         player = nil
         state = .signedOut
     }

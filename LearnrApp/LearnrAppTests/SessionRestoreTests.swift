@@ -236,4 +236,30 @@ struct SessionRestoreTests {
 
         #expect(session.state == .signedOut)
     }
+
+    @Test("entering demo needs no token and no network")
+    func demoNeedsNothing() async {
+        // The reviewer's device: never signed in, no code, no connection.
+        let session = Self.session(answering: nil, cache: Cache())
+
+        session.enterDemo()
+
+        #expect(session.state == .demo)
+        #expect(session.isDemo)
+        // Year 3 and maths, reusing the existing fallback rather than a second
+        // demo-only constant.
+        #expect(session.level == .three)
+    }
+
+    @Test("leaving demo returns to the code screen and keeps nothing")
+    func demoLeavesNothingBehind() async {
+        let session = Self.session(answering: nil, cache: Cache())
+        session.enterDemo()
+
+        session.leaveDemo()
+
+        #expect(session.state == .signedOut)
+        #expect(!session.isDemo)
+        #expect(session.player == nil)
+    }
 }
