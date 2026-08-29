@@ -213,10 +213,8 @@ components:
             - 'null'
       required:
         - id
-        - role
         - parentId
         - name
-        - avatar
         - image
         - photo
       additionalProperties: false
@@ -372,7 +370,6 @@ components:
         - avatar
         - photo
         - level
-        - target
         - code
         - codeExpiresAt
       additionalProperties: false
@@ -1239,7 +1236,6 @@ components:
         - selectedLevel
         - streak
         - stars
-        - target
         - targetDay
       additionalProperties: false
     ProgressBucket:
@@ -1533,7 +1529,6 @@ components:
         - previousBest
         - best
         - isRecord
-        - standing
       additionalProperties: false
     SpeedRecords:
       $schema: https://json-schema.org/draft/2020-12/schema
@@ -1875,7 +1870,6 @@ components:
         - avatar
         - photo
         - level
-        - target
         - code
         - codeExpiresAt
         - access
