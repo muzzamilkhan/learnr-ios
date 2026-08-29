@@ -88,7 +88,34 @@ final class Session {
     }
 
     let api: ApiClient
-    let queue: SyncQueue
+
+    /// Where a sitting's answers go.
+    ///
+    /// A `var` because entering the demo swaps it for a sealed one — a
+    /// `SyncQueue` over `NoSittingStore`, which loads nothing and saves
+    /// nothing. That is what makes "a demo child cannot record" a property of
+    /// this object rather than of every call site: a view asks for
+    /// `session.queue` and gets whatever the current state should have, with
+    /// no `isDemo` to remember.
+    ///
+    /// The real one is held aside in `signedInQueue` and put back on leaving,
+    /// so a child's unsynced work survives somebody wandering through the demo
+    /// — `signOut()` deliberately keeps the queue, and this must not be the
+    /// thing that quietly discards it.
+    private(set) var queue: SyncQueue
+
+    /// The queue the signed-in child's work lives in, while the demo borrows
+    /// the slot above.
+    private let signedInQueue: SyncQueue
+
+    /// The client a play or speed session should use, or `nil` in demo.
+    ///
+    /// Separate from `api` because `api` is what signing in and restoring use,
+    /// and those always have a client — making the stored one optional would
+    /// put a `?` through seven auth call sites to express a fact about play.
+    /// This is the one the play path reads.
+    var playApi: ApiClient? { isDemo ? nil : api }
+
     let library: ContentLibrary
 
     /// The last account the server gave us, for a launch that cannot reach it.
@@ -101,7 +128,9 @@ final class Session {
         let tokens = KeychainTokenStore()
         let store = FileSittingStore(url: Self.queueURL)
         self.api = ApiClient(baseURL: baseURL, tokens: tokens)
-        self.queue = SyncQueue(api: api, store: store)
+        let real = SyncQueue(api: api, store: store)
+        self.queue = real
+        self.signedInQueue = real
         self.library = ContentLibrary(api: api, store: FilePackStore(directory: Self.packsURL))
         self.accounts = FileAccountCache(url: Self.accountURL)
         self.snapshots = FilePlayerSnapshotCache(url: Self.playerURL)
@@ -113,6 +142,7 @@ final class Session {
          snapshots: any PlayerSnapshotCache = NoPlayerSnapshotCache()) {
         self.api = api
         self.queue = queue
+        self.signedInQueue = queue
         self.library = library
         self.accounts = accounts
         self.snapshots = snapshots
@@ -229,49 +259,52 @@ final class Session {
     /// second demo-only constant - there is one rule about "what level when
     /// nobody has said", not two.
     ///
-    /// Nothing is written: no account is cached, no snapshot is stored, and the
-    /// sync queue is never handed to the sessions this state builds (see
-    /// `HomeView`). The demo child exists only in memory.
+    /// Nothing is written, and the sealing is this object's rather than every
+    /// call site's: `queue` is swapped for one over `NoSittingStore`, which
+    /// loads nothing and saves nothing, and `playApi` reads nil while the
+    /// state is `.demo`. A view can then just ask for `session.queue` and
+    /// `session.playApi` without knowing what a demo is.
+    ///
+    /// The real queue is not discarded, only set aside. `signOut()`
+    /// deliberately keeps a child's unsynced work, and somebody wandering
+    /// through the demo must not be what finally loses it.
     func enterDemo() {
         level = .three
         player = nil
         pendingAttempts = 0  // HomeView shows a pending-count label when > 0
+        // Sealed: no store behind it, so it starts empty and keeps nothing.
+        queue = SyncQueue(api: api, store: NoSittingStore())
         state = .demo
     }
 
     /// Leave the demo, discarding it.
     ///
-    /// Releasing the play and speed sessions is the discard - there is nothing
-    /// persisted to tear down, which is the point of building it with no queue
-    /// and no caches.
+    /// The sealed queue goes with the state, and the signed-in child's own
+    /// queue - with whatever it still had waiting - comes back.
     func leaveDemo() {
         player = nil
+        queue = signedInQueue
         state = .signedOut
     }
 
     /// Best-effort, always. A failed sync costs history, never the question in
     /// front of the child.
     ///
-    /// Guarded for demo for the same reason `refreshPendingCount()` is, and it
-    /// is not enough that `flush()` returns early without a token: the count
-    /// assignment below runs whether or not the flush did, so an unguarded
-    /// `sync()` would put a signed-out child's pending count back on a demo
-    /// home screen. This is called on every foreground, so that is one
-    /// backgrounding away rather than a corner.
+    /// The demo guard is belt and braces now rather than the mechanism: a demo
+    /// session's `queue` is sealed, so this would read 0 anyway. It stays
+    /// because this exact path leaked a stranded child's count twice while the
+    /// sealing lived at the call sites - once here and once in
+    /// `refreshPendingCount()` - and the cost of keeping it is one comparison.
     func sync() async {
         guard !isDemo else { return }
         _ = await queue.flush()
         pendingAttempts = await queue.pendingAttemptCount
     }
 
+    /// Belt and braces for the same reason as `sync()`. What actually makes a
+    /// demo child's count zero is that `enterDemo()` swapped the queue for one
+    /// with no store behind it.
     func refreshPendingCount() async {
-        // A demo child has no queue of its own but still holds the real one
-        // (`queue` is never optional on `Session`), so refreshing here would
-        // surface whatever a previously signed-out child left pending.
-        // `signOut()` deliberately does not clear the queue, so that is a real
-        // path, not a hypothetical one: a child leaves unsynced work, signs
-        // out, someone taps "Have a look around", plays, and leaves - a demo
-        // child must never show another child's count.
         guard !isDemo else { return }
         pendingAttempts = await queue.pendingAttemptCount
     }

@@ -106,8 +106,8 @@ struct HomeView: View {
         .fullScreenCover(isPresented: $playing) {
             PlayView(
                 level: session.level,
-                queue: session.isDemo ? nil : session.queue,
-                api: session.isDemo ? nil : session.api)
+                queue: session.queue,
+                api: session.playApi)
                 .environment(session)
         }
         .fullScreenCover(isPresented: $speeding) {

@@ -308,15 +308,18 @@ struct DemoModeTests {
         #expect(second.answeredCount == 0)
     }
 
-    /// The bug this task fixes: `Session` always holds the *real* `SyncQueue`
-    /// (`queue` is not optional on `Session` itself - only the sessions it
-    /// hands to `PlayView` go without one), and `signOut()` deliberately
-    /// leaves that queue's contents alone so unsynced work survives a sign
-    /// out. A demo child therefore sits on top of whatever the previous,
-    /// signed-out child left pending. `refreshPendingCount()` must not surface
-    /// that count for a demo child - `PlayView`'s exit button called it
-    /// unconditionally, which is exactly how a demo child could end up
-    /// showing "N answers waiting to sync" for someone else's answers.
+    /// A demo child must never show a stranded child's pending count.
+    ///
+    /// `signOut()` deliberately leaves the queue's contents alone so unsynced
+    /// work survives a sign out, so a demo child entered afterwards sits on top
+    /// of whatever the previous child left behind. This leaked twice while the
+    /// sealing lived at the call sites - through `refreshPendingCount()`, and
+    /// then again through `sync()`, which runs on every foreground.
+    ///
+    /// What stops it now is that `enterDemo()` swaps `Session.queue` for one
+    /// over `NoSittingStore`, so there is no stranded work to find. The guards
+    /// in both methods are kept as belt and braces; this test drives both
+    /// paths and would fail if either the seal or a guard regressed.
     @Test("a demo session does not pick up another child's pending count")
     func demoNeverShowsAnotherChildsPendingCount() async throws {
         let sittings = MemorySittingStore()
@@ -365,6 +368,60 @@ struct DemoModeTests {
         await session.sync()
 
         #expect(session.pendingAttempts == 0)
+    }
+
+    @Test("entering the demo seals the queue, and leaving gives the real one back")
+    func demoSwapsInASealedQueue() async throws {
+        // The mechanism, rather than its symptom. A demo child's inability to
+        // record is now a property of `Session` - it hands out a queue with no
+        // store behind it - instead of something every construction site has to
+        // remember to ask about.
+        let sittings = MemorySittingStore()
+        let attempt = AttemptPayload(
+            id: UUID().uuidString.lowercased(),
+            templateId: "maths.3.addition.sum", subject: "maths", topic: "addition",
+            level: ._3, prompt: "What is 2 + 2?", expected: "4",
+            response: "4", correct: true,
+            timeTakenMs: 1000, answeredAt: 1_756_197_600_000, offsetMinutes: 600)
+        sittings.save([PendingSitting(
+            subject: "maths", level: .three, seed: "left-behind", attempts: [attempt])])
+        let (urlSession, _) = CountingProtocol.session()
+        let api = ApiClient(
+            baseURL: URL(string: "https://stub.invalid")!,
+            tokens: NoTokens(),
+            session: urlSession)
+        let real = SyncQueue(api: api, store: sittings)
+        let session = Session(
+            api: api,
+            queue: real,
+            library: ContentLibrary(api: api, store: MemoryPackStore()))
+
+        #expect(await session.queue.pendingAttemptCount == 1)
+        #expect(session.playApi != nil)
+
+        session.enterDemo()
+
+        // The queue a view would now be handed is not the real one, and it is
+        // empty - no guard involved, nothing to remember at the call site.
+        #expect(await session.queue.pendingAttemptCount == 0)
+        // And the play path is handed no client at all.
+        #expect(session.playApi == nil)
+
+        // Recording into the sealed queue reaches no store.
+        await session.queue.begin(PendingSitting(
+            id: "demo-sitting", subject: "maths", level: .three, seed: "demo"))
+        await session.queue.record(attempt, in: "demo-sitting")
+        #expect(await session.queue.pendingAttemptCount == 1, "the sealed queue holds it in memory")
+        #expect(sittings.load().count == 1, "but nothing reached the store - still just the stranded sitting")
+
+        session.leaveDemo()
+
+        // The real queue comes back with its work intact. `signOut()` keeps a
+        // child's unsynced answers on purpose, and a wander through the demo
+        // must not be what finally loses them.
+        #expect(await session.queue.pendingAttemptCount == 1)
+        #expect(session.playApi != nil)
+        #expect(sittings.load().first?.seed == "left-behind")
     }
 
     @Test("demo plays from the bundle with no cache and no network")

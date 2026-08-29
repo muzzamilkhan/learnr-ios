@@ -95,6 +95,28 @@ extension SittingStore {
     public func saveRuns(_ runs: [PendingRun]) {}
 }
 
+/// Keeps nothing, and starts empty.
+///
+/// A `SyncQueue` over this one can be handed out freely: it loads nothing at
+/// construction, so it cannot surface work somebody else left behind, and it
+/// saves nothing, so nothing played through it reaches disk or a later launch.
+///
+/// This is what a demo session's queue is built on (ledger `L26`). The demo
+/// child must be unable to record rather than filtered out at flush, and a
+/// queue with no store behind it is that: the object exists, so nothing has to
+/// be optional or guarded at the call sites, but there is nowhere for an
+/// attempt to go and nothing for a pending count to find.
+///
+/// The counterpart to `NoAccountCache` and `NoPlayerSnapshotCache`, and useful
+/// for the same second reason: a test or a preview that is not about the queue.
+public struct NoSittingStore: SittingStore {
+    public init() {}
+    public func load() -> [PendingSitting] { [] }
+    public func save(_ sittings: [PendingSitting]) {}
+    public func loadRuns() -> [PendingRun] { [] }
+    public func saveRuns(_ runs: [PendingRun]) {}
+}
+
 /// A file-backed store. Writes atomically so a crash mid-write cannot leave a
 /// child's afternoon truncated.
 ///

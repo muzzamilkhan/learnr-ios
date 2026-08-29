@@ -33,8 +33,8 @@ struct SpeedRunView: View {
             guard run == nil else { return }
             let session = SpeedSession(
                 mode: mode,
-                api: session.isDemo ? nil : session.api,
-                queue: session.isDemo ? nil : session.queue)
+                api: session.playApi,
+                queue: session.queue)
             run = session
             session.start()
         }
@@ -44,8 +44,8 @@ struct SpeedRunView: View {
     private func restart() {
         let fresh = SpeedSession(
             mode: mode,
-            api: session.isDemo ? nil : session.api,
-            queue: session.isDemo ? nil : session.queue)
+            api: session.playApi,
+            queue: session.queue)
         run = fresh
         fresh.start()
     }
