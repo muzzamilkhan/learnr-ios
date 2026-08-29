@@ -257,6 +257,14 @@ final class Session {
     }
 
     func refreshPendingCount() async {
+        // A demo child has no queue of its own but still holds the real one
+        // (`queue` is never optional on `Session`), so refreshing here would
+        // surface whatever a previously signed-out child left pending.
+        // `signOut()` deliberately does not clear the queue, so that is a real
+        // path, not a hypothetical one: a child leaves unsynced work, signs
+        // out, someone taps "Have a look around", plays, and leaves - a demo
+        // child must never show another child's count.
+        guard !isDemo else { return }
         pendingAttempts = await queue.pendingAttemptCount
     }
 }

@@ -22,12 +22,19 @@ enum GrownUpGate {
 
     /// Where a grown-up is sent to set up an account.
     ///
-    /// The web app root rather than a sign-up route, and that is a compromise
-    /// recorded rather than hidden: `/signup`, `/sign-up`, `/register` and
-    /// `/login` all 404, there is no `learnr` clone on this machine, and parent
-    /// sign-in is Google-only, so the right destination is not knowable from
-    /// this side. An ask to the web side for the real sign-up route is
-    /// planned (see the plan's Task 7); this is one constant to change.
+    /// This is the correct and only right destination - not a placeholder, and
+    /// not something to "fix" toward a more specific-looking route. Ledger
+    /// `L29` asked the web side for the real sign-up route and the answer is
+    /// that there isn't a separate one to find: parent sign-in is Google-only,
+    /// so signing in with Google *is* account creation, and the root is the
+    /// one URL that behaves correctly for every visitor state - signed-out,
+    /// a parent with children already, a parent with none yet, and a
+    /// signed-in child.
+    ///
+    /// Do not change this to `/signin`: that is Auth.js's error destination,
+    /// not a page meant for a person to land on deliberately. Do not deep-link
+    /// `/children` either: for a signed-out visitor it silently discards the
+    /// intent that brought them here.
     static let signUpURL = URL(string: "https://learnr.muzza.tech")!
 
     /// Eighteen years, by the calendar rather than by 365-day arithmetic - leap

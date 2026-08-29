@@ -308,6 +308,56 @@ struct DemoModeTests {
         #expect(second.answeredCount == 0)
     }
 
+    /// The bug this task fixes: `Session` always holds the *real* `SyncQueue`
+    /// (`queue` is not optional on `Session` itself - only the sessions it
+    /// hands to `PlayView` go without one), and `signOut()` deliberately
+    /// leaves that queue's contents alone so unsynced work survives a sign
+    /// out. A demo child therefore sits on top of whatever the previous,
+    /// signed-out child left pending. `refreshPendingCount()` must not surface
+    /// that count for a demo child - `PlayView`'s exit button called it
+    /// unconditionally, which is exactly how a demo child could end up
+    /// showing "N answers waiting to sync" for someone else's answers.
+    @Test("a demo session does not pick up another child's pending count")
+    func demoNeverShowsAnotherChildsPendingCount() async throws {
+        let sittings = MemorySittingStore()
+        // A pending sitting left behind by a real, signed-out child - exactly
+        // what `signOut()` leaves in place on purpose - with a real attempt in
+        // it, so `pendingAttemptCount` (what `Session.pendingAttempts` and the
+        // "N answers waiting to sync" label actually read) is nonzero.
+        let attempt = AttemptPayload(
+            id: UUID().uuidString.lowercased(),
+            templateId: "maths.3.addition.sum", subject: "maths", topic: "addition",
+            level: ._3, prompt: "What is 2 + 2?", expected: "4",
+            response: "4", correct: true,
+            timeTakenMs: 1000, answeredAt: 1_756_197_600_000, offsetMinutes: 600)
+        sittings.save([PendingSitting(
+            subject: "maths", level: .three, seed: "left-behind", attempts: [attempt])])
+        let (urlSession, _) = CountingProtocol.session()
+        let api = ApiClient(
+            baseURL: URL(string: "https://stub.invalid")!,
+            tokens: NoTokens(),
+            session: urlSession)
+        let queue = SyncQueue(api: api, store: sittings)
+        let session = Session(
+            api: api,
+            queue: queue,
+            library: ContentLibrary(api: api, store: MemoryPackStore()))
+
+        // Sanity: the queue really does have work in it, so the assertion
+        // below cannot pass vacuously.
+        #expect(await queue.pendingAttemptCount == 1)
+
+        session.enterDemo()
+        #expect(session.pendingAttempts == 0)
+
+        await session.refreshPendingCount()
+
+        // The defect this proves fixed: before the guard in
+        // `refreshPendingCount()`, this read straight through to the real
+        // queue and picked up the left-behind child's pending attempt.
+        #expect(session.pendingAttempts == 0)
+    }
+
     @Test("demo plays from the bundle with no cache and no network")
     func demoPlaysOffline() async {
         // The reviewer's device: nothing fetched, nothing cached, no network.

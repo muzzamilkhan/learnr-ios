@@ -77,9 +77,14 @@ sealing argument. That is met by absence, not by a flag:
 - **No `ApiClient` traffic.** The only two network readers on this path are
   `PlaySession.loadProfile()` and `Session.refreshPlayer()`; a demo session
   calls neither.
-- **No caches.** `NoAccountCache` and `NoPlayerSnapshotCache` already exist in
-  the engine for exactly this purpose, so nothing is written to Application
-  Support and nothing survives the process.
+- **No account cache and no player snapshot.** `NoAccountCache` and
+  `NoPlayerSnapshotCache` already exist in the engine for exactly this
+  purpose, so no child data of any kind is written to Application Support and
+  none of it survives the process. (The bundled content pack is a partial
+  exception, and a pre-existing one: `ContentLibrary.cachedOrBundled` seeds a
+  never-fetched device's content cache from the bundle on first read, same as
+  it does for any other launch. That is question templates, not child data,
+  and this branch does not change it.)
 
 The profile and the selector are fed from an in-memory `LearnerProfileState`
 owned by the demo session. It is discarded when the session is released.

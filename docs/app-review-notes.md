@@ -49,7 +49,7 @@ the background.
 
 WHAT THE APP DOES NOT DO
 
-- No account creation, no sign-up, no password.
+- No account creation, no sign-up and no password anywhere in the app itself.
 - No name, email address, date of birth or device identifier is collected.
 - No analytics, no crash reporting, no advertising, and no third-party
   SDKs of any kind.
