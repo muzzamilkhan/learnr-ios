@@ -15,6 +15,9 @@ struct PlayView: View {
     let level: YearLevel
     /// Nil in demo, which is what makes a demo sitting unqueueable.
     let queue: SyncQueue?
+    /// Nil in demo, which is what makes a demo sitting unable to read a
+    /// profile from the server at all (ledger `L26`).
+    let api: ApiClient?
 
     var body: some View {
         ZStack {
@@ -43,7 +46,7 @@ struct PlayView: View {
         .task {
             guard play == nil else { return }
             let session = PlaySession(
-                library: session.library, queue: queue, api: session.api, level: level)
+                library: session.library, queue: queue, api: api, level: level)
             play = session
             await session.start()
         }

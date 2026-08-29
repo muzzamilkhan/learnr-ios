@@ -61,24 +61,65 @@ struct DemoModeTests {
         func write(_ token: String?) {}
     }
 
+    /// Counts every request it sees, and fails each one at the transport.
+    ///
+    /// Registered on every `URLSession` a demo test builds, so that "no
+    /// `ApiClient` traffic" (the spec's own words for this task) is proved by
+    /// counting requests rather than inferred from `api` being `nil` — the
+    /// same idiom `SessionRestoreTests.MeProtocol` uses to answer `GET /me`.
+    final class CountingProtocol: URLProtocol, @unchecked Sendable {
+        nonisolated(unsafe) static var counts: [String: Int] = [:]
+        static let lock = NSLock()
+        static let keyHeader = "X-Counting-Key"
+
+        static func session() -> (URLSession, key: String) {
+            let key = UUID().uuidString
+            lock.lock(); counts[key] = 0; lock.unlock()
+            let config = URLSessionConfiguration.ephemeral
+            config.protocolClasses = [CountingProtocol.self]
+            config.httpAdditionalHeaders = [keyHeader: key]
+            return (URLSession(configuration: config), key)
+        }
+
+        static func count(_ key: String) -> Int {
+            lock.lock(); defer { lock.unlock() }
+            return counts[key] ?? 0
+        }
+
+        override class func canInit(with request: URLRequest) -> Bool {
+            request.value(forHTTPHeaderField: keyHeader) != nil
+        }
+        override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
+
+        override func startLoading() {
+            let key = request.value(forHTTPHeaderField: Self.keyHeader) ?? ""
+            Self.lock.lock(); Self.counts[key, default: 0] += 1; Self.lock.unlock()
+            client?.urlProtocol(self, didFailWithError: URLError(.notConnectedToInternet))
+        }
+
+        override func stopLoading() {}
+    }
+
     @Test("a demo sitting records nothing, because there is no queue to record to")
     func demoPlayNeverQueues() async throws {
         let packs = MemoryPackStore()
         packs.seed(CachedPack(
             data: Self.packJSON, subject: "maths", level: .three, etag: nil, storedAt: 0))
         let sittings = MemorySittingStore()
+        let (urlSession, key) = CountingProtocol.session()
         let api = ApiClient(
-            baseURL: URL(string: "http://127.0.0.1:1")!,
+            baseURL: URL(string: "https://stub.invalid")!,
             tokens: NoTokens(),
-            session: URLSession(configuration: .ephemeral))
+            session: urlSession)
         let queue = SyncQueue(api: api, store: sittings)
 
-        // Built exactly as `HomeView` builds it in demo: the real library, and
-        // no queue.
+        // Built exactly as `HomeView` builds it in demo: the real library
+        // (with a stubbed client it never needs, the pack being cached), no
+        // queue, and — the fix this test proves — no client either.
         let play = PlaySession(
             library: ContentLibrary(api: api, store: packs),
             queue: nil,
-            api: api,
+            api: nil,
             level: .three)
 
         await play.start()
@@ -101,25 +142,32 @@ struct DemoModeTests {
         #expect(sittings.load().isEmpty)
         #expect(await queue.pendingAttemptCount == 0)
         #expect(await queue.pendingCount == 0)
+
+        // Nor did a single request leave the device: with `api: nil`,
+        // `loadProfile()` has no client to call `GET /play/state` on, which is
+        // the whole point of the seal being structural rather than filtered.
+        #expect(CountingProtocol.count(key) == 0)
     }
 
-    @Test("a demo speed run is never queued")
+    @Test("a demo speed run is never queued, and never calls the server at all")
     func demoSpeedRunNeverQueues() async throws {
         let sittings = MemorySittingStore()
+        let (urlSession, key) = CountingProtocol.session()
         let api = ApiClient(
-            baseURL: URL(string: "http://127.0.0.1:1")!,
+            baseURL: URL(string: "https://stub.invalid")!,
             tokens: NoTokens(),
-            session: URLSession(configuration: .ephemeral))
+            session: urlSession)
         let queue = SyncQueue(api: api, store: sittings)
 
-        // `SpeedSession` already takes an optional queue; demo passes nil.
-        // Driven exactly like `SpeedSessionTests.running(_:)` /
-        // `unsentRunKeepsItsScore`: an injected clock, `start()` then
-        // `tick(at:)`, an answer typed digit by digit, then `finish(at:)`.
+        // `SpeedSession` already takes an optional queue; demo passes nil for
+        // both it and the client — the fix this test proves. Driven exactly
+        // like `SpeedSessionTests.running(_:)` / `unsentRunKeepsItsScore`: an
+        // injected clock, `start()` then `tick(at:)`, an answer typed digit by
+        // digit, then `finish(at:)`.
         let start = 1_700_000_000_000
         let runBegins = start + SpeedRun.countdownMs
         let run = SpeedSession(
-            mode: .multiply(.single(7)), api: api, queue: nil,
+            mode: .multiply(.single(7)), api: nil, queue: nil,
             seed: "test-seed", now: { start })
 
         run.start()
@@ -134,10 +182,96 @@ struct DemoModeTests {
         #expect(run.phase == .over)
         #expect(run.score == 1)
 
+        // `finish()` hands `submit(_:previousBest:)` to an unstructured Task,
+        // exactly as the real path does - give it the same turn to land
+        // before reading what it settled.
         try await Task.sleep(for: .milliseconds(200))
+
+        // Settled honestly rather than left `.pending`: the run was never
+        // meant to reach the server, so there is nothing to wait on.
+        #expect(run.outcome == .unsent)
 
         #expect(sittings.loadRuns().isEmpty)
         #expect(await queue.pendingRunCount == 0)
+
+        // Nor did a single request leave the device: with `api: nil`,
+        // `submit(_:previousBest:)` has no client to call `POST /speed/runs`
+        // on, which is the whole point of the seal being structural.
+        #expect(CountingProtocol.count(key) == 0)
+    }
+
+    /// The seal this task closes: `PlaySession` and `SpeedSession` used to
+    /// hold `ApiClient` directly, so `loadProfile()` and `submit(_:)` reached
+    /// the network for a demo child even though nothing was ever queued.
+    /// Both are `authorised: true` and a demo device holds no token, so the
+    /// calls failed harmlessly - but the spec is explicit that a demo session
+    /// has no `ApiClient` traffic at all, and a failing call is still traffic.
+    /// These two prove `api: nil` closes that off structurally, the same way
+    /// `queue: nil` already closes off recording.
+    @Test("a demo sitting with no client starts, deals a question, and grades an answer")
+    func demoPlayWithNoClientStillPlays() async throws {
+        let packs = MemoryPackStore()
+        packs.seed(CachedPack(
+            data: Self.packJSON, subject: "maths", level: .three, etag: nil, storedAt: 0))
+
+        // `ContentLibrary` itself still takes a non-optional `ApiClient` -
+        // out of scope for this task, and never called here since the pack is
+        // already cached. What this test is about is `PlaySession`'s own
+        // `api`, which is the one actually passed as `nil`.
+        let (urlSession, key) = CountingProtocol.session()
+        let libraryApi = ApiClient(
+            baseURL: URL(string: "https://stub.invalid")!,
+            tokens: NoTokens(),
+            session: urlSession)
+        let play = PlaySession(
+            library: ContentLibrary(api: libraryApi, store: packs),
+            queue: nil,
+            api: nil,
+            level: .three)
+
+        await play.start()
+        #expect(play.status == .playing)
+        #expect(play.question != nil)
+
+        play.type("5")
+        play.check()
+
+        #expect(play.phase == .answered(correct: true, expected: "5"))
+        #expect(play.answeredCount == 1)
+
+        // And no request left the device via `PlaySession`'s own client -
+        // `loadProfile()` had none to call.
+        #expect(CountingProtocol.count(key) == 0)
+    }
+
+    @Test("a demo speed run with no client completes without queuing or crashing")
+    func demoSpeedRunWithNoClientCompletes() async throws {
+        let start = 1_700_000_000_000
+        let runBegins = start + SpeedRun.countdownMs
+        let run = SpeedSession(
+            mode: .multiply(.single(7)), api: nil, queue: nil,
+            seed: "test-seed", now: { start })
+
+        run.start()
+        run.tick(at: runBegins)
+        for digit in run.state!.current.answer.stringValue {
+            run.type(String(digit), at: runBegins + 1_000)
+        }
+        run.finish(at: runBegins + SpeedRun.runMs + 1)
+
+        #expect(run.phase == .over)
+        #expect(run.score == 1)
+
+        // `finish()` hands off to `submit(_:previousBest:)` on an unstructured
+        // Task even with no client - give it the same turn to land, so this
+        // cannot pass merely by being too quick to have crashed yet.
+        try await Task.sleep(for: .milliseconds(200))
+
+        // Honest rather than misleading: `.unsent` says the score stands and
+        // says nothing about a record, which is true here for the same reason
+        // it is true of a real failed submit - the run was not sent - so no
+        // new outcome is needed for the demo case.
+        #expect(run.outcome == .unsent)
     }
 
     @Test("a second look around starts with no history from the first")
@@ -154,7 +288,7 @@ struct DemoModeTests {
             session: URLSession(configuration: .ephemeral))
         let library = ContentLibrary(api: api, store: packs)
 
-        let first = PlaySession(library: library, queue: nil, api: api, level: .three)
+        let first = PlaySession(library: library, queue: nil, api: nil, level: .three)
         await first.start()
         for _ in 0..<3 {
             first.type("5")
@@ -167,7 +301,7 @@ struct DemoModeTests {
 
         // Leaving releases the session; coming back builds a new one, exactly
         // as `HomeView` does.
-        let second = PlaySession(library: library, queue: nil, api: api, level: .three)
+        let second = PlaySession(library: library, queue: nil, api: nil, level: .three)
         await second.start()
 
         #expect(second.summary == nil)
@@ -184,7 +318,7 @@ struct DemoModeTests {
         let play = PlaySession(
             library: ContentLibrary(api: api, store: MemoryPackStore()),
             queue: nil,
-            api: api,
+            api: nil,
             level: .three)
 
         await play.start()

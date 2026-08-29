@@ -107,7 +107,14 @@ final class PlaySession {
     /// unable to reach the queue rather than filtered out of it (ledger `L26`).
     /// There is no object here to record onto, so there is nothing to seal.
     private let queue: SyncQueue?
-    private let api: ApiClient
+    /// Where a profile is read from, or `nil` in demo mode.
+    ///
+    /// Optional for the same reason `queue` is: a demo sitting must be
+    /// structurally unable to reach the server rather than filtered out of
+    /// reaching it (ledger `L26`). With no client to call, `loadProfile()` has
+    /// nothing to await and returns the empty profile straight away — the same
+    /// thing an offline child sees when the call fails.
+    private let api: ApiClient?
     private let level: YearLevel
     private let subject: String
 
@@ -117,7 +124,7 @@ final class PlaySession {
     private var advanceTask: Task<Void, Never>?
 
     init(
-        library: ContentLibrary, queue: SyncQueue? = nil, api: ApiClient,
+        library: ContentLibrary, queue: SyncQueue? = nil, api: ApiClient?,
         subject: String = "maths", level: YearLevel
     ) {
         self.library = library
@@ -189,7 +196,10 @@ final class PlaySession {
 
     /// The child's history, or an empty profile when it cannot be had.
     private func loadProfile() async -> (profile: LearnerProfileState, recentTopics: [String]) {
-        guard let play = try? await api.playState(subject: subject, level: level) else {
+        // No client to call in demo mode — the empty profile is returned
+        // immediately, exactly as it is when a real call fails, so a demo
+        // child starts on the same footing as an offline one.
+        guard let api, let play = try? await api.playState(subject: subject, level: level) else {
             return (.empty, [])
         }
 

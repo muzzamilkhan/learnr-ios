@@ -104,7 +104,10 @@ struct HomeView: View {
             .padding()
         }
         .fullScreenCover(isPresented: $playing) {
-            PlayView(level: session.level, queue: session.isDemo ? nil : session.queue)
+            PlayView(
+                level: session.level,
+                queue: session.isDemo ? nil : session.queue,
+                api: session.isDemo ? nil : session.api)
                 .environment(session)
         }
         .fullScreenCover(isPresented: $speeding) {

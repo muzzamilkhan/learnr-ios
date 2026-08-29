@@ -73,7 +73,14 @@ final class SpeedSession {
     /// still answerable would be lying about the one number it exists to show.
     var secondsLeft: Int { Int((Double(remainingMs) / 1000).rounded(.up)) }
 
-    private let api: ApiClient
+    /// Where a run is submitted, or `nil` in demo mode.
+    ///
+    /// Optional for the same reason `queue` is: a demo run must be
+    /// structurally unable to reach the server rather than filtered out of
+    /// reaching it (ledger `L26`). With no client to call, `submit(_:)` never
+    /// attempts the request and settles straight on `.unsent` — the honest
+    /// reading, since the run genuinely was not sent, and deliberately.
+    private let api: ApiClient?
     /// Where a run goes when it cannot be sent now.
     ///
     /// Optional so a screen with nothing to sync into still runs; without one,
@@ -95,7 +102,7 @@ final class SpeedSession {
 
     init(
         mode: Mode,
-        api: ApiClient,
+        api: ApiClient?,
         queue: SyncQueue? = nil,
         seed: String = UUID().uuidString.lowercased(),
         now: @escaping () -> Int = { Int(Date().timeIntervalSince1970 * 1000) }
@@ -278,6 +285,15 @@ final class SpeedSession {
     /// so the three-way distinction — first run, record, short — is made in one
     /// place, and a first run is never celebrated as a record.
     private func submit(_ pending: PendingRun, previousBest result: RunResult) async {
+        // No client to call in demo mode: the run was never meant to reach the
+        // server, so `.unsent` is settled directly rather than attempted and
+        // queued. Queuing it would give a sealed session an object to record
+        // onto, which is exactly what it must not have (ledger `L26`).
+        guard let api else {
+            outcome = .unsent
+            return
+        }
+
         // Built from `pending` in full, stamp included. The stamp is not the
         // queue's alone: the flush that happens most is this one, the first,
         // which succeeds - and a run sent straight away is still dated by when
