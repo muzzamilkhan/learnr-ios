@@ -271,7 +271,8 @@ public actor SyncQueue {
         // Idempotent on the id, so a retry after a dropped connection does not
         // open a second sitting.
         try await api.createSession(CreateSessionRequest(
-            id: sitting.id, subject: sitting.subject, level: sitting.level, seed: sitting.seed))
+            id: sitting.id, subject: sitting.subject, level: sitting.level.input,
+            seed: sitting.seed))
 
         // Batched, but in order: the server folds each answer into the child's
         // skill for its topic, and the fold is not commutative.

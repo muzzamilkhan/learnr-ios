@@ -143,8 +143,11 @@ private func makeClient(token: String? = "tok") -> ApiClient {
 
 private func anAttempt(_ index: Int, correct: Bool = true) -> AttemptPayload {
     AttemptPayload(
+        // The generated model defaults nothing: `id` is the client's to choose
+        // and the server dedupes on it, so each attempt here needs its own.
+        id: UUID().uuidString.lowercased(),
         templateId: "maths.3.addition.sum", subject: "maths", topic: "addition",
-        level: .three, prompt: "What is 2 + 2?", expected: "4",
+        level: ._3, prompt: "What is 2 + 2?", expected: "4",
         response: correct ? "4" : "5", correct: correct,
         timeTakenMs: 1000, answeredAt: 1_756_197_600_000 + index * 1000,
         offsetMinutes: 600)
@@ -710,18 +713,18 @@ struct PlayStateTests {
     }
     """.utf8)
 
-    @Test("a play-state body decodes into the hand-transcribed model")
+    @Test("a play-state body decodes into the generated model")
     func decodesPlayState() throws {
         let state = try JSONDecoder().decode(PlayState.self, from: Self.body)
 
         #expect(state.player.selectedLevel == "3")
         #expect(state.player.streak.days == 4)
         #expect(state.player.stars == 27)
-        #expect(state.player.target?.kind == "questions")
-        #expect(state.player.target?.value == 20)
+        #expect(state.player.target?.value1.kind == .questions)
+        #expect(state.player.target?.value1.value == 20)
         #expect(state.profile.skills.count == 1)
         #expect(state.profile.skills[0].topic == "addition")
-        #expect(state.profile.skills[0].level == .three)
+        #expect(state.profile.skills[0].level == ._3)
         #expect(state.profile.skills[0].strength == 0.78)
         #expect(state.recentTopics == ["addition", "subtraction"])
         #expect(state.targetAnswers.count == 1)
@@ -806,9 +809,9 @@ struct PlayStateTests {
         let placed = try ApiCoding.decoder().decode(
             SpeedOutcome.self,
             from: Data(#"{"previousBest":3,"best":5,"isRecord":true,"standing":{"place":2,"previousPlace":4,"rivals":6}}"#.utf8))
-        #expect(placed.standing?.place == 2)
-        #expect(placed.standing?.previousPlace == 4)
-        #expect(placed.standing?.rivals == 6)
+        #expect(placed.standing?.value1.place == 2)
+        #expect(placed.standing?.value1.previousPlace == 4)
+        #expect(placed.standing?.value1.rivals == 6)
 
         // A first-ever placing has no previous one, and a run outside the
         // board has no standing at all. Both are null, not absent.

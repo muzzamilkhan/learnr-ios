@@ -146,13 +146,33 @@ they are. Types only - `ApiClient` is hand-written on purpose, because the rules
 it encodes (a 503 is retryable and a 400 is not, a 304 is a success) are this
 app's and are not in the document.
 
-The models in `Api/Models.swift` are **still transcribed by hand**, and are still
-what the call sites use. Six properties are nullable `$ref`s that the contract
-encodes as `allOf: [{$ref}]` while also listing them in `required`, which makes
-the generator emit them non-optional so they throw on a null - and two of the six
-(`PlayerState.target`, `SpeedOutcome.standing`) are null on the ordinary path.
-The web side has ruled the fix and it is ledger item `L24`; deleting the models
-is one regeneration once it ships, which is the rest of `L1`.
+`Api/Models.swift` **names those generated types rather than defining them** -
+it is aliases and two extensions, where it used to be 434 lines of hand
+transcription. `L1` is closed. The transcription had drifted twice by the time
+it was replaced: `SpeedOutcome.standing` was missing altogether, and
+`DailyTarget.kind` was a `String` where the contract declares a closed enum of
+`questions`/`minutes`.
+
+Three things are still written by hand there, each because the document does not
+carry them:
+
+- `YearLevel`, because the generated enum spells its cases `_3`, has neither
+  `label` nor `schoolOrder`, and exists twice - once for what the server sends
+  and once for what it accepts. `ContractShapeTests` is what stops it drifting:
+  it asserts the cases are exactly the contract's, in both directions.
+- `ApiCoding` and `ISO8601`, because how a `format: date-time` is parsed is this
+  client's policy (ledger `L16`).
+- `Account.isManagedChild` and `Account.unread`, which are product rules.
+
+The six nullable `$ref`s that blocked this are optional now (`376908e`,
+ledger `L24`), so a real null decodes to `nil` rather than throwing - which
+matters because two of them, `PlayerState.target` and `SpeedOutcome.standing`,
+are null on the ordinary path.
+
+One thing the swap did **not** change: `AttemptInput.figure` is declared by the
+contract and still never sent. Filling it would put the resolved figure -
+kilobytes - in every attempt of every flush, which is a product decision and not
+one a regeneration should make quietly. Raised on the ledger.
 
 ## The server
 

@@ -4,13 +4,12 @@ import Foundation
 
 /// The one date format the API speaks, decoded.
 ///
-/// Ten contract fields carry `format: date-time` (L1). None of the
-/// hand-written models types one as a `Date` yet - `RedeemResponse.expiresAt`
-/// is a `String` - so nothing decodes one today and nothing would notice this
-/// being wrong. It bites the moment the generator lands, which emits `Date`
-/// for all ten, and it would bite as "The data couldn't be read" on a device
-/// with no way to tell which field or why. So the strategy is fixed and pinned
-/// first, and separately, exactly as `L1` sequences it.
+/// Ten contract fields carry `format: date-time`, and the generated models
+/// (`L1`) type every one of them as a `Date` - so the strategy is load-bearing
+/// now rather than merely correct. Getting it wrong reads as "The data couldn't
+/// be read" on a device, naming neither the field nor the reason, which is why
+/// it is pinned here rather than left to the one endpoint that happens to
+/// exercise it.
 @Suite(.serialized)
 struct DateDecodingTests {
 
@@ -72,11 +71,41 @@ struct DateDecodingTests {
 
     @Test("the client itself decodes a date-time field, not just the strategy")
     func clientDecodesADate() async throws {
-        // The strategy is worthless if `ApiClient` does not use it, so this goes
-        // through a real endpoint and a real model. `RedeemResponse.expiresAt`
-        // is the first of the ten `format: date-time` fields to be typed as a
-        // `Date` rather than carried as a String - it reddens if `decode` goes
-        // back to a bare `JSONDecoder()`, which is the defect L1 named.
+        // The strategy is worthless if `ApiClient` does not use it, so this
+        // goes through the client's own `decode` rather than a bare
+        // `ApiCoding.decoder()`. It reddens if `decode` goes back to a plain
+        // `JSONDecoder()`, which is the defect L1 named.
+        //
+        // `FamilyRecord.achievedAt` is the subject because it is a real
+        // `format: date-time` on a real schema. It is decoded here rather than
+        // fetched: `ApiClient` has no `GET /speed/records` call yet, so there
+        // is no endpoint it makes that returns a `Date` to stub.
+        //
+        // It is NOT `RedeemResponse.expiresAt`, which this test used to use.
+        // That field is declared a bare `string` on `POST /auth/redeem` - no
+        // `format` - so the generator types it `String` and there is no date to
+        // decode. The hand-written model typed it a `Date` and was stricter
+        // than the contract; the generated one is not, which is the swap
+        // working rather than a regression. See `ApiCoding`'s note.
+        let record = try ApiCoding.decoder().decode(
+            Components.Schemas.FamilyRecord.self,
+            from: Data("""
+            {"playerId":"p","playerName":"Ada","playerPhoto":null,
+             "playerAvatar":null,"playerImage":null,"mode":"add-10",
+             "best":12,"achievedAt":"2023-11-14T22:13:20.123Z"}
+            """.utf8))
+
+        #expect(record.achievedAt.timeIntervalSince1970 == Self.epoch + 0.123)
+    }
+
+    @Test("the redeem response carries its expiry as the contract declares it")
+    func redeemExpiryIsAString() async throws {
+        // Pinned deliberately, because it looks like a defect and is not.
+        // `POST /auth/redeem`'s `expiresAt` has no `format: date-time` on it
+        // while `LoginCode.expiresAt` does, so the generated response carries a
+        // String here and a `Date` there. Nothing in the app reads this field;
+        // if that changes, parse it with `ApiCoding.date(from:)` rather than
+        // adding a second dialect.
         let session = StubProtocol.session { _ in
             (200, Data("""
             {"token":"t","childId":"c","expiresAt":"2023-11-14T22:13:20.123Z"}
@@ -87,7 +116,9 @@ struct DateDecodingTests {
 
         let response = try await client.redeem(code: "ABCD")
 
-        #expect(response.expiresAt.timeIntervalSince1970 == Self.epoch + 0.123)
+        #expect(response.expiresAt == "2023-11-14T22:13:20.123Z")
+        #expect(ApiCoding.date(from: response.expiresAt)?.timeIntervalSince1970
+                == Self.epoch + 0.123)
     }
 
     @Test("a round trip through both preserves the instant")

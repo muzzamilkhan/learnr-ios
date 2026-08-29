@@ -283,10 +283,15 @@ final class PlaySession {
     /// never the question in front of the child.
     private func record(_ attempt: Attempt) {
         let payload = AttemptPayload(
+            // Minted here, one per answer, because the server dedupes on it:
+            // a retried flush must write each answer once or the child's skill
+            // row counts their answers twice. The hand-written model defaulted
+            // this; the generated one does not, so it is spelled out.
+            id: UUID().uuidString.lowercased(),
             templateId: attempt.templateId,
             subject: attempt.subject,
             topic: attempt.topic,
-            level: YearLevel(rawValue: attempt.level) ?? level,
+            level: (YearLevel(rawValue: attempt.level) ?? level).input,
             prompt: attempt.prompt,
             expected: attempt.expected,
             response: attempt.response,

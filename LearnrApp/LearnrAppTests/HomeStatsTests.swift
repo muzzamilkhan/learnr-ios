@@ -106,7 +106,7 @@ struct HomeStatsTests {
         {"player":{"selectedLevel":"\(level)","streak":{"days":\(streak),"lastDay":20000},
          "stars":\(stars),"target":null,"targetDay":null},
          "targetAnswers":[],
-         "profile":{"skills":[],"totalAnswered":0,"totalCorrect":0},
+         "profile":{"skills":[]},
          "recentTopics":[]}
         """
     }

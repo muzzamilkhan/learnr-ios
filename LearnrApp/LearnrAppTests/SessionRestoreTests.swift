@@ -100,8 +100,10 @@ struct SessionRestoreTests {
         override func stopLoading() {}
     }
 
+    /// `role` reads through `value1`: it is an `allOf`-wrapped `$ref`, which is
+    /// what lets the null the contract permits decode to nil (ledger `L24`).
     static let cached = Account(
-        id: "c1", role: "child", parentId: "p1", name: "Ada",
+        id: "c1", role: .init(value1: .child), parentId: "p1", name: "Ada",
         avatar: nil, image: nil, photo: nil)
 
     /// Builds a session whose `GET /me` answers with `status`, or fails at the

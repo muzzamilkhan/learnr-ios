@@ -87,7 +87,7 @@ public actor ApiClient {
     /// The level this child last chose. A managed child's is their parent's to
     /// set, so this only ever confirms what the parent already decided.
     public func setLevel(_ level: YearLevel) async throws {
-        try await sendNoContent("PUT", "/me/level", body: SetLevelRequest(level: level))
+        try await sendNoContent("PUT", "/me/level", body: SetLevelRequest(level: level.input))
     }
 
     @discardableResult
