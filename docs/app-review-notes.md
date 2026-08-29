@@ -14,9 +14,11 @@ HOW TO SIGN IN
 You do not need a code, and you do not need an account.
 
 On the first screen, tap "Have a look around". That opens a full demo of
-the app — practice questions, diagrams, the timed speed run and the end-of
--sitting summary — with no sign-in of any kind. It works with no network
-connection. Nothing you do in it is saved or sent anywhere.
+the app — practice questions, diagrams, an end-of-sitting summary and the
+timed speed run — with no sign-in of any kind. Questions come from a pack
+bundled in the app, so it works with no network connection. Nothing you
+answer is saved: there is no account behind the demo, so there is nothing to
+attach an answer to and nothing kept after you leave it.
 
 This app is for children only. There is no registration, no email address
 and no password anywhere in it. In normal use a parent uses our web app and
@@ -30,14 +32,20 @@ If you would like a live code to see the signed-in experience, contact us
 at [CONTACT] and we will issue one within minutes, at whatever time suits
 you.
 
-WHAT TO EXPECT
+WHAT TO EXPECT IN THE DEMO
 
-- The app opens on a home screen showing the child's stars and streak.
-- Tapping through starts a practice sitting: maths and English questions
-  for the child's school year, answered on a large on-screen pad.
-- There is also a timed "speed run" mode.
-- Everything works offline. Questions are generated on-device and answers
-  sync when a connection returns.
+- A plain home screen: a greeting, a Play button and a Speed button. It shows
+  no stars or streak — those belong to a signed-in child's history, and the
+  demo has none.
+- Play starts a maths practice sitting at Year 3, answered on a large
+  on-screen pad, and ends on a summary of what was answered.
+- Speed is a 90-second timed round with its own score screen.
+- None of this needs a network connection: play draws from a pack bundled in
+  the app, and speed draws from a table built into the app.
+
+A signed-in child (the fallback above) sees the same screens plus their own
+stars, streak and speed-run history, and their answers sync to our server in
+the background.
 
 WHAT THE APP DOES NOT DO
 
