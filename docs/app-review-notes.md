@@ -1,8 +1,8 @@
 # App Review notes
 
 Paste the block below into **App Review Information → Notes** in App Store
-Connect, and fill in the two bracketed values first. The rest of this file is
-why it says what it says — for us, not for Apple.
+Connect, and fill in the bracketed value first. The rest of this file is why
+it says what it says — for us, not for Apple.
 
 ---
 
@@ -11,29 +11,24 @@ why it says what it says — for us, not for Apple.
 ```
 HOW TO SIGN IN
 
+You do not need a code, and you do not need an account.
+
+On the first screen, tap "Have a look around". That opens a full demo of
+the app — practice questions, diagrams, the timed speed run and the end-of
+-sitting summary — with no sign-in of any kind. It works with no network
+connection. Nothing you do in it is saved or sent anywhere.
+
 This app is for children only. There is no registration, no email address
-and no password anywhere in it. A parent uses our web app and hands their
-child a four-character code; typing that code is the app's entire sign-in.
+and no password anywhere in it. In normal use a parent uses our web app and
+hands their child a four-character code; typing that code is the app's
+entire sign-in. Those codes last one hour and can be redeemed once, which
+is a deliberate safety property of a children's app — so rather than paste
+one here that would expire before you read it, the demo above needs no code
+at all.
 
-The test device does not need a code. The build you have has already been
-signed in as a demo child, and the session does not expire, so the app opens
-straight onto the home screen with practice ready to start.
-
-If you do need to sign in from scratch — a fresh install, or a device wipe —
-please use this code:
-
-    Code: [CODE]
-    Issued: [DATE/TIME UTC]
-
-IMPORTANT, PLEASE READ: a login code lasts ONE HOUR from when it is issued
-and can only be redeemed ONCE. This is a deliberate safety property of a
-children's app, not a limitation we can lift for review. If the code above
-has expired or has already been used, the app will say "That code did not
-work." That is the app behaving correctly.
-
-If that happens, please contact us at [CONTACT] and we will issue a fresh
-code within minutes, at whatever time suits you. We are happy to be on
-standby during your review — please just tell us when.
+If you would like a live code to see the signed-in experience, contact us
+at [CONTACT] and we will issue one within minutes, at whatever time suits
+you.
 
 WHAT TO EXPECT
 
@@ -62,39 +57,40 @@ The app talks only to our own API at learnr-api-syd.fly.dev.
 
 ## Why the note is shaped this way
 
-**A code cannot simply be written in the note, and this is the trap.** The two
-facts that decide it, both confirmed against the server side via the ledger:
+**A code cannot simply be written in the note, and this used to be the trap.**
+The two facts that decide it, both confirmed against the server side via the
+ledger:
 
 - `CODE_TTL_MS` is **one hour** (`src/lib/login-code.ts`).
 - Redemption is **single-use** — the argument for why four characters is safe
   rests on it.
 
 Review can begin days after submission. A code pasted into the note at
-submission time is dead long before anyone reads it, and the reviewer sees
-"That code did not work." — which reads as a broken app rather than an expired
-credential. This is a rejection waiting to happen, so the note is written to
-make the demo build carry the session instead.
+submission time is dead long before anyone reads it, and the reviewer would
+see "That code did not work." — which reads as a broken app rather than an
+expired credential. That used to be worked around by archiving a
+build already signed in as a demo child; the session token does not expire
+(`SESSION_LIFETIME_MS` is 100 years, `apps/api/src/data/accounts.ts:276`), but
+that approach was still tied to whichever device the build happened to be
+archived from, and still fell back to a code that would be dead on arrival.
 
-**A redeemed session is what makes this work.** `SESSION_LIFETIME_MS` is 100
-years (`apps/api/src/data/accounts.ts:276`), and the token is held in the
-Keychain, so a build signed in before submission stays signed in through review
-indefinitely. That is why the note leads with "the test device does not need a
-code": it is true, and it removes the expiry from the reviewer's path entirely.
+**Demo mode removes the credential from the path entirely.** "Have a look
+around" (`CodeEntryView.swift`, `Session.enterDemo()`) needs no token, no code
+and no network — see `LearnrApp/LearnrApp/Support/Session.swift`. It cannot
+expire because nothing is issued, it cannot be single-use because nothing is
+redeemed, and it does not depend on which device or simulator the archive was
+built from. That is strictly stronger than a pre-signed-in build, so the note
+leads with it and offers a live code only as a fallback for a reviewer who
+specifically wants the signed-in experience.
 
 ### What to actually do before submitting
 
-1. Have a parent account issue a login code for a demo child. Give that child a
-   realistic amount of history — a few sittings and a speed run — so the home
-   screen shows stars and a streak rather than an empty state.
-2. **Redeem it on the device or simulator you archive from**, so the shipped
-   build is already signed in. Redeem it *once*: a second attempt with the same
-   code fails by design.
-3. Issue a **second, fresh code** immediately before hitting Submit, and put it
-   in the note with the time you issued it. It will very likely be expired when
-   read — the note says so plainly — but it costs nothing and covers the case
-   where a reviewer wipes the app.
-4. Fill in `[CONTACT]` with a channel that is genuinely monitored. The offer to
-   issue a code on demand is the real fallback, so it has to be answerable.
+1. Check that "Have a look around" is reachable on the first screen of the
+   build you are archiving, and walk it once: play, a speed run, and back out.
+   That path is what the note tells the reviewer to use, so it is the one that
+   must work in the shipped binary.
+2. Fill in `[CONTACT]` with a channel that is genuinely monitored. The offer to
+   issue a live code on demand is the fallback, so it has to be answerable.
 
 ### Why the note volunteers the negatives
 
